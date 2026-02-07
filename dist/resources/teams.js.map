@@ -1,0 +1,1 @@
+{"version":3,"file":"teams.js","sourceRoot":"","sources":["../../src/resources/teams.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,aAAc,SAAQ,YAAY;IAC7C,IAAI,CAAC,MAAkC;QACrC,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAA6B,aAAa,EAAE,MAAM,CAAC,CAAC;IAChF,CAAC;CACF"}

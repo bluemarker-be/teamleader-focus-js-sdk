@@ -1,0 +1,1 @@
+{"version":3,"file":"price-lists.js","sourceRoot":"","sources":["../../src/resources/price-lists.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,kBAAmB,SAAQ,YAAY;IAClD,IAAI,CAAC,MAAuC;QAC1C,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAAkC,kBAAkB,EAAE,MAAM,CAAC,CAAC;IAC1F,CAAC;CACF"}

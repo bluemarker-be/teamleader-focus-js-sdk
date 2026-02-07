@@ -1,0 +1,1 @@
+{"version":3,"file":"bookkeeping-submissions.js","sourceRoot":"","sources":["../../src/resources/bookkeeping-submissions.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,8BAA+B,SAAQ,YAAY;IAC9D,IAAI,CAAC,MAAmD;QACtD,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAA8C,8BAA8B,EAAE,MAAM,CAAC,CAAC;IAClH,CAAC;CACF"}

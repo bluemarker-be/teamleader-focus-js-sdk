@@ -1,0 +1,1 @@
+{"version":3,"file":"work-types.js","sourceRoot":"","sources":["../../src/resources/work-types.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,iBAAkB,SAAQ,YAAY;IACjD,IAAI,CAAC,MAAsC;QACzC,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAAiC,iBAAiB,EAAE,MAAM,CAAC,CAAC;IACxF,CAAC;CACF"}

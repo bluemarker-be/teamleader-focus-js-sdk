@@ -1,0 +1,1 @@
+{"version":3,"file":"payment-terms.js","sourceRoot":"","sources":["../../src/resources/payment-terms.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,oBAAqB,SAAQ,YAAY;IACpD,IAAI,CAAC,MAAyC;QAC5C,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAAoC,oBAAoB,EAAE,MAAM,CAAC,CAAC;IAC9F,CAAC;CACF"}

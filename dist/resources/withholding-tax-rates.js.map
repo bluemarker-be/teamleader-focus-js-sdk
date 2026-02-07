@@ -1,0 +1,1 @@
+{"version":3,"file":"withholding-tax-rates.js","sourceRoot":"","sources":["../../src/resources/withholding-tax-rates.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,2BAA4B,SAAQ,YAAY;IAC3D,IAAI,CAAC,MAAgD;QACnD,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAA2C,2BAA2B,EAAE,MAAM,CAAC,CAAC;IAC5G,CAAC;CACF"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"expenses.js","sourceRoot":"","sources":["../../src/resources/expenses.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,gBAAiB,SAAQ,YAAY;IAChD,IAAI,CAAC,MAAqC;QACxC,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAAgC,gBAAgB,EAAE,MAAM,CAAC,CAAC;IACtF,CAAC;CACF"}
