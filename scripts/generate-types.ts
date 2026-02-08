@@ -24,6 +24,16 @@ async function main() {
 // 2. dealPhases.duplicate returns 404
 //    The endpoint exists in the spec but is not functional in the API.
 //    No patch needed — the SDK includes the method, tests skip it.
+//
+// 🧹 Post-generation cleanups (openapi-typescript artifacts):
+//
+// 3. Removed "& unknown" intersection artifacts (~500 occurrences)
+//    openapi-typescript emits these from allOf schemas — they add no type
+//    information and hinder language-server autocomplete (especially Deno LS).
+//
+// 4. Removed "& Record<string, never>" intersection artifacts (~56 occurrences)
+//    Same cause as above — empty record intersections that block property
+//    assignment and confuse LS type resolution.
 
 `;
 
@@ -45,6 +55,26 @@ async function main() {
     console.log(`Patch 1: Added "meeting" to NoteSubjectTypesCreate (${patchCount} occurrences)`);
   } else {
     console.log("Patch 1: NoteSubjectTypesCreate already includes meeting (or pattern changed)");
+  }
+
+  // ---------------------------------------------------------------------------
+  // Cleanup: strip openapi-typescript artifacts that hinder LS autocomplete
+  // ---------------------------------------------------------------------------
+
+  // Cleanup 1: Remove " & unknown" — adds no type information
+  // Matches both ") & unknown" (after enum unions) and "} & unknown" (after objects)
+  const unknownBefore = (patched.match(/ & unknown/g) || []).length;
+  patched = patched.replaceAll(" & unknown", "");
+  if (unknownBefore > 0) {
+    console.log(`Cleanup 1: Removed "& unknown" (${unknownBefore} occurrences)`);
+  }
+
+  // Cleanup 2: Remove " & Record<string, never>" — empty record intersection
+  // that blocks property assignment and confuses LS type resolution
+  const recordNeverBefore = (patched.match(/ & Record<string, never>/g) || []).length;
+  patched = patched.replaceAll(" & Record<string, never>", "");
+  if (recordNeverBefore > 0) {
+    console.log(`Cleanup 2: Removed "& Record<string, never>" (${recordNeverBefore} occurrences)`);
   }
 
   const { writeFileSync } = await import("node:fs");

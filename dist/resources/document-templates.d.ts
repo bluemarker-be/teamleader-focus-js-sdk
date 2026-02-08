@@ -8,7 +8,7 @@ export declare class DocumentTemplatesResource extends BaseResource {
                 id?: string | undefined;
                 type?: string | undefined;
             } | undefined;
-            document_type?: (("delivery_note" | "invoice" | "order" | "order_confirmation" | "quotation" | "timetracking_report" | "workorder") & unknown) | undefined;
+            document_type?: ("delivery_note" | "invoice" | "order" | "order_confirmation" | "quotation" | "timetracking_report" | "workorder") | undefined;
             is_default?: boolean | undefined;
             name?: string | undefined;
             status?: "active" | "archived" | undefined;

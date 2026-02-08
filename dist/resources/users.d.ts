@@ -17,7 +17,7 @@ export declare class UsersResource extends BaseResource {
                 type?: "phone" | "mobile" | "fax" | undefined;
                 number?: string | undefined;
             }[] | undefined;
-            language?: (("nl-BE" | "da" | "de" | "en" | "es" | "fi" | "fr" | "it" | "nb" | "nl" | "pl" | "pt" | "sv" | "tr") & unknown) | undefined;
+            language?: ("nl-BE" | "da" | "de" | "en" | "es" | "fi" | "fr" | "it" | "nb" | "nl" | "pl" | "pt" | "sv" | "tr") | undefined;
             function?: string | undefined;
             time_zone?: string | undefined;
             preferences?: {
@@ -69,7 +69,7 @@ export declare class UsersResource extends BaseResource {
                 type?: "phone" | "mobile" | "fax" | undefined;
                 number?: string | undefined;
             }[] | undefined;
-            language?: (("nl-BE" | "da" | "de" | "en" | "es" | "fi" | "fr" | "it" | "nb" | "nl" | "pl" | "pt" | "sv" | "tr") & unknown) | undefined;
+            language?: ("nl-BE" | "da" | "de" | "en" | "es" | "fi" | "fr" | "it" | "nb" | "nl" | "pl" | "pt" | "sv" | "tr") | undefined;
             function?: string | undefined;
             time_zone?: string | undefined;
             status?: "active" | "deactivated" | undefined;

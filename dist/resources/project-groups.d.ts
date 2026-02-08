@@ -11,9 +11,9 @@ export declare class ProjectGroupsResource extends BaseResource {
                 type?: string | undefined;
             } | undefined;
             title?: string | undefined;
-            color?: (("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") & unknown) | undefined;
+            color?: ("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") | undefined;
             billing_method?: "time_and_materials" | "fixed_price" | "parent_fixed_price" | "non_billable" | undefined;
-            billing_status?: (("not_billable" | "not_billed" | "partially_billed" | "fully_billed") & unknown) | undefined;
+            billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             amount_billed?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
@@ -84,9 +84,9 @@ export declare class ProjectGroupsResource extends BaseResource {
             } | undefined;
             title?: string | undefined;
             description?: string | null | undefined;
-            color?: (("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") & unknown) | undefined;
+            color?: ("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") | undefined;
             billing_method?: "time_and_materials" | "fixed_price" | "parent_fixed_price" | "non_billable" | undefined;
-            billing_status?: (("not_billable" | "not_billed" | "partially_billed" | "fully_billed") & unknown) | undefined;
+            billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             amount_billed?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";

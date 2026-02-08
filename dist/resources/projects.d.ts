@@ -81,7 +81,7 @@ export declare class ProjectsResource extends BaseResource {
                 id?: string | undefined;
                 type?: string | undefined;
             }[] | undefined;
-            color?: (("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") & unknown) | undefined;
+            color?: ("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") | undefined;
             assignees?: {
                 assignee?: {
                     type?: "user" | "team" | undefined;
@@ -206,7 +206,7 @@ export declare class ProjectsResource extends BaseResource {
                 id?: string | undefined;
                 type?: string | undefined;
             }[] | undefined;
-            color?: (("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") & unknown) | undefined;
+            color?: ("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20") | undefined;
             assignees?: {
                 assignee?: {
                     type?: "user" | "team" | undefined;

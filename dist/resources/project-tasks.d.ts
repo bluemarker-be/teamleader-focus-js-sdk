@@ -24,7 +24,7 @@ export declare class ProjectTasksResource extends BaseResource {
             status?: "to_do" | "in_progress" | "on_hold" | "done" | undefined;
             title?: string | undefined;
             billing_method?: "user_rate" | "work_type_rate" | "custom_rate" | "fixed_price" | "parent_fixed_price" | "non_billable" | undefined;
-            billing_status?: (("not_billable" | "not_billed" | "partially_billed" | "fully_billed") & unknown) | undefined;
+            billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             custom_rate?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
@@ -112,7 +112,7 @@ export declare class ProjectTasksResource extends BaseResource {
             title?: string | undefined;
             description?: string | null | undefined;
             billing_method?: "user_rate" | "work_type_rate" | "custom_rate" | "fixed_price" | "parent_fixed_price" | "non_billable" | undefined;
-            billing_status?: (("not_billable" | "not_billed" | "partially_billed" | "fully_billed") & unknown) | undefined;
+            billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             custom_rate?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
