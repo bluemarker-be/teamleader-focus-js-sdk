@@ -4,61 +4,57 @@ export declare class UserAvailabilityResource extends BaseResource {
     total(params: RequestBody<"userAvailability.total">): Promise<{
         data?: {
             user?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             availability?: {
                 gross_time_available?: {
-                    unit?: "minutes";
-                    value?: number;
-                };
+                    unit?: "minutes" | undefined;
+                    value?: number | undefined;
+                } | undefined;
                 net_time_available?: {
-                    unit?: "minutes";
-                    value?: number;
-                };
+                    unit?: "minutes" | undefined;
+                    value?: number | undefined;
+                } | undefined;
                 planned_time?: {
-                    unit?: "minutes";
-                    value?: number;
-                };
+                    unit?: "minutes" | undefined;
+                    value?: number | undefined;
+                } | undefined;
                 unplanned_time?: {
-                    unit?: "minutes";
-                    value?: number;
-                };
-            };
-        }[];
+                    unit?: "minutes" | undefined;
+                    value?: number | undefined;
+                } | undefined;
+            } | undefined;
+        }[] | undefined;
     }>;
     daily(params: RequestBody<"userAvailability.daily">): Promise<{
         data?: {
             user?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             availabilities?: {
-                date?: string;
+                date?: string | undefined;
                 availability?: {
                     gross_time_available?: {
-                        unit?: "minutes";
-                        value?: number;
-                    };
+                        unit?: "minutes" | undefined;
+                        value?: number | undefined;
+                    } | undefined;
                     net_time_available?: {
-                        unit?: "minutes";
-                        value?: number;
-                    };
+                        unit?: "minutes" | undefined;
+                        value?: number | undefined;
+                    } | undefined;
                     planned_time?: {
-                        unit?: "minutes";
-                        value?: number;
-                    };
+                        unit?: "minutes" | undefined;
+                        value?: number | undefined;
+                    } | undefined;
                     unplanned_time?: {
-                        unit?: "minutes";
-                        value?: number;
-                    };
-                };
-            }[];
-        }[];
+                        unit?: "minutes" | undefined;
+                        value?: number | undefined;
+                    } | undefined;
+                } | undefined;
+            }[] | undefined;
+        }[] | undefined;
     }>;
 }
 //# sourceMappingURL=user-availability.d.ts.map

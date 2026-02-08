@@ -3,37 +3,31 @@ import { BaseResource } from "./base.js";
 export declare class ReservationsResource extends BaseResource {
     list(params?: RequestBody<"reservations.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             plannable_item?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: string;
-            };
-            date?: string;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            date?: string | undefined;
             duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
             assignee?: {
-                type?: string;
-                id?: string;
-            } & {
-                type: "team" | "user";
-            };
+                type: "user" | "team";
+                id?: string | undefined;
+            } | undefined;
             origin?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: string;
-            };
-        }[];
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+        }[] | undefined;
     }>;
     create(params: RequestBody<"reservations.create">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"reservations.update">): Promise<void>;
     delete(params: RequestBody<"reservations.delete">): Promise<void>;

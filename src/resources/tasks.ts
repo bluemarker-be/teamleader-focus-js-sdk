@@ -27,7 +27,7 @@ export class TasksResource extends BaseResource {
   }
 
   schedule(params: RequestBody<"tasks.schedule">) {
-    return this.client.request<void>("/tasks.schedule", params);
+    return this.client.request<ResponseBody<"tasks.schedule">>("/tasks.schedule", params);
   }
 
   delete(params: RequestBody<"tasks.delete">) {

@@ -3,73 +3,69 @@ import { BaseResource } from "./base.js";
 export declare class EventsResource extends BaseResource {
     list(params?: RequestBody<"events.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             creator?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             task?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             activity_type?: {
-                id?: string;
-                type?: string;
-            };
-            title?: string;
-            description?: string;
-            starts_at?: string;
-            ends_at?: string;
-            location?: string;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            title?: string | undefined;
+            description?: string | undefined;
+            starts_at?: string | undefined;
+            ends_at?: string | undefined;
+            location?: string | undefined;
             attendees?: {
-                type?: "user" | "contact";
-                id?: string;
-            }[];
-            links?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: "contact" | "company" | "deal";
-            })[];
-        }[];
+                type?: "user" | "contact" | undefined;
+                id?: string | undefined;
+            }[] | undefined;
+            links?: {
+                id?: string | undefined;
+                type?: "company" | "contact" | "deal" | undefined;
+            }[] | undefined;
+        }[] | undefined;
     }>;
     info(params: RequestBody<"events.info">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
-            description?: string;
+            id?: string | undefined;
+            title?: string | undefined;
+            description?: string | undefined;
             creator?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             task?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             activity_type?: {
-                id?: string;
-                type?: string;
-            };
-            starts_at?: string;
-            ends_at?: string;
-            location?: string;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            starts_at?: string | undefined;
+            ends_at?: string | undefined;
+            location?: string | undefined;
             attendees?: {
-                type?: "user" | "contact";
-                id?: string;
-            }[];
-            links?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: "contact" | "company" | "work_order" | "deal";
-            })[];
-        };
+                type?: "user" | "contact" | undefined;
+                id?: string | undefined;
+            }[] | undefined;
+            links?: {
+                id?: string | undefined;
+                type?: "company" | "contact" | "deal" | "work_order" | undefined;
+            }[] | undefined;
+        } | undefined;
     }>;
     create(params: RequestBody<"events.create">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"events.update">): Promise<void>;
     cancel(params: RequestBody<"events.cancel">): Promise<void>;

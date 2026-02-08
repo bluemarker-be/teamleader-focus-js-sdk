@@ -53,7 +53,80 @@ await teamleader.contacts.update({ id: "uuid", first_name: "Jane" });
 await teamleader.contacts.delete({ id: "uuid" });
 ```
 
-All 59 resources are available: `contacts`, `companies`, `deals`, `invoices`, `projects`, `quotations`, `products`, `timeTracking`, `webhooks`, `events`, `tasks`, `tickets`, and many more.
+All 68 resources are available — see the full list below.
+
+## Resources
+
+| Resource | Methods |
+| --- | --- |
+| `accounts` | `projectsV2Status` |
+| `activityTypes` | `list` |
+| `bookkeepingSubmissions` | `list` |
+| `businessTypes` | `list` |
+| `callOutcomes` | `list` |
+| `calls` | `list` `info` `add` `update` `complete` |
+| `closingDays` | `list` `add` `delete` |
+| `cloudPlatforms` | `url` |
+| `commercialDiscounts` | `list` |
+| `companies` | `list` `info` `add` `update` `delete` `tag` `untag` `uploadLogo` |
+| `contacts` | `list` `info` `add` `update` `delete` `tag` `untag` `linkToCompany` `unlinkFromCompany` `updateCompanyLink` `uploadAvatar` |
+| `creditNotes` | `list` `info` `download` `sendViaPeppol` |
+| `currencies` | `exchangeRates` |
+| `customFieldDefinitions` | `create` `list` `info` |
+| `dayOffTypes` | `list` `create` `update` `delete` |
+| `daysOff` | `import` `bulkDelete` |
+| `dealPhases` | `list` `create` `update` `duplicate` `move` `delete` |
+| `dealPipelines` | `list` `create` `update` `markAsDefault` `duplicate` `delete` |
+| `dealSources` | `list` |
+| `deals` | `list` `info` `create` `update` `move` `win` `lose` `delete` |
+| `departments` | `list` `info` |
+| `documentTemplates` | `list` |
+| `emailTracking` | `list` `create` |
+| `events` | `list` `info` `create` `update` `cancel` |
+| `expenses` | `list` |
+| `externalParties` | `addToProject` `update` `delete` |
+| `files` | `list` `info` `upload` `download` `delete` |
+| `incomingCreditNotes` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `incomingInvoices` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `invoices` | `list` `info` `download` `draft` `update` `updateBooked` `copy` `book` `delete` `registerPayment` `removePayments` `credit` `creditPartially` `send` `sendViaPeppol` |
+| `legacyMilestones` | `list` `info` `create` `update` `delete` `close` `open` |
+| `legacyProjects` | `list` `info` `create` `update` `close` `reopen` `delete` `addParticipant` `updateParticipant` |
+| `levelTwoAreas` | `list` |
+| `lostReasons` | `list` |
+| `mailTemplates` | `list` |
+| `meetings` | `list` `info` `schedule` `update` `complete` `createReport` `delete` |
+| `migrate` | `id` `taxRate` `activityType` |
+| `notes` | `list` `create` `update` |
+| `orders` | `list` `info` |
+| `paymentMethods` | `list` |
+| `paymentTerms` | `list` |
+| `plannableItems` | `list` `info` |
+| `priceLists` | `list` |
+| `productCategories` | `list` |
+| `products` | `list` `info` `add` `update` `delete` |
+| `projectGroups` | `list` `info` `create` `update` `duplicate` `delete` `assign` `unassign` |
+| `projectLines` | `list` `addToGroup` `removeFromGroup` |
+| `projectMaterials` | `list` `info` `create` `update` `duplicate` `delete` `assign` `unassign` |
+| `projectTasks` | `list` `info` `create` `update` `duplicate` `delete` `assign` `unassign` |
+| `projects` | `list` `info` `create` `update` `close` `reopen` `duplicate` `delete` `addOwner` `removeOwner` `assign` `unassign` `addCustomer` `removeCustomer` `addDeal` `removeDeal` `addQuotation` `removeQuotation` |
+| `quotations` | `list` `info` `download` `create` `send` `update` `accept` `delete` |
+| `receipts` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `reservations` | `list` `create` `update` `delete` |
+| `subscriptions` | `list` `info` `create` `update` `deactivate` |
+| `tags` | `list` |
+| `tasks` | `list` `info` `create` `update` `complete` `reopen` `schedule` `delete` |
+| `taxRates` | `list` |
+| `teams` | `list` |
+| `ticketStatus` | `list` |
+| `tickets` | `list` `info` `create` `update` `listMessages` `getMessage` `addReply` `addInternalMessage` `importMessage` |
+| `timeTracking` | `list` `info` `add` `update` `resume` `delete` |
+| `timers` | `current` `start` `stop` `update` |
+| `unitsOfMeasure` | `list` |
+| `userAvailability` | `total` `daily` |
+| `users` | `me` `list` `info` `listDaysOff` `getWeekSchedule` |
+| `webhooks` | `register` `list` `unregister` |
+| `withholdingTaxRates` | `list` |
+| `workTypes` | `list` |
 
 ## OAuth2 flow
 

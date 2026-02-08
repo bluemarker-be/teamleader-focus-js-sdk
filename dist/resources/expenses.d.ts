@@ -4,52 +4,52 @@ export declare class ExpensesResource extends BaseResource {
     list(params?: RequestBody<"expenses.list">): Promise<{
         data?: {
             source?: {
-                type?: "incomingInvoice" | "incomingCreditNote" | "receipt";
-                id?: string;
-            };
+                type?: "incomingInvoice" | "incomingCreditNote" | "receipt" | undefined;
+                id?: string | undefined;
+            } | undefined;
             origin?: {
-                type?: "user" | "peppolIncomingDocument";
-                id?: string;
-            };
-            title?: string;
+                type?: "user" | "peppolIncomingDocument" | undefined;
+                id?: string | undefined;
+            } | undefined;
+            title?: string | undefined;
             supplier?: {
-                type?: "company" | "contact";
-                id?: string;
-            } | null;
-            document_number?: string | null;
-            document_date?: string | null;
-            due_date?: string | null;
+                type?: "company" | "contact" | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            document_number?: string | null | undefined;
+            document_date?: string | null | undefined;
+            due_date?: string | null | undefined;
             currency?: {
-                code?: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            };
+                code?: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR" | undefined;
+            } | undefined;
             total?: {
                 tax_exclusive?: {
-                    amount?: number;
-                } | null;
+                    amount?: number | undefined;
+                } | null | undefined;
                 tax_inclusive?: {
-                    amount?: number;
-                } | null;
-            };
+                    amount?: number | undefined;
+                } | null | undefined;
+            } | undefined;
             company_entity?: {
-                type?: string;
-                id?: string;
-            } | null;
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
             file?: {
-                type?: string;
-                id?: string;
-            } | null;
-            payment_reference?: string | null;
-            review_status?: "pending" | "approved" | "refused";
-            bookkeeping_status?: "not_sent" | "sent";
-            iban_number?: string | null;
-        }[];
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            payment_reference?: string | null | undefined;
+            review_status?: "pending" | "approved" | "refused" | undefined;
+            bookkeeping_status?: "not_sent" | "sent" | undefined;
+            iban_number?: string | null | undefined;
+        }[] | undefined;
         meta?: {
             page?: {
-                size?: number;
-                number?: number;
-            };
-            matches?: number;
-        } & unknown;
+                size?: number | undefined;
+                number?: number | undefined;
+            } | undefined;
+            matches?: number | undefined;
+        } | undefined;
     }>;
 }
 //# sourceMappingURL=expenses.d.ts.map

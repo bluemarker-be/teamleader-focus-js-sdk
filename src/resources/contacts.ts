@@ -51,4 +51,9 @@ export class ContactsResource extends BaseResource {
   updateCompanyLink(params: RequestBody<"contacts.updateCompanyLink">) {
     return this.client.request<void>("/contacts.updateCompanyLink", params);
   }
+
+  /** Upload or remove a contact's avatar (base64-encoded image or null) */
+  uploadAvatar(params: RequestBody<"contacts.uploadAvatar">) {
+    return this.client.request<void>("/contacts.uploadAvatar", params);
+  }
 }

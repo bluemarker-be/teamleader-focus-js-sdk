@@ -3,12 +3,12 @@ import { BaseResource } from "./base.js";
 export declare class CommercialDiscountsResource extends BaseResource {
     list(params?: RequestBody<"commercialDiscounts.list">): Promise<{
         data?: {
-            name?: string;
+            name?: string | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
-        }[];
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+        }[] | undefined;
     }>;
 }
 //# sourceMappingURL=commercial-discounts.d.ts.map

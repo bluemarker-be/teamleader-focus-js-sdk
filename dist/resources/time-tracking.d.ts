@@ -4,132 +4,124 @@ export declare class TimeTrackingResource extends BaseResource {
     /** Get a list of time tracking entries */
     list(params?: RequestBody<"timeTracking.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             user?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             work_type?: {
-                id?: string;
-                type?: string;
-            };
-            started_on?: string;
-            started_at?: string | null;
-            ended_at?: string | null;
-            duration?: number;
-            description?: string;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            started_on?: string | undefined;
+            started_at?: string | null | undefined;
+            ended_at?: string | null | undefined;
+            duration?: number | undefined;
+            description?: string | undefined;
             subject?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: "company" | "contact" | "event" | "todo" | "milestone" | "ticket";
-            };
-            invoiceable?: boolean;
+                id?: string | undefined;
+                type?: "company" | "contact" | "milestone" | "ticket" | "event" | "todo" | undefined;
+            } | undefined;
+            invoiceable?: boolean | undefined;
             billing_info?: {
-                type?: "invoice" | "prepaid";
+                type?: "invoice" | "prepaid" | undefined;
                 invoice?: {
-                    id?: string;
-                    type?: string;
-                } | null;
-            } | null;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
+            } | null | undefined;
             materials?: {
                 product?: {
-                    id?: string;
-                    type?: string;
-                } | null;
-                description?: string;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
+                description?: string | undefined;
                 unit_price?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
-                quantity?: number;
-            }[];
-            relates_to?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
-            })[];
+                } | undefined;
+                quantity?: number | undefined;
+            }[] | undefined;
+            relates_to?: {
+                id?: string | undefined;
+                type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | undefined;
+            }[] | undefined;
             hourly_rate?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            };
-        }[];
+            } | undefined;
+        }[] | undefined;
     }>;
     /** Get details for a single time tracking entry */
     info(params: RequestBody<"timeTracking.info">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             user?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             work_type?: {
-                id?: string;
-                type?: string;
-            };
-            started_on?: string;
-            started_at?: string | null;
-            ended_at?: string | null;
-            duration?: number;
-            description?: string;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            started_on?: string | undefined;
+            started_at?: string | null | undefined;
+            ended_at?: string | null | undefined;
+            duration?: number | undefined;
+            description?: string | undefined;
             subject?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: "company" | "contact" | "event" | "todo" | "milestone" | "ticket";
-            };
-            invoiceable?: boolean;
-            locked?: boolean;
+                id?: string | undefined;
+                type?: "company" | "contact" | "milestone" | "ticket" | "event" | "todo" | undefined;
+            } | undefined;
+            invoiceable?: boolean | undefined;
+            locked?: boolean | undefined;
             billing_info?: {
-                type?: "invoice" | "prepaid";
+                type?: "invoice" | "prepaid" | undefined;
                 invoice?: {
-                    id?: string;
-                    type?: string;
-                } | null;
-            } | null;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
+            } | null | undefined;
             materials?: {
                 product?: {
-                    id?: string;
-                    type?: string;
-                } | null;
-                description?: string;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
+                description?: string | undefined;
                 unit_price?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
-                quantity?: number;
-            }[];
-            relates_to?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
-            })[];
+                } | undefined;
+                quantity?: number | undefined;
+            }[] | undefined;
+            relates_to?: {
+                id?: string | undefined;
+                type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | undefined;
+            }[] | undefined;
             hourly_rate?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            };
-        };
+            } | undefined;
+        } | undefined;
         meta?: {
-            updatable?: boolean;
-        };
+            updatable?: boolean | undefined;
+        } | undefined;
     }>;
     /** Add a new time tracking entry */
     add(params: RequestBody<"timeTracking.add">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Update a time tracking entry */
     update(params: RequestBody<"timeTracking.update">): Promise<void>;
     /** Resume a time tracking entry (start timer) */
     resume(params: RequestBody<"timeTracking.resume">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Delete a time tracking entry */
     delete(params: RequestBody<"timeTracking.delete">): Promise<void>;

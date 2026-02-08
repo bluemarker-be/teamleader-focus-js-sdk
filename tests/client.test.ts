@@ -86,13 +86,15 @@ describe("TeamleaderClient", () => {
   });
 
   it("retries on 429 rate limit and succeeds", async () => {
+    // Teamleader returns X-RateLimit-Reset as ISO 8601 datetime
+    const resetDate = new Date(Date.now() - 1000); // reset in the past = retry immediately
     const { fetchFn, calls } = mockFetchSequence([
       {
         status: 429,
         body: { error: "rate_limit" },
         headers: {
           "content-type": "application/json",
-          "X-RateLimit-Reset": String(Math.floor(Date.now() / 1000)),  // reset now
+          "X-RateLimit-Reset": resetDate.toISOString(),
         },
       },
       { status: 200, body: { data: [{ id: "1" }] } },
@@ -109,12 +111,13 @@ describe("TeamleaderClient", () => {
   });
 
   it("throws TeamleaderRateLimitError after max retries", async () => {
+    const resetDate = new Date(Date.now() - 1000);
     const { fetchFn } = mockFetch({
       status: 429,
       body: { error: "rate_limit" },
       headers: {
         "content-type": "application/json",
-        "X-RateLimit-Reset": String(Math.floor(Date.now() / 1000)),
+        "X-RateLimit-Reset": resetDate.toISOString(),
       },
     });
     const client = new TeamleaderClient({
@@ -136,6 +139,32 @@ describe("TeamleaderClient", () => {
 
     await client.contacts.list();
     expect(calls[0].url).toBe("https://custom.api.example.com/contacts.list");
+  });
+
+  it("sends X-API-Version header when apiVersion is set", async () => {
+    const { fetchFn, calls } = mockFetch({ body: { data: [] } });
+    const client = new TeamleaderClient({
+      accessToken: "tok",
+      fetch: fetchFn,
+      apiVersion: "2023-09-26",
+    });
+
+    await client.contacts.list();
+
+    expect(calls[0].init.headers).toEqual({
+      "Content-Type": "application/json",
+      Authorization: "Bearer tok",
+      "X-API-Version": "2023-09-26",
+    });
+  });
+
+  it("does not send X-API-Version header when apiVersion is not set", async () => {
+    const { fetchFn, calls } = mockFetch({ body: { data: [] } });
+    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+
+    await client.contacts.list();
+
+    expect(calls[0].init.headers).not.toHaveProperty("X-API-Version");
   });
 
   it("refreshes token on 401 when refresh credentials are provided", async () => {

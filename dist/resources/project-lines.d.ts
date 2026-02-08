@@ -4,16 +4,14 @@ export declare class ProjectLinesResource extends BaseResource {
     list(params: RequestBody<"projectLines.list">): Promise<{
         data?: {
             line?: {
-                type?: "nextgenTask" | "nextgenMaterial" | "nextgenProjectGroup";
-                id?: string;
-            };
-            group?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: unknown;
-            }) | null;
-        }[];
+                type?: "nextgenTask" | "nextgenMaterial" | "nextgenProjectGroup" | undefined;
+                id?: string | undefined;
+            } | undefined;
+            group?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+        }[] | undefined;
     }>;
     addToGroup(params: RequestBody<"projectLines.addToGroup">): Promise<void>;
     removeFromGroup(params: RequestBody<"projectLines.removeFromGroup">): Promise<void>;

@@ -3,15 +3,15 @@ import { BaseResource } from "./base.js";
 export declare class DayOffTypesResource extends BaseResource {
     list(): Promise<{
         data?: {
-            id?: string;
-            name?: string;
-        }[];
+            id?: string | undefined;
+            name?: string | undefined;
+        }[] | undefined;
     }>;
     create(params: RequestBody<"dayOffTypes.create">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"dayOffTypes.update">): Promise<void>;
     delete(params: RequestBody<"dayOffTypes.delete">): Promise<void>;

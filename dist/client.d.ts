@@ -1,9 +1,12 @@
 import type { OAuthTokens } from "./types/common.js";
+import { AccountsResource } from "./resources/accounts.js";
 import { ActivityTypesResource } from "./resources/activity-types.js";
 import { BookkeepingSubmissionsResource } from "./resources/bookkeeping-submissions.js";
 import { BusinessTypesResource } from "./resources/business-types.js";
+import { CallOutcomesResource } from "./resources/call-outcomes.js";
 import { CallsResource } from "./resources/calls.js";
 import { ClosingDaysResource } from "./resources/closing-days.js";
+import { CloudPlatformsResource } from "./resources/cloud-platforms.js";
 import { CommercialDiscountsResource } from "./resources/commercial-discounts.js";
 import { CompaniesResource } from "./resources/companies.js";
 import { ContactsResource } from "./resources/contacts.js";
@@ -13,6 +16,7 @@ import { CustomFieldDefinitionsResource } from "./resources/custom-field-definit
 import { DayOffTypesResource } from "./resources/day-off-types.js";
 import { DaysOffResource } from "./resources/days-off.js";
 import { DealPhasesResource } from "./resources/deal-phases.js";
+import { DealPipelinesResource } from "./resources/deal-pipelines.js";
 import { DealSourcesResource } from "./resources/deal-sources.js";
 import { DealsResource } from "./resources/deals.js";
 import { DepartmentsResource } from "./resources/departments.js";
@@ -25,6 +29,9 @@ import { FilesResource } from "./resources/files.js";
 import { IncomingCreditNotesResource } from "./resources/incoming-credit-notes.js";
 import { IncomingInvoicesResource } from "./resources/incoming-invoices.js";
 import { InvoicesResource } from "./resources/invoices.js";
+import { LegacyMilestonesResource } from "./resources/legacy-milestones.js";
+import { LegacyProjectsResource } from "./resources/legacy-projects.js";
+import { LevelTwoAreasResource } from "./resources/level-two-areas.js";
 import { LostReasonsResource } from "./resources/lost-reasons.js";
 import { MailTemplatesResource } from "./resources/mail-templates.js";
 import { MeetingsResource } from "./resources/meetings.js";
@@ -37,6 +44,7 @@ import { PlannableItemsResource } from "./resources/plannable-items.js";
 import { PriceListsResource } from "./resources/price-lists.js";
 import { ProductCategoriesResource } from "./resources/product-categories.js";
 import { ProductsResource } from "./resources/products.js";
+import { ProjectGroupsResource } from "./resources/project-groups.js";
 import { ProjectLinesResource } from "./resources/project-lines.js";
 import { ProjectMaterialsResource } from "./resources/project-materials.js";
 import { ProjectTasksResource } from "./resources/project-tasks.js";
@@ -53,6 +61,7 @@ import { TicketStatusResource } from "./resources/ticket-status.js";
 import { TicketsResource } from "./resources/tickets.js";
 import { TimeTrackingResource } from "./resources/time-tracking.js";
 import { TimersResource } from "./resources/timers.js";
+import { UnitsOfMeasureResource } from "./resources/units-of-measure.js";
 import { UserAvailabilityResource } from "./resources/user-availability.js";
 import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
@@ -78,8 +87,16 @@ export interface TeamleaderClientConfig {
     fetch?: typeof globalThis.fetch;
     /** Request timeout in ms (default: 30000) */
     timeout?: number;
-    /** Max retries on rate-limit (default: 3) */
+    /** Max retries on rate-limit or server errors (429/500/502/503) (default: 3) */
     maxRetries?: number;
+    /**
+     * API version identifier (e.g. "2023-09-26").
+     * Sent as `X-API-Version` header on every request.
+     * When omitted, the version embedded in your OAuth token is used.
+     *
+     * @see https://developer.teamleader.eu/#/introduction/ap-i-versions
+     */
+    apiVersion?: string;
 }
 export declare class TeamleaderClient {
     private accessToken;
@@ -91,12 +108,16 @@ export declare class TeamleaderClient {
     private readonly fetchFn;
     private readonly timeout;
     private readonly maxRetries;
+    private readonly apiVersion?;
     private refreshPromise;
+    readonly accounts: AccountsResource;
     readonly activityTypes: ActivityTypesResource;
     readonly bookkeepingSubmissions: BookkeepingSubmissionsResource;
     readonly businessTypes: BusinessTypesResource;
+    readonly callOutcomes: CallOutcomesResource;
     readonly calls: CallsResource;
     readonly closingDays: ClosingDaysResource;
+    readonly cloudPlatforms: CloudPlatformsResource;
     readonly commercialDiscounts: CommercialDiscountsResource;
     readonly companies: CompaniesResource;
     readonly contacts: ContactsResource;
@@ -106,6 +127,7 @@ export declare class TeamleaderClient {
     readonly dayOffTypes: DayOffTypesResource;
     readonly daysOff: DaysOffResource;
     readonly dealPhases: DealPhasesResource;
+    readonly dealPipelines: DealPipelinesResource;
     readonly dealSources: DealSourcesResource;
     readonly deals: DealsResource;
     readonly departments: DepartmentsResource;
@@ -118,6 +140,9 @@ export declare class TeamleaderClient {
     readonly incomingCreditNotes: IncomingCreditNotesResource;
     readonly incomingInvoices: IncomingInvoicesResource;
     readonly invoices: InvoicesResource;
+    readonly legacyMilestones: LegacyMilestonesResource;
+    readonly legacyProjects: LegacyProjectsResource;
+    readonly levelTwoAreas: LevelTwoAreasResource;
     readonly lostReasons: LostReasonsResource;
     readonly mailTemplates: MailTemplatesResource;
     readonly meetings: MeetingsResource;
@@ -130,6 +155,7 @@ export declare class TeamleaderClient {
     readonly priceLists: PriceListsResource;
     readonly productCategories: ProductCategoriesResource;
     readonly products: ProductsResource;
+    readonly projectGroups: ProjectGroupsResource;
     readonly projectLines: ProjectLinesResource;
     readonly projectMaterials: ProjectMaterialsResource;
     readonly projectTasks: ProjectTasksResource;
@@ -146,6 +172,7 @@ export declare class TeamleaderClient {
     readonly tickets: TicketsResource;
     readonly timeTracking: TimeTrackingResource;
     readonly timers: TimersResource;
+    readonly unitsOfMeasure: UnitsOfMeasureResource;
     readonly userAvailability: UserAvailabilityResource;
     readonly users: UsersResource;
     readonly webhooks: WebhooksResource;

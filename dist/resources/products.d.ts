@@ -4,99 +4,97 @@ export declare class ProductsResource extends BaseResource {
     /** Get a list of products */
     list(params?: RequestBody<"products.list">): Promise<{
         data?: {
-            id?: string;
-            name?: string | null;
-            description?: string | null;
-            code?: string | null;
+            id?: string | undefined;
+            name?: string | null | undefined;
+            description?: string | null | undefined;
+            code?: string | null | undefined;
             unit?: {
-                id?: string;
-                type?: string;
-            } | null;
-            added_at?: string;
-            updated_at?: string;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            added_at?: string | undefined;
+            updated_at?: string | undefined;
             stock?: {
-                amount?: number | null;
-            } & unknown;
+                amount?: number | null | undefined;
+            } | undefined;
             configuration?: {
                 stock_threshold?: {
-                    minimum?: number;
-                    action?: "notify";
-                } | null;
-            } | null;
-        }[];
+                    minimum?: number | undefined;
+                    action?: "notify" | undefined;
+                } | null | undefined;
+            } | null | undefined;
+        }[] | undefined;
     }>;
     /** Get details for a single product */
     info(params: RequestBody<"products.info">): Promise<{
         data?: {
-            id?: string;
-            name?: string | null;
-            description?: string | null;
-            code?: string | null;
+            id?: string | undefined;
+            name?: string | null | undefined;
+            description?: string | null | undefined;
+            code?: string | null | undefined;
             purchase_price?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            } | null;
+            } | null | undefined;
             selling_price?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            } | null;
+            } | null | undefined;
             unit?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             tax?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             suppliers?: {
                 supplier?: {
-                    type?: "company" | "contact";
-                    id?: string;
-                };
+                    type?: "company" | "contact" | undefined;
+                    id?: string | undefined;
+                } | undefined;
                 purchase_price?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | null;
-                product_code?: string;
-                minimum_order_amount?: number;
-                classification?: "primary" | "secondary";
-            }[];
+                } | null | undefined;
+                product_code?: string | undefined;
+                minimum_order_amount?: number | undefined;
+                classification?: "primary" | "secondary" | undefined;
+            }[] | undefined;
             custom_fields?: {
                 definition?: {
-                    type?: string;
-                    id?: string;
-                };
-                value?: string | number | string[] | boolean | ({
-                    id?: string;
-                    type?: string;
-                } & {
-                    type?: "company" | "contact" | "product" | "user";
-                });
-            }[];
-            price_list_prices?: unknown[][];
+                    type?: string | undefined;
+                    id?: string | undefined;
+                } | undefined;
+                value?: string | number | boolean | string[] | {
+                    id?: string | undefined;
+                    type?: "user" | "company" | "contact" | "product" | undefined;
+                } | undefined;
+            }[] | undefined;
+            price_list_prices?: unknown[][] | undefined;
             product_category?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             stock?: {
-                amount?: number | null;
-            } & unknown;
+                amount?: number | null | undefined;
+            } | undefined;
             configuration?: {
                 stock_threshold?: {
-                    minimum?: number;
-                    action?: "notify";
-                } | null;
-            } | null;
-            added_at?: string;
-            updated_at?: string;
-        };
+                    minimum?: number | undefined;
+                    action?: "notify" | undefined;
+                } | null | undefined;
+            } | null | undefined;
+            added_at?: string | undefined;
+            updated_at?: string | undefined;
+        } | undefined;
     }>;
     /** Create a new product */
     add(params: RequestBody<"products.add">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Update an existing product */
     update(params: RequestBody<"products.update">): Promise<void>;

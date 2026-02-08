@@ -53,7 +53,7 @@ export async function* paginatePages<T>(
 
     // Stop if we've received all matches
     if (response.meta?.matches !== undefined) {
-      const totalFetched = pageNumber * pageSize;
+      const totalFetched = pagesYielded * pageSize;
       if (totalFetched >= response.meta.matches) {
         break;
       }

@@ -3,93 +3,91 @@ import { BaseResource } from "./base.js";
 export declare class CallsResource extends BaseResource {
     list(params?: RequestBody<"calls.list">): Promise<{
         data?: {
-            id?: string;
-            added_at?: string | null;
+            id?: string | undefined;
+            added_at?: string | null | undefined;
             participant?: {
                 customer?: {
-                    id?: string;
-                    type?: string;
-                } | null;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
                 contact?: {
-                    id?: string;
-                    type?: string;
-                } | null;
-            } | null;
-            description?: string | null;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
+            } | null | undefined;
+            description?: string | null | undefined;
             outcome?: {
-                id?: string;
-                type?: string;
-            } | null;
-            outcome_summary?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            outcome_summary?: string | null | undefined;
             assignee?: {
-                id?: string;
-                type?: string;
-            } | null;
-            scheduled_at?: string;
-            status?: "open" | "completed";
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            scheduled_at?: string | undefined;
+            status?: "open" | "completed" | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            } | null;
-        }[];
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+        }[] | undefined;
         meta?: {
             page?: {
-                size?: number;
-                number?: number;
-            };
-            matches?: number;
-        } & unknown;
+                size?: number | undefined;
+                number?: number | undefined;
+            } | undefined;
+            matches?: number | undefined;
+        } | undefined;
     }>;
     info(params: RequestBody<"calls.info">): Promise<{
         data?: {
-            id?: string;
-            added_at?: string | null;
-            completed_at?: string | null;
+            id?: string | undefined;
+            added_at?: string | null | undefined;
+            completed_at?: string | null | undefined;
             participant?: {
                 customer?: {
-                    id?: string;
-                    type?: string;
-                } | null;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
                 contact?: {
-                    id?: string;
-                    type?: string;
-                } | null;
-            } | null;
-            description?: string | null;
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | null | undefined;
+            } | null | undefined;
+            description?: string | null | undefined;
             outcome?: {
-                id?: string;
-                type?: string;
-            } | null;
-            outcome_summary?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            outcome_summary?: string | null | undefined;
             assignee?: {
-                id?: string;
-                type?: string;
-            } | null;
-            scheduled_at?: string;
-            status?: "open" | "completed";
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            scheduled_at?: string | undefined;
+            status?: "open" | "completed" | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             custom_fields?: {
                 definition?: {
-                    type?: string;
-                    id?: string;
-                };
-                value?: string | number | string[] | boolean | ({
-                    id?: string;
-                    type?: string;
-                } & {
-                    type?: "company" | "contact" | "product" | "user";
-                });
-            }[];
-        };
+                    type?: string | undefined;
+                    id?: string | undefined;
+                } | undefined;
+                value?: string | number | boolean | string[] | {
+                    id?: string | undefined;
+                    type?: "user" | "company" | "contact" | "product" | undefined;
+                } | undefined;
+            }[] | undefined;
+        } | undefined;
     }>;
     add(params: RequestBody<"calls.add">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"calls.update">): Promise<void>;
     complete(params: RequestBody<"calls.complete">): Promise<void>;

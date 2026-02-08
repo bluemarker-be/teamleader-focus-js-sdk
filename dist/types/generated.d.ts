@@ -6488,7 +6488,7 @@ export interface components {
          * NoteSubjectTypes
          * @enum {string}
          */
-        NoteSubjectTypesCreate: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "quotation" | "subscription";
+        NoteSubjectTypesCreate: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "quotation" | "subscription";
         /** notes.createrequest */
         "notes.createrequest": {
             subject: {
@@ -6500,7 +6500,7 @@ export interface components {
                  * NoteSubjectTypes
                  * @enum {string}
                  */
-                type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "quotation" | "subscription";
+                type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "quotation" | "subscription";
             };
             /** @example new note content */
             content: string;
@@ -24417,7 +24417,7 @@ export interface operations {
                          * NoteSubjectTypes
                          * @enum {string}
                          */
-                        type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "quotation" | "subscription";
+                        type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "quotation" | "subscription";
                     };
                     /** @example new note content */
                     content: string;

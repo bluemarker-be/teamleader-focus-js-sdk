@@ -1,10 +1,13 @@
 import { TeamleaderAuthenticationError, TeamleaderError, TeamleaderNetworkError, TeamleaderRateLimitError, TeamleaderValidationError, } from "./errors.js";
 import { refreshTokens } from "./oauth.js";
+import { AccountsResource } from "./resources/accounts.js";
 import { ActivityTypesResource } from "./resources/activity-types.js";
 import { BookkeepingSubmissionsResource } from "./resources/bookkeeping-submissions.js";
 import { BusinessTypesResource } from "./resources/business-types.js";
+import { CallOutcomesResource } from "./resources/call-outcomes.js";
 import { CallsResource } from "./resources/calls.js";
 import { ClosingDaysResource } from "./resources/closing-days.js";
+import { CloudPlatformsResource } from "./resources/cloud-platforms.js";
 import { CommercialDiscountsResource } from "./resources/commercial-discounts.js";
 import { CompaniesResource } from "./resources/companies.js";
 import { ContactsResource } from "./resources/contacts.js";
@@ -14,6 +17,7 @@ import { CustomFieldDefinitionsResource } from "./resources/custom-field-definit
 import { DayOffTypesResource } from "./resources/day-off-types.js";
 import { DaysOffResource } from "./resources/days-off.js";
 import { DealPhasesResource } from "./resources/deal-phases.js";
+import { DealPipelinesResource } from "./resources/deal-pipelines.js";
 import { DealSourcesResource } from "./resources/deal-sources.js";
 import { DealsResource } from "./resources/deals.js";
 import { DepartmentsResource } from "./resources/departments.js";
@@ -26,6 +30,9 @@ import { FilesResource } from "./resources/files.js";
 import { IncomingCreditNotesResource } from "./resources/incoming-credit-notes.js";
 import { IncomingInvoicesResource } from "./resources/incoming-invoices.js";
 import { InvoicesResource } from "./resources/invoices.js";
+import { LegacyMilestonesResource } from "./resources/legacy-milestones.js";
+import { LegacyProjectsResource } from "./resources/legacy-projects.js";
+import { LevelTwoAreasResource } from "./resources/level-two-areas.js";
 import { LostReasonsResource } from "./resources/lost-reasons.js";
 import { MailTemplatesResource } from "./resources/mail-templates.js";
 import { MeetingsResource } from "./resources/meetings.js";
@@ -38,6 +45,7 @@ import { PlannableItemsResource } from "./resources/plannable-items.js";
 import { PriceListsResource } from "./resources/price-lists.js";
 import { ProductCategoriesResource } from "./resources/product-categories.js";
 import { ProductsResource } from "./resources/products.js";
+import { ProjectGroupsResource } from "./resources/project-groups.js";
 import { ProjectLinesResource } from "./resources/project-lines.js";
 import { ProjectMaterialsResource } from "./resources/project-materials.js";
 import { ProjectTasksResource } from "./resources/project-tasks.js";
@@ -54,6 +62,7 @@ import { TicketStatusResource } from "./resources/ticket-status.js";
 import { TicketsResource } from "./resources/tickets.js";
 import { TimeTrackingResource } from "./resources/time-tracking.js";
 import { TimersResource } from "./resources/timers.js";
+import { UnitsOfMeasureResource } from "./resources/units-of-measure.js";
 import { UserAvailabilityResource } from "./resources/user-availability.js";
 import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
@@ -72,14 +81,18 @@ export class TeamleaderClient {
     fetchFn;
     timeout;
     maxRetries;
+    apiVersion;
     // Mutex for token refresh — prevents multiple concurrent refreshes
     refreshPromise = null;
     // Resources
+    accounts;
     activityTypes;
     bookkeepingSubmissions;
     businessTypes;
+    callOutcomes;
     calls;
     closingDays;
+    cloudPlatforms;
     commercialDiscounts;
     companies;
     contacts;
@@ -89,6 +102,7 @@ export class TeamleaderClient {
     dayOffTypes;
     daysOff;
     dealPhases;
+    dealPipelines;
     dealSources;
     deals;
     departments;
@@ -101,6 +115,9 @@ export class TeamleaderClient {
     incomingCreditNotes;
     incomingInvoices;
     invoices;
+    legacyMilestones;
+    legacyProjects;
+    levelTwoAreas;
     lostReasons;
     mailTemplates;
     meetings;
@@ -113,6 +130,7 @@ export class TeamleaderClient {
     priceLists;
     productCategories;
     products;
+    projectGroups;
     projectLines;
     projectMaterials;
     projectTasks;
@@ -129,6 +147,7 @@ export class TeamleaderClient {
     tickets;
     timeTracking;
     timers;
+    unitsOfMeasure;
     userAvailability;
     users;
     webhooks;
@@ -144,17 +163,21 @@ export class TeamleaderClient {
         this.fetchFn = config.fetch ?? globalThis.fetch.bind(globalThis);
         this.timeout = config.timeout ?? DEFAULT_TIMEOUT_MS;
         this.maxRetries = config.maxRetries ?? DEFAULT_MAX_RETRIES;
+        this.apiVersion = config.apiVersion;
         // Warn if clientSecret is used in browser context
         if (config.clientSecret && typeof globalThis.window !== "undefined") {
             console.warn("[teamleader-focus-sdk] WARNING: clientSecret should not be used in browser environments. " +
                 "Use server-side code for OAuth2 token exchange and refresh.");
         }
         // Initialize resources
+        this.accounts = new AccountsResource(this);
         this.activityTypes = new ActivityTypesResource(this);
         this.bookkeepingSubmissions = new BookkeepingSubmissionsResource(this);
         this.businessTypes = new BusinessTypesResource(this);
+        this.callOutcomes = new CallOutcomesResource(this);
         this.calls = new CallsResource(this);
         this.closingDays = new ClosingDaysResource(this);
+        this.cloudPlatforms = new CloudPlatformsResource(this);
         this.commercialDiscounts = new CommercialDiscountsResource(this);
         this.companies = new CompaniesResource(this);
         this.contacts = new ContactsResource(this);
@@ -164,6 +187,7 @@ export class TeamleaderClient {
         this.dayOffTypes = new DayOffTypesResource(this);
         this.daysOff = new DaysOffResource(this);
         this.dealPhases = new DealPhasesResource(this);
+        this.dealPipelines = new DealPipelinesResource(this);
         this.dealSources = new DealSourcesResource(this);
         this.deals = new DealsResource(this);
         this.departments = new DepartmentsResource(this);
@@ -176,6 +200,9 @@ export class TeamleaderClient {
         this.incomingCreditNotes = new IncomingCreditNotesResource(this);
         this.incomingInvoices = new IncomingInvoicesResource(this);
         this.invoices = new InvoicesResource(this);
+        this.legacyMilestones = new LegacyMilestonesResource(this);
+        this.legacyProjects = new LegacyProjectsResource(this);
+        this.levelTwoAreas = new LevelTwoAreasResource(this);
         this.lostReasons = new LostReasonsResource(this);
         this.mailTemplates = new MailTemplatesResource(this);
         this.meetings = new MeetingsResource(this);
@@ -188,6 +215,7 @@ export class TeamleaderClient {
         this.priceLists = new PriceListsResource(this);
         this.productCategories = new ProductCategoriesResource(this);
         this.products = new ProductsResource(this);
+        this.projectGroups = new ProjectGroupsResource(this);
         this.projectLines = new ProjectLinesResource(this);
         this.projectMaterials = new ProjectMaterialsResource(this);
         this.projectTasks = new ProjectTasksResource(this);
@@ -204,6 +232,7 @@ export class TeamleaderClient {
         this.tickets = new TicketsResource(this);
         this.timeTracking = new TimeTrackingResource(this);
         this.timers = new TimersResource(this);
+        this.unitsOfMeasure = new UnitsOfMeasureResource(this);
         this.userAvailability = new UserAvailabilityResource(this);
         this.users = new UsersResource(this);
         this.webhooks = new WebhooksResource(this);
@@ -223,12 +252,16 @@ export class TeamleaderClient {
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
         let response;
         try {
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${this.accessToken}`,
+            };
+            if (this.apiVersion) {
+                headers["X-API-Version"] = this.apiVersion;
+            }
             response = await this.fetchFn(url.toString(), {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${this.accessToken}`,
-                },
+                headers,
                 body: body !== undefined ? JSON.stringify(body) : undefined,
                 signal: controller.signal,
             });
@@ -330,9 +363,14 @@ export class TeamleaderClient {
     parseRetryAfter(response) {
         const resetHeader = response.headers.get("X-RateLimit-Reset");
         if (resetHeader) {
+            // Teamleader returns an ISO 8601 datetime string (e.g. "2026-02-08T11:09:08+00:00")
+            const parsed = new Date(resetHeader);
+            if (!isNaN(parsed.getTime())) {
+                return parsed;
+            }
+            // Fallback: try as epoch seconds/ms (for future compatibility)
             const resetTime = Number(resetHeader);
             if (!isNaN(resetTime)) {
-                // Could be epoch seconds or ms — if < year 2000 in ms, treat as seconds
                 return new Date(resetTime > 1e12 ? resetTime : resetTime * 1000);
             }
         }

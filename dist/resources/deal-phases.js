@@ -9,9 +9,6 @@ export class DealPhasesResource extends BaseResource {
     update(params) {
         return this.client.request("/dealPhases.update", params);
     }
-    duplicate(params) {
-        return this.client.request("/dealPhases.duplicate", params);
-    }
     move(params) {
         return this.client.request("/dealPhases.move", params);
     }

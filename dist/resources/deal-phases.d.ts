@@ -3,29 +3,23 @@ import { BaseResource } from "./base.js";
 export declare class DealPhasesResource extends BaseResource {
     list(params: RequestBody<"dealPhases.list">): Promise<{
         data?: {
-            id?: string;
-            name?: string;
-            actions?: ("create_event" | "create_call" | "create_task")[];
+            id?: string | undefined;
+            name?: string | undefined;
+            actions?: ("create_event" | "create_call" | "create_task")[] | undefined;
             requires_attention_after?: {
-                amount?: number;
-                unit?: "days" | "weeks";
-            } & unknown;
-            probability?: number;
-        }[];
+                amount?: number | undefined;
+                unit?: "days" | "weeks" | undefined;
+            } | undefined;
+            probability?: number | undefined;
+        }[] | undefined;
     }>;
     create(params: RequestBody<"dealPhases.create">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"dealPhases.update">): Promise<void>;
-    duplicate(params: RequestBody<"dealPhases.duplicate">): Promise<{
-        data?: {
-            type?: string;
-            id: string;
-        };
-    }>;
     move(params: RequestBody<"dealPhases.move">): Promise<void>;
     delete(params: RequestBody<"dealPhases.delete">): Promise<void>;
 }

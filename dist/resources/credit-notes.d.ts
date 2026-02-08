@@ -3,190 +3,188 @@ import { BaseResource } from "./base.js";
 export declare class CreditNotesResource extends BaseResource {
     list(params?: RequestBody<"creditNotes.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
-            credit_note_number?: string | null;
-            credit_note_date?: string | null;
-            status?: "booked";
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            credit_note_number?: string | null | undefined;
+            credit_note_date?: string | null | undefined;
+            status?: "booked" | undefined;
             invoice?: {
-                id?: string;
-                type?: string;
-            } | null;
-            paid?: boolean;
-            paid_at?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            paid?: boolean | undefined;
+            paid_at?: string | null | undefined;
             invoicee?: {
-                name?: string;
-                vat_number?: string | null;
+                name?: string | undefined;
+                vat_number?: string | null | undefined;
                 customer?: {
-                    id?: string;
-                    type?: string;
-                };
-            };
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | undefined;
+            } | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 payable?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
-            };
-            created_at?: string;
-            updated_at?: string;
-        }[];
+                    } | undefined;
+                }[] | undefined;
+            } | undefined;
+            created_at?: string | undefined;
+            updated_at?: string | undefined;
+        }[] | undefined;
     }>;
     info(params: RequestBody<"creditNotes.info">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
-            credit_note_number?: string | null;
-            credit_note_date?: string | null;
-            status?: "booked";
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            credit_note_number?: string | null | undefined;
+            credit_note_date?: string | null | undefined;
+            status?: "booked" | undefined;
             invoice?: {
-                id?: string;
-                type?: string;
-            } | null;
-            paid?: boolean;
-            paid_at?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            paid?: boolean | undefined;
+            paid_at?: string | null | undefined;
             invoicee?: {
-                name?: string;
-                vat_number?: string | null;
+                name?: string | undefined;
+                vat_number?: string | null | undefined;
                 customer?: {
-                    id?: string;
-                    type?: string;
-                };
-                email?: string | null;
-                national_identification_number?: string | null;
-            };
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | undefined;
+                email?: string | null | undefined;
+                national_identification_number?: string | null | undefined;
+            } | undefined;
             discounts?: {
-                type?: "percentage";
-                value?: number;
-                description?: string;
-            }[];
+                type?: "percentage" | undefined;
+                value?: number | undefined;
+                description?: string | undefined;
+            }[] | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 payable?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
-            };
+                    } | undefined;
+                }[] | undefined;
+            } | undefined;
             grouped_lines?: {
                 section?: {
-                    title?: string;
-                };
-                line_items?: ({
+                    title?: string | undefined;
+                } | undefined;
+                line_items?: {
                     product?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    quantity?: number;
-                    description?: string;
-                    extended_description?: string | null;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    quantity?: number | undefined;
+                    description?: string | undefined;
+                    extended_description?: string | undefined;
                     unit?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: Record<string, never>;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    unit_price?: {
+                        tax?: "excluding" | undefined;
+                        amount: number;
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    } | undefined;
                     tax?: {
-                        id?: string;
-                        type?: string;
-                    };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | undefined;
                     discount?: {
-                        value?: number;
-                        type?: "percentage";
-                    } | null;
+                        value?: number | undefined;
+                        type?: "percentage" | undefined;
+                    } | null | undefined;
                     total?: {
                         tax_exclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_exclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
-                    };
-                } & {
-                    extended_description?: string;
+                        } | undefined;
+                    } | undefined;
                     product_category?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: ({
-                        tax?: "excluding";
-                    } & ({
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } & Record<string, never>)) & Record<string, never>;
-                })[];
-            }[];
-            currency?: string;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                }[] | undefined;
+            }[] | undefined;
+            currency?: string | undefined;
             currency_exchange_rate?: {
-                from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                rate?: number;
-            };
-            created_at?: string;
-            updated_at?: string;
+                from?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                to?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                rate?: number | undefined;
+            } | undefined;
+            created_at?: string | undefined;
+            updated_at?: string | undefined;
             document_template?: {
-                id?: string;
-                type?: string;
-            };
-            peppol_status?: ("sending" | "sending_failed" | "sent" | "application_acknowledged" | "application_accepted" | "application_rejected" | "receiver_acknowledged" | "receiver_accepted" | "receiver_rejected" | "receiver_is_processing" | "receiver_awaits_feedback" | "receiver_conditionally_accepted" | "receiver_paid" | null) & unknown;
-        }[];
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            peppol_status?: (("sending" | "sending_failed" | "sent" | "application_acknowledged" | "application_accepted" | "application_rejected" | "receiver_acknowledged" | "receiver_accepted" | "receiver_rejected" | "receiver_is_processing" | "receiver_awaits_feedback" | "receiver_conditionally_accepted" | "receiver_paid" | null) & unknown) | undefined;
+        }[] | undefined;
     }>;
     download(params: RequestBody<"creditNotes.download">): Promise<{
         data?: {
-            location?: string;
-            expires?: string;
-        };
+            location?: string | undefined;
+            expires?: string | undefined;
+        } | undefined;
     }>;
+    /** Send a credit note via Peppol */
+    sendViaPeppol(params: RequestBody<"creditNotes.sendViaPeppol">): Promise<void>;
 }
 //# sourceMappingURL=credit-notes.d.ts.map

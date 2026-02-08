@@ -4,115 +4,111 @@ export declare class QuotationsResource extends BaseResource {
     /** Get a list of quotations */
     list(params?: RequestBody<"quotations.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             currency_exchange_rate?: {
-                from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                rate?: number;
-            };
+                from?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                to?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                rate?: number | undefined;
+            } | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
+                    } | undefined;
+                }[] | undefined;
                 purchase_price?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | null;
-            };
-            created_at?: string | null;
-            updated_at?: string | null;
-            status?: "open" | "accepted" | "expired" | "rejected" | "closed";
-            name?: string;
+                } | null | undefined;
+            } | undefined;
+            created_at?: string | null | undefined;
+            updated_at?: string | null | undefined;
+            status?: "open" | "accepted" | "expired" | "rejected" | "closed" | undefined;
+            name?: string | undefined;
             expiry?: {
-                expires_after?: string;
-                action_after_expiry?: "lock" | "none";
-            } & unknown;
-        }[];
+                expires_after?: string | undefined;
+                action_after_expiry?: "lock" | "none" | undefined;
+            } | undefined;
+        }[] | undefined;
     }>;
     /** Get details for a single quotation */
     info(params: RequestBody<"quotations.info">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             grouped_lines?: {
                 section?: {
-                    title?: string;
-                };
-                line_items?: ({
+                    title?: string | undefined;
+                } | undefined;
+                line_items?: {
                     product?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    quantity?: number;
-                    description?: string;
-                    extended_description?: string | null;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    quantity?: number | undefined;
+                    description?: string | undefined;
+                    extended_description?: string | undefined;
                     unit?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: Record<string, never>;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    unit_price?: {
+                        tax?: "excluding" | undefined;
+                        amount: number;
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    } | undefined;
                     tax?: {
-                        id?: string;
-                        type?: string;
-                    };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | undefined;
                     discount?: {
-                        value?: number;
-                        type?: "percentage";
-                    } | null;
+                        value?: number | undefined;
+                        type?: "percentage" | undefined;
+                    } | null | undefined;
                     total?: {
                         tax_exclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_exclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
-                    };
-                } & {
-                    extended_description?: string;
-                    unit_price?: ({
-                        tax?: "excluding";
-                    } & ({
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } & Record<string, never>)) & Record<string, never>;
+                        } | undefined;
+                    } | undefined;
                     purchase_price?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | null;
-                    periodicity?: ({
+                    } | null | undefined;
+                    periodicity?: {
                         unit: "week";
                         period: 1 | 2;
                     } | {
@@ -121,73 +117,73 @@ export declare class QuotationsResource extends BaseResource {
                     } | {
                         unit: "year";
                         period: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-                    }) | null;
-                })[];
-            }[];
-            currency?: string;
+                    } | null | undefined;
+                }[] | undefined;
+            }[] | undefined;
+            currency?: string | undefined;
             currency_exchange_rate?: {
-                from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                rate?: number;
-            };
-            text?: string;
+                from?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                to?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                rate?: number | undefined;
+            } | undefined;
+            text?: string | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
+                    } | undefined;
+                }[] | undefined;
                 purchase_price?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | null;
-            };
+                } | null | undefined;
+            } | undefined;
             discounts?: {
-                type?: "percentage";
-                value?: number;
-                description?: string;
-            }[];
-            created_at?: string | null;
-            updated_at?: string | null;
-            status?: "open" | "accepted" | "expired" | "rejected" | "closed";
-            name?: string;
+                type?: "percentage" | undefined;
+                value?: number | undefined;
+                description?: string | undefined;
+            }[] | undefined;
+            created_at?: string | null | undefined;
+            updated_at?: string | null | undefined;
+            status?: "open" | "accepted" | "expired" | "rejected" | "closed" | undefined;
+            name?: string | undefined;
             document_template?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             expiry?: {
-                expires_after?: string;
-                action_after_expiry?: "lock" | "none";
-            } & unknown;
-        };
+                expires_after?: string | undefined;
+                action_after_expiry?: "lock" | "none" | undefined;
+            } | undefined;
+        } | undefined;
     }>;
     /** Download a quotation PDF */
     download(params: RequestBody<"quotations.download">): Promise<{
         data?: {
-            location?: string;
-            expires?: string;
-        };
+            location?: string | undefined;
+            expires?: string | undefined;
+        } | undefined;
     }>;
     /** Create a new quotation */
     create(params: RequestBody<"quotations.create">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Send a quotation via email */
     send(params: RequestBody<"quotations.send">): Promise<void>;

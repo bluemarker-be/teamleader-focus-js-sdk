@@ -3,181 +3,168 @@ import { BaseResource } from "./base.js";
 export declare class MeetingsResource extends BaseResource {
     list(params?: RequestBody<"meetings.list">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
-            description?: string;
-            created_at?: string;
-            scheduled_at?: string;
+            id?: string | undefined;
+            title?: string | undefined;
+            description?: string | undefined;
+            created_at?: string | undefined;
+            scheduled_at?: string | undefined;
             duration?: {
-                unit?: "min";
-                value?: number;
-            };
+                unit?: "min" | undefined;
+                value?: number | undefined;
+            } | undefined;
             tracked_time?: {
                 total?: {
-                    unit?: "min";
-                } & {
-                    value?: number;
-                    unit?: string;
-                };
-            };
+                    unit?: "min" | undefined;
+                    value?: number | undefined;
+                } | undefined;
+            } | undefined;
             estimated_time?: {
                 total?: {
-                    unit?: "s";
-                } & {
-                    value?: number;
-                    unit?: string;
-                };
-            };
+                    unit?: "s" | undefined;
+                    value?: number | undefined;
+                } | undefined;
+            } | undefined;
             customer?: {
                 type: "contact" | "company";
                 id: string;
-            } | null;
-            project?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: "project" | "nextgenProject";
-            }) | null;
+            } | null | undefined;
+            project?: {
+                id?: string | undefined;
+                type?: "project" | "nextgenProject" | undefined;
+            } | null | undefined;
             milestone?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             group?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             attendees?: {
-                type?: "user" | "contact";
-                id?: string;
-            }[];
-            status?: "open" | "done";
+                type?: "user" | "contact" | undefined;
+                id?: string | undefined;
+            }[] | undefined;
+            status?: "open" | "done" | undefined;
             recurrence?: {
-                id?: string;
-                type?: string;
-            } | null;
-        }[];
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+        }[] | undefined;
     }>;
     info(params: RequestBody<"meetings.info">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
-            description?: string;
-            created_at?: string;
-            scheduled_at?: string;
+            id?: string | undefined;
+            title?: string | undefined;
+            description?: string | undefined;
+            created_at?: string | undefined;
+            scheduled_at?: string | undefined;
             duration?: {
-                unit?: "min";
-                value?: number;
-            };
+                unit?: "min" | undefined;
+                value?: number | undefined;
+            } | undefined;
             tracked_time?: {
                 total?: {
-                    unit?: "min";
-                } & {
-                    value?: number;
-                    unit?: string;
-                };
-            };
+                    unit?: "min" | undefined;
+                    value?: number | undefined;
+                } | undefined;
+            } | undefined;
             estimated_time?: {
                 total?: {
-                    unit?: "s";
-                } & {
-                    value?: number;
-                    unit?: string;
-                };
-            };
+                    unit?: "s" | undefined;
+                    value?: number | undefined;
+                } | undefined;
+            } | undefined;
             customer?: {
                 type: "contact" | "company";
                 id: string;
-            } | null;
-            project?: ({
-                id?: string;
-                type?: string;
-            } & {
-                type?: "project" | "nextgenProject";
-            }) | null;
+            } | null | undefined;
+            project?: {
+                id?: string | undefined;
+                type?: "project" | "nextgenProject" | undefined;
+            } | null | undefined;
             milestone?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             group?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             location?: {
-                type?: "virtual" | "calendarResource";
+                type?: "virtual" | "calendarResource" | undefined;
             } | {
-                type?: "contact" | "company";
+                type?: "contact" | "company" | undefined;
                 address?: {
-                    line_1?: string | null;
-                    postal_code?: string | null;
-                    city?: string | null;
-                    country?: string;
-                    area_level_two?: ({
-                        id?: string;
-                        type?: string;
-                    } & {
-                        type?: string;
-                    }) | null;
-                };
+                    line_1?: string | null | undefined;
+                    postal_code?: string | null | undefined;
+                    city?: string | null | undefined;
+                    country?: string | undefined;
+                    area_level_two?: {
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                } | undefined;
             } | {
-                type?: string;
-                id?: string;
+                type?: string | undefined;
+                id?: string | undefined;
                 address?: {
-                    line_1?: string | null;
-                    postal_code?: string | null;
-                    city?: string | null;
-                    country?: string;
-                    area_level_two?: ({
-                        id?: string;
-                        type?: string;
-                    } & {
-                        type?: string;
-                    }) | null;
-                };
-            };
+                    line_1?: string | null | undefined;
+                    postal_code?: string | null | undefined;
+                    city?: string | null | undefined;
+                    country?: string | undefined;
+                    area_level_two?: {
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                } | undefined;
+            } | undefined;
             online_meeting_room?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             attendees?: {
-                type?: "user" | "contact";
-                id?: string;
-            }[];
+                type?: "user" | "contact" | undefined;
+                id?: string | undefined;
+            }[] | undefined;
             custom_fields?: {
                 definition?: {
-                    type?: string;
-                    id?: string;
-                };
-                value?: string | number | string[] | boolean | ({
-                    id?: string;
-                    type?: string;
-                } & {
-                    type?: "company" | "contact" | "product" | "user";
-                });
-            }[];
-            status?: "open" | "done";
+                    type?: string | undefined;
+                    id?: string | undefined;
+                } | undefined;
+                value?: string | number | boolean | string[] | {
+                    id?: string | undefined;
+                    type?: "user" | "company" | "contact" | "product" | undefined;
+                } | undefined;
+            }[] | undefined;
+            status?: "open" | "done" | undefined;
             recurrence?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             workOrder?: {
-                id?: string;
-                type?: string;
-            } | null;
-        };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+        } | undefined;
     }>;
     schedule(params: RequestBody<"meetings.schedule">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"meetings.update">): Promise<void>;
     complete(params: RequestBody<"meetings.complete">): Promise<void>;
-    createReport(params: RequestBody<"meetings.createReport">): Promise<void>;
+    createReport(params: RequestBody<"meetings.createReport">): Promise<{
+        data?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+    }>;
     delete(params: RequestBody<"meetings.delete">): Promise<void>;
 }
 //# sourceMappingURL=meetings.d.ts.map

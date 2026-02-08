@@ -3,34 +3,34 @@ import { BaseResource } from "./base.js";
 export declare class SubscriptionsResource extends BaseResource {
     list(params?: RequestBody<"subscriptions.list">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
-            note?: string | null;
-            status?: "active" | "deactivated";
+            id?: string | undefined;
+            title?: string | undefined;
+            note?: string | null | undefined;
+            status?: "active" | "deactivated" | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             invoicee?: {
                 customer?: {
                     type: "contact" | "company";
                     id: string;
-                };
+                } | undefined;
                 for_attention_of?: {
-                    name?: string | null;
+                    name?: string | null | undefined;
                     contact?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                } | null;
-            };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                } | null | undefined;
+            } | undefined;
             project?: {
-                id?: string;
-                type?: string;
-            } | null;
-            starts_on?: string;
-            ends_on?: string | null;
-            next_renewal_date?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            starts_on?: string | undefined;
+            ends_on?: string | null | undefined;
+            next_renewal_date?: string | null | undefined;
             billing_cycle?: {
                 periodicity?: {
                     unit: "week";
@@ -41,86 +41,86 @@ export declare class SubscriptionsResource extends BaseResource {
                 } | {
                     unit: "year";
                     period: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-                };
-                days_in_advance?: 0 | 7 | 14 | 21 | 28;
-            };
+                } | undefined;
+                days_in_advance?: 0 | 7 | 14 | 21 | 28 | undefined;
+            } | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
-            };
-            web_url?: string;
-            created_at?: string | null;
-        }[];
+                    } | undefined;
+                }[] | undefined;
+            } | undefined;
+            web_url?: string | undefined;
+            created_at?: string | null | undefined;
+        }[] | undefined;
     }>;
     info(params: RequestBody<"subscriptions.info">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
-            note?: string | null;
-            status?: "active" | "deactivated";
+            id?: string | undefined;
+            title?: string | undefined;
+            note?: string | null | undefined;
+            status?: "active" | "deactivated" | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             invoicee?: {
                 customer?: {
                     type: "contact" | "company";
                     id: string;
-                };
+                } | undefined;
                 for_attention_of?: {
-                    name?: string | null;
+                    name?: string | null | undefined;
                     contact?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                } | null;
-            };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                } | null | undefined;
+            } | undefined;
             project?: {
-                id?: string;
-                type?: string;
-            } | null;
-            next_renewal_date?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            next_renewal_date?: string | null | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
-            };
-            web_url?: string;
-            starts_on?: string;
-            ends_on?: string | null;
+                    } | undefined;
+                }[] | undefined;
+            } | undefined;
+            web_url?: string | undefined;
+            starts_on?: string | undefined;
+            ends_on?: string | null | undefined;
             billing_cycle?: {
                 periodicity?: {
                     unit: "week";
@@ -131,103 +131,99 @@ export declare class SubscriptionsResource extends BaseResource {
                 } | {
                     unit: "year";
                     period: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-                };
-                days_in_advance?: 0 | 7 | 14 | 21 | 28;
-            } & unknown;
+                } | undefined;
+                days_in_advance?: 0 | 7 | 14 | 21 | 28 | undefined;
+            } | undefined;
             payment_term?: {
-                type?: "cash" | "end_of_month" | "after_invoice_date";
-                days?: number;
-            };
+                type?: "cash" | "end_of_month" | "after_invoice_date" | undefined;
+                days?: number | undefined;
+            } | undefined;
             grouped_lines?: {
                 section?: {
-                    title?: string | null;
-                };
-                line_items?: ({
+                    title?: string | null | undefined;
+                } | undefined;
+                line_items?: {
                     product?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    quantity?: number;
-                    description?: string;
-                    extended_description?: string | null;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    quantity?: number | undefined;
+                    description?: string | undefined;
+                    extended_description?: string | null | undefined;
                     unit?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: Record<string, never>;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    unit_price?: {
+                        amount: number;
+                        tax: "excluding";
+                    } | undefined;
                     tax?: {
-                        id?: string;
-                        type?: string;
-                    };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | undefined;
                     discount?: {
-                        value?: number;
-                        type?: "percentage";
-                    } | null;
+                        value?: number | undefined;
+                        type?: "percentage" | undefined;
+                    } | null | undefined;
                     total?: {
                         tax_exclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_exclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
-                    };
-                } & {
+                        } | undefined;
+                    } | undefined;
                     product_category?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: {
-                        amount: number;
-                        tax: "excluding";
-                    } & Record<string, never>;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
                     withheld_tax?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                })[];
-            }[];
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                }[] | undefined;
+            }[] | undefined;
             invoice_generation?: {
-                action?: "draft" | "book" | "book_and_send";
+                action?: "draft" | "book" | "book_and_send" | undefined;
                 sending_methods?: {
-                    method?: "email" | "peppol" | "postal_service";
-                }[];
-                payment_method?: "direct_debit";
-            };
+                    method?: "email" | "peppol" | "postal_service" | undefined;
+                }[] | undefined;
+                payment_method?: "direct_debit" | undefined;
+            } | undefined;
             custom_fields?: {
                 definition?: {
-                    type?: string;
-                    id?: string;
-                };
-                value?: string | number | string[] | boolean | ({
-                    id?: string;
-                    type?: string;
-                } & {
-                    type?: "company" | "contact" | "product" | "user";
-                });
-            }[];
+                    type?: string | undefined;
+                    id?: string | undefined;
+                } | undefined;
+                value?: string | number | boolean | string[] | {
+                    id?: string | undefined;
+                    type?: "user" | "company" | "contact" | "product" | undefined;
+                } | undefined;
+            }[] | undefined;
             document_template?: {
-                id?: string;
-                type?: string;
-            };
-            currency?: string;
-            created_at?: string | null;
-        };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            currency?: string | undefined;
+            created_at?: string | null | undefined;
+        } | undefined;
     }>;
     create(params: RequestBody<"subscriptions.create">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"subscriptions.update">): Promise<void>;
     deactivate(params: RequestBody<"subscriptions.deactivate">): Promise<void>;

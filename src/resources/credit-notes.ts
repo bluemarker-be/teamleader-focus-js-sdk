@@ -13,4 +13,9 @@ export class CreditNotesResource extends BaseResource {
   download(params: RequestBody<"creditNotes.download">) {
     return this.client.request<ResponseBody<"creditNotes.download">>("/creditNotes.download", params);
   }
+
+  /** Send a credit note via Peppol */
+  sendViaPeppol(params: RequestBody<"creditNotes.sendViaPeppol">) {
+    return this.client.request<void>("/creditNotes.sendViaPeppol", params);
+  }
 }

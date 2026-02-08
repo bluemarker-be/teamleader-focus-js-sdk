@@ -3,7 +3,7 @@ import { BaseResource } from "./base.js";
 
 export class ExternalPartiesResource extends BaseResource {
   addToProject(params: RequestBody<"NextgenProjectsExternalParties.addToProject">) {
-    return this.client.request<ResponseBody<"NextgenProjectsExternalParties.addToProject">>("/projects-v2/externalParties.addToProject", params);
+    return this.client.request<void>("/projects-v2/externalParties.addToProject", params);
   }
 
   update(params: RequestBody<"NextgenProjectsExternalParties.update">) {

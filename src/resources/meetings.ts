@@ -23,7 +23,7 @@ export class MeetingsResource extends BaseResource {
   }
 
   createReport(params: RequestBody<"meetings.createReport">) {
-    return this.client.request<void>("/meetings.createReport", params);
+    return this.client.request<ResponseBody<"meetings.createReport">>("/meetings.createReport", params);
   }
 
   delete(params: RequestBody<"meetings.delete">) {

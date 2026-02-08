@@ -3,16 +3,16 @@ import { BaseResource } from "./base.js";
 export declare class ProductCategoriesResource extends BaseResource {
     list(params?: RequestBody<"productCategories.list">): Promise<{
         data?: {
-            id?: string;
-            name?: string;
+            id?: string | undefined;
+            name?: string | undefined;
             ledgers?: {
                 department?: {
-                    id?: string;
-                    type?: string;
-                };
-                ledger_account_number?: string;
-            }[];
-        }[];
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | undefined;
+                ledger_account_number?: string | undefined;
+            }[] | undefined;
+        }[] | undefined;
     }>;
 }
 //# sourceMappingURL=product-categories.d.ts.map

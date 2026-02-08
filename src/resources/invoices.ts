@@ -71,4 +71,9 @@ export class InvoicesResource extends BaseResource {
   send(params: RequestBody<"invoices.send">) {
     return this.client.request<void>("/invoices.send", params);
   }
+
+  /** Send an invoice via Peppol */
+  sendViaPeppol(params: RequestBody<"invoices.sendViaPeppol">) {
+    return this.client.request<void>("/invoices.sendViaPeppol", params);
+  }
 }

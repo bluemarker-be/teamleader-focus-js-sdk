@@ -4,7 +4,7 @@ import { BaseResource } from "./base.js";
 export class WebhooksResource extends BaseResource {
   /** Register a new webhook */
   register(params: RequestBody<"webhooks.register">) {
-    return this.client.request<ResponseBody<"webhooks.register">>("/webhooks.register", params);
+    return this.client.request<void>("/webhooks.register", params);
   }
 
   /** Get a list of registered webhooks */

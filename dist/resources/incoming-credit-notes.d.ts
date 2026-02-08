@@ -3,48 +3,48 @@ import { BaseResource } from "./base.js";
 export declare class IncomingCreditNotesResource extends BaseResource {
     add(params: RequestBody<"incomingCreditNotes.add">): Promise<{
         data?: {
-            type?: string;
-            id?: string;
-        };
+            type?: string | undefined;
+            id?: string | undefined;
+        } | undefined;
     }>;
     info(params: RequestBody<"incomingCreditNotes.info">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
+            id?: string | undefined;
+            title?: string | undefined;
             origin?: {
-                type?: "user" | "peppolIncomingDocument";
-                id?: string;
-            };
+                type?: "user" | "peppolIncomingDocument" | undefined;
+                id?: string | undefined;
+            } | undefined;
             supplier?: {
-                type?: "company" | "contact";
-                id?: string;
-            } | null;
-            document_number?: string | null;
-            invoice_date?: string | null;
-            due_date?: string | null;
+                type?: "company" | "contact" | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            document_number?: string | null | undefined;
+            invoice_date?: string | null | undefined;
+            due_date?: string | null | undefined;
             currency?: {
-                code?: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            };
+                code?: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR" | undefined;
+            } | undefined;
             total?: {
                 tax_exclusive?: {
-                    amount?: number;
-                } | null;
+                    amount?: number | undefined;
+                } | null | undefined;
                 tax_inclusive?: {
-                    amount?: number;
-                } | null;
-            };
+                    amount?: number | undefined;
+                } | null | undefined;
+            } | undefined;
             company_entity?: {
-                type?: string;
-                id?: string;
-            };
+                type?: string | undefined;
+                id?: string | undefined;
+            } | undefined;
             file?: {
-                type?: string;
-                id?: string;
-            } | null;
-            payment_reference?: string | null;
-            review_status?: "pending" | "approved" | "refused";
-            iban_number?: string | null;
-        };
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            payment_reference?: string | null | undefined;
+            review_status?: "pending" | "approved" | "refused" | undefined;
+            iban_number?: string | null | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"incomingCreditNotes.update">): Promise<void>;
     delete(params: RequestBody<"incomingCreditNotes.delete">): Promise<void>;

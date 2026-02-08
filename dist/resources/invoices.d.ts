@@ -4,328 +4,324 @@ export declare class InvoicesResource extends BaseResource {
     /** Get a list of invoices */
     list(params?: RequestBody<"invoices.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
-            invoice_number?: string | null;
-            invoice_date?: string | null;
-            status?: "draft" | "outstanding" | "matched";
-            due_on?: string | null;
-            paid?: boolean;
-            paid_at?: string | null;
-            sent?: boolean;
-            purchase_order_number?: string | null;
-            payment_reference?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            invoice_number?: string | null | undefined;
+            invoice_date?: string | null | undefined;
+            status?: "draft" | "outstanding" | "matched" | undefined;
+            due_on?: string | null | undefined;
+            paid?: boolean | undefined;
+            paid_at?: string | null | undefined;
+            sent?: boolean | undefined;
+            purchase_order_number?: string | null | undefined;
+            payment_reference?: string | null | undefined;
             invoicee?: {
-                name?: string;
-                vat_number?: string | null;
+                name?: string | undefined;
+                vat_number?: string | null | undefined;
                 customer?: {
-                    id?: string;
-                    type?: string;
-                };
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | undefined;
                 for_attention_of?: {
-                    name?: string | null;
+                    name?: string | null | undefined;
                     contact?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                } | null;
-            };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                } | null | undefined;
+            } | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 payable?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
+                    } | undefined;
+                }[] | undefined;
                 due?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 due_incasso_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 fixed_late_fee?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 interest?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
-            };
+                } | undefined;
+            } | undefined;
             currency_exchange_rate?: {
-                from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                rate?: number;
-            };
-            created_at?: string;
-            updated_at?: string;
-            web_url?: string;
+                from?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                to?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                rate?: number | undefined;
+            } | undefined;
+            created_at?: string | undefined;
+            updated_at?: string | undefined;
+            web_url?: string | undefined;
             file?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             project?: {
-                id?: string;
-                type?: string;
-            } | null;
-            delivery_date?: string | null;
-        }[];
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            delivery_date?: string | null | undefined;
+        }[] | undefined;
     }>;
     /** Get details for a single invoice */
     info(params: RequestBody<"invoices.info">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             department?: {
-                id?: string;
-                type?: string;
-            };
-            invoice_number?: string | null;
-            invoice_date?: string | null;
-            status?: "draft" | "outstanding" | "matched";
-            due_on?: string | null;
-            paid?: boolean;
-            paid_at?: string | null;
-            sent?: boolean;
-            purchase_order_number?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            invoice_number?: string | null | undefined;
+            invoice_date?: string | null | undefined;
+            status?: "draft" | "outstanding" | "matched" | undefined;
+            due_on?: string | null | undefined;
+            paid?: boolean | undefined;
+            paid_at?: string | null | undefined;
+            sent?: boolean | undefined;
+            purchase_order_number?: string | null | undefined;
             invoicee?: {
-                name?: string;
-                vat_number?: string | null;
+                name?: string | undefined;
+                vat_number?: string | null | undefined;
                 customer?: {
-                    id?: string;
-                    type?: string;
-                };
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | undefined;
                 for_attention_of?: {
-                    name?: string | null;
+                    name?: string | null | undefined;
                     contact?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                } | null;
-                email?: string | null;
-                national_identification_number?: string | null;
-            };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                } | null | undefined;
+                email?: string | null | undefined;
+                national_identification_number?: string | null | undefined;
+            } | undefined;
             discounts?: {
-                type?: "percentage";
-                value?: number;
-                description?: string;
-            }[];
+                type?: "percentage" | undefined;
+                value?: number | undefined;
+                description?: string | undefined;
+            }[] | undefined;
             grouped_lines?: {
                 section?: {
-                    title?: string;
-                };
-                line_items?: ({
+                    title?: string | undefined;
+                } | undefined;
+                line_items?: {
                     product?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    quantity?: number;
-                    description?: string;
-                    extended_description?: string | null;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    quantity?: number | undefined;
+                    description?: string | undefined;
+                    extended_description?: string | null | undefined;
                     unit?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: Record<string, never>;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    unit_price?: {
+                        amount: number;
+                        tax: "excluding";
+                    } | undefined;
                     tax?: {
-                        id?: string;
-                        type?: string;
-                    };
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | undefined;
                     discount?: {
-                        value?: number;
-                        type?: "percentage";
-                    } | null;
+                        value?: number | undefined;
+                        type?: "percentage" | undefined;
+                    } | null | undefined;
                     total?: {
                         tax_exclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_exclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
+                        } | undefined;
                         tax_inclusive_before_discount?: {
                             amount: number;
                             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                        };
-                    };
-                } & {
+                        } | undefined;
+                    } | undefined;
                     product_category?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                    unit_price?: {
-                        amount: number;
-                        tax: "excluding";
-                    } & Record<string, never>;
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
                     withheld_tax?: {
-                        id?: string;
-                        type?: string;
-                    } | null;
-                })[];
-            }[];
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                }[] | undefined;
+            }[] | undefined;
             total?: {
                 tax_exclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_exclusive_before_discount?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 tax_inclusive_before_discount?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 taxes?: {
-                    rate?: number;
+                    rate?: number | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     tax?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
+                    } | undefined;
+                }[] | undefined;
                 withheld_taxes?: {
-                    id?: string;
+                    id?: string | undefined;
                     taxable?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
+                    } | undefined;
                     withheld?: {
                         amount: number;
                         currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    };
-                }[];
+                    } | undefined;
+                }[] | undefined;
                 payable?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 due?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 due_incasso_inclusive?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 fixed_late_fee?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
+                } | undefined;
                 interest?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
-            };
+                } | undefined;
+            } | undefined;
             payment_term?: {
-                type?: "cash" | "end_of_month" | "after_invoice_date";
-                days?: number;
-            };
+                type?: "cash" | "end_of_month" | "after_invoice_date" | undefined;
+                days?: number | undefined;
+            } | undefined;
             payments?: {
-                paid_at?: string;
+                paid_at?: string | undefined;
                 payment?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                };
-            }[];
-            payment_reference?: string | null;
-            note?: string | null;
-            currency?: string;
+                } | undefined;
+            }[] | undefined;
+            payment_reference?: string | null | undefined;
+            note?: string | null | undefined;
+            currency?: string | undefined;
             currency_exchange_rate?: {
-                from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown;
-                rate?: number;
-            };
-            expected_payment_method?: ({
-                method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
-                reference?: string | null;
+                from?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                to?: (("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & unknown) | undefined;
+                rate?: number | undefined;
+            } | undefined;
+            expected_payment_method?: {
+                method?: "sepa_direct_debit" | "direct_debit" | "credit_card" | undefined;
+                reference?: string | null | undefined;
             } | {
-                method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
-            }) | null;
+                method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card" | undefined;
+            } | null | undefined;
             file?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             deal?: {
-                id?: string;
-                type?: string;
-            } | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             project?: {
-                id?: string;
-                type?: string;
-            } | null;
-            on_hold_since?: string | null;
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
+            on_hold_since?: string | null | undefined;
             custom_fields?: {
                 definition?: {
-                    type?: string;
-                    id?: string;
-                };
-                value?: string | number | string[] | boolean | ({
-                    id?: string;
-                    type?: string;
-                } & {
-                    type?: "company" | "contact" | "product" | "user";
-                });
-            }[];
-            created_at?: string;
-            updated_at?: string;
+                    type?: string | undefined;
+                    id?: string | undefined;
+                } | undefined;
+                value?: string | number | boolean | string[] | {
+                    id?: string | undefined;
+                    type?: "user" | "company" | "contact" | "product" | undefined;
+                } | undefined;
+            }[] | undefined;
+            created_at?: string | undefined;
+            updated_at?: string | undefined;
             document_template?: {
-                id?: string;
-                type?: string;
-            };
-            delivery_date?: string | null;
-            peppol_status?: ("sending" | "sending_failed" | "sent" | "application_acknowledged" | "application_accepted" | "application_rejected" | "receiver_acknowledged" | "receiver_accepted" | "receiver_rejected" | "receiver_is_processing" | "receiver_awaits_feedback" | "receiver_conditionally_accepted" | "receiver_paid" | null) & unknown;
-        };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            delivery_date?: string | null | undefined;
+            peppol_status?: (("sending" | "sending_failed" | "sent" | "application_acknowledged" | "application_accepted" | "application_rejected" | "receiver_acknowledged" | "receiver_accepted" | "receiver_rejected" | "receiver_is_processing" | "receiver_awaits_feedback" | "receiver_conditionally_accepted" | "receiver_paid" | null) & unknown) | undefined;
+        } | undefined;
     }>;
     /** Download an invoice PDF */
     download(params: RequestBody<"invoices.download">): Promise<{
         data?: {
-            location?: string;
-            expires?: string;
-        };
+            location?: string | undefined;
+            expires?: string | undefined;
+        } | undefined;
     }>;
     /** Create a draft invoice */
     draft(params: RequestBody<"invoices.draft">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Update a draft invoice */
     update(params: RequestBody<"invoices.update">): Promise<void>;
@@ -334,9 +330,9 @@ export declare class InvoicesResource extends BaseResource {
     /** Copy an invoice */
     copy(params: RequestBody<"invoices.copy">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Book a draft invoice */
     book(params: RequestBody<"invoices.book">): Promise<void>;
@@ -349,18 +345,20 @@ export declare class InvoicesResource extends BaseResource {
     /** Credit a full invoice */
     credit(params: RequestBody<"invoices.credit">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Partially credit an invoice */
     creditPartially(params: RequestBody<"invoices.creditPartially">): Promise<{
         data?: {
-            id?: string;
-            type?: string;
-        };
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
     }>;
     /** Send an invoice via email */
     send(params: RequestBody<"invoices.send">): Promise<void>;
+    /** Send an invoice via Peppol */
+    sendViaPeppol(params: RequestBody<"invoices.sendViaPeppol">): Promise<void>;
 }
 //# sourceMappingURL=invoices.d.ts.map

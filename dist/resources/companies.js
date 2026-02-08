@@ -28,5 +28,9 @@ export class CompaniesResource extends BaseResource {
     untag(params) {
         return this.client.request("/companies.untag", params);
     }
+    /** Upload or remove a company's logo (base64-encoded image or null) */
+    uploadLogo(params) {
+        return this.client.request("/companies.uploadLogo", params);
+    }
 }
 //# sourceMappingURL=companies.js.map

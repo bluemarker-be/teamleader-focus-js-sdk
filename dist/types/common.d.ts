@@ -1,30 +1,42 @@
 import type { operations } from "./generated.js";
-/** Extract the JSON request body type for a given operation */
+type KnownKeys<T> = {
+    [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
+};
+type Simplify<T> = T extends (infer U)[] ? Simplify<U>[] : T extends Record<string, unknown> ? {
+    [K in keyof KnownKeys<T>]: Simplify<KnownKeys<T>[K]>;
+} : T;
+type JsonContent<C> = C extends {
+    "application/json": infer B;
+} ? Simplify<B> : C extends {
+    "application/json;charset=utf-8": infer B;
+} ? Simplify<B> : never;
+/** Extract the JSON request body type for a given operation.
+ *  Handles both required and optional requestBody, and both
+ *  "application/json" and "application/json;charset=utf-8" content types. */
 export type RequestBody<Op extends keyof operations> = operations[Op] extends {
     requestBody: {
-        content: {
-            "application/json": infer B;
-        };
+        content: infer C;
     };
-} ? B : never;
-/** Extract the JSON response body type for a given operation (200 or 201) */
+} ? JsonContent<C> : operations[Op] extends {
+    requestBody?: {
+        content: infer C;
+    };
+} ? JsonContent<C> : never;
+/** Extract the JSON response body type for a given operation (200 or 201).
+ *  Handles both "application/json" and "application/json;charset=utf-8". */
 export type ResponseBody<Op extends keyof operations> = operations[Op] extends {
     responses: {
         200: {
-            content: {
-                "application/json": infer R;
-            };
+            content: infer C;
         };
     };
-} ? R : operations[Op] extends {
+} ? JsonContent<C> : operations[Op] extends {
     responses: {
         201: {
-            content: {
-                "application/json": infer R;
-            };
+            content: infer C;
         };
     };
-} ? R : void;
+} ? JsonContent<C> : void;
 /** Pagination request parameters */
 export interface Page {
     size?: number;
@@ -67,4 +79,5 @@ export interface OAuthConfig {
     clientSecret: string;
     redirectUri: string;
 }
+export {};
 //# sourceMappingURL=common.d.ts.map

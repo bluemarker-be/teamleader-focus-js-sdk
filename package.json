@@ -19,7 +19,8 @@
     "generate": "node --loader ts-node/esm scripts/generate-types.ts",
     "dev": "tsc --watch",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "devDependencies": {
     "openapi-typescript": "^7.6.1",

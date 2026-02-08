@@ -7,11 +7,14 @@ export { TeamleaderError, TeamleaderAuthenticationError, TeamleaderRateLimitErro
 // Pagination
 export { paginatePages, paginateItems } from "./paginator.js";
 // Resource classes (for advanced usage / extending)
+export { AccountsResource } from "./resources/accounts.js";
 export { ActivityTypesResource } from "./resources/activity-types.js";
 export { BookkeepingSubmissionsResource } from "./resources/bookkeeping-submissions.js";
 export { BusinessTypesResource } from "./resources/business-types.js";
+export { CallOutcomesResource } from "./resources/call-outcomes.js";
 export { CallsResource } from "./resources/calls.js";
 export { ClosingDaysResource } from "./resources/closing-days.js";
+export { CloudPlatformsResource } from "./resources/cloud-platforms.js";
 export { CommercialDiscountsResource } from "./resources/commercial-discounts.js";
 export { CompaniesResource } from "./resources/companies.js";
 export { ContactsResource } from "./resources/contacts.js";
@@ -21,6 +24,7 @@ export { CustomFieldDefinitionsResource } from "./resources/custom-field-definit
 export { DayOffTypesResource } from "./resources/day-off-types.js";
 export { DaysOffResource } from "./resources/days-off.js";
 export { DealPhasesResource } from "./resources/deal-phases.js";
+export { DealPipelinesResource } from "./resources/deal-pipelines.js";
 export { DealSourcesResource } from "./resources/deal-sources.js";
 export { DealsResource } from "./resources/deals.js";
 export { DepartmentsResource } from "./resources/departments.js";
@@ -33,6 +37,9 @@ export { FilesResource } from "./resources/files.js";
 export { IncomingCreditNotesResource } from "./resources/incoming-credit-notes.js";
 export { IncomingInvoicesResource } from "./resources/incoming-invoices.js";
 export { InvoicesResource } from "./resources/invoices.js";
+export { LegacyMilestonesResource } from "./resources/legacy-milestones.js";
+export { LegacyProjectsResource } from "./resources/legacy-projects.js";
+export { LevelTwoAreasResource } from "./resources/level-two-areas.js";
 export { LostReasonsResource } from "./resources/lost-reasons.js";
 export { MailTemplatesResource } from "./resources/mail-templates.js";
 export { MeetingsResource } from "./resources/meetings.js";
@@ -45,6 +52,7 @@ export { PlannableItemsResource } from "./resources/plannable-items.js";
 export { PriceListsResource } from "./resources/price-lists.js";
 export { ProductCategoriesResource } from "./resources/product-categories.js";
 export { ProductsResource } from "./resources/products.js";
+export { ProjectGroupsResource } from "./resources/project-groups.js";
 export { ProjectLinesResource } from "./resources/project-lines.js";
 export { ProjectMaterialsResource } from "./resources/project-materials.js";
 export { ProjectTasksResource } from "./resources/project-tasks.js";
@@ -61,6 +69,7 @@ export { TicketStatusResource } from "./resources/ticket-status.js";
 export { TicketsResource } from "./resources/tickets.js";
 export { TimeTrackingResource } from "./resources/time-tracking.js";
 export { TimersResource } from "./resources/timers.js";
+export { UnitsOfMeasureResource } from "./resources/units-of-measure.js";
 export { UserAvailabilityResource } from "./resources/user-availability.js";
 export { UsersResource } from "./resources/users.js";
 export { WebhooksResource } from "./resources/webhooks.js";

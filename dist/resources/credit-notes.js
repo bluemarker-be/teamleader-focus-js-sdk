@@ -9,5 +9,9 @@ export class CreditNotesResource extends BaseResource {
     download(params) {
         return this.client.request("/creditNotes.download", params);
     }
+    /** Send a credit note via Peppol */
+    sendViaPeppol(params) {
+        return this.client.request("/creditNotes.sendViaPeppol", params);
+    }
 }
 //# sourceMappingURL=credit-notes.js.map

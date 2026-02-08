@@ -3,49 +3,45 @@ import { BaseResource } from "./base.js";
 export declare class PlannableItemsResource extends BaseResource {
     list(params?: RequestBody<"plannableItems.list">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             source?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             total_duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
             planned_duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
             unplanned_duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
-        }[];
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
+        }[] | undefined;
     }>;
     info(params: RequestBody<"plannableItems.info">): Promise<{
         data?: {
-            id?: string;
+            id?: string | undefined;
             source?: {
-                id?: string;
-                type?: string;
-            } & {
-                type?: string;
-            };
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
             total_duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
             planned_duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
             unplanned_duration?: {
-                unit?: "minutes";
-                value?: number;
-            };
-        };
+                unit?: "minutes" | undefined;
+                value?: number | undefined;
+            } | undefined;
+        } | undefined;
     }>;
 }
 //# sourceMappingURL=plannable-items.d.ts.map

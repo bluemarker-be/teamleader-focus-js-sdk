@@ -3,42 +3,42 @@ import { BaseResource } from "./base.js";
 export declare class ReceiptsResource extends BaseResource {
     add(params: RequestBody<"receipts.add">): Promise<{
         data?: {
-            type?: string;
-            id?: string;
-        };
+            type?: string | undefined;
+            id?: string | undefined;
+        } | undefined;
     }>;
     info(params: RequestBody<"receipts.info">): Promise<{
         data?: {
-            id?: string;
-            title?: string;
+            id?: string | undefined;
+            title?: string | undefined;
             origin?: {
-                type?: string;
-                id?: string;
-            };
+                type?: string | undefined;
+                id?: string | undefined;
+            } | undefined;
             supplier?: {
-                type?: "company" | "contact";
-                id?: string;
-            } | null;
-            document_number?: string | null;
-            receipt_date?: string | null;
+                type?: "company" | "contact" | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            document_number?: string | null | undefined;
+            receipt_date?: string | null | undefined;
             currency?: {
-                code?: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            };
+                code?: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR" | undefined;
+            } | undefined;
             total?: {
                 tax_inclusive?: {
-                    amount?: number;
-                } | null;
-            };
+                    amount?: number | undefined;
+                } | null | undefined;
+            } | undefined;
             company_entity?: {
-                type?: string;
-                id?: string;
-            };
+                type?: string | undefined;
+                id?: string | undefined;
+            } | undefined;
             file?: {
-                type?: string;
-                id?: string;
-            } | null;
-            review_status?: "pending" | "approved" | "refused";
-        };
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            review_status?: "pending" | "approved" | "refused" | undefined;
+        } | undefined;
     }>;
     update(params: RequestBody<"receipts.update">): Promise<void>;
     delete(params: RequestBody<"receipts.delete">): Promise<void>;

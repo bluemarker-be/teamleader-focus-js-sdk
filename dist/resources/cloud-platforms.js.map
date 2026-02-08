@@ -1,0 +1,1 @@
+{"version":3,"file":"cloud-platforms.js","sourceRoot":"","sources":["../../src/resources/cloud-platforms.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,OAAO,sBAAuB,SAAQ,YAAY;IACtD,iCAAiC;IACjC,GAAG,CAAC,MAAyC;QAC3C,OAAO,IAAI,CAAC,MAAM,CAAC,OAAO,CAAqC,qBAAqB,EAAE,MAAM,CAAC,CAAC;IAChG,CAAC;CACF"}

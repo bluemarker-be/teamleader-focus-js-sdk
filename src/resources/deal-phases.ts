@@ -14,10 +14,6 @@ export class DealPhasesResource extends BaseResource {
     return this.client.request<void>("/dealPhases.update", params);
   }
 
-  duplicate(params: RequestBody<"dealPhases.duplicate">) {
-    return this.client.request<ResponseBody<"dealPhases.duplicate">>("/dealPhases.duplicate", params);
-  }
-
   move(params: RequestBody<"dealPhases.move">) {
     return this.client.request<void>("/dealPhases.move", params);
   }
