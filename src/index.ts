@@ -18,6 +18,7 @@ export type {
 export {
   TeamleaderError,
   TeamleaderAuthenticationError,
+  TeamleaderTokenRefreshError,
   TeamleaderRateLimitError,
   TeamleaderValidationError,
   TeamleaderNetworkError,

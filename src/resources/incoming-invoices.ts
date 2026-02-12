@@ -33,4 +33,20 @@ export class IncomingInvoicesResource extends BaseResource {
   sendToBookkeeping(params: RequestBody<"incomingInvoices.sendToBookkeeping">) {
     return this.client.request<void>("/incomingInvoices.sendToBookkeeping", params);
   }
+
+  listPayments(params: RequestBody<"incomingInvoices.listPayments">) {
+    return this.client.request<ResponseBody<"incomingInvoices.listPayments">>("/incomingInvoices.listPayments", params);
+  }
+
+  registerPayment(params: RequestBody<"incomingInvoices.registerPayment">) {
+    return this.client.request<ResponseBody<"incomingInvoices.registerPayment">>("/incomingInvoices.registerPayment", params);
+  }
+
+  removePayment(params: RequestBody<"incomingInvoices.removePayment">) {
+    return this.client.request<void>("/incomingInvoices.removePayment", params);
+  }
+
+  updatePayment(params: RequestBody<"incomingInvoices.updatePayment">) {
+    return this.client.request<void>("/incomingInvoices.updatePayment", params);
+  }
 }

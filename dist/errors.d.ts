@@ -8,6 +8,10 @@ export declare class TeamleaderError extends Error {
 export declare class TeamleaderAuthenticationError extends TeamleaderError {
     constructor(body: unknown);
 }
+/** Thrown when a token refresh fails (e.g. refresh token revoked or not linked to client) */
+export declare class TeamleaderTokenRefreshError extends TeamleaderAuthenticationError {
+    constructor(body: unknown);
+}
 /** Thrown when the API returns 429 (rate limit exceeded) */
 export declare class TeamleaderRateLimitError extends TeamleaderError {
     readonly retryAfter: Date;

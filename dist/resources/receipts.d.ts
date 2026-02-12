@@ -38,6 +38,7 @@ export declare class ReceiptsResource extends BaseResource {
                 id?: string | undefined;
             } | null | undefined;
             review_status?: "pending" | "approved" | "refused" | undefined;
+            payment_status?: "unknown" | "paid" | "not_paid" | undefined;
         } | undefined;
     }>;
     update(params: RequestBody<"receipts.update">): Promise<void>;
@@ -46,5 +47,33 @@ export declare class ReceiptsResource extends BaseResource {
     refuse(params: RequestBody<"receipts.refuse">): Promise<void>;
     markAsPendingReview(params: RequestBody<"receipts.markAsPendingReview">): Promise<void>;
     sendToBookkeeping(params: RequestBody<"receipts.sendToBookkeeping">): Promise<void>;
+    listPayments(params: RequestBody<"receipts.listPayments">): Promise<{
+        data?: {
+            id?: string | undefined;
+            payment?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            paid_at?: string | undefined;
+            payment_method?: {
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            remark?: string | null | undefined;
+        }[] | undefined;
+        meta?: {
+            total?: {
+                amount?: number | undefined;
+            } | undefined;
+        } | undefined;
+    }>;
+    registerPayment(params: RequestBody<"receipts.registerPayment">): Promise<{
+        data?: {
+            type?: string | undefined;
+            id?: string | undefined;
+        } | undefined;
+    }>;
+    removePayment(params: RequestBody<"receipts.removePayment">): Promise<void>;
+    updatePayment(params: RequestBody<"receipts.updatePayment">): Promise<void>;
 }
 //# sourceMappingURL=receipts.d.ts.map

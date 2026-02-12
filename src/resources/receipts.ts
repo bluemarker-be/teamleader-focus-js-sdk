@@ -33,4 +33,20 @@ export class ReceiptsResource extends BaseResource {
   sendToBookkeeping(params: RequestBody<"receipts.sendToBookkeeping">) {
     return this.client.request<void>("/receipts.sendToBookkeeping", params);
   }
+
+  listPayments(params: RequestBody<"receipts.listPayments">) {
+    return this.client.request<ResponseBody<"receipts.listPayments">>("/receipts.listPayments", params);
+  }
+
+  registerPayment(params: RequestBody<"receipts.registerPayment">) {
+    return this.client.request<ResponseBody<"receipts.registerPayment">>("/receipts.registerPayment", params);
+  }
+
+  removePayment(params: RequestBody<"receipts.removePayment">) {
+    return this.client.request<void>("/receipts.removePayment", params);
+  }
+
+  updatePayment(params: RequestBody<"receipts.updatePayment">) {
+    return this.client.request<void>("/receipts.updatePayment", params);
+  }
 }

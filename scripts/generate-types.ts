@@ -1,17 +1,30 @@
 import openapiTS, { astToString } from "openapi-typescript";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 
-const SPEC_URL =
-  "https://unpkg.com/@teamleader/focus-api-specification/dist/api.focus.teamleader.eu.dereferenced.yaml";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "..");
+const SPEC_PATH = resolve(ROOT, "api-spec.yaml");
 
 async function main() {
-  console.log("Fetching OpenAPI spec from:", SPEC_URL);
+  if (process.argv.includes("--update")) {
+    console.log("Checking for spec updates...\n");
+    execFileSync("node", ["--loader", "ts-node/esm", resolve(__dirname, "check-spec-update.ts"), "--update"], {
+      cwd: ROOT,
+      stdio: "inherit",
+    });
+    console.log("");
+  }
 
-  const ast = await openapiTS(new URL(SPEC_URL));
+  console.log("Generating types from local api-spec.yaml...");
+
+  const ast = await openapiTS(new URL(`file://${SPEC_PATH}`));
   const output = astToString(ast);
 
   const header = `// Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run \`npm run generate\` to regenerate
-// Source: ${SPEC_URL}
+// Source: api-spec.yaml
 // Generated: ${new Date().toISOString()}
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
@@ -78,11 +91,7 @@ async function main() {
   }
 
   const { writeFileSync } = await import("node:fs");
-  const { resolve, dirname } = await import("node:path");
-  const { fileURLToPath } = await import("node:url");
-
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const outPath = resolve(__dirname, "../src/types/generated.ts");
+  const outPath = resolve(ROOT, "src/types/generated.ts");
 
   writeFileSync(outPath, header + patched, "utf-8");
   console.log("Types written to:", outPath);

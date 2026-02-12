@@ -33,4 +33,20 @@ export class IncomingCreditNotesResource extends BaseResource {
   sendToBookkeeping(params: RequestBody<"incomingCreditNotes.sendToBookkeeping">) {
     return this.client.request<void>("/incomingCreditNotes.sendToBookkeeping", params);
   }
+
+  listPayments(params: RequestBody<"incomingCreditNotes.listPayments">) {
+    return this.client.request<ResponseBody<"incomingCreditNotes.listPayments">>("/incomingCreditNotes.listPayments", params);
+  }
+
+  registerPayment(params: RequestBody<"incomingCreditNotes.registerPayment">) {
+    return this.client.request<ResponseBody<"incomingCreditNotes.registerPayment">>("/incomingCreditNotes.registerPayment", params);
+  }
+
+  removePayment(params: RequestBody<"incomingCreditNotes.removePayment">) {
+    return this.client.request<void>("/incomingCreditNotes.removePayment", params);
+  }
+
+  updatePayment(params: RequestBody<"incomingCreditNotes.updatePayment">) {
+    return this.client.request<void>("/incomingCreditNotes.updatePayment", params);
+  }
 }

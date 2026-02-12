@@ -24,5 +24,17 @@ export class ReceiptsResource extends BaseResource {
     sendToBookkeeping(params) {
         return this.client.request("/receipts.sendToBookkeeping", params);
     }
+    listPayments(params) {
+        return this.client.request("/receipts.listPayments", params);
+    }
+    registerPayment(params) {
+        return this.client.request("/receipts.registerPayment", params);
+    }
+    removePayment(params) {
+        return this.client.request("/receipts.removePayment", params);
+    }
+    updatePayment(params) {
+        return this.client.request("/receipts.updatePayment", params);
+    }
 }
 //# sourceMappingURL=receipts.js.map

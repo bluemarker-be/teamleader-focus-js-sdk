@@ -19,6 +19,27 @@ export class TeamleaderAuthenticationError extends TeamleaderError {
   }
 }
 
+/** Thrown when a token refresh fails (e.g. refresh token revoked or not linked to client) */
+export class TeamleaderTokenRefreshError extends TeamleaderAuthenticationError {
+  constructor(body: unknown) {
+    super(body);
+    this.name = "TeamleaderTokenRefreshError";
+    const hint = extractHint(body);
+    this.message = hint ? `Token refresh failed: ${hint}` : "Token refresh failed";
+  }
+}
+
+function extractHint(body: unknown): string | undefined {
+  try {
+    const errors = (body as Record<string, unknown>)?.errors;
+    if (Array.isArray(errors) && errors.length > 0) {
+      return ((errors[0] as Record<string, unknown>).meta as Record<string, unknown>)?.hint as string | undefined;
+    }
+  } catch {
+    // ignore
+  }
+}
+
 /** Thrown when the API returns 429 (rate limit exceeded) */
 export class TeamleaderRateLimitError extends TeamleaderError {
   public readonly retryAfter: Date;

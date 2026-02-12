@@ -24,5 +24,17 @@ export class IncomingInvoicesResource extends BaseResource {
     sendToBookkeeping(params) {
         return this.client.request("/incomingInvoices.sendToBookkeeping", params);
     }
+    listPayments(params) {
+        return this.client.request("/incomingInvoices.listPayments", params);
+    }
+    registerPayment(params) {
+        return this.client.request("/incomingInvoices.registerPayment", params);
+    }
+    removePayment(params) {
+        return this.client.request("/incomingInvoices.removePayment", params);
+    }
+    updatePayment(params) {
+        return this.client.request("/incomingInvoices.updatePayment", params);
+    }
 }
 //# sourceMappingURL=incoming-invoices.js.map

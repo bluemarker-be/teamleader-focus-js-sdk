@@ -24,5 +24,17 @@ export class IncomingCreditNotesResource extends BaseResource {
     sendToBookkeeping(params) {
         return this.client.request("/incomingCreditNotes.sendToBookkeeping", params);
     }
+    listPayments(params) {
+        return this.client.request("/incomingCreditNotes.listPayments", params);
+    }
+    registerPayment(params) {
+        return this.client.request("/incomingCreditNotes.registerPayment", params);
+    }
+    removePayment(params) {
+        return this.client.request("/incomingCreditNotes.removePayment", params);
+    }
+    updatePayment(params) {
+        return this.client.request("/incomingCreditNotes.updatePayment", params);
+    }
 }
 //# sourceMappingURL=incoming-credit-notes.js.map

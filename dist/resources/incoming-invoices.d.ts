@@ -44,6 +44,7 @@ export declare class IncomingInvoicesResource extends BaseResource {
             payment_reference?: string | null | undefined;
             review_status?: "pending" | "approved" | "refused" | undefined;
             iban_number?: string | null | undefined;
+            payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid" | undefined;
         } | undefined;
     }>;
     update(params: RequestBody<"incomingInvoices.update">): Promise<void>;
@@ -52,5 +53,33 @@ export declare class IncomingInvoicesResource extends BaseResource {
     refuse(params: RequestBody<"incomingInvoices.refuse">): Promise<void>;
     markAsPendingReview(params: RequestBody<"incomingInvoices.markAsPendingReview">): Promise<void>;
     sendToBookkeeping(params: RequestBody<"incomingInvoices.sendToBookkeeping">): Promise<void>;
+    listPayments(params: RequestBody<"incomingInvoices.listPayments">): Promise<{
+        data?: {
+            id?: string | undefined;
+            payment?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            paid_at?: string | undefined;
+            payment_method?: {
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            remark?: string | null | undefined;
+        }[] | undefined;
+        meta?: {
+            total?: {
+                amount?: number | undefined;
+            } | undefined;
+        } | undefined;
+    }>;
+    registerPayment(params: RequestBody<"incomingInvoices.registerPayment">): Promise<{
+        data?: {
+            type?: string | undefined;
+            id?: string | undefined;
+        } | undefined;
+    }>;
+    removePayment(params: RequestBody<"incomingInvoices.removePayment">): Promise<void>;
+    updatePayment(params: RequestBody<"incomingInvoices.updatePayment">): Promise<void>;
 }
 //# sourceMappingURL=incoming-invoices.d.ts.map

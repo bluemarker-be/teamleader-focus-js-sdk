@@ -127,6 +127,90 @@ describe("Resources", () => {
     });
   });
 
+  describe("incoming invoices (payment methods)", () => {
+    it("listPayments → POST /incomingInvoices.listPayments", async () => {
+      const { client, calls } = createClientWithBody({ data: [] });
+      await client.incomingInvoices.listPayments({ id: "inv1" });
+      expect(calls[0].url).toContain("/incomingInvoices.listPayments");
+    });
+
+    it("registerPayment → POST /incomingInvoices.registerPayment", async () => {
+      const { client, calls } = createClientWithBody({ data: { id: "pay1" } });
+      await client.incomingInvoices.registerPayment({ id: "inv1", payment: { amount: 100, currency: "EUR", paid_at: "2026-01-01" } } as any);
+      expect(calls[0].url).toContain("/incomingInvoices.registerPayment");
+    });
+
+    it("removePayment → POST /incomingInvoices.removePayment", async () => {
+      const { fetchFn, calls } = mockFetch({ status: 204 });
+      const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+      await client.incomingInvoices.removePayment({ id: "pay1" } as any);
+      expect(calls[0].url).toContain("/incomingInvoices.removePayment");
+    });
+
+    it("updatePayment → POST /incomingInvoices.updatePayment", async () => {
+      const { fetchFn, calls } = mockFetch({ status: 204 });
+      const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+      await client.incomingInvoices.updatePayment({ id: "pay1" } as any);
+      expect(calls[0].url).toContain("/incomingInvoices.updatePayment");
+    });
+  });
+
+  describe("incoming credit notes (payment methods)", () => {
+    it("listPayments → POST /incomingCreditNotes.listPayments", async () => {
+      const { client, calls } = createClientWithBody({ data: [] });
+      await client.incomingCreditNotes.listPayments({ id: "cn1" });
+      expect(calls[0].url).toContain("/incomingCreditNotes.listPayments");
+    });
+
+    it("registerPayment → POST /incomingCreditNotes.registerPayment", async () => {
+      const { client, calls } = createClientWithBody({ data: { id: "pay1" } });
+      await client.incomingCreditNotes.registerPayment({ id: "cn1", payment: { amount: 50, currency: "EUR", paid_at: "2026-01-01" } } as any);
+      expect(calls[0].url).toContain("/incomingCreditNotes.registerPayment");
+    });
+
+    it("removePayment → POST /incomingCreditNotes.removePayment", async () => {
+      const { fetchFn, calls } = mockFetch({ status: 204 });
+      const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+      await client.incomingCreditNotes.removePayment({ id: "pay1" } as any);
+      expect(calls[0].url).toContain("/incomingCreditNotes.removePayment");
+    });
+
+    it("updatePayment → POST /incomingCreditNotes.updatePayment", async () => {
+      const { fetchFn, calls } = mockFetch({ status: 204 });
+      const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+      await client.incomingCreditNotes.updatePayment({ id: "pay1" } as any);
+      expect(calls[0].url).toContain("/incomingCreditNotes.updatePayment");
+    });
+  });
+
+  describe("receipts (payment methods)", () => {
+    it("listPayments → POST /receipts.listPayments", async () => {
+      const { client, calls } = createClientWithBody({ data: [] });
+      await client.receipts.listPayments({ id: "r1" });
+      expect(calls[0].url).toContain("/receipts.listPayments");
+    });
+
+    it("registerPayment → POST /receipts.registerPayment", async () => {
+      const { client, calls } = createClientWithBody({ data: { id: "pay1" } });
+      await client.receipts.registerPayment({ id: "r1", payment: { amount: 25, currency: "EUR", paid_at: "2026-01-01" } } as any);
+      expect(calls[0].url).toContain("/receipts.registerPayment");
+    });
+
+    it("removePayment → POST /receipts.removePayment", async () => {
+      const { fetchFn, calls } = mockFetch({ status: 204 });
+      const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+      await client.receipts.removePayment({ id: "pay1" } as any);
+      expect(calls[0].url).toContain("/receipts.removePayment");
+    });
+
+    it("updatePayment → POST /receipts.updatePayment", async () => {
+      const { fetchFn, calls } = mockFetch({ status: 204 });
+      const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+      await client.receipts.updatePayment({ id: "pay1" } as any);
+      expect(calls[0].url).toContain("/receipts.updatePayment");
+    });
+  });
+
   describe("other resources send correct endpoints", () => {
     const cases: Array<[string, (client: TeamleaderClient) => Promise<unknown>]> = [
       ["departments.list", (c) => c.departments.list()],

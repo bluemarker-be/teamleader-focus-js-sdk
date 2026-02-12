@@ -4,23 +4,26 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased] - 2026-02-12
+## [1.0.1] - 2026-02-12
 
 API spec updated: → 1.107.0
 
 ### Added
-- `/incomingCreditNotes.listPayments` endpoint
-- `/incomingCreditNotes.registerPayment` endpoint
-- `/incomingCreditNotes.removePayment` endpoint
-- `/incomingCreditNotes.updatePayment` endpoint
-- `/incomingInvoices.listPayments` endpoint
-- `/incomingInvoices.registerPayment` endpoint
-- `/incomingInvoices.removePayment` endpoint
-- `/incomingInvoices.updatePayment` endpoint
-- `/receipts.listPayments` endpoint
-- `/receipts.registerPayment` endpoint
-- `/receipts.removePayment` endpoint
-- `/receipts.updatePayment` endpoint
+- `TeamleaderTokenRefreshError` — dedicated error subclass for token refresh failures, with the hint from the Teamleader error response in the message (e.g. "Token refresh failed: Token has been revoked")
+
+### Changed
+- `incomingCreditNotes.listPayments()` — list payments for an incoming credit note
+- `incomingCreditNotes.registerPayment()` — register a payment for an incoming credit note
+- `incomingCreditNotes.removePayment()` — remove a payment from an incoming credit note
+- `incomingCreditNotes.updatePayment()` — update a payment for an incoming credit note
+- `incomingInvoices.listPayments()` — list payments for an incoming invoice
+- `incomingInvoices.registerPayment()` — register a payment for an incoming invoice
+- `incomingInvoices.removePayment()` — remove a payment from an incoming invoice
+- `incomingInvoices.updatePayment()` — update a payment for an incoming invoice
+- `receipts.listPayments()` — list payments for a receipt
+- `receipts.registerPayment()` — register a payment for a receipt
+- `receipts.removePayment()` — remove a payment from a receipt
+- `receipts.updatePayment()` — update a payment for a receipt
 
 ## [1.0.0] - 2026-02-12
 

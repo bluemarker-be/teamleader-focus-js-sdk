@@ -2,7 +2,7 @@ export { TeamleaderClient } from "./client.js";
 export type { TeamleaderClientConfig } from "./client.js";
 export { createAuthorizationUrl, exchangeCodeForTokens, refreshTokens, } from "./oauth.js";
 export type { AuthorizationUrlParams, ExchangeCodeParams, RefreshTokenParams, } from "./oauth.js";
-export { TeamleaderError, TeamleaderAuthenticationError, TeamleaderRateLimitError, TeamleaderValidationError, TeamleaderNetworkError, } from "./errors.js";
+export { TeamleaderError, TeamleaderAuthenticationError, TeamleaderTokenRefreshError, TeamleaderRateLimitError, TeamleaderValidationError, TeamleaderNetworkError, } from "./errors.js";
 export { paginatePages, paginateItems } from "./paginator.js";
 export type { RequestBody, ResponseBody, Page, PageMeta, TypeAndId, ListResponse, SingleResponse, CreatedResponse, OAuthTokens, OAuthConfig, } from "./types/common.js";
 export type { operations, paths, components } from "./types/generated.js";

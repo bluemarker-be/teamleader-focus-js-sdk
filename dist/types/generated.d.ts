@@ -2681,6 +2681,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/incomingCreditNotes.listPayments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingCreditNotes.listPayments
+         * @description List payments for an incoming credit note.
+         */
+        post: operations["incomingCreditNotes.listPayments"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/incomingCreditNotes.markAsPendingReview": {
         parameters: {
             query?: never;
@@ -2721,6 +2741,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/incomingCreditNotes.registerPayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingCreditNotes.registerPayment
+         * @description Register a payment for an incoming credit note.
+         */
+        post: operations["incomingCreditNotes.registerPayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/incomingCreditNotes.removePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingCreditNotes.removePayment
+         * @description Remove a payment from an incoming credit note.
+         */
+        post: operations["incomingCreditNotes.removePayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/incomingCreditNotes.sendToBookkeeping": {
         parameters: {
             query?: never;
@@ -2755,6 +2815,26 @@ export interface paths {
          * @description Updates an incoming credit note.
          */
         post: operations["incomingCreditNotes.update"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/incomingCreditNotes.updatePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingCreditNotes.updatePayment
+         * @description Update a payment for an incoming credit note.
+         */
+        post: operations["incomingCreditNotes.updatePayment"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2841,6 +2921,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/incomingInvoices.listPayments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingInvoices.listPayments
+         * @description List payments for an incoming invoice.
+         */
+        post: operations["incomingInvoices.listPayments"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/incomingInvoices.markAsPendingReview": {
         parameters: {
             query?: never;
@@ -2881,6 +2981,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/incomingInvoices.registerPayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingInvoices.registerPayment
+         * @description Register a payment for an incoming invoice.
+         */
+        post: operations["incomingInvoices.registerPayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/incomingInvoices.removePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingInvoices.removePayment
+         * @description Remove a payment from an incoming invoice.
+         */
+        post: operations["incomingInvoices.removePayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/incomingInvoices.sendToBookkeeping": {
         parameters: {
             query?: never;
@@ -2915,6 +3055,26 @@ export interface paths {
          * @description Updates an incoming invoice.
          */
         post: operations["incomingInvoices.update"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/incomingInvoices.updatePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * incomingInvoices.updatePayment
+         * @description Update a payment for an incoming invoice.
+         */
+        post: operations["incomingInvoices.updatePayment"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3001,6 +3161,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/receipts.listPayments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * receipts.listPayments
+         * @description List payments for a(n incoming) receipt.
+         */
+        post: operations["receipts.listPayments"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/receipts.markAsPendingReview": {
         parameters: {
             query?: never;
@@ -3041,6 +3221,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/receipts.registerPayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * receipts.registerPayment
+         * @description Register a payment for a(n incoming) receipt.
+         */
+        post: operations["receipts.registerPayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/receipts.removePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * receipts.removePayment
+         * @description Remove a payment from a receipt.
+         */
+        post: operations["receipts.removePayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/receipts.sendToBookkeeping": {
         parameters: {
             query?: never;
@@ -3075,6 +3295,26 @@ export interface paths {
          * @description Updates a receipt.
          */
         post: operations["receipts.update"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/receipts.updatePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * receipts.updatePayment
+         * @description Update a payment for a(n incoming) receipt.
+         */
+        post: operations["receipts.updatePayment"];
         delete?: never;
         options?: never;
         head?: never;
@@ -15315,6 +15555,10 @@ export interface components {
                 /** @enum {string} */
                 bookkeeping_status?: "not_sent" | "sent";
                 iban_number?: string | null;
+                /** @enum {string} */
+                payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid";
+                paid_amount?: number | null;
+                paid_at?: string | null;
             }[];
             meta?: {
                 /** Pagination */
@@ -15327,6 +15571,249 @@ export interface components {
                 /** @example 12 */
                 matches?: number;
             };
+        };
+        /** incomingCreditNotes.listPaymentsrequest */
+        "incomingCreditNotes.listPaymentsrequest": {
+            id: string;
+        };
+        /** receipts.listPaymentsresponse */
+        "incomingCreditNotes.listPaymentsresponse": {
+            data?: {
+                id?: string;
+                /** Money */
+                payment?: {
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                };
+                /** Format: date-time */
+                paid_at?: string;
+                payment_method?: {
+                    type?: string;
+                    id?: string;
+                } | null;
+                remark?: string | null;
+            }[];
+            meta?: {
+                total?: {
+                    amount?: number;
+                };
+            };
+        };
+        /** receipts.incomingCreditNotes */
+        "incomingCreditNotes.registerPaymentrequest": {
+            id: string;
+            /** Money */
+            payment: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            };
+            /** Format: date-time */
+            paid_at: string;
+            payment_method_id?: string | null;
+            remark?: string | null;
+        };
+        /** receipts.registerPaymentresponse */
+        "incomingCreditNotes.registerPaymentresponse": {
+            data?: {
+                type?: string;
+                id?: string;
+            };
+        };
+        /** receipts.removePaymentrequest */
+        "incomingCreditNotes.removePaymentrequest": {
+            id: string;
+            payment_id: string;
+        };
+        /** incomingCreditNotes.updatePaymentrequest */
+        "incomingCreditNotes.updatePaymentrequest": {
+            id: string;
+            payment_id: string;
+            /** Money */
+            payment?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            };
+            /** Format: date-time */
+            paid_at?: string;
+            payment_method_id?: string | null;
+            remark?: string | null;
+        };
+        /** incomingInvoices.listPaymentsrequest */
+        "incomingInvoices.listPaymentsrequest": {
+            id: string;
+        };
+        /** receipts.listPaymentsresponse */
+        "incomingInvoices.listPaymentsresponse": {
+            data?: {
+                id?: string;
+                /** Money */
+                payment?: {
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                };
+                /** Format: date-time */
+                paid_at?: string;
+                payment_method?: {
+                    type?: string;
+                    id?: string;
+                } | null;
+                remark?: string | null;
+            }[];
+            meta?: {
+                total?: {
+                    amount?: number;
+                };
+            };
+        };
+        /** incomingInvoices.registerPaymentrequest */
+        "incomingInvoices.registerPaymentrequest": {
+            id: string;
+            /** Money */
+            payment: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            };
+            /** Format: date-time */
+            paid_at: string;
+            payment_method_id?: string | null;
+            remark?: string | null;
+        };
+        /** receipts.registerPaymentresponse */
+        "incomingInvoices.registerPaymentresponse": {
+            data?: {
+                type?: string;
+                id?: string;
+            };
+        };
+        /** incomingInvoices.removePaymentrequest */
+        "incomingInvoices.removePaymentrequest": {
+            id: string;
+            payment_id: string;
+        };
+        /** incomingInvoices.updatePaymentrequest */
+        "incomingInvoices.updatePaymentrequest": {
+            id: string;
+            payment_id: string;
+            /** Money */
+            payment?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            };
+            /** Format: date-time */
+            paid_at?: string;
+            payment_method_id?: string | null;
+            remark?: string | null;
+        };
+        /** receipts.listPaymentsrequest */
+        "receipts.listPaymentsrequest": {
+            id: string;
+        };
+        /** receipts.listPaymentsresponse */
+        "receipts.listPaymentsresponse": {
+            data?: {
+                id?: string;
+                /** Money */
+                payment?: {
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                };
+                /** Format: date-time */
+                paid_at?: string;
+                payment_method?: {
+                    type?: string;
+                    id?: string;
+                } | null;
+                remark?: string | null;
+            }[];
+            meta?: {
+                total?: {
+                    amount?: number;
+                };
+            };
+        };
+        /** receipts.registerPaymentrequest */
+        "receipts.registerPaymentrequest": {
+            id: string;
+            /** Money */
+            payment: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            };
+            /** Format: date-time */
+            paid_at: string;
+            payment_method_id?: string | null;
+            remark?: string | null;
+        };
+        /** receipts.registerPaymentresponse */
+        "receipts.registerPaymentresponse": {
+            data?: {
+                type?: string;
+                id?: string;
+            };
+        };
+        /** receipts.removePaymentrequest */
+        "receipts.removePaymentrequest": {
+            id: string;
+            payment_id: string;
+        };
+        /** receipts.updatePaymentrequest */
+        "receipts.updatePaymentrequest": {
+            id: string;
+            payment_id: string;
+            /** Money */
+            payment?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            };
+            /** Format: date-time */
+            paid_at?: string;
+            payment_method_id?: string | null;
+            remark?: string | null;
         };
         /** productCategories.listrequest */
         "productCategories.listrequest": {
@@ -26231,7 +26718,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -36754,7 +37241,10 @@ export interface operations {
                      *           "payment_reference": "PR-12345",
                      *           "review_status": "pending",
                      *           "bookkeeping_status": "not_sent",
-                     *           "iban_number": "FR7630006000011234567890189"
+                     *           "iban_number": "FR7630006000011234567890189",
+                     *           "payment_status": "paid",
+                     *           "paid_amount": 100,
+                     *           "paid_at": "2025-12-12"
                      *         }
                      *       ],
                      *       "meta": {
@@ -36816,6 +37306,10 @@ export interface operations {
                             /** @enum {string} */
                             bookkeeping_status?: "not_sent" | "sent";
                             iban_number?: string | null;
+                            /** @enum {string} */
+                            payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid";
+                            paid_amount?: number | null;
+                            paid_at?: string | null;
                         }[];
                         meta?: {
                             /** Pagination */
@@ -37037,7 +37531,8 @@ export interface operations {
                      *         },
                      *         "payment_reference": "REF-3578296",
                      *         "review_status": "pending",
-                     *         "iban_number": "BE68539007547034"
+                     *         "iban_number": "BE68539007547034",
+                     *         "payment_status": "not_paid"
                      *       }
                      *     }
                      */
@@ -37085,6 +37580,89 @@ export interface operations {
                             /** @enum {string} */
                             review_status?: "pending" | "approved" | "refused";
                             iban_number?: string | null;
+                            /** @enum {string} */
+                            payment_status?: "unknown" | "paid" | "not_paid";
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "incomingCreditNotes.listPayments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": [
+                     *         {
+                     *           "id": "018d5965-19fb-701a-af11-e80451931551",
+                     *           "payment": {
+                     *             "amount": 123.3,
+                     *             "currency": "EUR"
+                     *           },
+                     *           "paid_at": "2016-03-03T16:44:33+00:00",
+                     *           "payment_method": {
+                     *             "type": "paymentMethod",
+                     *             "id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d"
+                     *           },
+                     *           "remark": "This is a remark"
+                     *         }
+                     *       ],
+                     *       "meta": {
+                     *         "total": {
+                     *           "amount": 123.3
+                     *         }
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            id?: string;
+                            /** Money */
+                            payment?: {
+                                /** @example 123.3 */
+                                amount: number;
+                                /**
+                                 * CurrencyCode
+                                 * @enum {string}
+                                 */
+                                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                            };
+                            /** Format: date-time */
+                            paid_at?: string;
+                            payment_method?: {
+                                type?: string;
+                                id?: string;
+                            } | null;
+                            remark?: string | null;
+                        }[];
+                        meta?: {
+                            total?: {
+                                amount?: number;
+                            };
                         };
                     };
                 };
@@ -37136,6 +37714,102 @@ export interface operations {
                  */
                 "application/json": {
                     id: string;
+                };
+            };
+        };
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "incomingCreditNotes.registerPayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "paid_at": "2016-03-03T16:44:33+00:00",
+                 *       "payment_method_id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d",
+                 *       "remark": "This is a remark"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    /** Money */
+                    payment: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    };
+                    /** Format: date-time */
+                    paid_at: string;
+                    payment_method_id?: string | null;
+                    remark?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": {
+                     *         "id": "88268bc5-86bc-43cb-8c9f-fdcf125e1ad0",
+                     *         "type": "financialTransaction"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            type?: string;
+                            id?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "incomingCreditNotes.removePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment_id": "018d5965-19fb-701a-af11-e80451931551"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    payment_id: string;
                 };
             };
         };
@@ -37244,6 +37918,60 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    "incomingCreditNotes.updatePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment_id": "aa7e7d42-a951-4cde-85b8-ae447a2f1ac4",
+                 *       "payment": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "paid_at": "2016-03-03T16:44:33+00:00",
+                 *       "payment_method_id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d",
+                 *       "remark": "This is an updated remark"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    payment_id: string;
+                    /** Money */
+                    payment?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    };
+                    /** Format: date-time */
+                    paid_at?: string;
+                    payment_method_id?: string | null;
+                    remark?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
             };
         };
     };
@@ -37451,7 +38179,8 @@ export interface operations {
                      *         },
                      *         "payment_reference": "REF-3578296",
                      *         "review_status": "pending",
-                     *         "iban_number": "BE68539007547034"
+                     *         "iban_number": "BE68539007547034",
+                     *         "payment_status": "not_paid"
                      *       }
                      *     }
                      */
@@ -37499,6 +38228,89 @@ export interface operations {
                             /** @enum {string} */
                             review_status?: "pending" | "approved" | "refused";
                             iban_number?: string | null;
+                            /** @enum {string} */
+                            payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid";
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "incomingInvoices.listPayments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": [
+                     *         {
+                     *           "id": "018d5965-19fb-701a-af11-e80451931551",
+                     *           "payment": {
+                     *             "amount": 123.3,
+                     *             "currency": "EUR"
+                     *           },
+                     *           "paid_at": "2016-03-03T16:44:33+00:00",
+                     *           "payment_method": {
+                     *             "type": "paymentMethod",
+                     *             "id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d"
+                     *           },
+                     *           "remark": "This is a remark"
+                     *         }
+                     *       ],
+                     *       "meta": {
+                     *         "total": {
+                     *           "amount": 123.3
+                     *         }
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            id?: string;
+                            /** Money */
+                            payment?: {
+                                /** @example 123.3 */
+                                amount: number;
+                                /**
+                                 * CurrencyCode
+                                 * @enum {string}
+                                 */
+                                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                            };
+                            /** Format: date-time */
+                            paid_at?: string;
+                            payment_method?: {
+                                type?: string;
+                                id?: string;
+                            } | null;
+                            remark?: string | null;
+                        }[];
+                        meta?: {
+                            total?: {
+                                amount?: number;
+                            };
                         };
                     };
                 };
@@ -37560,6 +38372,104 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    "incomingInvoices.registerPayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "paid_at": "2016-03-03T16:44:33+00:00",
+                 *       "payment_method_id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d",
+                 *       "remark": "This is a remark"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    /** Money */
+                    payment: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    };
+                    /** Format: date-time */
+                    paid_at: string;
+                    payment_method_id?: string | null;
+                    remark?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": {
+                     *         "type": "financialTransaction",
+                     *         "id": "ee94b4c0-5786-0517-9d26-8dd1e6406f20"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            type?: string;
+                            id?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "incomingInvoices.removePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment_id": "018d5965-19fb-701a-af11-e80451931551"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    payment_id: string;
+                };
+            };
+        };
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
             };
         };
     };
@@ -37658,6 +38568,60 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    "incomingInvoices.updatePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment_id": "aa7e7d42-a951-4cde-85b8-ae447a2f1ac4",
+                 *       "payment": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "paid_at": "2016-03-03T16:44:33+00:00",
+                 *       "payment_method_id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d",
+                 *       "remark": "This is a remark"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    payment_id: string;
+                    /** Money */
+                    payment?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    };
+                    /** Format: date-time */
+                    paid_at?: string;
+                    payment_method_id?: string | null;
+                    remark?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
             };
         };
     };
@@ -37847,7 +38811,8 @@ export interface operations {
                      *           "type": "file",
                      *           "id": "5027619a-5e0a-01ce-a533-f80dfcc3f142"
                      *         },
-                     *         "review_status": "pending"
+                     *         "review_status": "pending",
+                     *         "payment_status": "not_paid"
                      *       }
                      *     }
                      */
@@ -37888,6 +38853,89 @@ export interface operations {
                             } | null;
                             /** @enum {string} */
                             review_status?: "pending" | "approved" | "refused";
+                            /** @enum {string} */
+                            payment_status?: "unknown" | "paid" | "not_paid";
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "receipts.listPayments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": [
+                     *         {
+                     *           "id": "018d5965-19fb-701a-af11-e80451931551",
+                     *           "payment": {
+                     *             "amount": 123.3,
+                     *             "currency": "EUR"
+                     *           },
+                     *           "paid_at": "2016-03-03T16:44:33+00:00",
+                     *           "payment_method": {
+                     *             "type": "paymentMethod",
+                     *             "id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d"
+                     *           },
+                     *           "remark": "This is a remark"
+                     *         }
+                     *       ],
+                     *       "meta": {
+                     *         "total": {
+                     *           "amount": 123.3
+                     *         }
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            id?: string;
+                            /** Money */
+                            payment?: {
+                                /** @example 123.3 */
+                                amount: number;
+                                /**
+                                 * CurrencyCode
+                                 * @enum {string}
+                                 */
+                                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                            };
+                            /** Format: date-time */
+                            paid_at?: string;
+                            payment_method?: {
+                                type?: string;
+                                id?: string;
+                            } | null;
+                            remark?: string | null;
+                        }[];
+                        meta?: {
+                            total?: {
+                                amount?: number;
+                            };
                         };
                     };
                 };
@@ -37949,6 +38997,104 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    "receipts.registerPayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "paid_at": "2016-03-03T16:44:33+00:00",
+                 *       "payment_method_id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d",
+                 *       "remark": "This is a remark"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    /** Money */
+                    payment: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    };
+                    /** Format: date-time */
+                    paid_at: string;
+                    payment_method_id?: string | null;
+                    remark?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": {
+                     *         "id": "6deb188e-3468-4886-b6a1-2306e7fc18fb",
+                     *         "type": "financialTransaction"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            type?: string;
+                            id?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "receipts.removePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment_id": "018d5965-19fb-701a-af11-e80451931551"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    payment_id: string;
+                };
+            };
+        };
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
             };
         };
     };
@@ -38035,6 +39181,60 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    "receipts.updatePayment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "018d5965-19fb-701a-af11-e80451931551",
+                 *       "payment_id": "aa7e7d42-a951-4cde-85b8-ae447a2f1ac4",
+                 *       "payment": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "paid_at": "2016-03-03T16:44:33+00:00",
+                 *       "payment_method_id": "bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d",
+                 *       "remark": "This is an updated remark"
+                 *     }
+                 */
+                "application/json": {
+                    id: string;
+                    payment_id: string;
+                    /** Money */
+                    payment?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    };
+                    /** Format: date-time */
+                    paid_at?: string;
+                    payment_method_id?: string | null;
+                    remark?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
             };
         };
     };
