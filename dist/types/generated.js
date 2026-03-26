@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-spec.yaml
-// Generated: 2026-02-12T10:26:07.103Z
+// Generated: 2026-03-26T20:40:49.325Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -13,6 +13,20 @@
 // 2. dealPhases.duplicate returns 404
 //    The endpoint exists in the spec but is not functional in the API.
 //    No patch needed — the SDK includes the method, tests skip it.
+//
+// 5. Context enum: "deal" → "sale" + 6 missing contexts
+//    The spec uses "deal" but the API requires "sale". Also missing:
+//    meeting, todo, callback, meeting_report, pro_external_cost, werkbonnen.
+//    Patch: replaced enum in all 9 occurrences.
+//
+// 6. custom_fields_update_strategy missing from update request types
+//    The API supports "partial" strategy on 11 update endpoints but the
+//    spec omits the parameter entirely. Not supported on tickets.update.
+//    Patch: added optional property to 11 operation request bodies.
+//
+// 7. tasks.list missing deal_id filter
+//    The API accepts deal_id as a filter on tasks.list but the spec omits it.
+//    Patch: added optional deal_id to the tasks.listrequest filter.
 //
 // 🧹 Post-generation cleanups (openapi-typescript artifacts):
 //

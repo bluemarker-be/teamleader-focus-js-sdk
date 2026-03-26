@@ -80,10 +80,7 @@ const DEFAULT_BASE_URL = "https://api.focus.teamleader.eu";
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_MAX_RETRIES = 3;
 
-export interface TeamleaderClientConfig {
-  /** OAuth2 access token */
-  accessToken: string;
-
+interface TeamleaderClientConfigBase {
   /** OAuth2 refresh token — required for auto-refresh */
   refreshToken?: string;
   /** OAuth2 client ID — required for auto-refresh */
@@ -119,12 +116,36 @@ export interface TeamleaderClientConfig {
   apiVersion?: string;
 }
 
+interface TeamleaderClientConfigWithToken extends TeamleaderClientConfigBase {
+  /** OAuth2 access token */
+  accessToken: string;
+  /**
+   * Callback to read the latest tokens from a shared store (DB, Redis).
+   * Used in multi-process deployments where another process may have refreshed the token.
+   */
+  getTokens?: () => Promise<{ access_token: string; refresh_token?: string }> | { access_token: string; refresh_token?: string };
+}
+
+interface TeamleaderClientConfigWithGetTokens extends TeamleaderClientConfigBase {
+  /** OAuth2 access token — optional when getTokens is provided */
+  accessToken?: string;
+  /**
+   * Callback to read the latest tokens from a shared store (DB, Redis).
+   * Used in multi-process deployments where another process may have refreshed the token.
+   * When provided without accessToken, the first request will trigger a 401 → getTokens flow.
+   */
+  getTokens: () => Promise<{ access_token: string; refresh_token?: string }> | { access_token: string; refresh_token?: string };
+}
+
+export type TeamleaderClientConfig = TeamleaderClientConfigWithToken | TeamleaderClientConfigWithGetTokens;
+
 export class TeamleaderClient {
   private accessToken: string;
   private refreshToken?: string;
   private readonly clientId?: string;
   private readonly clientSecret?: string;
   private readonly onTokenRefresh?: (tokens: OAuthTokens) => void | Promise<void>;
+  private readonly getTokensFn?: () => Promise<{ access_token: string; refresh_token?: string }> | { access_token: string; refresh_token?: string };
   private readonly baseUrl: string;
   private readonly fetchFn: typeof globalThis.fetch;
   private readonly timeout: number;
@@ -205,11 +226,12 @@ export class TeamleaderClient {
   public readonly workTypes: WorkTypesResource;
 
   constructor(config: TeamleaderClientConfig) {
-    this.accessToken = config.accessToken;
+    this.accessToken = config.accessToken ?? "";
     this.refreshToken = config.refreshToken;
     this.clientId = config.clientId;
     this.clientSecret = config.clientSecret;
     this.onTokenRefresh = config.onTokenRefresh;
+    this.getTokensFn = config.getTokens;
     this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL;
     this.fetchFn = config.fetch ?? globalThis.fetch.bind(globalThis);
     this.timeout = config.timeout ?? DEFAULT_TIMEOUT_MS;
@@ -303,13 +325,18 @@ export class TeamleaderClient {
     endpoint: string,
     body?: unknown,
   ): Promise<T> {
-    return this.requestWithRetry(endpoint, body, false);
+    return this.requestWithRetry(endpoint, body, 0);
   }
 
+  // authRetryState tracks where we are in the 401 recovery flow:
+  // 0 = first attempt
+  // 1 = retrying after getTokens returned changed tokens
+  // 2 = retrying after OAuth refresh
+  // 3 = retrying after fallback getTokens (post-failed-refresh)
   private async requestWithRetry<T>(
     endpoint: string,
     body: unknown,
-    isRetryAfterRefresh: boolean,
+    authRetryState: number,
     retryCount = 0,
   ): Promise<T> {
     const url = new URL(endpoint, this.baseUrl);
@@ -348,12 +375,34 @@ export class TeamleaderClient {
       return undefined as T;
     }
 
-    // 401 Unauthorized — attempt token refresh (once)
-    if (response.status === 401 && !isRetryAfterRefresh) {
-      if (this.canRefreshToken()) {
-        await this.performTokenRefresh();
-        return this.requestWithRetry(endpoint, body, true, retryCount);
+    // 401 Unauthorized — multi-step recovery: getTokens → refresh → fallback getTokens
+    if (response.status === 401) {
+      // Step 1: Try getTokens (re-read from shared store, e.g. another process refreshed)
+      if (authRetryState === 0 && this.getTokensFn) {
+        const changed = await this.fetchLatestTokens();
+        if (changed) {
+          return this.requestWithRetry(endpoint, body, 1, retryCount);
+        }
+        // Not changed — fall through to refresh
       }
+
+      // Step 2: OAuth token refresh
+      if (authRetryState <= 1 && this.canRefreshToken()) {
+        try {
+          await this.performTokenRefresh();
+          return this.requestWithRetry(endpoint, body, 2, retryCount);
+        } catch (refreshError) {
+          // Step 3: Refresh failed — try getTokens one more time (another process may have refreshed)
+          if (this.getTokensFn) {
+            const changed = await this.fetchLatestTokens();
+            if (changed) {
+              return this.requestWithRetry(endpoint, body, 3, retryCount);
+            }
+          }
+          throw refreshError;
+        }
+      }
+
       throw new TeamleaderAuthenticationError(await this.safeParseBody(response));
     }
 
@@ -364,14 +413,14 @@ export class TeamleaderClient {
       if (waitMs > 0) {
         await this.sleep(waitMs);
       }
-      return this.requestWithRetry(endpoint, body, isRetryAfterRefresh, retryCount + 1);
+      return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
     }
 
     // 500/502/503 Server Error — retry with exponential backoff
     if ((response.status === 500 || response.status === 502 || response.status === 503) && retryCount < this.maxRetries) {
       const backoffMs = Math.min(1000 * 2 ** retryCount, 10_000);
       await this.sleep(backoffMs);
-      return this.requestWithRetry(endpoint, body, isRetryAfterRefresh, retryCount + 1);
+      return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
     }
 
     // Parse response body
@@ -399,6 +448,21 @@ export class TeamleaderClient {
     }
 
     return (await response.json()) as T;
+  }
+
+  /**
+   * Re-reads tokens from the shared store via getTokens callback.
+   * Returns true if the access token changed (another process refreshed).
+   */
+  private async fetchLatestTokens(): Promise<boolean> {
+    if (!this.getTokensFn) return false;
+    const tokens = await this.getTokensFn();
+    const changed = tokens.access_token !== this.accessToken;
+    this.accessToken = tokens.access_token;
+    if (tokens.refresh_token !== undefined) {
+      this.refreshToken = tokens.refresh_token;
+    }
+    return changed;
   }
 
   private canRefreshToken(): boolean {

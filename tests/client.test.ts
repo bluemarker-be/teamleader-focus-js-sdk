@@ -1,8 +1,9 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { TeamleaderClient } from "../src/client.js";
 import {
   TeamleaderError,
   TeamleaderAuthenticationError,
+  TeamleaderTokenRefreshError,
   TeamleaderValidationError,
   TeamleaderRateLimitError,
   TeamleaderNetworkError,
@@ -300,5 +301,211 @@ describe("TeamleaderClient", () => {
     // The second refresh call (calls[4]) should use the new refresh token
     const secondRefreshBody = new URLSearchParams(calls[4].init.body as string);
     expect(secondRefreshBody.get("refresh_token")).toBe("new-rt");
+  });
+
+  describe("getTokens", () => {
+    it("uses fresh tokens from getTokens on 401 without needing refresh", async () => {
+      const { fetchFn, calls } = mockFetchSequence([
+        // First call: 401 (stale token)
+        { status: 401, body: { error: "invalid_token" } },
+        // Retry after getTokens: success
+        { status: 200, body: { data: [{ id: "1" }] } },
+      ]);
+
+      const getTokens = vi.fn().mockReturnValue({
+        access_token: "fresh-token",
+        refresh_token: "fresh-refresh",
+      });
+
+      const client = new TeamleaderClient({
+        accessToken: "stale-token",
+        getTokens,
+        fetch: fetchFn,
+      });
+
+      const result = await client.contacts.list();
+
+      expect(getTokens).toHaveBeenCalledOnce();
+      expect(calls).toHaveLength(2);
+      expect(result).toEqual({ data: [{ id: "1" }] });
+      // Retry should use the fresh token
+      expect((calls[1].init.headers as Record<string, string>).Authorization).toBe("Bearer fresh-token");
+    });
+
+    it("falls through to refresh when getTokens returns same token", async () => {
+      const tokenResponse = {
+        access_token: "refreshed-token",
+        refresh_token: "refreshed-refresh",
+        token_type: "Bearer",
+        expires_in: 3600,
+      };
+
+      const { fetchFn, calls } = mockFetchSequence([
+        // First call: 401
+        { status: 401, body: { error: "invalid_token" } },
+        // Token refresh call
+        { status: 200, body: tokenResponse },
+        // Retry after refresh: success
+        { status: 200, body: { data: [{ id: "1" }] } },
+      ]);
+
+      const getTokens = vi.fn().mockReturnValue({
+        access_token: "stale-token", // same as current — no change
+        refresh_token: "old-refresh",
+      });
+
+      const client = new TeamleaderClient({
+        accessToken: "stale-token",
+        refreshToken: "old-refresh",
+        clientId: "cid",
+        clientSecret: "csec",
+        getTokens,
+        fetch: fetchFn,
+      });
+
+      const result = await client.contacts.list();
+
+      expect(getTokens).toHaveBeenCalledOnce();
+      expect(calls).toHaveLength(3); // original + refresh + retry
+      expect(result).toEqual({ data: [{ id: "1" }] });
+      expect((calls[2].init.headers as Record<string, string>).Authorization).toBe("Bearer refreshed-token");
+    });
+
+    it("falls back to getTokens when refresh fails (another process refreshed)", async () => {
+      const { fetchFn, calls } = mockFetchSequence([
+        // First call: 401
+        { status: 401, body: { error: "invalid_token" } },
+        // Token refresh: fails (refresh token already consumed by another process)
+        { status: 401, body: { errors: [{ meta: { hint: "refresh token not linked to client" } }] } },
+        // Retry after fallback getTokens: success
+        { status: 200, body: { data: [{ id: "1" }] } },
+      ]);
+
+      let getTokensCallCount = 0;
+      const getTokens = vi.fn().mockImplementation(() => {
+        getTokensCallCount++;
+        if (getTokensCallCount === 1) {
+          // First call: same token (no change yet)
+          return { access_token: "stale-token", refresh_token: "stale-refresh" };
+        }
+        // Second call: another process has refreshed
+        return { access_token: "other-process-token", refresh_token: "other-process-refresh" };
+      });
+
+      const client = new TeamleaderClient({
+        accessToken: "stale-token",
+        refreshToken: "stale-refresh",
+        clientId: "cid",
+        clientSecret: "csec",
+        getTokens,
+        fetch: fetchFn,
+      });
+
+      const result = await client.contacts.list();
+
+      expect(getTokens).toHaveBeenCalledTimes(2);
+      expect(calls).toHaveLength(3); // original + failed refresh + retry
+      expect(result).toEqual({ data: [{ id: "1" }] });
+      expect((calls[2].init.headers as Record<string, string>).Authorization).toBe("Bearer other-process-token");
+    });
+
+    it("throws refresh error when both refresh and fallback getTokens fail", async () => {
+      const { fetchFn } = mockFetchSequence([
+        // First call: 401
+        { status: 401, body: { error: "invalid_token" } },
+        // Token refresh: fails
+        { status: 401, body: { errors: [{ meta: { hint: "refresh token not linked to client" } }] } },
+      ]);
+
+      const getTokens = vi.fn().mockReturnValue({
+        access_token: "stale-token", // always returns same token — no other process refreshed
+        refresh_token: "stale-refresh",
+      });
+
+      const client = new TeamleaderClient({
+        accessToken: "stale-token",
+        refreshToken: "stale-refresh",
+        clientId: "cid",
+        clientSecret: "csec",
+        getTokens,
+        fetch: fetchFn,
+      });
+
+      await expect(client.contacts.list()).rejects.toThrow(TeamleaderTokenRefreshError);
+      expect(getTokens).toHaveBeenCalledTimes(2); // once before refresh, once after
+    });
+
+    it("works with getTokens and without OAuth credentials (re-read only)", async () => {
+      const { fetchFn, calls } = mockFetchSequence([
+        // First call: 401
+        { status: 401, body: { error: "invalid_token" } },
+        // Retry after getTokens: success
+        { status: 200, body: { data: [{ id: "1" }] } },
+      ]);
+
+      const getTokens = vi.fn().mockReturnValue({
+        access_token: "fresh-token",
+        refresh_token: "fresh-refresh",
+      });
+
+      // No clientId/clientSecret — cannot do OAuth refresh, only getTokens
+      const client = new TeamleaderClient({
+        getTokens,
+        fetch: fetchFn,
+      });
+
+      const result = await client.contacts.list();
+
+      expect(getTokens).toHaveBeenCalledOnce();
+      expect(calls).toHaveLength(2);
+      expect(result).toEqual({ data: [{ id: "1" }] });
+    });
+
+    it("throws auth error when getTokens returns unchanged token and no OAuth credentials", async () => {
+      const { fetchFn } = mockFetchSequence([
+        { status: 401, body: { error: "invalid_token" } },
+      ]);
+
+      const getTokens = vi.fn().mockReturnValue({
+        access_token: "same-token",
+        refresh_token: "some-refresh",
+      });
+
+      const client = new TeamleaderClient({
+        accessToken: "same-token",
+        getTokens,
+        fetch: fetchFn,
+      });
+
+      await expect(client.contacts.list()).rejects.toThrow(TeamleaderAuthenticationError);
+      expect(getTokens).toHaveBeenCalledOnce();
+    });
+
+    it("without getTokens works as before (backwards compatible)", async () => {
+      const tokenResponse = {
+        access_token: "new-token",
+        refresh_token: "new-refresh",
+        token_type: "Bearer",
+        expires_in: 3600,
+      };
+
+      const { fetchFn, calls } = mockFetchSequence([
+        { status: 401, body: { error: "invalid_token" } },
+        { status: 200, body: tokenResponse },
+        { status: 200, body: { data: [{ id: "1" }] } },
+      ]);
+
+      const client = new TeamleaderClient({
+        accessToken: "old-token",
+        refreshToken: "old-refresh",
+        clientId: "cid",
+        clientSecret: "csec",
+        fetch: fetchFn,
+      });
+
+      const result = await client.contacts.list();
+      expect(calls).toHaveLength(3);
+      expect(result).toEqual({ data: [{ id: "1" }] });
+    });
   });
 });

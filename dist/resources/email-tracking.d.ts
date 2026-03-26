@@ -8,7 +8,7 @@ export declare class EmailTrackingResource extends BaseResource {
             content?: string | undefined;
             subject?: {
                 id?: string | undefined;
-                type: "company" | "contact" | "product" | "deal" | "invoice" | "subscription" | "quotation" | "creditNote" | "nextgenProject";
+                type: "company" | "contact" | "product" | "invoice" | "subscription" | "quotation" | "creditNote" | "deal" | "nextgenProject";
             } | undefined;
             added_at?: string | undefined;
             attachments?: {

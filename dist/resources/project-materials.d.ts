@@ -17,6 +17,7 @@ export declare class ProjectMaterialsResource extends BaseResource {
             billing_method?: "fixed_price" | "unit_price" | "non_billable" | undefined;
             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             quantity?: number | null | undefined;
+            quantity_estimated?: number | null | undefined;
             unit_price?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
@@ -94,6 +95,7 @@ export declare class ProjectMaterialsResource extends BaseResource {
             billing_method?: "fixed_price" | "unit_price" | "non_billable" | undefined;
             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             quantity?: number | null | undefined;
+            quantity_estimated?: number | null | undefined;
             unit_price?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";

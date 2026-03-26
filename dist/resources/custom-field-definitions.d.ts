@@ -10,7 +10,7 @@ export declare class CustomFieldDefinitionsResource extends BaseResource {
     list(params?: RequestBody<"customFieldDefinitions.list">): Promise<{
         data?: {
             id?: string | undefined;
-            context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket") | undefined;
+            context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen") | undefined;
             type?: "single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user" | undefined;
             label?: string | undefined;
             group?: string | undefined;
@@ -27,7 +27,7 @@ export declare class CustomFieldDefinitionsResource extends BaseResource {
     info(params: RequestBody<"customFieldDefinitions.info">): Promise<{
         data?: {
             id?: string | undefined;
-            context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket") | undefined;
+            context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen") | undefined;
             type?: "single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user" | undefined;
             label?: string | undefined;
             group?: string | undefined;

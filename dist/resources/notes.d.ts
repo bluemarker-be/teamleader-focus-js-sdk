@@ -7,7 +7,7 @@ export declare class NotesResource extends BaseResource {
             content?: string | undefined;
             subject?: {
                 id?: string | undefined;
-                type?: "company" | "contact" | "product" | "deal" | "project" | "invoice" | "subscription" | "quotation" | "creditNote" | "nextgenProject" | undefined;
+                type?: "company" | "contact" | "product" | "project" | "invoice" | "subscription" | "quotation" | "creditNote" | "deal" | "nextgenProject" | undefined;
             } | undefined;
             added_at?: string | undefined;
         }[] | undefined;

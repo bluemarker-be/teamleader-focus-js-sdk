@@ -67,9 +67,7 @@ import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
 import { WithholdingTaxRatesResource } from "./resources/withholding-tax-rates.js";
 import { WorkTypesResource } from "./resources/work-types.js";
-export interface TeamleaderClientConfig {
-    /** OAuth2 access token */
-    accessToken: string;
+interface TeamleaderClientConfigBase {
     /** OAuth2 refresh token — required for auto-refresh */
     refreshToken?: string;
     /** OAuth2 client ID — required for auto-refresh */
@@ -98,12 +96,45 @@ export interface TeamleaderClientConfig {
      */
     apiVersion?: string;
 }
+interface TeamleaderClientConfigWithToken extends TeamleaderClientConfigBase {
+    /** OAuth2 access token */
+    accessToken: string;
+    /**
+     * Callback to read the latest tokens from a shared store (DB, Redis).
+     * Used in multi-process deployments where another process may have refreshed the token.
+     */
+    getTokens?: () => Promise<{
+        access_token: string;
+        refresh_token?: string;
+    }> | {
+        access_token: string;
+        refresh_token?: string;
+    };
+}
+interface TeamleaderClientConfigWithGetTokens extends TeamleaderClientConfigBase {
+    /** OAuth2 access token — optional when getTokens is provided */
+    accessToken?: string;
+    /**
+     * Callback to read the latest tokens from a shared store (DB, Redis).
+     * Used in multi-process deployments where another process may have refreshed the token.
+     * When provided without accessToken, the first request will trigger a 401 → getTokens flow.
+     */
+    getTokens: () => Promise<{
+        access_token: string;
+        refresh_token?: string;
+    }> | {
+        access_token: string;
+        refresh_token?: string;
+    };
+}
+export type TeamleaderClientConfig = TeamleaderClientConfigWithToken | TeamleaderClientConfigWithGetTokens;
 export declare class TeamleaderClient {
     private accessToken;
     private refreshToken?;
     private readonly clientId?;
     private readonly clientSecret?;
     private readonly onTokenRefresh?;
+    private readonly getTokensFn?;
     private readonly baseUrl;
     private readonly fetchFn;
     private readonly timeout;
@@ -185,6 +216,11 @@ export declare class TeamleaderClient {
      */
     request<T>(endpoint: string, body?: unknown): Promise<T>;
     private requestWithRetry;
+    /**
+     * Re-reads tokens from the shared store via getTokens callback.
+     * Returns true if the access token changed (another process refreshed).
+     */
+    private fetchLatestTokens;
     private canRefreshToken;
     /**
      * Performs token refresh with mutex — only one refresh at a time.
@@ -195,4 +231,5 @@ export declare class TeamleaderClient {
     private safeParseBody;
     private sleep;
 }
+export {};
 //# sourceMappingURL=client.d.ts.map

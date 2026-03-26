@@ -16,7 +16,7 @@ export declare class TimersResource extends BaseResource {
             description?: string | undefined;
             subject?: {
                 id?: string | undefined;
-                type?: "company" | "contact" | "milestone" | "ticket" | "event" | "todo" | undefined;
+                type?: "company" | "contact" | "milestone" | "ticket" | "todo" | "event" | undefined;
             } | undefined;
             invoiceable?: boolean | undefined;
         } | undefined;

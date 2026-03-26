@@ -6447,12 +6447,12 @@ export interface components {
          * Context
          * @enum {string}
          */
-        Context: "contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket";
+        Context: "contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen";
         /** customFieldDefinitions.createrequest */
         "customFieldDefinitions.createrequest": {
             label: string;
             type: ("single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user");
-            context: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+            context: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
             /**
              * @description - Use `options` when `type` is one of [`single_select`, `multi_select`]
              *     - Use `default_value` when `type` is `auto_increment`
@@ -6481,7 +6481,7 @@ export interface components {
         "customFieldDefinitions.listrequest": {
             filter?: {
                 ids?: string[];
-                context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
             };
             /** Page */
             page?: {
@@ -6507,7 +6507,7 @@ export interface components {
             data?: {
                 /** @example 74855f4a-2b61-429c-81d8-c79ad3675a76 */
                 id?: string;
-                context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
                 /** @enum {string} */
                 type?: "single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user";
                 label?: string;
@@ -6537,7 +6537,7 @@ export interface components {
             data?: {
                 /** @example 74855f4a-2b61-429c-81d8-c79ad3675a76 */
                 id?: string;
-                context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
                 /** @enum {string} */
                 type?: "single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user";
                 label?: string;
@@ -12270,6 +12270,11 @@ export interface components {
                     id?: string;
                     type?: string;
                 } | null;
+                subscription?: {
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } | null;
                 /** @example 2025-12-08 */
                 delivery_date?: string | null;
             }[];
@@ -15196,9 +15201,9 @@ export interface components {
                 days?: number;
             } | null;
             /** @example cef01135-7e51-4f6f-a6eb-6e5e5a885ac8 */
-            project_id?: string;
+            project_id?: string | null;
             /** @example f6871b06-6513-4750-b5e6-ff3503b5a029 */
-            deal_id?: string;
+            deal_id?: string | null;
             /** @example Subscription comments */
             note?: string | null;
             grouped_lines?: {
@@ -19960,6 +19965,7 @@ export interface components {
                 billing_method?: "fixed_price" | "unit_price" | "non_billable";
                 billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                 quantity?: number | null;
+                quantity_estimated?: number | null;
                 unit_price?: {
                     /** @example 123.3 */
                     amount: number;
@@ -20145,6 +20151,7 @@ export interface components {
                 billing_method?: "fixed_price" | "unit_price" | "non_billable";
                 billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                 quantity?: number | null;
+                quantity_estimated?: number | null;
                 unit_price?: {
                     /** @example 123.3 */
                     amount: number;
@@ -20310,6 +20317,7 @@ export interface components {
              */
             billing_method?: "fixed_price" | "unit_price" | "non_billable";
             quantity?: number;
+            quantity_estimated?: number;
             unit_price?: {
                 /** @example 123.3 */
                 amount: number;
@@ -20404,6 +20412,7 @@ export interface components {
              */
             billing_method?: "fixed_price" | "unit_price" | "non_billable";
             quantity?: number | null;
+            quantity_estimated?: number | null;
             unit_price?: {
                 /** @example 123.3 */
                 amount: number;
@@ -20517,6 +20526,8 @@ export interface components {
         "tasks.listrequest": {
             filter?: {
                 ids?: string[];
+                /** @description Filter tasks linked to a specific deal. */
+                deal_id?: string;
                 /**
                  * @description Returns tasks that are assigned to this user or to a team to which this user belongs. When passing `null`, it returns tasks that are unassigned.
                  * @example f29abf48-337d-44b4-aad4-585f5277a456
@@ -20978,7 +20989,7 @@ export interface components {
                     type?: string;
                 } & {
                     /** @enum {string} */
-                    type: "milestone" | "project";
+                    type: "milestone" | "project" | "nextgenProject" | "nextgenProjectGroup";
                 };
             };
             sort?: ({
@@ -22420,6 +22431,31 @@ export interface components {
                      */
                     tax: "excluding";
                 };
+                project?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example nextgenProject */
+                    type?: unknown;
+                }) | null;
+                group?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example nextgenProjectGroup */
+                    type?: unknown;
+                }) | null;
+                purchase_price?: {
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | null;
             })[];
         };
         /** orders.inforesponse */
@@ -22431,6 +22467,8 @@ export interface components {
                 name?: string;
                 /** @example 2016-02-04 */
                 order_date?: string | null;
+                /** @example 32 */
+                order_number?: number | null;
                 /** @example 2016-10-14 */
                 delivery_date?: string | null;
                 payment_term?: {
@@ -22537,6 +22575,31 @@ export interface components {
                              */
                             tax: "excluding";
                         };
+                        project?: ({
+                            /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                            id?: string;
+                            type?: string;
+                        } & {
+                            /** @example nextgenProject */
+                            type?: unknown;
+                        }) | null;
+                        group?: ({
+                            /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                            id?: string;
+                            type?: string;
+                        } & {
+                            /** @example nextgenProjectGroup */
+                            type?: unknown;
+                        }) | null;
+                        purchase_price?: {
+                            /** @example 123.3 */
+                            amount: number;
+                            /**
+                             * CurrencyCode
+                             * @enum {string}
+                             */
+                            currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                        } | null;
                     })[];
                 }[];
                 total?: {
@@ -22677,6 +22740,8 @@ export interface components {
                 name?: string;
                 /** @example 2016-02-04 */
                 order_date?: string | null;
+                /** @example 32 */
+                order_number?: number | null;
                 /** @example 2016-10-14 */
                 delivery_date?: string | null;
                 payment_term?: {
@@ -23411,7 +23476,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -23714,7 +23779,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -24212,7 +24277,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -24329,7 +24394,7 @@ export interface operations {
                 "application/json": {
                     label: string;
                     type: ("single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user");
-                    context: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                    context: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
                     /**
                      * @description - Use `options` when `type` is one of [`single_select`, `multi_select`]
                      *     - Use `default_value` when `type` is `auto_increment`
@@ -24380,7 +24445,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -24404,7 +24469,7 @@ export interface operations {
                 "application/json": {
                     filter?: {
                         ids?: string[];
-                        context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                        context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
                     };
                     /** Page */
                     page?: {
@@ -24460,7 +24525,7 @@ export interface operations {
                         data?: {
                             /** @example 74855f4a-2b61-429c-81d8-c79ad3675a76 */
                             id?: string;
-                            context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                            context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
                             /** @enum {string} */
                             type?: "single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user";
                             label?: string;
@@ -24535,7 +24600,7 @@ export interface operations {
                         data?: {
                             /** @example 74855f4a-2b61-429c-81d8-c79ad3675a76 */
                             id?: string;
-                            context?: ("contact" | "company" | "deal" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket");
+                            context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
                             /** @enum {string} */
                             type?: "single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user";
                             label?: string;
@@ -24566,7 +24631,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -25163,7 +25228,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -25587,7 +25652,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -26457,6 +26522,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                     /** @example false */
                     marketing_mails_consent?: boolean;
                 };
@@ -27637,6 +27704,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                     /** @example false */
                     marketing_mails_consent?: boolean;
                     preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & (string | null);
@@ -27842,7 +27911,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -27977,7 +28046,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -28811,6 +28880,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                     /** CurrencyWithRequiredExchangeRate */
                     currency?: {
                         /**
@@ -28965,7 +29036,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -29034,7 +29105,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -29307,7 +29378,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -29633,7 +29704,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -29699,7 +29770,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -31001,7 +31072,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -31680,6 +31751,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                 };
             };
         };
@@ -31840,7 +31913,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -32339,6 +32412,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                 };
             };
         };
@@ -32442,7 +32517,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -32942,7 +33017,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -33006,7 +33081,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -33241,6 +33316,10 @@ export interface operations {
                      *           "project": {
                      *             "type": "project",
                      *             "id": "179e1564-493b-4305-8c54-a34fc80920fc"
+                     *           },
+                     *           "subscription": {
+                     *             "type": "subscription",
+                     *             "id": "8631bbbf-bead-4f6e-a2ab-58ec9bbd997a"
                      *           }
                      *         }
                      *       ]
@@ -33419,6 +33498,11 @@ export interface operations {
                                 type?: string;
                             } | null;
                             project?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } | null;
+                            subscription?: {
                                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                 id?: string;
                                 type?: string;
@@ -34262,6 +34346,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                     /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
                     document_template_id?: string;
                     /** @example 2025-12-08 */
@@ -34384,6 +34470,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                 };
             };
         };
@@ -34926,7 +35014,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -35644,7 +35732,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -36531,9 +36619,9 @@ export interface operations {
                         days?: number;
                     } | null;
                     /** @example cef01135-7e51-4f6f-a6eb-6e5e5a885ac8 */
-                    project_id?: string;
+                    project_id?: string | null;
                     /** @example f6871b06-6513-4750-b5e6-ff3503b5a029 */
-                    deal_id?: string;
+                    deal_id?: string | null;
                     /** @example Subscription comments */
                     note?: string | null;
                     grouped_lines?: {
@@ -36623,6 +36711,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                     /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
                     document_template_id?: string;
                 };
@@ -36673,7 +36763,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -36806,7 +36896,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -36874,7 +36964,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -36933,7 +37023,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -39245,7 +39335,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -39319,7 +39409,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -39981,6 +40071,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                 };
             };
         };
@@ -40066,7 +40158,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -40126,7 +40218,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -41144,7 +41236,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -41947,7 +42039,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -43346,6 +43438,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                 };
             };
         };
@@ -44169,7 +44263,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -45120,7 +45214,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -46314,7 +46408,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -46357,6 +46451,7 @@ export interface operations {
                      *           "billing_method": "unit_price",
                      *           "billing_status": "not_billable",
                      *           "quantity": null,
+                     *           "quantity_estimated": null,
                      *           "unit_price": {
                      *             "amount": 123.3,
                      *             "currency": "EUR"
@@ -46454,6 +46549,7 @@ export interface operations {
                             billing_method?: "fixed_price" | "unit_price" | "non_billable";
                             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                             quantity?: number | null;
+                            quantity_estimated?: number | null;
                             unit_price?: {
                                 /** @example 123.3 */
                                 amount: number;
@@ -46643,6 +46739,7 @@ export interface operations {
                      *         "billing_method": "unit_price",
                      *         "billing_status": "not_billable",
                      *         "quantity": null,
+                     *         "quantity_estimated": null,
                      *         "unit_price": {
                      *           "amount": 123.3,
                      *           "currency": "EUR"
@@ -46744,6 +46841,7 @@ export interface operations {
                             billing_method?: "fixed_price" | "unit_price" | "non_billable";
                             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                             quantity?: number | null;
+                            quantity_estimated?: number | null;
                             unit_price?: {
                                 /** @example 123.3 */
                                 amount: number;
@@ -46961,6 +47059,7 @@ export interface operations {
                      */
                     billing_method?: "fixed_price" | "unit_price" | "non_billable";
                     quantity?: number;
+                    quantity_estimated?: number;
                     unit_price?: {
                         /** @example 123.3 */
                         amount: number;
@@ -47114,6 +47213,7 @@ export interface operations {
                      */
                     billing_method?: "fixed_price" | "unit_price" | "non_billable";
                     quantity?: number | null;
+                    quantity_estimated?: number | null;
                     unit_price?: {
                         /** @example 123.3 */
                         amount: number;
@@ -47353,7 +47453,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -47924,6 +48024,8 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
+                    /** @description Use "partial" to update only the provided custom fields, preserving others. Default behavior replaces all custom fields. */
+                    custom_fields_update_strategy?: "partial";
                 };
             };
         };
@@ -48082,7 +48184,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "application/json": {
                     filter?: {
@@ -48125,7 +48227,7 @@ export interface operations {
                             type?: string;
                         } & {
                             /** @enum {string} */
-                            type: "milestone" | "project";
+                            type: "milestone" | "project" | "nextgenProject" | "nextgenProjectGroup";
                         };
                     };
                     sort?: ({
@@ -48980,7 +49082,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -49966,7 +50068,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -50763,6 +50865,8 @@ export interface operations {
                             name?: string;
                             /** @example 2016-02-04 */
                             order_date?: string | null;
+                            /** @example 32 */
+                            order_number?: number | null;
                             /** @example 2016-10-14 */
                             delivery_date?: string | null;
                             payment_term?: {
@@ -50869,6 +50973,31 @@ export interface operations {
                                          */
                                         tax: "excluding";
                                     };
+                                    project?: ({
+                                        /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                        id?: string;
+                                        type?: string;
+                                    } & {
+                                        /** @example nextgenProject */
+                                        type?: unknown;
+                                    }) | null;
+                                    group?: ({
+                                        /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                        id?: string;
+                                        type?: string;
+                                    } & {
+                                        /** @example nextgenProjectGroup */
+                                        type?: unknown;
+                                    }) | null;
+                                    purchase_price?: {
+                                        /** @example 123.3 */
+                                        amount: number;
+                                        /**
+                                         * CurrencyCode
+                                         * @enum {string}
+                                         */
+                                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                                    } | null;
                                 })[];
                             }[];
                             total?: {
@@ -51000,7 +51129,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -51115,6 +51244,8 @@ export interface operations {
                             name?: string;
                             /** @example 2016-02-04 */
                             order_date?: string | null;
+                            /** @example 32 */
+                            order_number?: number | null;
                             /** @example 2016-10-14 */
                             delivery_date?: string | null;
                             payment_term?: {
@@ -51429,7 +51560,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {
@@ -51679,7 +51810,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 /**
                  * @example {

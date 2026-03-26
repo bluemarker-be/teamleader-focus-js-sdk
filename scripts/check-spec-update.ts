@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -332,6 +332,24 @@ function reportPatchStatus(specYaml: string): void {
     console.log("  -> Remove from IGNORED_OPERATIONS in scripts/check-spec-update.ts");
   }
 
+  // Patch 7: tasks.list missing deal_id filter
+  const tasksListIdx = specYaml.indexOf("operationId: tasks.list");
+  if (tasksListIdx !== -1) {
+    const nextEp = specYaml.indexOf("\n  /", tasksListIdx);
+    const tasksBlock = specYaml.slice(tasksListIdx, nextEp !== -1 ? nextEp : undefined);
+    const hasDealId = tasksBlock.includes("deal_id");
+
+    console.log("\nPatch 7 (tasks.list missing deal_id filter):");
+    if (hasDealId) {
+      console.log("  No longer needed — spec now includes deal_id");
+      console.log("  -> Remove patch from scripts/generate-types.ts");
+    } else {
+      console.log("  Still needed — spec still omits deal_id filter");
+    }
+  } else {
+    console.log("\nPatch 7: Could not find tasks.list endpoint in spec");
+  }
+
   console.log("");
 }
 
@@ -475,6 +493,12 @@ async function main() {
     if (process.argv.includes("--update")) {
       console.log("\nUpdating api-spec.yaml...");
       writeFileSync(SPEC_PATH, remoteText);
+
+      const specsDir = resolve(ROOT, "api-specs");
+      mkdirSync(specsDir, { recursive: true });
+      const versionedPath = resolve(specsDir, `${remoteVersion}.yaml`);
+      writeFileSync(versionedPath, remoteText);
+      console.log(`Saved versioned copy to api-specs/${remoteVersion}.yaml`);
 
       console.log("Updating CHANGELOG.md...");
       const entry = buildChangelogEntry(remoteVersion, added, removed);

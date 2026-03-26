@@ -94,6 +94,10 @@ export declare class InvoicesResource extends BaseResource {
                 id?: string | undefined;
                 type?: string | undefined;
             } | null | undefined;
+            subscription?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             delivery_date?: string | null | undefined;
         }[] | undefined;
     }>;

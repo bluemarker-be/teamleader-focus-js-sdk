@@ -77,6 +77,7 @@ export class TeamleaderClient {
     clientId;
     clientSecret;
     onTokenRefresh;
+    getTokensFn;
     baseUrl;
     fetchFn;
     timeout;
@@ -154,11 +155,12 @@ export class TeamleaderClient {
     withholdingTaxRates;
     workTypes;
     constructor(config) {
-        this.accessToken = config.accessToken;
+        this.accessToken = config.accessToken ?? "";
         this.refreshToken = config.refreshToken;
         this.clientId = config.clientId;
         this.clientSecret = config.clientSecret;
         this.onTokenRefresh = config.onTokenRefresh;
+        this.getTokensFn = config.getTokens;
         this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL;
         this.fetchFn = config.fetch ?? globalThis.fetch.bind(globalThis);
         this.timeout = config.timeout ?? DEFAULT_TIMEOUT_MS;
@@ -244,9 +246,14 @@ export class TeamleaderClient {
      * Handles token refresh, rate limiting, and error mapping.
      */
     async request(endpoint, body) {
-        return this.requestWithRetry(endpoint, body, false);
+        return this.requestWithRetry(endpoint, body, 0);
     }
-    async requestWithRetry(endpoint, body, isRetryAfterRefresh, retryCount = 0) {
+    // authRetryState tracks where we are in the 401 recovery flow:
+    // 0 = first attempt
+    // 1 = retrying after getTokens returned changed tokens
+    // 2 = retrying after OAuth refresh
+    // 3 = retrying after fallback getTokens (post-failed-refresh)
+    async requestWithRetry(endpoint, body, authRetryState, retryCount = 0) {
         const url = new URL(endpoint, this.baseUrl);
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
@@ -279,11 +286,32 @@ export class TeamleaderClient {
         if (response.status === 204) {
             return undefined;
         }
-        // 401 Unauthorized — attempt token refresh (once)
-        if (response.status === 401 && !isRetryAfterRefresh) {
-            if (this.canRefreshToken()) {
-                await this.performTokenRefresh();
-                return this.requestWithRetry(endpoint, body, true, retryCount);
+        // 401 Unauthorized — multi-step recovery: getTokens → refresh → fallback getTokens
+        if (response.status === 401) {
+            // Step 1: Try getTokens (re-read from shared store, e.g. another process refreshed)
+            if (authRetryState === 0 && this.getTokensFn) {
+                const changed = await this.fetchLatestTokens();
+                if (changed) {
+                    return this.requestWithRetry(endpoint, body, 1, retryCount);
+                }
+                // Not changed — fall through to refresh
+            }
+            // Step 2: OAuth token refresh
+            if (authRetryState <= 1 && this.canRefreshToken()) {
+                try {
+                    await this.performTokenRefresh();
+                    return this.requestWithRetry(endpoint, body, 2, retryCount);
+                }
+                catch (refreshError) {
+                    // Step 3: Refresh failed — try getTokens one more time (another process may have refreshed)
+                    if (this.getTokensFn) {
+                        const changed = await this.fetchLatestTokens();
+                        if (changed) {
+                            return this.requestWithRetry(endpoint, body, 3, retryCount);
+                        }
+                    }
+                    throw refreshError;
+                }
             }
             throw new TeamleaderAuthenticationError(await this.safeParseBody(response));
         }
@@ -294,13 +322,13 @@ export class TeamleaderClient {
             if (waitMs > 0) {
                 await this.sleep(waitMs);
             }
-            return this.requestWithRetry(endpoint, body, isRetryAfterRefresh, retryCount + 1);
+            return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
         }
         // 500/502/503 Server Error — retry with exponential backoff
         if ((response.status === 500 || response.status === 502 || response.status === 503) && retryCount < this.maxRetries) {
             const backoffMs = Math.min(1000 * 2 ** retryCount, 10_000);
             await this.sleep(backoffMs);
-            return this.requestWithRetry(endpoint, body, isRetryAfterRefresh, retryCount + 1);
+            return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
         }
         // Parse response body
         const contentType = response.headers.get("content-type") ?? "";
@@ -321,6 +349,21 @@ export class TeamleaderClient {
             return undefined;
         }
         return (await response.json());
+    }
+    /**
+     * Re-reads tokens from the shared store via getTokens callback.
+     * Returns true if the access token changed (another process refreshed).
+     */
+    async fetchLatestTokens() {
+        if (!this.getTokensFn)
+            return false;
+        const tokens = await this.getTokensFn();
+        const changed = tokens.access_token !== this.accessToken;
+        this.accessToken = tokens.access_token;
+        if (tokens.refresh_token !== undefined) {
+            this.refreshToken = tokens.refresh_token;
+        }
+        return changed;
     }
     canRefreshToken() {
         return !!(this.refreshToken && this.clientId && this.clientSecret);

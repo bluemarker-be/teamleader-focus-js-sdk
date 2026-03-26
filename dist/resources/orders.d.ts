@@ -6,6 +6,7 @@ export declare class OrdersResource extends BaseResource {
             id?: string | undefined;
             name?: string | undefined;
             order_date?: string | null | undefined;
+            order_number?: number | null | undefined;
             delivery_date?: string | null | undefined;
             payment_term?: {
                 type?: "cash" | "end_of_month" | "after_invoice_date" | undefined;
@@ -78,6 +79,7 @@ export declare class OrdersResource extends BaseResource {
             id?: string | undefined;
             name?: string | undefined;
             order_date?: string | null | undefined;
+            order_number?: number | null | undefined;
             delivery_date?: string | null | undefined;
             payment_term?: {
                 type?: "cash" | "end_of_month" | "after_invoice_date" | undefined;
@@ -132,6 +134,18 @@ export declare class OrdersResource extends BaseResource {
                     product_category?: {
                         id?: string | undefined;
                         type?: string | undefined;
+                    } | null | undefined;
+                    project?: {
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    group?: {
+                        id?: string | undefined;
+                        type?: string | undefined;
+                    } | null | undefined;
+                    purchase_price?: {
+                        amount: number;
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                     } | null | undefined;
                 }[] | undefined;
             }[] | undefined;
