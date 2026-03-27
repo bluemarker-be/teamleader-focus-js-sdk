@@ -3,7 +3,7 @@ import { BaseResource } from "./base.js";
 /** Groups within Projects v2 */
 export declare class ProjectGroupsResource extends BaseResource {
     /** Get a list of project groups */
-    list(params: RequestBody<"projectGroups.list">): Promise<{
+    list(params?: RequestBody<"projectGroups.list">): Promise<{
         data?: {
             id?: string | undefined;
             project?: {

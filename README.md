@@ -7,7 +7,7 @@ Types are auto-generated from the official OpenAPI spec — your editor gives yo
 ## Setup
 
 ```typescript
-import { TeamleaderClient } from "teamleader-focus-sdk";
+import { TeamleaderClient } from "teamleader-focus-js-sdk";
 
 const teamleader = new TeamleaderClient({
   accessToken: "your-access-token",
@@ -137,7 +137,7 @@ import {
   createAuthorizationUrl,
   exchangeCodeForTokens,
   refreshTokens,
-} from "teamleader-focus-sdk";
+} from "teamleader-focus-js-sdk";
 
 // Step 1: Redirect user to Teamleader
 const url = createAuthorizationUrl({
@@ -166,7 +166,7 @@ const newTokens = await refreshTokens({
 ## Pagination
 
 ```typescript
-import { paginateItems, paginatePages } from "teamleader-focus-sdk";
+import { paginateItems, paginatePages } from "teamleader-focus-js-sdk";
 
 // Iterate over all items across pages
 for await (const contact of paginateItems(teamleader, "/contacts.list", {
@@ -197,7 +197,7 @@ import {
   TeamleaderValidationError,
   TeamleaderRateLimitError,
   TeamleaderNetworkError,
-} from "teamleader-focus-sdk";
+} from "teamleader-focus-js-sdk";
 
 try {
   await teamleader.contacts.list();

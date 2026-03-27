@@ -1,13 +1,31 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
+const SPECS_DIR = resolve(ROOT, "api-specs");
 
 const SPEC_URL =
   "https://unpkg.com/@teamleader/focus-api-specification/dist/api.focus.teamleader.eu.dereferenced.yaml";
-const SPEC_PATH = resolve(ROOT, "api-spec.yaml");
+
+function getLatestSpecPath(): string {
+  const files = readdirSync(SPECS_DIR)
+    .filter((f) => f.endsWith(".yaml"))
+    .sort((a, b) => {
+      const va = a.replace(".yaml", "").split(".").map(Number);
+      const vb = b.replace(".yaml", "").split(".").map(Number);
+      for (let i = 0; i < Math.max(va.length, vb.length); i++) {
+        const diff = (va[i] ?? 0) - (vb[i] ?? 0);
+        if (diff !== 0) return diff;
+      }
+      return 0;
+    });
+  if (files.length === 0) {
+    throw new Error("No spec files found in api-specs/. Run check-spec --update first.");
+  }
+  return resolve(SPECS_DIR, files[files.length - 1]);
+}
 
 // ---------------------------------------------------------------------------
 // ANSI colors
@@ -426,7 +444,7 @@ async function main() {
     process.exit(1);
   }
   const remoteYaml = await response.text();
-  const localYaml = readFileSync(SPEC_PATH, "utf-8");
+  const localYaml = readFileSync(getLatestSpecPath(), "utf-8");
 
   const remoteVersion = parseVersion(remoteYaml);
   const localVersion = parseVersion(localYaml);

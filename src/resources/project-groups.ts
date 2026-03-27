@@ -4,7 +4,7 @@ import { BaseResource } from "./base.js";
 /** Groups within Projects v2 */
 export class ProjectGroupsResource extends BaseResource {
   /** Get a list of project groups */
-  list(params: RequestBody<"projectGroups.list">) {
+  list(params?: RequestBody<"projectGroups.list">) {
     return this.client.request<ResponseBody<"projectGroups.list">>("/projects-v2/projectGroups.list", params);
   }
 

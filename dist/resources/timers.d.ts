@@ -27,7 +27,7 @@ export declare class TimersResource extends BaseResource {
             type?: string | undefined;
         } | undefined;
     }>;
-    stop(params: RequestBody<"timers.stop">): Promise<{
+    stop(params?: RequestBody<"timers.stop">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;

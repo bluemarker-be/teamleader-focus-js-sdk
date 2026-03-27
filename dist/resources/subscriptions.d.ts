@@ -66,6 +66,11 @@ export declare class SubscriptionsResource extends BaseResource {
                 }[] | undefined;
             } | undefined;
             web_url?: string | undefined;
+            purchase_order_number?: string | null | undefined;
+            delivery_information?: {
+                type?: "set_days_after_invoice_date" | undefined;
+                number_of_days_after_invoice_date?: number | undefined;
+            } | null | undefined;
             created_at?: string | null | undefined;
         }[] | undefined;
     }>;
@@ -216,6 +221,11 @@ export declare class SubscriptionsResource extends BaseResource {
                 type?: string | undefined;
             } | undefined;
             currency?: string | undefined;
+            purchase_order_number?: string | null | undefined;
+            delivery_information?: {
+                type?: "set_days_after_invoice_date" | undefined;
+                number_of_days_after_invoice_date?: number | undefined;
+            } | null | undefined;
             created_at?: string | null | undefined;
         } | undefined;
     }>;

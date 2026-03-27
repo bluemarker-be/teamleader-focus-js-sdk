@@ -2,7 +2,7 @@ import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 /** Tasks within Projects v2 (not to be confused with standalone Tasks) */
 export declare class ProjectTasksResource extends BaseResource {
-    list(params: RequestBody<"NextgenProjectsTasks.list">): Promise<{
+    list(params?: RequestBody<"NextgenProjectsTasks.list">): Promise<{
         data?: {
             id?: string | undefined;
             project?: {

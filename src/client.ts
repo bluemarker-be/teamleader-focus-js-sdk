@@ -241,7 +241,7 @@ export class TeamleaderClient {
     // Warn if clientSecret is used in browser context
     if (config.clientSecret && typeof (globalThis as Record<string, unknown>).window !== "undefined") {
       console.warn(
-        "[teamleader-focus-sdk] WARNING: clientSecret should not be used in browser environments. " +
+        "[teamleader-focus-js-sdk] WARNING: clientSecret should not be used in browser environments. " +
         "Use server-side code for OAuth2 token exchange and refresh.",
       );
     }
@@ -494,7 +494,7 @@ export class TeamleaderClient {
           } catch (callbackError) {
             // Log but don't fail the request — tokens are already updated in memory.
             // The user's callback (e.g. DB write) failed, but the API request can still proceed.
-            console.error("[teamleader-focus-sdk] onTokenRefresh callback failed:", callbackError);
+            console.error("[teamleader-focus-js-sdk] onTokenRefresh callback failed:", callbackError);
           }
         }
       } finally {

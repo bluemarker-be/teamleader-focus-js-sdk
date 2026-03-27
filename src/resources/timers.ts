@@ -10,7 +10,7 @@ export class TimersResource extends BaseResource {
     return this.client.request<ResponseBody<"timers.start">>("/timers.start", params);
   }
 
-  stop(params: RequestBody<"timers.stop">) {
+  stop(params?: RequestBody<"timers.stop">) {
     return this.client.request<ResponseBody<"timers.stop">>("/timers.stop", params);
   }
 

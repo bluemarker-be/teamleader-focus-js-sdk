@@ -11163,7 +11163,20 @@ export interface components {
                 /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
                 id?: string;
             };
-            /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+            /**
+             * @description Mutually exclusive with `milestone_id`.
+             * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+             */
+            project_id?: string;
+            /**
+             * @description If omitted the meeting is not added to a group. Requires `project_id`. The group must belong to the specified project.
+             * @example 0185968b-2c9e-73fd-9ce1-a12c0979783b
+             */
+            group_id?: string;
+            /**
+             * @description Mutually exclusive with `project_id`.
+             * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+             */
             milestone_id?: string;
             /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
             deal_id?: string;
@@ -11272,7 +11285,20 @@ export interface components {
                 /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
                 id?: string;
             };
-            /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+            /**
+             * @description Mutually exclusive with `milestone_id`. Required when `group_id` is provided.
+             * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+             */
+            project_id?: string | null;
+            /**
+             * @description Requires `project_id`. The group must belong to the specified project.
+             * @example 0185968b-2c9e-73fd-9ce1-a12c0979783b
+             */
+            group_id?: string | null;
+            /**
+             * @description Mutually exclusive with `project_id`.
+             * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+             */
             milestone_id?: string | null;
             /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
             deal_id?: string | null;
@@ -14413,6 +14439,14 @@ export interface components {
                 };
                 /** @example https://focus.teamleader.eu/subscription_detail.php?id=e2314517-3cab-4aa9-8471-450e73449041 */
                 web_url?: string;
+                /** @example 000023 */
+                purchase_order_number?: string | null;
+                delivery_information?: {
+                    /** @enum {string} */
+                    type?: "set_days_after_invoice_date";
+                    /** @example 5 */
+                    number_of_days_after_invoice_date?: number;
+                } | null;
                 /** @example 2022-04-18T16:44:33+00:00 */
                 created_at?: string | null;
             }[];
@@ -14831,6 +14865,14 @@ export interface components {
                 };
                 /** @example USD */
                 currency?: string;
+                /** @example 000023 */
+                purchase_order_number?: string | null;
+                delivery_information?: {
+                    /** @enum {string} */
+                    type?: "set_days_after_invoice_date";
+                    /** @example 5 */
+                    number_of_days_after_invoice_date?: number;
+                } | null;
                 /** @example 2022-04-18T16:44:33+00:00 */
                 created_at?: string | null;
             };
@@ -15082,6 +15124,14 @@ export interface components {
             }[];
             /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
             document_template_id?: string;
+            /** @example 000023 */
+            purchase_order_number?: string | null;
+            delivery_information?: {
+                /** @enum {string} */
+                type: "set_days_after_invoice_date";
+                /** @example 5 */
+                number_of_days_after_invoice_date: number;
+            } | null;
         };
         /** subscriptions.createresponse */
         "subscriptions.createresponse": {
@@ -15295,6 +15345,14 @@ export interface components {
             }[];
             /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
             document_template_id?: string;
+            /** @example 000023 */
+            purchase_order_number?: string | null;
+            delivery_information?: {
+                /** @enum {string} */
+                type: "set_days_after_invoice_date";
+                /** @example 5 */
+                number_of_days_after_invoice_date: number;
+            } | null;
         };
         /** subscriptions.deactivaterequest */
         "subscriptions.deactivaterequest": {
@@ -31596,7 +31654,20 @@ export interface operations {
                         /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
                         id?: string;
                     };
-                    /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+                    /**
+                     * @description Mutually exclusive with `milestone_id`.
+                     * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+                     */
+                    project_id?: string;
+                    /**
+                     * @description If omitted the meeting is not added to a group. Requires `project_id`. The group must belong to the specified project.
+                     * @example 0185968b-2c9e-73fd-9ce1-a12c0979783b
+                     */
+                    group_id?: string;
+                    /**
+                     * @description Mutually exclusive with `project_id`.
+                     * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+                     */
                     milestone_id?: string;
                     /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
                     deal_id?: string;
@@ -31732,7 +31803,20 @@ export interface operations {
                         /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
                         id?: string;
                     };
-                    /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+                    /**
+                     * @description Mutually exclusive with `milestone_id`. Required when `group_id` is provided.
+                     * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+                     */
+                    project_id?: string | null;
+                    /**
+                     * @description Requires `project_id`. The group must belong to the specified project.
+                     * @example 0185968b-2c9e-73fd-9ce1-a12c0979783b
+                     */
+                    group_id?: string | null;
+                    /**
+                     * @description Mutually exclusive with `project_id`.
+                     * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+                     */
                     milestone_id?: string | null;
                     /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
                     deal_id?: string | null;
@@ -35972,6 +36056,14 @@ export interface operations {
                             };
                             /** @example https://focus.teamleader.eu/subscription_detail.php?id=e2314517-3cab-4aa9-8471-450e73449041 */
                             web_url?: string;
+                            /** @example 000023 */
+                            purchase_order_number?: string | null;
+                            delivery_information?: {
+                                /** @enum {string} */
+                                type?: "set_days_after_invoice_date";
+                                /** @example 5 */
+                                number_of_days_after_invoice_date?: number;
+                            } | null;
                             /** @example 2022-04-18T16:44:33+00:00 */
                             created_at?: string | null;
                         }[];
@@ -36308,6 +36400,14 @@ export interface operations {
                             };
                             /** @example USD */
                             currency?: string;
+                            /** @example 000023 */
+                            purchase_order_number?: string | null;
+                            delivery_information?: {
+                                /** @enum {string} */
+                                type?: "set_days_after_invoice_date";
+                                /** @example 5 */
+                                number_of_days_after_invoice_date?: number;
+                            } | null;
                             /** @example 2022-04-18T16:44:33+00:00 */
                             created_at?: string | null;
                         };
@@ -36498,6 +36598,14 @@ export interface operations {
                     }[];
                     /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
                     document_template_id?: string;
+                    /** @example 000023 */
+                    purchase_order_number?: string | null;
+                    delivery_information?: {
+                        /** @enum {string} */
+                        type: "set_days_after_invoice_date";
+                        /** @example 5 */
+                        number_of_days_after_invoice_date: number;
+                    } | null;
                 };
             };
         };
@@ -36715,6 +36823,14 @@ export interface operations {
                     custom_fields_update_strategy?: "partial";
                     /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
                     document_template_id?: string;
+                    /** @example 000023 */
+                    purchase_order_number?: string | null;
+                    delivery_information?: {
+                        /** @enum {string} */
+                        type: "set_days_after_invoice_date";
+                        /** @example 5 */
+                        number_of_days_after_invoice_date: number;
+                    } | null;
                 };
             };
         };

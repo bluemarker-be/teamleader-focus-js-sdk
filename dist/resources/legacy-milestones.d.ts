@@ -3,7 +3,7 @@ import { BaseResource } from "./base.js";
 /** Legacy milestones (pre-v2). Only available for accounts not yet migrated to Projects v2. */
 export declare class LegacyMilestonesResource extends BaseResource {
     /** Get a list of milestones */
-    list(params: RequestBody<"LegacyMilestones.list">): Promise<{
+    list(params?: RequestBody<"LegacyMilestones.list">): Promise<{
         data?: {
             id?: string | undefined;
             project?: {

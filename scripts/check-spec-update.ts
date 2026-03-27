@@ -4,11 +4,29 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
+const SPECS_DIR = resolve(ROOT, "api-specs");
 
 const SPEC_URL =
   "https://unpkg.com/@teamleader/focus-api-specification/dist/api.focus.teamleader.eu.dereferenced.yaml";
-const SPEC_PATH = resolve(ROOT, "api-spec.yaml");
 const CHANGELOG_PATH = resolve(ROOT, "CHANGELOG.md");
+
+function getLatestSpecPath(): string {
+  const files = readdirSync(SPECS_DIR)
+    .filter((f) => f.endsWith(".yaml"))
+    .sort((a, b) => {
+      const va = a.replace(".yaml", "").split(".").map(Number);
+      const vb = b.replace(".yaml", "").split(".").map(Number);
+      for (let i = 0; i < Math.max(va.length, vb.length); i++) {
+        const diff = (va[i] ?? 0) - (vb[i] ?? 0);
+        if (diff !== 0) return diff;
+      }
+      return 0;
+    });
+  if (files.length === 0) {
+    throw new Error("No spec files found in api-specs/. Run with --update first.");
+  }
+  return resolve(SPECS_DIR, files[files.length - 1]);
+}
 
 const IGNORED_OPERATIONS = new Set([
   "dealPhases.duplicate", // Patch 2: returns 404, not functional
@@ -332,6 +350,37 @@ function reportPatchStatus(specYaml: string): void {
     console.log("  -> Remove from IGNORED_OPERATIONS in scripts/check-spec-update.ts");
   }
 
+  // Patch 5: Context enum "deal" → "sale" + 6 missing contexts
+  const contextEnumIdx = specYaml.indexOf("- deal\n");
+  if (contextEnumIdx !== -1) {
+    // Check a narrow window around it for the context enum pattern
+    const contextBlock = specYaml.slice(Math.max(0, contextEnumIdx - 200), contextEnumIdx + 200);
+    const hasContact = contextBlock.includes("- contact");
+    const hasCompany = contextBlock.includes("- company");
+    if (hasContact && hasCompany) {
+      console.log('\nPatch 5 (Context enum "deal" → "sale" + missing contexts):');
+      const hasSale = contextBlock.includes("- sale");
+      if (hasSale) {
+        console.log('  No longer needed — spec now uses "sale"');
+        console.log("  -> Remove patch from scripts/generate-types.ts");
+      } else {
+        console.log('  Still needed — spec still uses "deal" instead of "sale"');
+      }
+    }
+  } else {
+    console.log('\nPatch 5: Could not find context enum with "deal" — may have been fixed');
+  }
+
+  // Patch 6: custom_fields_update_strategy missing from update request types
+  const hasStrategy = specYaml.includes("custom_fields_update_strategy");
+  console.log("\nPatch 6 (custom_fields_update_strategy missing from update types):");
+  if (hasStrategy) {
+    console.log("  No longer needed — spec now includes custom_fields_update_strategy");
+    console.log("  -> Remove patch from scripts/generate-types.ts");
+  } else {
+    console.log("  Still needed — spec still omits custom_fields_update_strategy");
+  }
+
   // Patch 7: tasks.list missing deal_id filter
   const tasksListIdx = specYaml.indexOf("operationId: tasks.list");
   if (tasksListIdx !== -1) {
@@ -465,7 +514,7 @@ async function main() {
     process.exit(1);
   }
   const remoteText = await response.text();
-  const localText = readFileSync(SPEC_PATH, "utf-8");
+  const localText = readFileSync(getLatestSpecPath(), "utf-8");
 
   const remoteVersion = parseVersion(remoteText);
   const localVersion = parseVersion(localText);
@@ -491,14 +540,10 @@ async function main() {
     }
 
     if (process.argv.includes("--update")) {
-      console.log("\nUpdating api-spec.yaml...");
-      writeFileSync(SPEC_PATH, remoteText);
-
-      const specsDir = resolve(ROOT, "api-specs");
-      mkdirSync(specsDir, { recursive: true });
-      const versionedPath = resolve(specsDir, `${remoteVersion}.yaml`);
+      mkdirSync(SPECS_DIR, { recursive: true });
+      const versionedPath = resolve(SPECS_DIR, `${remoteVersion}.yaml`);
       writeFileSync(versionedPath, remoteText);
-      console.log(`Saved versioned copy to api-specs/${remoteVersion}.yaml`);
+      console.log(`\nSaved spec to api-specs/${remoteVersion}.yaml`);
 
       console.log("Updating CHANGELOG.md...");
       const entry = buildChangelogEntry(remoteVersion, added, removed);

@@ -4,19 +4,24 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased] - 2026-03-26
+## [1.2.0] - 2026-03-27
 
-API spec updated: 1.119.0 → 1.127.0
-
-### Changed
-- Regenerated types from API spec 1.127.0
-- Updated `openapi-typescript` to 7.13.0, `vitest` to 4.1.2
-- Improved 401 retry logic — multi-step recovery flow: getTokens → OAuth refresh → fallback getTokens
-- `check-spec-update` now reports on Patch 7 status and archives spec versions
+API spec updated: 1.119.0 → 1.129.0
 
 ### Added
+- `events.create` / `events.update` — new `project_id` and `group_id` fields (mutually exclusive with `milestone_id`)
+- `subscriptions` — new `purchase_order_number` and `delivery_information` fields on list, info, and create
+- Patch 5 & 6 status checks in `check-spec-update`
 - Patch 7: `tasks.list` — added undocumented `deal_id` filter (accepted by the API but missing from the spec)
 - Additional client tests (retry logic, getTokens flow, error handling)
+
+### Changed
+- Regenerated types from API spec 1.129.0
+- Updated `openapi-typescript` to 7.13.0, `vitest` to 4.1.2
+- Improved 401 retry logic — multi-step recovery flow: getTokens → OAuth refresh → fallback getTokens
+- `check-spec-update` now reports on Patch 5, 6, 7 status and archives spec versions
+- Scripts now read spec from `api-specs/` directory (versioned files) instead of single `api-spec.yaml`
+- Fixed optional/required params on several `.list()` and `.stop()` methods to match the spec
 
 ## [1.1.1] - 2026-03-01
 

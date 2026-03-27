@@ -3,7 +3,7 @@ import { BaseResource } from "./base.js";
 
 /** Tasks within Projects v2 (not to be confused with standalone Tasks) */
 export class ProjectTasksResource extends BaseResource {
-  list(params: RequestBody<"NextgenProjectsTasks.list">) {
+  list(params?: RequestBody<"NextgenProjectsTasks.list">) {
     return this.client.request<ResponseBody<"NextgenProjectsTasks.list">>("/projects-v2/tasks.list", params);
   }
 

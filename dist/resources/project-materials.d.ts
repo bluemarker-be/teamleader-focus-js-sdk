@@ -1,7 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class ProjectMaterialsResource extends BaseResource {
-    list(params: RequestBody<"NextgenProjectsMaterials.list">): Promise<{
+    list(params?: RequestBody<"NextgenProjectsMaterials.list">): Promise<{
         data?: {
             id?: string | undefined;
             project?: {

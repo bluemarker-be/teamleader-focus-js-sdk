@@ -1,11 +1,30 @@
 import openapiTS, { astToString } from "openapi-typescript";
+import { readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
-const SPEC_PATH = resolve(ROOT, "api-spec.yaml");
+const SPECS_DIR = resolve(ROOT, "api-specs");
+
+function getLatestSpecPath(): string {
+  const files = readdirSync(SPECS_DIR)
+    .filter((f) => f.endsWith(".yaml"))
+    .sort((a, b) => {
+      const va = a.replace(".yaml", "").split(".").map(Number);
+      const vb = b.replace(".yaml", "").split(".").map(Number);
+      for (let i = 0; i < Math.max(va.length, vb.length); i++) {
+        const diff = (va[i] ?? 0) - (vb[i] ?? 0);
+        if (diff !== 0) return diff;
+      }
+      return 0;
+    });
+  if (files.length === 0) {
+    throw new Error("No spec files found in api-specs/. Run check-spec --update first.");
+  }
+  return resolve(SPECS_DIR, files[files.length - 1]);
+}
 
 async function main() {
   if (process.argv.includes("--update")) {
@@ -17,14 +36,15 @@ async function main() {
     console.log("");
   }
 
-  console.log("Generating types from local api-spec.yaml...");
+  const specPath = getLatestSpecPath();
+  console.log(`Generating types from ${specPath.split("/").slice(-2).join("/")}...`);
 
-  const ast = await openapiTS(new URL(`file://${SPEC_PATH}`));
+  const ast = await openapiTS(new URL(`file://${specPath}`));
   const output = astToString(ast);
 
   const header = `// Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run \`npm run generate\` to regenerate
-// Source: api-spec.yaml
+// Source: api-specs/ (latest version)
 // Generated: ${new Date().toISOString()}
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):

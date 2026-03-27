@@ -2,7 +2,7 @@ import type { RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class ProjectMaterialsResource extends BaseResource {
-  list(params: RequestBody<"NextgenProjectsMaterials.list">) {
+  list(params?: RequestBody<"NextgenProjectsMaterials.list">) {
     return this.client.request<ResponseBody<"NextgenProjectsMaterials.list">>("/projects-v2/materials.list", params);
   }
 
