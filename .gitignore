@@ -4,4 +4,5 @@ node_modules/
 *.tgz
 .DS_Store
 api-specs/
-tests/integration/
+tests/integration/*.test.ts
+tests/integration/reports/
