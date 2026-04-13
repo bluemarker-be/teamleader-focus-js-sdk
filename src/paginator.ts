@@ -13,7 +13,8 @@ interface PaginatedResponse<T> {
   };
 }
 
-const DEFAULT_PAGE_SIZE = 20;
+const DEFAULT_PAGE_SIZE = 100;
+const MAX_PAGE_SIZE = 100;
 const DEFAULT_MAX_PAGES = 100;
 
 /**
@@ -33,7 +34,7 @@ export async function* paginatePages<T>(
   options: { maxPages?: number } = {},
 ): AsyncGenerator<PaginatedResponse<T>, void, undefined> {
   const maxPages = options.maxPages ?? DEFAULT_MAX_PAGES;
-  const pageSize = params.page?.size ?? DEFAULT_PAGE_SIZE;
+  const pageSize = Math.min(params.page?.size ?? DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE);
   let pageNumber = params.page?.number ?? 1;
   let pagesYielded = 0;
 
@@ -43,13 +44,13 @@ export async function* paginatePages<T>(
       page: { size: pageSize, number: pageNumber },
     });
 
-    yield response;
-    pagesYielded++;
-
-    // Stop if no data or less than a full page (= last page)
+    // Stop before yielding if no data (avoids yielding an empty trailing page)
     if (!response.data || response.data.length === 0) {
       break;
     }
+
+    yield response;
+    pagesYielded++;
 
     // Stop if we've received all matches
     if (response.meta?.matches !== undefined) {

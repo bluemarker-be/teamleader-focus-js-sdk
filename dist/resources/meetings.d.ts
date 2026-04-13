@@ -7,6 +7,10 @@ export declare class MeetingsResource extends BaseResource {
             title?: string | undefined;
             description?: string | undefined;
             created_at?: string | undefined;
+            created_by?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             scheduled_at?: string | undefined;
             duration?: {
                 unit?: "min" | undefined;
@@ -57,6 +61,10 @@ export declare class MeetingsResource extends BaseResource {
             title?: string | undefined;
             description?: string | undefined;
             created_at?: string | undefined;
+            created_by?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             scheduled_at?: string | undefined;
             duration?: {
                 unit?: "min" | undefined;
@@ -122,7 +130,7 @@ export declare class MeetingsResource extends BaseResource {
                     } | null | undefined;
                 } | undefined;
             } | undefined;
-            online_meeting_room?: {
+            customer_meeting_room?: {
                 id?: string | undefined;
                 type?: string | undefined;
             } | null | undefined;

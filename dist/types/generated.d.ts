@@ -6678,7 +6678,7 @@ export interface components {
          * NoteSubjectTypes
          * @enum {string}
          */
-        NoteSubjectTypes: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+        NoteSubjectTypes: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
         /** notes.listrequest */
         "notes.listrequest": {
             filter: {
@@ -6691,7 +6691,7 @@ export interface components {
                      * NoteSubjectTypes
                      * @enum {string}
                      */
-                    type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                    type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                 };
             };
             /** Page */
@@ -6718,7 +6718,7 @@ export interface components {
                      * NoteSubjectTypes
                      * @enum {string}
                      */
-                    type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                    type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                 };
                 /** @example 2016-01-01T00:00:00+00:00 */
                 added_at?: string;
@@ -10689,6 +10689,14 @@ export interface components {
                 description?: string;
                 /** @example 2020-02-01T10:33:45+00:00 */
                 created_at?: string;
+                created_by?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example user */
+                    type?: string;
+                }) | null;
                 /** @example 2020-02-04T16:44:33+00:00 */
                 scheduled_at?: string;
                 /** DurationInMinutes */
@@ -10857,6 +10865,14 @@ export interface components {
                 description?: string;
                 /** @example 2020-02-01T10:33:45+00:00 */
                 created_at?: string;
+                created_by?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example user */
+                    type?: string;
+                }) | null;
                 /** @example 2020-02-04T16:44:33+00:00 */
                 scheduled_at?: string;
                 /** DurationInMinutes */
@@ -10991,7 +11007,7 @@ export interface components {
                         }) | null;
                     };
                 };
-                online_meeting_room?: {
+                customer_meeting_room?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
                     type?: string;
@@ -24934,7 +24950,7 @@ export interface operations {
                              * NoteSubjectTypes
                              * @enum {string}
                              */
-                            type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                            type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                         };
                     };
                     /** Page */
@@ -24983,7 +24999,7 @@ export interface operations {
                                  * NoteSubjectTypes
                                  * @enum {string}
                                  */
-                                type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                                type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                             };
                             /** @example 2016-01-01T00:00:00+00:00 */
                             added_at?: string;
@@ -31247,6 +31263,14 @@ export interface operations {
                             description?: string;
                             /** @example 2020-02-01T10:33:45+00:00 */
                             created_at?: string;
+                            created_by?: ({
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } & {
+                                /** @example user */
+                                type?: string;
+                            }) | null;
                             /** @example 2020-02-04T16:44:33+00:00 */
                             scheduled_at?: string;
                             /** DurationInMinutes */
@@ -31383,6 +31407,14 @@ export interface operations {
                             description?: string;
                             /** @example 2020-02-01T10:33:45+00:00 */
                             created_at?: string;
+                            created_by?: ({
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } & {
+                                /** @example user */
+                                type?: string;
+                            }) | null;
                             /** @example 2020-02-04T16:44:33+00:00 */
                             scheduled_at?: string;
                             /** DurationInMinutes */
@@ -31517,7 +31549,7 @@ export interface operations {
                                     }) | null;
                                 };
                             };
-                            online_meeting_room?: {
+                            customer_meeting_room?: {
                                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                 id?: string;
                                 type?: string;

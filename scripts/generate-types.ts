@@ -49,14 +49,15 @@ async function main() {
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
-// 1. NoteSubjectTypesCreate missing "meeting"
+// 1. [RESOLVED in spec 1.136.0] NoteSubjectTypesCreate missing "meeting"
 //    The API accepts "meeting" as subject.type in notes.create, but the
 //    OpenAPI spec omits it from the NoteSubjectTypesCreate enum.
 //    Patch: added "meeting" to all NoteSubjectTypesCreate occurrences.
+//    Status: spec now includes "meeting" natively — no patch needed.
 //
 // 2. dealPhases.duplicate returns 404
 //    The endpoint exists in the spec but is not functional in the API.
-//    No patch needed — the SDK includes the method, tests skip it.
+//    Method intentionally excluded from SDK. Listed in IGNORED_OPERATIONS.
 //
 // 5. Context enum: "deal" → "sale" + 6 missing contexts
 //    The spec uses "deal" but the API requires "sale". Also missing:
@@ -71,6 +72,11 @@ async function main() {
 // 7. tasks.list missing deal_id filter
 //    The API accepts deal_id as a filter on tasks.list but the spec omits it.
 //    Patch: added optional deal_id to the tasks.listrequest filter.
+//
+// 8. bookkeepingSubmissions filter.subject.type snake_case → camelCase
+//    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
+//    expects "incomingInvoice" | "incomingCreditNote".
+//    Patch: replaced enum values in all occurrences.
 //
 // 🧹 Post-generation cleanups (openapi-typescript artifacts):
 //
@@ -88,21 +94,6 @@ async function main() {
   // Post-generation patches for known spec deviations
   // ---------------------------------------------------------------------------
   let patched = output;
-
-  // Patch 1: Add "meeting" to NoteSubjectTypesCreate enum
-  // The API accepts "meeting" as notes.create subject.type but the spec omits it.
-  const noteSubjectWithoutMeeting =
-    '"company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "quotation" | "subscription"';
-  const noteSubjectWithMeeting =
-    '"company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "quotation" | "subscription"';
-
-  const patchCount = patched.split(noteSubjectWithoutMeeting).length - 1;
-  if (patchCount > 0) {
-    patched = patched.replaceAll(noteSubjectWithoutMeeting, noteSubjectWithMeeting);
-    console.log(`Patch 1: Added "meeting" to NoteSubjectTypesCreate (${patchCount} occurrences)`);
-  } else {
-    console.log("Patch 1: NoteSubjectTypesCreate already includes meeting (or pattern changed)");
-  }
 
   // Patch 5: Fix context enum — "deal" → "sale" and add 6 missing contexts
   // The spec uses "deal" but the API requires "sale". Also missing:
@@ -184,6 +175,19 @@ async function main() {
     console.log("Patch 7: Added deal_id filter to tasks.listrequest");
   } else {
     console.log("Patch 7: tasks.listrequest filter pattern not found (or already patched)");
+  }
+
+  // Patch 8: bookkeepingSubmissions filter.subject.type uses snake_case in spec but API expects camelCase
+  // Spec: "incoming_invoice" | "incoming_credit_note" | "receipt"
+  // API:  "incomingInvoice" | "incomingCreditNote" | "receipt"
+  const wrongBookkeepingEnum = '"incoming_invoice" | "incoming_credit_note" | "receipt"';
+  const fixedBookkeepingEnum = '"incomingInvoice" | "incomingCreditNote" | "receipt"';
+  const bookkeepingPatchCount = patched.split(wrongBookkeepingEnum).length - 1;
+  if (bookkeepingPatchCount > 0) {
+    patched = patched.replaceAll(wrongBookkeepingEnum, fixedBookkeepingEnum);
+    console.log(`Patch 8: Fixed bookkeepingSubmissions subject.type enum — snake_case → camelCase (${bookkeepingPatchCount} occurrences)`);
+  } else {
+    console.log("Patch 8: bookkeepingSubmissions enum already fixed (or pattern changed)");
   }
 
   // ---------------------------------------------------------------------------

@@ -303,6 +303,139 @@ describe("TeamleaderClient", () => {
     expect(secondRefreshBody.get("refresh_token")).toBe("new-rt");
   });
 
+  it("throws TeamleaderNetworkError on request timeout", async () => {
+    // Create a fetch that never resolves, simulating a hung connection
+    const fetchFn = (async (_url: string | URL | Request, init?: RequestInit) => {
+      return new Promise<Response>((_resolve, reject) => {
+        // Listen for abort signal
+        init?.signal?.addEventListener("abort", () => {
+          reject(new DOMException("The operation was aborted.", "AbortError"));
+        });
+      });
+    }) as typeof globalThis.fetch;
+
+    const client = new TeamleaderClient({
+      accessToken: "tok",
+      fetch: fetchFn,
+      timeout: 50, // 50ms timeout for fast test
+    });
+
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderNetworkError);
+    await expect(client.contacts.list()).rejects.toThrow(/timed out/);
+  });
+
+  it("deduplicates concurrent token refreshes (refreshPromise mutex)", async () => {
+    let refreshCallCount = 0;
+    const tokenResponse = {
+      access_token: "refreshed-token",
+      refresh_token: "refreshed-refresh",
+      token_type: "Bearer",
+      expires_in: 3600,
+    };
+
+    // We need a custom fetch that:
+    // 1. Returns 401 for the first two API calls (concurrent requests)
+    // 2. Returns success for the refresh call
+    // 3. Returns success for the two retried API calls
+    let callIndex = 0;
+    const calls: Array<{ url: string }> = [];
+    const fetchFn = (async (url: string | URL | Request, _init?: RequestInit) => {
+      const urlStr = url.toString();
+      calls.push({ url: urlStr });
+
+      // Token refresh endpoint
+      if (urlStr.includes("oauth2/access_token")) {
+        refreshCallCount++;
+        // Small delay to simulate network latency
+        await new Promise((r) => setTimeout(r, 10));
+        return new Response(JSON.stringify(tokenResponse), {
+          status: 200,
+          headers: new Headers({ "content-type": "application/json" }),
+        });
+      }
+
+      // API calls: first two return 401, subsequent ones succeed
+      callIndex++;
+      if (callIndex <= 2) {
+        return new Response(JSON.stringify({ error: "invalid_token" }), {
+          status: 401,
+          headers: new Headers({ "content-type": "application/json" }),
+        });
+      }
+      return new Response(JSON.stringify({ data: [{ id: "ok" }] }), {
+        status: 200,
+        headers: new Headers({ "content-type": "application/json" }),
+      });
+    }) as typeof globalThis.fetch;
+
+    const client = new TeamleaderClient({
+      accessToken: "expired-token",
+      refreshToken: "old-refresh",
+      clientId: "cid",
+      clientSecret: "csec",
+      fetch: fetchFn,
+    });
+
+    // Fire two requests concurrently — both should hit 401 and share one refresh
+    const [r1, r2] = await Promise.all([
+      client.contacts.list(),
+      client.companies.list(),
+    ]);
+
+    expect(r1).toEqual({ data: [{ id: "ok" }] });
+    expect(r2).toEqual({ data: [{ id: "ok" }] });
+    // Only ONE refresh call should have been made
+    expect(refreshCallCount).toBe(1);
+  });
+
+  it("succeeds even when onTokenRefresh callback throws", async () => {
+    const { fetchFn, calls } = mockFetchSequence([
+      { status: 401, body: { error: "invalid_token" } },
+      {
+        status: 200,
+        body: { access_token: "new-at", refresh_token: "new-rt", token_type: "Bearer", expires_in: 3600 },
+      },
+      { status: 200, body: { data: [{ id: "1" }] } },
+    ]);
+
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const client = new TeamleaderClient({
+      accessToken: "old-at",
+      refreshToken: "old-rt",
+      clientId: "cid",
+      clientSecret: "csec",
+      onTokenRefresh: () => { throw new Error("DB write failed"); },
+      fetch: fetchFn,
+    });
+
+    // Request should still succeed despite callback failure
+    const result = await client.contacts.list();
+    expect(result).toEqual({ data: [{ id: "1" }] });
+    expect(calls).toHaveLength(3);
+
+    // The error should have been logged
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("onTokenRefresh callback failed"),
+      expect.any(Error),
+    );
+
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("returns undefined for non-JSON success response", async () => {
+    const fetchFn = (async () => {
+      return new Response("OK", {
+        status: 200,
+        headers: new Headers({ "content-type": "text/plain" }),
+      });
+    }) as typeof globalThis.fetch;
+
+    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const result = await client.contacts.list();
+    expect(result).toBeUndefined();
+  });
+
   describe("getTokens", () => {
     it("uses fresh tokens from getTokens on 401 without needing refresh", async () => {
       const { fetchFn, calls } = mockFetchSequence([

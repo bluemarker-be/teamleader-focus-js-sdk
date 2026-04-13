@@ -2,14 +2,17 @@ import type { RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class CreditNotesResource extends BaseResource {
+  /** Get a list of credit notes */
   list(params?: RequestBody<"creditNotes.list">) {
     return this.client.request<ResponseBody<"creditNotes.list">>("/creditNotes.list", params);
   }
 
+  /** Get details for a single credit note */
   info(params: RequestBody<"creditNotes.info">) {
     return this.client.request<ResponseBody<"creditNotes.info">>("/creditNotes.info", params);
   }
 
+  /** Download a credit note PDF */
   download(params: RequestBody<"creditNotes.download">) {
     return this.client.request<ResponseBody<"creditNotes.download">>("/creditNotes.download", params);
   }

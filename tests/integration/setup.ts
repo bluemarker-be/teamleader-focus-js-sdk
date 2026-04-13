@@ -1,5 +1,4 @@
 import { TeamleaderClient } from "../../src/index.js";
-import { trackCoverage } from "./coverage-tracker.js";
 
 // ---------------------------------------------------------------------------
 // Client singleton
@@ -34,8 +33,6 @@ export function getClient(): TeamleaderClient {
       process.env.REFRESH_TOKEN = tokens.refresh_token;
     },
   });
-
-  trackCoverage(_client);
 
   return _client;
 }

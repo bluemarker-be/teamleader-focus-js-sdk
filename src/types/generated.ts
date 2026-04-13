@@ -1,18 +1,19 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
-// Source: api-spec.yaml
-// Generated: 2026-03-27T09:58:33.537Z
+// Source: api-specs/ (latest version)
+// Generated: 2026-04-12T05:31:02.431Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
-// 1. NoteSubjectTypesCreate missing "meeting"
+// 1. [RESOLVED in spec 1.136.0] NoteSubjectTypesCreate missing "meeting"
 //    The API accepts "meeting" as subject.type in notes.create, but the
 //    OpenAPI spec omits it from the NoteSubjectTypesCreate enum.
 //    Patch: added "meeting" to all NoteSubjectTypesCreate occurrences.
+//    Status: spec now includes "meeting" natively — no patch needed.
 //
 // 2. dealPhases.duplicate returns 404
 //    The endpoint exists in the spec but is not functional in the API.
-//    No patch needed — the SDK includes the method, tests skip it.
+//    Method intentionally excluded from SDK. Listed in IGNORED_OPERATIONS.
 //
 // 5. Context enum: "deal" → "sale" + 6 missing contexts
 //    The spec uses "deal" but the API requires "sale". Also missing:
@@ -27,6 +28,11 @@
 // 7. tasks.list missing deal_id filter
 //    The API accepts deal_id as a filter on tasks.list but the spec omits it.
 //    Patch: added optional deal_id to the tasks.listrequest filter.
+//
+// 8. bookkeepingSubmissions filter.subject.type snake_case → camelCase
+//    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
+//    expects "incomingInvoice" | "incomingCreditNote".
+//    Patch: replaced enum values in all occurrences.
 //
 // 🧹 Post-generation cleanups (openapi-typescript artifacts):
 //
@@ -6718,7 +6724,7 @@ export interface components {
          * NoteSubjectTypes
          * @enum {string}
          */
-        NoteSubjectTypes: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+        NoteSubjectTypes: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
         /** notes.listrequest */
         "notes.listrequest": {
             filter: {
@@ -6731,7 +6737,7 @@ export interface components {
                      * NoteSubjectTypes
                      * @enum {string}
                      */
-                    type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                    type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                 };
             };
             /** Page */
@@ -6758,7 +6764,7 @@ export interface components {
                      * NoteSubjectTypes
                      * @enum {string}
                      */
-                    type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                    type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                 };
                 /** @example 2016-01-01T00:00:00+00:00 */
                 added_at?: string;
@@ -10729,6 +10735,14 @@ export interface components {
                 description?: string;
                 /** @example 2020-02-01T10:33:45+00:00 */
                 created_at?: string;
+                created_by?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example user */
+                    type?: string;
+                }) | null;
                 /** @example 2020-02-04T16:44:33+00:00 */
                 scheduled_at?: string;
                 /** DurationInMinutes */
@@ -10897,6 +10911,14 @@ export interface components {
                 description?: string;
                 /** @example 2020-02-01T10:33:45+00:00 */
                 created_at?: string;
+                created_by?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example user */
+                    type?: string;
+                }) | null;
                 /** @example 2020-02-04T16:44:33+00:00 */
                 scheduled_at?: string;
                 /** DurationInMinutes */
@@ -11031,7 +11053,7 @@ export interface components {
                         }) | null;
                     };
                 };
-                online_meeting_room?: {
+                customer_meeting_room?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
                     type?: string;
@@ -24974,7 +24996,7 @@ export interface operations {
                              * NoteSubjectTypes
                              * @enum {string}
                              */
-                            type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                            type: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                         };
                     };
                     /** Page */
@@ -25023,7 +25045,7 @@ export interface operations {
                                  * NoteSubjectTypes
                                  * @enum {string}
                                  */
-                                type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
+                                type?: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
                             };
                             /** @example 2016-01-01T00:00:00+00:00 */
                             added_at?: string;
@@ -31287,6 +31309,14 @@ export interface operations {
                             description?: string;
                             /** @example 2020-02-01T10:33:45+00:00 */
                             created_at?: string;
+                            created_by?: ({
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } & {
+                                /** @example user */
+                                type?: string;
+                            }) | null;
                             /** @example 2020-02-04T16:44:33+00:00 */
                             scheduled_at?: string;
                             /** DurationInMinutes */
@@ -31423,6 +31453,14 @@ export interface operations {
                             description?: string;
                             /** @example 2020-02-01T10:33:45+00:00 */
                             created_at?: string;
+                            created_by?: ({
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } & {
+                                /** @example user */
+                                type?: string;
+                            }) | null;
                             /** @example 2020-02-04T16:44:33+00:00 */
                             scheduled_at?: string;
                             /** DurationInMinutes */
@@ -31557,7 +31595,7 @@ export interface operations {
                                     }) | null;
                                 };
                             };
-                            online_meeting_room?: {
+                            customer_meeting_room?: {
                                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                 id?: string;
                                 type?: string;
@@ -37262,7 +37300,7 @@ export interface operations {
                             /** @description UUID of the financial document */
                             id?: string;
                             /** @enum {string} */
-                            type?: "incoming_invoice" | "incoming_credit_note" | "receipt";
+                            type?: "incomingInvoice" | "incomingCreditNote" | "receipt";
                         };
                     };
                 };
@@ -37298,7 +37336,7 @@ export interface operations {
                             subject?: {
                                 id?: string;
                                 /** @enum {string} */
-                                type?: "incoming_invoice" | "incoming_credit_note" | "receipt";
+                                type?: "incomingInvoice" | "incomingCreditNote" | "receipt";
                             };
                             /** @description email address where the bookkeeping submission was sent */
                             email_address?: string;

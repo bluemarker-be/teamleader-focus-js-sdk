@@ -29,6 +29,5 @@ export default defineConfig({
     hookTimeout: 120_000,
     sequence: { sequential: true },
     fileParallelism: false,
-    globalTeardown: ["tests/integration/coverage-teardown.ts"],
   },
 });

@@ -4,7 +4,33 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [1.2.0] - 2026-03-27
+## [0.3.0] - 2026-04-13
+
+### Added
+- API spec updated: 1.129.0 → 1.136.0
+- Patch 8: `bookkeepingSubmissions` filter.subject.type — spec uses snake_case but API expects camelCase
+- Integration tests: error boundary tests (invalid IDs, missing fields, state violations)
+- Integration tests: filtering, pagination, and sorting verification
+- Integration tests: custom fields lifecycle with partial update strategy
+- Integration tests: `invoices.send`, `quotations.send`, `tickets.addReply`, `emailTracking`, `cloudPlatforms.url`, `bookkeepingSubmissions.list`, `contacts.uploadAvatar`, `companies.uploadLogo`
+- Unit tests: expanded from 82 to 342 tests — full resource method coverage
+- Unit tests: timeout, concurrent refresh deduplication, onTokenRefresh callback failure, non-JSON response
+- `npm run test:coverage` — static analysis script that reports which API endpoints have integration tests
+- JSDoc comments on all resource methods
+- Shared test data constants (`tests/integration/test-data.ts`)
+
+### Changed
+- Default page size changed from 20 to 100 (Teamleader API maximum)
+- Paginator now clamps page size to max 100
+- Paginator no longer yields empty trailing pages when total items is exact multiple of page size
+- Added jitter to exponential backoff on server errors (prevents thundering herd)
+- Added minimum 100ms wait floor on rate limit retries
+- Patch 1 (NoteSubjectTypesCreate "meeting") marked as resolved — spec now includes it natively
+
+### Fixed
+- Paginator bug: empty page was yielded before the break check, causing consumers to receive a spurious empty page
+
+## [0.2.0] - 2026-03-27
 
 API spec updated: 1.119.0 → 1.129.0
 
@@ -23,7 +49,7 @@ API spec updated: 1.119.0 → 1.129.0
 - Scripts now read spec from `api-specs/` directory (versioned files) instead of single `api-spec.yaml`
 - Fixed optional/required params on several `.list()` and `.stop()` methods to match the spec
 
-## [1.1.1] - 2026-03-01
+## [0.1.1] - 2026-03-01
 
 API spec updated: 1.112.0 → 1.115.0
 
@@ -32,35 +58,20 @@ API spec updated: 1.112.0 → 1.115.0
 - `orders.info` / `orders.list` — legacy `project` field marked as only available for users with access to the old projects module
 - `timeTracking.list` — `relates_to` filter now supports `nextgenProject` and `nextgenProjectGroup` types
 
-## [1.1.0] - 2026-02-12
+## [0.1.0] - 2026-02-12
 
 ### Added
 - `getTokens` callback for multi-process token resilience — allows reading fresh tokens from a shared store (DB, Redis) before attempting an OAuth refresh, so processes can pick up tokens refreshed by other processes
 - `accessToken` is now optional when `getTokens` is provided
 - `refresh_token` is optional in the `getTokens` return type — when omitted, the existing refresh token is kept
-
-## [1.0.1] - 2026-02-12
-
-API spec updated: → 1.107.0
-
-### Added
-- `TeamleaderTokenRefreshError` — dedicated error subclass for token refresh failures, with the hint from the Teamleader error response in the message (e.g. "Token refresh failed: Token has been revoked")
+- `TeamleaderTokenRefreshError` — dedicated error subclass for token refresh failures
 
 ### Changed
-- `incomingCreditNotes.listPayments()` — list payments for an incoming credit note
-- `incomingCreditNotes.registerPayment()` — register a payment for an incoming credit note
-- `incomingCreditNotes.removePayment()` — remove a payment from an incoming credit note
-- `incomingCreditNotes.updatePayment()` — update a payment for an incoming credit note
-- `incomingInvoices.listPayments()` — list payments for an incoming invoice
-- `incomingInvoices.registerPayment()` — register a payment for an incoming invoice
-- `incomingInvoices.removePayment()` — remove a payment from an incoming invoice
-- `incomingInvoices.updatePayment()` — update a payment for an incoming invoice
-- `receipts.listPayments()` — list payments for a receipt
-- `receipts.registerPayment()` — register a payment for a receipt
-- `receipts.removePayment()` — remove a payment from a receipt
-- `receipts.updatePayment()` — update a payment for a receipt
+- `incomingCreditNotes` — added listPayments, registerPayment, removePayment, updatePayment
+- `incomingInvoices` — added listPayments, registerPayment, removePayment, updatePayment
+- `receipts` — added listPayments, registerPayment, removePayment, updatePayment
 
-## [1.0.0] - 2026-02-12
+## [0.0.1] - 2026-02-12
 
 Initial release — full coverage of the Teamleader Focus API (spec v1.102.0).
 

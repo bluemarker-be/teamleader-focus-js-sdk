@@ -1,6 +1,6 @@
 {
   "name": "teamleader-focus-js-sdk",
-  "version": "1.2.0",
+  "version": "0.3.0",
   "description": "TypeScript SDK for the Teamleader Focus API",
   "type": "module",
   "main": "./dist/index.js",
@@ -23,7 +23,8 @@
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "oauth": "node --loader ts-node/esm scripts/oauth-token.ts",
     "check-spec": "node --loader ts-node/esm scripts/check-spec-update.ts",
-    "diff-spec": "node --loader ts-node/esm scripts/diff-spec.ts"
+    "diff-spec": "node --loader ts-node/esm scripts/diff-spec.ts",
+    "test:coverage": "node --loader ts-node/esm scripts/check-test-coverage.ts"
   },
   "devDependencies": {
     "openapi-typescript": "^7.13.0",

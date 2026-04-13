@@ -314,28 +314,6 @@ function reportSdkCoverage(specYaml: string): void {
 function reportPatchStatus(specYaml: string): void {
   console.log("--- Patch Status ---\n");
 
-  // Patch 1: NoteSubjectTypesCreate missing "meeting"
-  // Check if the notes.create endpoint's subject.type enum now includes "meeting"
-  const notesCreateIdx = specYaml.indexOf("operationId: notes.create");
-  if (notesCreateIdx !== -1) {
-    const nextEndpoint = specYaml.indexOf("\n  /", notesCreateIdx);
-    const block = specYaml.slice(
-      notesCreateIdx,
-      nextEndpoint !== -1 ? nextEndpoint : undefined
-    );
-    const hasMeeting = block.includes("- meeting");
-
-    console.log('Patch 1 (NoteSubjectTypesCreate missing "meeting"):');
-    if (hasMeeting) {
-      console.log('  No longer needed — spec now includes "meeting"');
-      console.log("  -> Remove patch from scripts/generate-types.ts");
-    } else {
-      console.log('  Still needed — spec still omits "meeting"');
-    }
-  } else {
-    console.log("Patch 1: Could not find notes.create endpoint in spec");
-  }
-
   // Patch 2: dealPhases.duplicate returns 404
   // The endpoint exists in the spec but is non-functional. If it's removed
   // from the spec we can drop it from IGNORED_OPERATIONS.
