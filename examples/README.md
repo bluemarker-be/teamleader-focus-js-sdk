@@ -1,45 +1,46 @@
 # Examples
 
-Reference implementations showing how to use the SDK in real deployments.
+Reference implementations showing how to use the SDK.
 
-## Supabase Edge Function — companies + contacts workflow
+## Supabase Edge Function — companies + contacts
 
 [`supabase-companies-and-contacts.ts`](./supabase-companies-and-contacts.ts)
 
-Demonstrates:
-- Token persistence via a Supabase table (tokens rotate — the SDK writes
-  fresh ones back via `onTokenRefresh`)
-- `getTokens` callback for multi-process safety (concurrent Edge Function
-  invocations can share the same DB-backed tokens)
-- Full pagination of `/companies.list` via `client.paginateItems`
-- Creating 3 contacts with structured field names
-- Linking each contact to the first company
-- **Cleanup on partial failure** — if contact #2 creates successfully but
-  linking fails, contact #1 and #2 are deleted before the error is returned
-- Exhaustive error mapping: every `TeamleaderError` subclass maps to a
-  meaningful HTTP status + code + body
+A minimal Supabase Edge Function that:
 
-### Running locally
+1. Paginates all companies via `teamleader.paginateItems("/companies.list")`
+2. Creates 3 contacts with `teamleader.contacts.add(...)`
+3. Links each contact to the first company with `teamleader.contacts.linkToCompany(...)`
+4. Catches any `TeamleaderError` and returns a matching HTTP status
 
-```bash
-supabase functions serve companies-and-contacts
-curl -X POST http://localhost:54321/functions/v1/companies-and-contacts \
-  -H "Authorization: Bearer $SUPABASE_ANON_KEY"
-```
+### Setup
 
-### Deploying
+1. Copy the SDK's `dist/` into `supabase/functions/_shared/teamleader/`
+   (the Deno Edge Runtime cannot install from a private git repo).
+2. Set the access token secret:
+   ```bash
+   supabase secrets set TEAMLEADER_ACCESS_TOKEN=...
+   ```
+
+### Deploy
 
 ```bash
 supabase functions deploy companies-and-contacts
-supabase secrets set TEAMLEADER_CLIENT_ID=... TEAMLEADER_CLIENT_SECRET=...
 ```
 
-### Distributing the SDK to the Edge Function
+### Production notes
 
-Because the SDK is in a private GitHub repo, Deno's Edge Runtime can't
-install it directly. Two options:
+The example uses a single access token from an env var for simplicity.
+For production you'll likely want:
 
-1. **Vendor the SDK**: copy `dist/` into `supabase/functions/_shared/teamleader/`
-   and import with a relative path (this example does that).
-2. **Publish to a registry**: if you later publish to npm or JSR, use
-   `import ... from "npm:teamleader-focus-js-sdk"` instead.
+- **Token persistence**: Teamleader refresh tokens are single-use and rotate
+  on every refresh. Store them in a Supabase table and pass `refreshToken` +
+  `clientId` + `clientSecret` + an `onTokenRefresh` callback that writes the
+  new tokens back to the table.
+- **Multi-process safety**: if multiple Edge Function invocations run
+  concurrently, pass a `getTokens` callback that re-reads the latest tokens
+  from your table before each request (see `tests/integration/setup.ts`
+  for an example of that pattern).
+- **Cleanup on partial failure**: if contact 2 of 3 succeeds but linking
+  fails, you may want to delete the created contacts before returning the
+  error. Track created IDs in a list and delete them in a catch block.
