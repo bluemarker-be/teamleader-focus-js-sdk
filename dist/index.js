@@ -1,9 +1,9 @@
 // Core
-export { TeamleaderClient } from "./client.js";
+export { TeamleaderFocusClient } from "./client.js";
 // OAuth2
 export { createAuthorizationUrl, exchangeCodeForTokens, refreshTokens, } from "./oauth.js";
 // Errors
-export { TeamleaderError, TeamleaderAuthenticationError, TeamleaderTokenRefreshError, TeamleaderRateLimitError, TeamleaderValidationError, TeamleaderNetworkError, } from "./errors.js";
+export { TeamleaderFocusError, TeamleaderFocusAuthenticationError, TeamleaderFocusTokenRefreshError, TeamleaderFocusRateLimitError, TeamleaderFocusValidationError, TeamleaderFocusNetworkError, } from "./errors.js";
 // Resource classes (for advanced usage / extending)
 export { AccountsResource } from "./resources/accounts.js";
 export { ActivityTypesResource } from "./resources/activity-types.js";

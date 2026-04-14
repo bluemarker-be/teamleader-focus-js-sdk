@@ -4,6 +4,27 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.5.0] - 2026-04-14
+
+### Changed (breaking)
+- All public classes renamed with `Focus` prefix for naming consistency
+  with the package name and to disambiguate from a potential future
+  Teamleader Orbit SDK:
+
+  | Old | New |
+  | --- | --- |
+  | `TeamleaderClient` | `TeamleaderFocusClient` |
+  | `TeamleaderClientConfig` | `TeamleaderFocusClientConfig` |
+  | `TeamleaderError` | `TeamleaderFocusError` |
+  | `TeamleaderAuthenticationError` | `TeamleaderFocusAuthenticationError` |
+  | `TeamleaderTokenRefreshError` | `TeamleaderFocusTokenRefreshError` |
+  | `TeamleaderRateLimitError` | `TeamleaderFocusRateLimitError` |
+  | `TeamleaderValidationError` | `TeamleaderFocusValidationError` |
+  | `TeamleaderNetworkError` | `TeamleaderFocusNetworkError` |
+
+  Migration is a pure find-and-replace. The runtime `.name` property on
+  each error class is also updated.
+
 ## [0.4.0] - 2026-04-14
 
 ### Changed (breaking)
@@ -122,7 +143,7 @@ API spec updated: 1.112.0 → 1.115.0
 - `getTokens` callback for multi-process token resilience — allows reading fresh tokens from a shared store (DB, Redis) before attempting an OAuth refresh, so processes can pick up tokens refreshed by other processes
 - `accessToken` is now optional when `getTokens` is provided
 - `refresh_token` is optional in the `getTokens` return type — when omitted, the existing refresh token is kept
-- `TeamleaderTokenRefreshError` — dedicated error subclass for token refresh failures
+- `TeamleaderFocusTokenRefreshError` — dedicated error subclass for token refresh failures
 
 ### Changed
 - `incomingCreditNotes` — added listPayments, registerPayment, removePayment, updatePayment

@@ -1,4 +1,4 @@
-import type { TeamleaderClient } from "./client.js";
+import type { TeamleaderFocusClient } from "./client.js";
 export interface PaginatedRequest {
     page?: {
         size?: number;
@@ -26,7 +26,7 @@ export interface PaginatedResponse<T> {
  * }
  * ```
  */
-export declare function paginatePages<T>(client: TeamleaderClient, endpoint: string, params?: PaginatedRequest, options?: {
+export declare function paginatePages<T>(client: TeamleaderFocusClient, endpoint: string, params?: PaginatedRequest, options?: {
     maxPages?: number;
 }): AsyncGenerator<PaginatedResponse<T>, void, undefined>;
 /**
@@ -39,7 +39,7 @@ export declare function paginatePages<T>(client: TeamleaderClient, endpoint: str
  * }
  * ```
  */
-export declare function paginateItems<T>(client: TeamleaderClient, endpoint: string, params?: PaginatedRequest, options?: {
+export declare function paginateItems<T>(client: TeamleaderFocusClient, endpoint: string, params?: PaginatedRequest, options?: {
     maxPages?: number;
 }): AsyncGenerator<T, void, undefined>;
 //# sourceMappingURL=paginator.d.ts.map

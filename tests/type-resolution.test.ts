@@ -3,7 +3,7 @@
  * structures from the YAML spec, and that TypeScript enforces them.
  */
 import { describe, it, expectTypeOf } from "vitest";
-import type { TeamleaderClient } from "../src/client.js";
+import type { TeamleaderFocusClient } from "../src/client.js";
 import type { RequestBody, ResponseBody } from "../src/types/common.js";
 
 describe("Type resolution", () => {

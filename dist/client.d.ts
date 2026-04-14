@@ -67,7 +67,7 @@ import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
 import { WithholdingTaxRatesResource } from "./resources/withholding-tax-rates.js";
 import { WorkTypesResource } from "./resources/work-types.js";
-interface TeamleaderClientConfigBase {
+interface TeamleaderFocusClientConfigBase {
     /** OAuth2 refresh token — required for auto-refresh */
     refreshToken?: string;
     /** OAuth2 client ID — required for auto-refresh */
@@ -96,7 +96,7 @@ interface TeamleaderClientConfigBase {
      */
     apiVersion?: string;
 }
-interface TeamleaderClientConfigWithToken extends TeamleaderClientConfigBase {
+interface TeamleaderFocusClientConfigWithToken extends TeamleaderFocusClientConfigBase {
     /** OAuth2 access token */
     accessToken: string;
     /**
@@ -111,7 +111,7 @@ interface TeamleaderClientConfigWithToken extends TeamleaderClientConfigBase {
         refresh_token?: string;
     };
 }
-interface TeamleaderClientConfigWithGetTokens extends TeamleaderClientConfigBase {
+interface TeamleaderFocusClientConfigWithGetTokens extends TeamleaderFocusClientConfigBase {
     /** OAuth2 access token — optional when getTokens is provided */
     accessToken?: string;
     /**
@@ -127,8 +127,8 @@ interface TeamleaderClientConfigWithGetTokens extends TeamleaderClientConfigBase
         refresh_token?: string;
     };
 }
-export type TeamleaderClientConfig = TeamleaderClientConfigWithToken | TeamleaderClientConfigWithGetTokens;
-export declare class TeamleaderClient {
+export type TeamleaderFocusClientConfig = TeamleaderFocusClientConfigWithToken | TeamleaderFocusClientConfigWithGetTokens;
+export declare class TeamleaderFocusClient {
     private accessToken;
     private refreshToken?;
     private readonly clientId?;
@@ -209,7 +209,7 @@ export declare class TeamleaderClient {
     readonly webhooks: WebhooksResource;
     readonly withholdingTaxRates: WithholdingTaxRatesResource;
     readonly workTypes: WorkTypesResource;
-    constructor(config: TeamleaderClientConfig);
+    constructor(config: TeamleaderFocusClientConfig);
     /**
      * Make an authenticated POST request to the Teamleader API.
      * Handles token refresh, rate limiting, and error mapping.

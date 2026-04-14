@@ -1,8 +1,8 @@
 import { describe, it, expect, afterAll } from "vitest";
 import { getClient, noToken, cleanupAll, delay, isoDate } from "./setup.js";
 import {
-  TeamleaderError,
-  TeamleaderValidationError,
+  TeamleaderFocusError,
+  TeamleaderFocusValidationError,
 } from "../../src/errors.js";
 
 describe.skipIf(noToken)("Error Boundaries", () => {
@@ -18,8 +18,8 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.contacts.info({ id: "00000000-0000-0000-0000-000000000000" });
         expect.fail("Expected an error");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
-        const tlErr = err as TeamleaderError;
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
+        const tlErr = err as TeamleaderFocusError;
         expect(tlErr.status).toBeGreaterThanOrEqual(400);
         expect(tlErr.body).toBeDefined();
       }
@@ -30,7 +30,7 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.deals.info({ id: "00000000-0000-0000-0000-000000000000" });
         expect.fail("Expected an error");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
       }
     });
 
@@ -39,7 +39,7 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.invoices.info({ id: "00000000-0000-0000-0000-000000000000" });
         expect.fail("Expected an error");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
       }
     });
   });
@@ -54,8 +54,8 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.contacts.add({} as any);
         expect.fail("Expected a validation error");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderValidationError);
-        const vlErr = err as TeamleaderValidationError;
+        expect(err).toBeInstanceOf(TeamleaderFocusValidationError);
+        const vlErr = err as TeamleaderFocusValidationError;
         expect(vlErr.status === 400 || vlErr.status === 422).toBe(true);
       }
     });
@@ -65,7 +65,7 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.deals.create({ lead: { customer: { type: "contact", id: "fake" } } } as any);
         expect.fail("Expected a validation error");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
       }
     });
 
@@ -74,7 +74,7 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.deals.create({ title: "No Lead" } as any);
         expect.fail("Expected a validation error");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
       }
     });
   });
@@ -143,7 +143,7 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.invoices.update({ id: invoiceId, payment_term: { type: "cash" } });
         console.log("  NOTE: invoices.update succeeded on booked invoice (API may have changed)");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
       }
     });
 
@@ -153,7 +153,7 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         // API allowed it — note as observation
         console.log("  NOTE: invoices.delete succeeded on booked invoice");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
       }
     });
 
@@ -162,8 +162,8 @@ describe.skipIf(noToken)("Error Boundaries", () => {
         await client.deals.win({ id: dealId });
         console.log("  NOTE: deals.win is idempotent on already-won deal");
       } catch (err) {
-        expect(err).toBeInstanceOf(TeamleaderError);
-        console.log(`  NOTE: deals.win on already-won deal returns status ${(err as TeamleaderError).status}`);
+        expect(err).toBeInstanceOf(TeamleaderFocusError);
+        console.log(`  NOTE: deals.win on already-won deal returns status ${(err as TeamleaderFocusError).status}`);
       }
     });
 

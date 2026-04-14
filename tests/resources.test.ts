@@ -1,23 +1,23 @@
 import { describe, it, expect } from "vitest";
-import { TeamleaderClient } from "../src/client.js";
+import { TeamleaderFocusClient } from "../src/client.js";
 import { mockFetch } from "./helpers.js";
 
 describe("Resources", () => {
   function createClient() {
     const { fetchFn, calls } = mockFetch({ body: { data: [] } });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
     return { client, calls };
   }
 
   function createClientWithBody(body: unknown) {
     const { fetchFn, calls } = mockFetch({ body });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
     return { client, calls };
   }
 
   function createVoidClient() {
     const { fetchFn, calls } = mockFetch({ status: 204 });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
     return { client, calls };
   }
 
@@ -244,7 +244,7 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("invoices", () => {
-    const invoiceEndpoints: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const invoiceEndpoints: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["invoices.list", (c) => c.invoices.list()],
       ["invoices.info", (c) => c.invoices.info({ id: "i1" })],
       ["invoices.download", (c) => c.invoices.download({ id: "i1", format: "pdf" })],
@@ -270,7 +270,7 @@ describe("Resources", () => {
       });
     }
 
-    const voidEndpoints: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidEndpoints: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["invoices.update", (c) => c.invoices.update({ id: "i1" })],
       ["invoices.updateBooked", (c) => c.invoices.updateBooked({ id: "i1" })],
       ["invoices.book", (c) => c.invoices.book({ id: "i1", on: "2026-01-01" })],
@@ -419,7 +419,7 @@ describe("Resources", () => {
       expect(calls[0].url).toContain("/projects-v2/projects.create");
     });
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["projects.update", (c) => c.projects.update({ id: "p1", title: "Updated" })],
       ["projects.close", (c) => c.projects.close({ id: "p1", closing_strategy: "none" })],
       ["projects.reopen", (c) => c.projects.reopen({ id: "p1" })],
@@ -1151,7 +1151,7 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("legacyProjects", () => {
-    const dataMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const dataMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["projects.list", (c) => c.legacyProjects.list()],
       ["projects.info", (c) => c.legacyProjects.info({ id: "lp1" })],
       ["projects.create", (c) => c.legacyProjects.create({
@@ -1170,7 +1170,7 @@ describe("Resources", () => {
       });
     }
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["projects.update", (c) => c.legacyProjects.update({ id: "lp1" })],
       ["projects.close", (c) => c.legacyProjects.close({ id: "lp1" })],
       ["projects.reopen", (c) => c.legacyProjects.reopen({ id: "lp1" })],
@@ -1193,7 +1193,7 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("legacyMilestones", () => {
-    const dataMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const dataMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["milestones.list", (c) => c.legacyMilestones.list()],
       ["milestones.info", (c) => c.legacyMilestones.info({ id: "ms1" })],
       ["milestones.create", (c) => c.legacyMilestones.create({
@@ -1213,7 +1213,7 @@ describe("Resources", () => {
       });
     }
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["milestones.update", (c) => c.legacyMilestones.update({ id: "ms1" })],
       ["milestones.delete", (c) => c.legacyMilestones.delete({ id: "ms1" })],
       ["milestones.close", (c) => c.legacyMilestones.close({ id: "ms1" })],
@@ -1234,7 +1234,7 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("projectGroups", () => {
-    const dataMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const dataMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["projectGroups.list", (c) => c.projectGroups.list()],
       ["projectGroups.info", (c) => c.projectGroups.info({ id: "pg1" })],
       ["projectGroups.create", (c) => c.projectGroups.create({ project_id: "p1", title: "G1" })],
@@ -1249,7 +1249,7 @@ describe("Resources", () => {
       });
     }
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["projectGroups.update", (c) => c.projectGroups.update({ id: "pg1" })],
       ["projectGroups.delete", (c) => c.projectGroups.delete({ id: "pg1", delete_strategy: "ungroup_tasks_and_materials" })],
       ["projectGroups.assign", (c) => c.projectGroups.assign({ id: "pg1", assignee: { type: "user", id: "u1" } })],
@@ -1295,7 +1295,7 @@ describe("Resources", () => {
       expect(calls[0].url).toContain("/projects-v2/tasks.duplicate");
     });
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["tasks.update", (c) => c.projectTasks.update({ id: "pt1" })],
       ["tasks.delete", (c) => c.projectTasks.delete({ id: "pt1", delete_strategy: "unlink_time_tracking" })],
       ["tasks.assign", (c) => c.projectTasks.assign({ id: "pt1", assignee: { type: "user", id: "u1" } })],
@@ -1341,7 +1341,7 @@ describe("Resources", () => {
       expect(calls[0].url).toContain("/projects-v2/materials.duplicate");
     });
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["materials.update", (c) => c.projectMaterials.update({ id: "pm1" })],
       ["materials.delete", (c) => c.projectMaterials.delete({ id: "pm1" })],
       ["materials.assign", (c) => c.projectMaterials.assign({ id: "pm1", assignee: { type: "user", id: "u1" } })],
@@ -1453,7 +1453,7 @@ describe("Resources", () => {
       expect(calls[0].url).toContain("/incomingInvoices.registerPayment");
     });
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["incomingInvoices.update", (c) => c.incomingInvoices.update({ id: "ii1" })],
       ["incomingInvoices.delete", (c) => c.incomingInvoices.delete({ id: "ii1" })],
       ["incomingInvoices.approve", (c) => c.incomingInvoices.approve({ id: "ii1" })],
@@ -1514,7 +1514,7 @@ describe("Resources", () => {
       expect(calls[0].url).toContain("/incomingCreditNotes.registerPayment");
     });
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["incomingCreditNotes.update", (c) => c.incomingCreditNotes.update({ id: "icn1" })],
       ["incomingCreditNotes.delete", (c) => c.incomingCreditNotes.delete({ id: "icn1" })],
       ["incomingCreditNotes.approve", (c) => c.incomingCreditNotes.approve({ id: "icn1" })],
@@ -1570,7 +1570,7 @@ describe("Resources", () => {
       expect(calls[0].url).toContain("/receipts.registerPayment");
     });
 
-    const voidMethods: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
+    const voidMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["receipts.update", (c) => c.receipts.update({ id: "r1" })],
       ["receipts.delete", (c) => c.receipts.delete({ id: "r1" })],
       ["receipts.approve", (c) => c.receipts.approve({ id: "r1" })],
@@ -1743,7 +1743,7 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("list-only resources", () => {
-    const cases: Array<[string, (client: TeamleaderClient) => Promise<unknown>]> = [
+    const cases: Array<[string, (client: TeamleaderFocusClient) => Promise<unknown>]> = [
       ["departments.list", (c) => c.departments.list()],
       ["teams.list", (c) => c.teams.list()],
       ["tags.list", (c) => c.tags.list()],

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { TeamleaderClient } from "../src/client.js";
+import { TeamleaderFocusClient } from "../src/client.js";
 import { paginatePages, paginateItems } from "../src/paginator.js";
 import { mockFetchSequence } from "./helpers.js";
 
@@ -19,7 +19,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const pages: unknown[] = [];
     for await (const page of paginatePages(client, "/contacts.list", { page: { size: 2 } })) {
@@ -44,7 +44,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const items: unknown[] = [];
     for await (const item of paginateItems(client, "/contacts.list", { page: { size: 2 } })) {
@@ -64,7 +64,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const items: unknown[] = [];
     for await (const item of paginateItems(client, "/contacts.list")) {
@@ -83,7 +83,7 @@ describe("Pagination", () => {
         },
       }),
     );
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const items: unknown[] = [];
     for await (const item of paginateItems(client, "/contacts.list", { page: { size: 20 } }, { maxPages: 2 })) {
@@ -103,7 +103,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const pages: unknown[] = [];
     for await (const page of paginatePages(client, "/contacts.list", { page: { size: 2 } })) {
@@ -123,7 +123,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const pages: unknown[] = [];
     for await (const page of paginatePages(client, "/contacts.list")) {
@@ -149,7 +149,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const pages: Array<{ data: unknown[] }> = [];
     for await (const page of paginatePages<{ id: string }>(client, "/contacts.list", { page: { size: 2 } })) {
@@ -176,7 +176,7 @@ describe("Pagination", () => {
         },
       },
     ]);
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     for await (const _ of paginatePages(client, "/contacts.list", { page: { size: 2 } })) {
       // consume

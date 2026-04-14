@@ -1,19 +1,19 @@
 import { describe, it, expect, vi } from "vitest";
-import { TeamleaderClient } from "../src/client.js";
+import { TeamleaderFocusClient } from "../src/client.js";
 import {
-  TeamleaderError,
-  TeamleaderAuthenticationError,
-  TeamleaderTokenRefreshError,
-  TeamleaderValidationError,
-  TeamleaderRateLimitError,
-  TeamleaderNetworkError,
+  TeamleaderFocusError,
+  TeamleaderFocusAuthenticationError,
+  TeamleaderFocusTokenRefreshError,
+  TeamleaderFocusValidationError,
+  TeamleaderFocusRateLimitError,
+  TeamleaderFocusNetworkError,
 } from "../src/errors.js";
 import { mockFetch, mockFetchSequence } from "./helpers.js";
 
-describe("TeamleaderClient", () => {
+describe("TeamleaderFocusClient", () => {
   it("sends POST requests with correct headers", async () => {
     const { fetchFn, calls } = mockFetch({ body: { data: [] } });
-    const client = new TeamleaderClient({ accessToken: "test-token", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "test-token", fetch: fetchFn });
 
     await client.contacts.list();
 
@@ -28,7 +28,7 @@ describe("TeamleaderClient", () => {
 
   it("sends request body as JSON", async () => {
     const { fetchFn, calls } = mockFetch({ body: { data: [] } });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     await client.contacts.list({ filter: { term: "John" }, page: { size: 10, number: 1 } });
 
@@ -42,7 +42,7 @@ describe("TeamleaderClient", () => {
   it("returns parsed JSON response", async () => {
     const contactData = { data: [{ id: "abc-123", first_name: "John" }] };
     const { fetchFn } = mockFetch({ body: contactData });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const result = await client.contacts.list();
     expect(result).toEqual(contactData);
@@ -50,40 +50,40 @@ describe("TeamleaderClient", () => {
 
   it("handles 204 No Content (update/delete)", async () => {
     const { fetchFn } = mockFetch({ status: 204 });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     const result = await client.contacts.delete({ id: "abc-123" });
     expect(result).toBeUndefined();
   });
 
-  it("throws TeamleaderAuthenticationError on 401", async () => {
+  it("throws TeamleaderFocusAuthenticationError on 401", async () => {
     const { fetchFn } = mockFetch({
       status: 401,
       body: { error: "invalid_token" },
     });
-    const client = new TeamleaderClient({ accessToken: "bad-token", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "bad-token", fetch: fetchFn });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderAuthenticationError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusAuthenticationError);
   });
 
-  it("throws TeamleaderValidationError on 400", async () => {
+  it("throws TeamleaderFocusValidationError on 400", async () => {
     const { fetchFn } = mockFetch({
       status: 400,
       body: { message: "Invalid filter" },
     });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderValidationError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusValidationError);
   });
 
-  it("throws TeamleaderValidationError on 422", async () => {
+  it("throws TeamleaderFocusValidationError on 422", async () => {
     const { fetchFn } = mockFetch({
       status: 422,
       body: { message: "Missing required field" },
     });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderValidationError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusValidationError);
   });
 
   it("retries on 429 rate limit and succeeds", async () => {
@@ -100,7 +100,7 @@ describe("TeamleaderClient", () => {
       },
       { status: 200, body: { data: [{ id: "1" }] } },
     ]);
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       maxRetries: 3,
@@ -111,7 +111,7 @@ describe("TeamleaderClient", () => {
     expect(result).toEqual({ data: [{ id: "1" }] });
   });
 
-  it("throws TeamleaderRateLimitError after max retries", async () => {
+  it("throws TeamleaderFocusRateLimitError after max retries", async () => {
     const resetDate = new Date(Date.now() - 1000);
     const { fetchFn } = mockFetch({
       status: 429,
@@ -121,18 +121,18 @@ describe("TeamleaderClient", () => {
         "X-RateLimit-Reset": resetDate.toISOString(),
       },
     });
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       maxRetries: 0,  // no retries
     });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderRateLimitError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusRateLimitError);
   });
 
   it("uses custom baseUrl", async () => {
     const { fetchFn, calls } = mockFetch({ body: { data: [] } });
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       baseUrl: "https://custom.api.example.com",
@@ -144,7 +144,7 @@ describe("TeamleaderClient", () => {
 
   it("sends X-API-Version header when apiVersion is set", async () => {
     const { fetchFn, calls } = mockFetch({ body: { data: [] } });
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       apiVersion: "2023-09-26",
@@ -161,7 +161,7 @@ describe("TeamleaderClient", () => {
 
   it("does not send X-API-Version header when apiVersion is not set", async () => {
     const { fetchFn, calls } = mockFetch({ body: { data: [] } });
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
 
     await client.contacts.list();
 
@@ -186,7 +186,7 @@ describe("TeamleaderClient", () => {
     ]);
 
     let refreshedTokens: unknown = null;
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "old-token",
       refreshToken: "old-refresh",
       clientId: "client-id",
@@ -216,7 +216,7 @@ describe("TeamleaderClient", () => {
       { status: 401, body: { error: "still_invalid" } },
     ]);
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       refreshToken: "ref",
       clientId: "cid",
@@ -224,7 +224,7 @@ describe("TeamleaderClient", () => {
       fetch: fetchFn,
     });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderAuthenticationError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusAuthenticationError);
     expect(calls).toHaveLength(3); // original + refresh + retry (no more)
   });
 
@@ -232,12 +232,12 @@ describe("TeamleaderClient", () => {
     const fetchFn = async () => {
       throw new TypeError("Failed to fetch");
     };
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn as typeof globalThis.fetch,
     });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderNetworkError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusNetworkError);
   });
 
   it("retries on 500/502/503 server errors and succeeds", async () => {
@@ -245,7 +245,7 @@ describe("TeamleaderClient", () => {
       { status: 503, body: { error: "service_unavailable" } },
       { status: 200, body: { data: [{ id: "1" }] } },
     ]);
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       maxRetries: 3,
@@ -261,13 +261,13 @@ describe("TeamleaderClient", () => {
       status: 500,
       body: { error: "internal_server_error" },
     });
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       maxRetries: 0,
     });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusError);
   });
 
   it("updates refreshToken after successful token refresh", async () => {
@@ -286,7 +286,7 @@ describe("TeamleaderClient", () => {
       { status: 200, body: { data: [{ id: "2" }] } },
     ]);
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "old-at",
       refreshToken: "old-rt",
       clientId: "cid",
@@ -303,7 +303,7 @@ describe("TeamleaderClient", () => {
     expect(secondRefreshBody.get("refresh_token")).toBe("new-rt");
   });
 
-  it("throws TeamleaderNetworkError on request timeout", async () => {
+  it("throws TeamleaderFocusNetworkError on request timeout", async () => {
     // Create a fetch that never resolves, simulating a hung connection
     const fetchFn = (async (_url: string | URL | Request, init?: RequestInit) => {
       return new Promise<Response>((_resolve, reject) => {
@@ -314,13 +314,13 @@ describe("TeamleaderClient", () => {
       });
     }) as typeof globalThis.fetch;
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "tok",
       fetch: fetchFn,
       timeout: 50, // 50ms timeout for fast test
     });
 
-    await expect(client.contacts.list()).rejects.toThrow(TeamleaderNetworkError);
+    await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusNetworkError);
     await expect(client.contacts.list()).rejects.toThrow(/timed out/);
   });
 
@@ -368,7 +368,7 @@ describe("TeamleaderClient", () => {
       });
     }) as typeof globalThis.fetch;
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "expired-token",
       refreshToken: "old-refresh",
       clientId: "cid",
@@ -400,7 +400,7 @@ describe("TeamleaderClient", () => {
 
     const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "old-at",
       refreshToken: "old-rt",
       clientId: "cid",
@@ -431,7 +431,7 @@ describe("TeamleaderClient", () => {
       });
     }) as typeof globalThis.fetch;
 
-    const client = new TeamleaderClient({ accessToken: "tok", fetch: fetchFn });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
     const result = await client.contacts.list();
     expect(result).toBeUndefined();
   });
@@ -450,7 +450,7 @@ describe("TeamleaderClient", () => {
         refresh_token: "fresh-refresh",
       });
 
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         accessToken: "stale-token",
         getTokens,
         fetch: fetchFn,
@@ -487,7 +487,7 @@ describe("TeamleaderClient", () => {
         refresh_token: "old-refresh",
       });
 
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         accessToken: "stale-token",
         refreshToken: "old-refresh",
         clientId: "cid",
@@ -525,7 +525,7 @@ describe("TeamleaderClient", () => {
         return { access_token: "other-process-token", refresh_token: "other-process-refresh" };
       });
 
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         accessToken: "stale-token",
         refreshToken: "stale-refresh",
         clientId: "cid",
@@ -555,7 +555,7 @@ describe("TeamleaderClient", () => {
         refresh_token: "stale-refresh",
       });
 
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         accessToken: "stale-token",
         refreshToken: "stale-refresh",
         clientId: "cid",
@@ -564,7 +564,7 @@ describe("TeamleaderClient", () => {
         fetch: fetchFn,
       });
 
-      await expect(client.contacts.list()).rejects.toThrow(TeamleaderTokenRefreshError);
+      await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusTokenRefreshError);
       expect(getTokens).toHaveBeenCalledTimes(2); // once before refresh, once after
     });
 
@@ -582,7 +582,7 @@ describe("TeamleaderClient", () => {
       });
 
       // No clientId/clientSecret — cannot do OAuth refresh, only getTokens
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         getTokens,
         fetch: fetchFn,
       });
@@ -604,13 +604,13 @@ describe("TeamleaderClient", () => {
         refresh_token: "some-refresh",
       });
 
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         accessToken: "same-token",
         getTokens,
         fetch: fetchFn,
       });
 
-      await expect(client.contacts.list()).rejects.toThrow(TeamleaderAuthenticationError);
+      await expect(client.contacts.list()).rejects.toThrow(TeamleaderFocusAuthenticationError);
       expect(getTokens).toHaveBeenCalledOnce();
     });
 
@@ -628,7 +628,7 @@ describe("TeamleaderClient", () => {
         { status: 200, body: { data: [{ id: "1" }] } },
       ]);
 
-      const client = new TeamleaderClient({
+      const client = new TeamleaderFocusClient({
         accessToken: "old-token",
         refreshToken: "old-refresh",
         clientId: "cid",

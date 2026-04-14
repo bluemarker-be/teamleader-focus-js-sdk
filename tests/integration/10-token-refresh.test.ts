@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { TeamleaderClient, TeamleaderTokenRefreshError } from "../../src/index.js";
+import { TeamleaderFocusClient, TeamleaderFocusTokenRefreshError } from "../../src/index.js";
 import { noToken } from "./setup.js";
 
 describe.skipIf(noToken)("Token Refresh", () => {
@@ -15,7 +15,7 @@ describe.skipIf(noToken)("Token Refresh", () => {
     let refreshedTokens: { access_token: string; refresh_token: string } | null = null;
     const creds = getCredentials();
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: "expired-invalid-token",
       refreshToken: creds.refreshToken,
       clientId: creds.clientId,
@@ -42,7 +42,7 @@ describe.skipIf(noToken)("Token Refresh", () => {
       process.env.ACCESS_TOKEN = refreshedTokens!.access_token;
       process.env.REFRESH_TOKEN = refreshedTokens!.refresh_token;
     } catch (err) {
-      if (err instanceof TeamleaderTokenRefreshError) {
+      if (err instanceof TeamleaderFocusTokenRefreshError) {
         // Refresh token was already consumed by an earlier test in the suite.
         // This is expected when running the full suite — the singleton client
         // in setup.ts may have rotated the token, invalidating the one we read.
@@ -57,7 +57,7 @@ describe.skipIf(noToken)("Token Refresh", () => {
     let refreshCount = 0;
     const creds = getCredentials();
 
-    const client = new TeamleaderClient({
+    const client = new TeamleaderFocusClient({
       accessToken: process.env.ACCESS_TOKEN!,
       refreshToken: creds.refreshToken,
       clientId: creds.clientId,

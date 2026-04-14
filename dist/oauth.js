@@ -1,4 +1,4 @@
-import { TeamleaderAuthenticationError, TeamleaderTokenRefreshError } from "./errors.js";
+import { TeamleaderFocusAuthenticationError, TeamleaderFocusTokenRefreshError } from "./errors.js";
 const AUTHORIZATION_URL = "https://focus.teamleader.eu/oauth2/authorize";
 const TOKEN_URL = "https://focus.teamleader.eu/oauth2/access_token";
 /**
@@ -50,7 +50,7 @@ export async function exchangeCodeForTokens(params) {
         catch {
             errorBody = text;
         }
-        throw new TeamleaderAuthenticationError(errorBody);
+        throw new TeamleaderFocusAuthenticationError(errorBody);
     }
     return (await response.json());
 }
@@ -79,7 +79,7 @@ export async function refreshTokens(params) {
         catch {
             errorBody = text;
         }
-        throw new TeamleaderTokenRefreshError(errorBody);
+        throw new TeamleaderFocusTokenRefreshError(errorBody);
     }
     return (await response.json());
 }

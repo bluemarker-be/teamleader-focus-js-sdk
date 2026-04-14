@@ -1,6 +1,6 @@
 import { describe, it, beforeAll, afterAll } from "vitest";
 import { getClient, noToken, cleanupAll, delay } from "./setup.js";
-import { TeamleaderError } from "../../src/errors.js";
+import { TeamleaderFocusError } from "../../src/errors.js";
 
 /**
  * Live test: is exchange_rate required or optional per endpoint?
@@ -107,7 +107,7 @@ describe.skipIf(noToken)("Currency exchange_rate — required vs optional", () =
   }
 
   function errorDetail(err: unknown): string {
-    if (err instanceof TeamleaderError) {
+    if (err instanceof TeamleaderFocusError) {
       return `status=${err.status} body=${JSON.stringify(err.body)}`;
     }
     return String(err);

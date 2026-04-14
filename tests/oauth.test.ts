@@ -4,7 +4,7 @@ import {
   exchangeCodeForTokens,
   refreshTokens,
 } from "../src/oauth.js";
-import { TeamleaderAuthenticationError } from "../src/errors.js";
+import { TeamleaderFocusAuthenticationError } from "../src/errors.js";
 import { mockFetch } from "./helpers.js";
 
 describe("OAuth2", () => {
@@ -92,7 +92,7 @@ describe("OAuth2", () => {
           redirectUri: "https://example.com/cb",
           fetch: fetchFn,
         }),
-      ).rejects.toThrow(TeamleaderAuthenticationError);
+      ).rejects.toThrow(TeamleaderFocusAuthenticationError);
     });
   });
 
@@ -135,7 +135,7 @@ describe("OAuth2", () => {
           clientSecret: "csec",
           fetch: fetchFn,
         }),
-      ).rejects.toThrow(TeamleaderAuthenticationError);
+      ).rejects.toThrow(TeamleaderFocusAuthenticationError);
     });
   });
 });

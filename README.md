@@ -28,9 +28,9 @@ Pinning to a tag is recommended for production use.
 ## Setup
 
 ```typescript
-import { TeamleaderClient } from "teamleader-focus-js-sdk";
+import { TeamleaderFocusClient } from "teamleader-focus-js-sdk";
 
-const teamleader = new TeamleaderClient({
+const teamleader = new TeamleaderFocusClient({
   accessToken: "your-access-token",
 });
 ```
@@ -38,7 +38,7 @@ const teamleader = new TeamleaderClient({
 ### With automatic token refresh
 
 ```typescript
-const teamleader = new TeamleaderClient({
+const teamleader = new TeamleaderFocusClient({
   accessToken: "...",
   refreshToken: "...",
   clientId: "your-client-id",
@@ -154,7 +154,7 @@ All 68 resources are available — see the full list below.
 See the [`examples/`](./examples/) folder for end-to-end reference
 implementations — including a Supabase Edge Function that paginates
 companies, creates contacts, links them, and handles every
-`TeamleaderError` subclass with cleanup-on-failure.
+`TeamleaderFocusError` subclass with cleanup-on-failure.
 
 ## OAuth2 flow
 
@@ -220,25 +220,25 @@ for await (const item of teamleader.paginateItems("/deals.list", {}, { maxPages:
 
 ```typescript
 import {
-  TeamleaderError,
-  TeamleaderAuthenticationError,
-  TeamleaderValidationError,
-  TeamleaderRateLimitError,
-  TeamleaderNetworkError,
+  TeamleaderFocusError,
+  TeamleaderFocusAuthenticationError,
+  TeamleaderFocusValidationError,
+  TeamleaderFocusRateLimitError,
+  TeamleaderFocusNetworkError,
 } from "teamleader-focus-js-sdk";
 
 try {
   await teamleader.contacts.list();
 } catch (err) {
-  if (err instanceof TeamleaderAuthenticationError) {
+  if (err instanceof TeamleaderFocusAuthenticationError) {
     // 401 — token expired or invalid
-  } else if (err instanceof TeamleaderValidationError) {
+  } else if (err instanceof TeamleaderFocusValidationError) {
     // 400/422 — invalid request params
     console.log(err.status, err.body);
-  } else if (err instanceof TeamleaderRateLimitError) {
+  } else if (err instanceof TeamleaderFocusRateLimitError) {
     // 429 — rate limited (auto-retried based on maxRetries)
     console.log(err.retryAfter); // Date
-  } else if (err instanceof TeamleaderNetworkError) {
+  } else if (err instanceof TeamleaderFocusNetworkError) {
     // DNS failure, timeout, etc.
   }
 }
@@ -247,7 +247,7 @@ try {
 Rate limit retries are automatic (default: 3 retries). Configure with `maxRetries`:
 
 ```typescript
-const teamleader = new TeamleaderClient({
+const teamleader = new TeamleaderFocusClient({
   accessToken: "...",
   maxRetries: 5, // or 0 to disable
 });

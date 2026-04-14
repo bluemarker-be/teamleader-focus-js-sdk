@@ -11,7 +11,7 @@ A minimal Supabase Edge Function that:
 1. Paginates all companies via `teamleader.paginateItems("/companies.list")`
 2. Creates 3 contacts with `teamleader.contacts.add(...)`
 3. Links each contact to the first company with `teamleader.contacts.linkToCompany(...)`
-4. Catches any `TeamleaderError` and returns a matching HTTP status
+4. Catches any `TeamleaderFocusError` and returns a matching HTTP status
 
 ### Setup
 

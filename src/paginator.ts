@@ -1,4 +1,4 @@
-import type { TeamleaderClient } from "./client.js";
+import type { TeamleaderFocusClient } from "./client.js";
 
 export interface PaginatedRequest {
   page?: { size?: number; number?: number };
@@ -28,7 +28,7 @@ const DEFAULT_MAX_PAGES = 100;
  * ```
  */
 export async function* paginatePages<T>(
-  client: TeamleaderClient,
+  client: TeamleaderFocusClient,
   endpoint: string,
   params: PaginatedRequest = {},
   options: { maxPages?: number } = {},
@@ -80,7 +80,7 @@ export async function* paginatePages<T>(
  * ```
  */
 export async function* paginateItems<T>(
-  client: TeamleaderClient,
+  client: TeamleaderFocusClient,
   endpoint: string,
   params: PaginatedRequest = {},
   options: { maxPages?: number } = {},

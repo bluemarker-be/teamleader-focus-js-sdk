@@ -1,4 +1,4 @@
-import { TeamleaderAuthenticationError, TeamleaderError, TeamleaderNetworkError, TeamleaderRateLimitError, TeamleaderValidationError, } from "./errors.js";
+import { TeamleaderFocusAuthenticationError, TeamleaderFocusError, TeamleaderFocusNetworkError, TeamleaderFocusRateLimitError, TeamleaderFocusValidationError, } from "./errors.js";
 import { refreshTokens } from "./oauth.js";
 import { paginatePages, paginateItems } from "./paginator.js";
 import { AccountsResource } from "./resources/accounts.js";
@@ -72,7 +72,7 @@ import { WorkTypesResource } from "./resources/work-types.js";
 const DEFAULT_BASE_URL = "https://api.focus.teamleader.eu";
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_MAX_RETRIES = 3;
-export class TeamleaderClient {
+export class TeamleaderFocusClient {
     accessToken;
     refreshToken;
     clientId;
@@ -304,9 +304,9 @@ export class TeamleaderClient {
         }
         catch (error) {
             if (error instanceof DOMException && error.name === "AbortError") {
-                throw new TeamleaderNetworkError(new Error(`Request timed out after ${this.timeout}ms`));
+                throw new TeamleaderFocusNetworkError(new Error(`Request timed out after ${this.timeout}ms`));
             }
-            throw new TeamleaderNetworkError(error);
+            throw new TeamleaderFocusNetworkError(error);
         }
         finally {
             clearTimeout(timeoutId);
@@ -342,7 +342,7 @@ export class TeamleaderClient {
                     throw refreshError;
                 }
             }
-            throw new TeamleaderAuthenticationError(await this.safeParseBody(response));
+            throw new TeamleaderFocusAuthenticationError(await this.safeParseBody(response));
         }
         // 429 Rate Limited — retry with backoff
         if (response.status === 429 && retryCount < this.maxRetries) {
@@ -362,15 +362,15 @@ export class TeamleaderClient {
         if (!response.ok) {
             const errorBody = await this.safeParseBody(response);
             if (response.status === 429) {
-                throw new TeamleaderRateLimitError(this.parseRetryAfter(response), errorBody);
+                throw new TeamleaderFocusRateLimitError(this.parseRetryAfter(response), errorBody);
             }
             if (response.status === 401) {
-                throw new TeamleaderAuthenticationError(errorBody);
+                throw new TeamleaderFocusAuthenticationError(errorBody);
             }
             if (response.status === 400 || response.status === 422) {
-                throw new TeamleaderValidationError(response.status, errorBody);
+                throw new TeamleaderFocusValidationError(response.status, errorBody);
             }
-            throw new TeamleaderError(`API request failed: ${response.status}`, response.status, errorBody);
+            throw new TeamleaderFocusError(`API request failed: ${response.status}`, response.status, errorBody);
         }
         if (!contentType.includes("application/json")) {
             return undefined;

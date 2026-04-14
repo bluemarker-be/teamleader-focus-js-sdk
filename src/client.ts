@@ -1,9 +1,9 @@
 import {
-  TeamleaderAuthenticationError,
-  TeamleaderError,
-  TeamleaderNetworkError,
-  TeamleaderRateLimitError,
-  TeamleaderValidationError,
+  TeamleaderFocusAuthenticationError,
+  TeamleaderFocusError,
+  TeamleaderFocusNetworkError,
+  TeamleaderFocusRateLimitError,
+  TeamleaderFocusValidationError,
 } from "./errors.js";
 import { refreshTokens } from "./oauth.js";
 import { paginatePages, paginateItems } from "./paginator.js";
@@ -81,7 +81,7 @@ const DEFAULT_BASE_URL = "https://api.focus.teamleader.eu";
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_MAX_RETRIES = 3;
 
-interface TeamleaderClientConfigBase {
+interface TeamleaderFocusClientConfigBase {
   /** OAuth2 refresh token — required for auto-refresh */
   refreshToken?: string;
   /** OAuth2 client ID — required for auto-refresh */
@@ -117,7 +117,7 @@ interface TeamleaderClientConfigBase {
   apiVersion?: string;
 }
 
-interface TeamleaderClientConfigWithToken extends TeamleaderClientConfigBase {
+interface TeamleaderFocusClientConfigWithToken extends TeamleaderFocusClientConfigBase {
   /** OAuth2 access token */
   accessToken: string;
   /**
@@ -127,7 +127,7 @@ interface TeamleaderClientConfigWithToken extends TeamleaderClientConfigBase {
   getTokens?: () => Promise<{ access_token: string; refresh_token?: string }> | { access_token: string; refresh_token?: string };
 }
 
-interface TeamleaderClientConfigWithGetTokens extends TeamleaderClientConfigBase {
+interface TeamleaderFocusClientConfigWithGetTokens extends TeamleaderFocusClientConfigBase {
   /** OAuth2 access token — optional when getTokens is provided */
   accessToken?: string;
   /**
@@ -138,9 +138,9 @@ interface TeamleaderClientConfigWithGetTokens extends TeamleaderClientConfigBase
   getTokens: () => Promise<{ access_token: string; refresh_token?: string }> | { access_token: string; refresh_token?: string };
 }
 
-export type TeamleaderClientConfig = TeamleaderClientConfigWithToken | TeamleaderClientConfigWithGetTokens;
+export type TeamleaderFocusClientConfig = TeamleaderFocusClientConfigWithToken | TeamleaderFocusClientConfigWithGetTokens;
 
-export class TeamleaderClient {
+export class TeamleaderFocusClient {
   private accessToken: string;
   private refreshToken?: string;
   private readonly clientId?: string;
@@ -226,7 +226,7 @@ export class TeamleaderClient {
   public readonly withholdingTaxRates: WithholdingTaxRatesResource;
   public readonly workTypes: WorkTypesResource;
 
-  constructor(config: TeamleaderClientConfig) {
+  constructor(config: TeamleaderFocusClientConfig) {
     this.accessToken = config.accessToken ?? "";
     this.refreshToken = config.refreshToken;
     this.clientId = config.clientId;
@@ -400,11 +400,11 @@ export class TeamleaderClient {
       });
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") {
-        throw new TeamleaderNetworkError(
+        throw new TeamleaderFocusNetworkError(
           new Error(`Request timed out after ${this.timeout}ms`),
         );
       }
-      throw new TeamleaderNetworkError(error as Error);
+      throw new TeamleaderFocusNetworkError(error as Error);
     } finally {
       clearTimeout(timeoutId);
     }
@@ -442,7 +442,7 @@ export class TeamleaderClient {
         }
       }
 
-      throw new TeamleaderAuthenticationError(await this.safeParseBody(response));
+      throw new TeamleaderFocusAuthenticationError(await this.safeParseBody(response));
     }
 
     // 429 Rate Limited — retry with backoff
@@ -465,15 +465,15 @@ export class TeamleaderClient {
     if (!response.ok) {
       const errorBody = await this.safeParseBody(response);
       if (response.status === 429) {
-        throw new TeamleaderRateLimitError(this.parseRetryAfter(response), errorBody);
+        throw new TeamleaderFocusRateLimitError(this.parseRetryAfter(response), errorBody);
       }
       if (response.status === 401) {
-        throw new TeamleaderAuthenticationError(errorBody);
+        throw new TeamleaderFocusAuthenticationError(errorBody);
       }
       if (response.status === 400 || response.status === 422) {
-        throw new TeamleaderValidationError(response.status, errorBody);
+        throw new TeamleaderFocusValidationError(response.status, errorBody);
       }
-      throw new TeamleaderError(
+      throw new TeamleaderFocusError(
         `API request failed: ${response.status}`,
         response.status,
         errorBody,

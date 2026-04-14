@@ -1,4 +1,4 @@
-import { TeamleaderClient } from "../../src/index.js";
+import { TeamleaderFocusClient } from "../../src/index.js";
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -48,23 +48,23 @@ function persistEnvVar(key: string, value: string): void {
 // Client singleton
 // ---------------------------------------------------------------------------
 
-let _client: TeamleaderClient | undefined;
+let _client: TeamleaderFocusClient | undefined;
 
 /**
- * Returns a shared TeamleaderClient instance configured from environment
+ * Returns a shared TeamleaderFocusClient instance configured from environment
  * variables. Returns a dummy client if ACCESS_TOKEN is missing (tests will
  * be skipped via `describe.skipIf(noToken)` so the dummy is never used).
  */
-export function getClient(): TeamleaderClient {
+export function getClient(): TeamleaderFocusClient {
   if (_client) return _client;
 
   const accessToken = process.env.ACCESS_TOKEN;
   if (!accessToken) {
     // Return a dummy — tests are skipped via noToken guard anyway
-    return new TeamleaderClient({ accessToken: "missing" });
+    return new TeamleaderFocusClient({ accessToken: "missing" });
   }
 
-  _client = new TeamleaderClient({
+  _client = new TeamleaderFocusClient({
     accessToken,
     refreshToken: process.env.REFRESH_TOKEN,
     clientId: process.env.CLIENT_ID,

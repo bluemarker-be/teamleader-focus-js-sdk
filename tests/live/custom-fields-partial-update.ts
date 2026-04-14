@@ -9,7 +9,7 @@
 
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { TeamleaderClient } from "../../src/client.js";
+import { TeamleaderFocusClient } from "../../src/client.js";
 
 // Minimal .env loader (no dependency needed)
 function loadEnv() {
@@ -92,7 +92,7 @@ function toTlIso(date: Date): string {
  * Reuses existing fields with the same label+context to avoid hitting the max limit.
  */
 async function findOrCreateField(
-  client: TeamleaderClient,
+  client: TeamleaderFocusClient,
   label: string,
   context: string,
 ): Promise<string> {
@@ -135,7 +135,7 @@ async function main() {
     process.exit(1);
   }
 
-  const client = new TeamleaderClient({
+  const client = new TeamleaderFocusClient({
     accessToken: ACCESS_TOKEN,
     refreshToken: REFRESH_TOKEN,
     clientId: CLIENT_ID,

@@ -11,12 +11,12 @@
  */
 
 import {
-  TeamleaderClient,
-  TeamleaderError,
+  TeamleaderFocusClient,
+  TeamleaderFocusError,
 } from "../../_shared/teamleader/index.js";
 
 Deno.serve(async () => {
-  const teamleader = new TeamleaderClient({
+  const teamleader = new TeamleaderFocusClient({
     accessToken: Deno.env.get("TEAMLEADER_ACCESS_TOKEN")!,
   });
 
@@ -60,7 +60,7 @@ Deno.serve(async () => {
       contacts_linked: contacts.length,
     });
   } catch (err) {
-    if (err instanceof TeamleaderError) {
+    if (err instanceof TeamleaderFocusError) {
       return Response.json(
         { error: err.message, status: err.status, body: err.body },
         { status: err.status || 500 },

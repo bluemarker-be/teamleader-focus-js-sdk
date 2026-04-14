@@ -1,6 +1,6 @@
 // Core
-export { TeamleaderClient } from "./client.js";
-export type { TeamleaderClientConfig } from "./client.js";
+export { TeamleaderFocusClient } from "./client.js";
+export type { TeamleaderFocusClientConfig } from "./client.js";
 
 // OAuth2
 export {
@@ -16,12 +16,12 @@ export type {
 
 // Errors
 export {
-  TeamleaderError,
-  TeamleaderAuthenticationError,
-  TeamleaderTokenRefreshError,
-  TeamleaderRateLimitError,
-  TeamleaderValidationError,
-  TeamleaderNetworkError,
+  TeamleaderFocusError,
+  TeamleaderFocusAuthenticationError,
+  TeamleaderFocusTokenRefreshError,
+  TeamleaderFocusRateLimitError,
+  TeamleaderFocusValidationError,
+  TeamleaderFocusNetworkError,
 } from "./errors.js";
 
 // Pagination types (use via client.paginatePages() / client.paginateItems())

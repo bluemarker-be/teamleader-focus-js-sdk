@@ -1,4 +1,4 @@
-import { TeamleaderAuthenticationError, TeamleaderTokenRefreshError } from "./errors.js";
+import { TeamleaderFocusAuthenticationError, TeamleaderFocusTokenRefreshError } from "./errors.js";
 import type { OAuthTokens } from "./types/common.js";
 
 const AUTHORIZATION_URL = "https://focus.teamleader.eu/oauth2/authorize";
@@ -82,7 +82,7 @@ export async function exchangeCodeForTokens(
     } catch {
       errorBody = text;
     }
-    throw new TeamleaderAuthenticationError(errorBody);
+    throw new TeamleaderFocusAuthenticationError(errorBody);
   }
 
   return (await response.json()) as OAuthTokens;
@@ -90,7 +90,7 @@ export async function exchangeCodeForTokens(
 
 // ---------------------------------------------------------------------------
 // Step 3: Refresh an access token
-// Throws TeamleaderTokenRefreshError on failure (subclass of TeamleaderAuthenticationError)
+// Throws TeamleaderFocusTokenRefreshError on failure (subclass of TeamleaderFocusAuthenticationError)
 // ---------------------------------------------------------------------------
 
 export interface RefreshTokenParams {
@@ -130,7 +130,7 @@ export async function refreshTokens(
     } catch {
       errorBody = text;
     }
-    throw new TeamleaderTokenRefreshError(errorBody);
+    throw new TeamleaderFocusTokenRefreshError(errorBody);
   }
 
   return (await response.json()) as OAuthTokens;
