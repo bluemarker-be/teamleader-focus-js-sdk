@@ -81,6 +81,22 @@ describe.skipIf(noToken)("files.upload (2-step binary flow)", () => {
       expect(data.id).toBe(uploadedFileId);
       expect(data.name).toBe(FILE_NAME);
     });
+
+    it("step 5: files.download returns a presigned URL, GET retrieves original bytes", async () => {
+      if (!uploadedFileId) return;
+      const res = await client.files.download({ id: uploadedFileId });
+      const data = res.data as { location?: string; expires_at?: string };
+      expect(data.location).toMatch(/^https?:\/\//);
+      expect(data.expires_at).toBeDefined();
+
+      const r = await fetch(data.location!);
+      expect(r.ok).toBe(true);
+      const downloadedBytes = new Uint8Array(await r.arrayBuffer());
+
+      // The bytes we uploaded should come back identical
+      expect(downloadedBytes.length).toBe(FILE_BYTES.length);
+      expect(Array.from(downloadedBytes)).toEqual(Array.from(FILE_BYTES));
+    });
   });
 
   afterAll(async () => {
