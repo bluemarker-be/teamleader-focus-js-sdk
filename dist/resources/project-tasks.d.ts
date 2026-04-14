@@ -2,6 +2,7 @@ import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 /** Tasks within Projects v2 (not to be confused with standalone Tasks) */
 export declare class ProjectTasksResource extends BaseResource {
+    /** Get a list of project tasks */
     list(params?: RequestBody<"NextgenProjectsTasks.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -89,6 +90,7 @@ export declare class ProjectTasksResource extends BaseResource {
             } | null | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single project task */
     info(params: RequestBody<"NextgenProjectsTasks.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -187,21 +189,27 @@ export declare class ProjectTasksResource extends BaseResource {
             }[] | undefined;
         } | undefined;
     }>;
+    /** Create a new project task */
     create(params: RequestBody<"NextgenProjectsTasks.create">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing project task */
     update(params: RequestBody<"NextgenProjectsTasks.update">): Promise<void>;
+    /** Duplicate a project task */
     duplicate(params: RequestBody<"NextgenProjectsTasks.duplicate">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Delete a project task */
     delete(params: RequestBody<"NextgenProjectsTasks.delete">): Promise<void>;
+    /** Assign a user to a project task */
     assign(params: RequestBody<"NextgenProjectsTasks.assign">): Promise<void>;
+    /** Unassign a user from a project task */
     unassign(params: RequestBody<"NextgenProjectsTasks.unassign">): Promise<void>;
 }
 //# sourceMappingURL=project-tasks.d.ts.map

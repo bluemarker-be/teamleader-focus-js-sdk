@@ -1,6 +1,8 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
+/** Materials within Projects v2 */
 export declare class ProjectMaterialsResource extends BaseResource {
+    /** Get a list of project materials */
     list(params?: RequestBody<"NextgenProjectsMaterials.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -78,6 +80,7 @@ export declare class ProjectMaterialsResource extends BaseResource {
             } | null | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single project material */
     info(params: RequestBody<"NextgenProjectsMaterials.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -156,21 +159,27 @@ export declare class ProjectMaterialsResource extends BaseResource {
             } | null | undefined;
         } | undefined;
     }>;
+    /** Create a new project material */
     create(params: RequestBody<"NextgenProjectsMaterials.create">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing project material */
     update(params: RequestBody<"NextgenProjectsMaterials.update">): Promise<void>;
+    /** Duplicate a project material */
     duplicate(params: RequestBody<"NextgenProjectsMaterials.duplicate">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Delete a project material */
     delete(params: RequestBody<"NextgenProjectsMaterials.delete">): Promise<void>;
+    /** Assign a user to a project material */
     assign(params: RequestBody<"NextgenProjectsMaterials.assign">): Promise<void>;
+    /** Unassign a user from a project material */
     unassign(params: RequestBody<"NextgenProjectsMaterials.unassign">): Promise<void>;
 }
 //# sourceMappingURL=project-materials.d.ts.map

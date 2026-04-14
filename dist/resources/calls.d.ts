@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class CallsResource extends BaseResource {
+    /** Get a list of calls */
     list(params?: RequestBody<"calls.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -40,6 +41,7 @@ export declare class CallsResource extends BaseResource {
             matches?: number | undefined;
         } | undefined;
     }>;
+    /** Get details for a single call */
     info(params: RequestBody<"calls.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -83,13 +85,16 @@ export declare class CallsResource extends BaseResource {
             }[] | undefined;
         } | undefined;
     }>;
+    /** Log a new call */
     add(params: RequestBody<"calls.add">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing call */
     update(params: RequestBody<"calls.update">): Promise<void>;
+    /** Mark a call as complete */
     complete(params: RequestBody<"calls.complete">): Promise<void>;
 }
 //# sourceMappingURL=calls.d.ts.map

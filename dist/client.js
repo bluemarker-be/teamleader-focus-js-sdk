@@ -318,15 +318,13 @@ export class TeamleaderClient {
         // 429 Rate Limited — retry with backoff
         if (response.status === 429 && retryCount < this.maxRetries) {
             const retryAfter = this.parseRetryAfter(response);
-            const waitMs = retryAfter.getTime() - Date.now();
-            if (waitMs > 0) {
-                await this.sleep(waitMs);
-            }
+            const waitMs = Math.max(100, retryAfter.getTime() - Date.now());
+            await this.sleep(waitMs);
             return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
         }
         // 500/502/503 Server Error — retry with exponential backoff
         if ((response.status === 500 || response.status === 502 || response.status === 503) && retryCount < this.maxRetries) {
-            const backoffMs = Math.min(1000 * 2 ** retryCount, 10_000);
+            const backoffMs = Math.min(1000 * 2 ** retryCount, 10_000) * (0.5 + Math.random() * 0.5);
             await this.sleep(backoffMs);
             return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
         }

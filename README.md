@@ -4,6 +4,27 @@ Fully typed TypeScript SDK for the [Teamleader Focus API](https://developer.team
 
 Types are auto-generated from the official OpenAPI spec — your editor gives you autocomplete on every parameter and response field. For field-level documentation, refer to the [Teamleader API docs](https://developer.teamleader.eu/).
 
+## Installation
+
+This SDK is distributed via GitHub (private repository). Install a specific version
+with a git tag:
+
+```bash
+# HTTPS (requires a GitHub Personal Access Token with repo scope)
+npm install git+https://github.com/henkdeblauw/teamleader-focus-js-sdk.git#v0.3.1
+
+# SSH (requires your GitHub SSH key)
+npm install git+ssh://git@github.com:henkdeblauw/teamleader-focus-js-sdk.git#v0.3.1
+```
+
+Or install the latest commit on `main`:
+
+```bash
+npm install git+ssh://git@github.com:henkdeblauw/teamleader-focus-js-sdk.git
+```
+
+Pinning to a tag is recommended for production use.
+
 ## Setup
 
 ```typescript

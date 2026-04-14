@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class SubscriptionsResource extends BaseResource {
+    /** Get a list of subscriptions */
     list(params?: RequestBody<"subscriptions.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -74,6 +75,7 @@ export declare class SubscriptionsResource extends BaseResource {
             created_at?: string | null | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single subscription */
     info(params: RequestBody<"subscriptions.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -229,13 +231,16 @@ export declare class SubscriptionsResource extends BaseResource {
             created_at?: string | null | undefined;
         } | undefined;
     }>;
+    /** Create a new subscription */
     create(params: RequestBody<"subscriptions.create">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing subscription */
     update(params: RequestBody<"subscriptions.update">): Promise<void>;
+    /** Deactivate a subscription */
     deactivate(params: RequestBody<"subscriptions.deactivate">): Promise<void>;
 }
 //# sourceMappingURL=subscriptions.d.ts.map

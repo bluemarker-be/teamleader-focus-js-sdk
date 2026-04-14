@@ -37254,7 +37254,7 @@ export interface operations {
                             /** @description UUID of the financial document */
                             id?: string;
                             /** @enum {string} */
-                            type?: "incoming_invoice" | "incoming_credit_note" | "receipt";
+                            type?: "incomingInvoice" | "incomingCreditNote" | "receipt";
                         };
                     };
                 };
@@ -37290,7 +37290,7 @@ export interface operations {
                             subject?: {
                                 id?: string;
                                 /** @enum {string} */
-                                type?: "incoming_invoice" | "incoming_credit_note" | "receipt";
+                                type?: "incomingInvoice" | "incomingCreditNote" | "receipt";
                             };
                             /** @description email address where the bookkeeping submission was sent */
                             email_address?: string;

@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "prepare": "tsc",
     "generate": "node --loader ts-node/esm scripts/generate-types.ts",
     "dev": "tsc --watch",
     "test": "vitest run",
@@ -26,6 +27,10 @@
     "diff-spec": "node --loader ts-node/esm scripts/diff-spec.ts",
     "test:coverage": "node --loader ts-node/esm scripts/check-test-coverage.ts",
     "verify:endpoints": "node --loader ts-node/esm scripts/verify-endpoints.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henkdeblauw/teamleader-focus-js-sdk.git"
   },
   "devDependencies": {
     "openapi-typescript": "^7.13.0",

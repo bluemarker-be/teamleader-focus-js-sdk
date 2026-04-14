@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class OrdersResource extends BaseResource {
+    /** Get a list of orders */
     list(params?: RequestBody<"orders.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -74,6 +75,7 @@ export declare class OrdersResource extends BaseResource {
             }[] | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single order */
     info(params: RequestBody<"orders.info">): Promise<{
         data?: {
             id?: string | undefined;

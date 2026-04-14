@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class UserAvailabilityResource extends BaseResource {
+    /** Get total availability for a user in a date range */
     total(params: RequestBody<"userAvailability.total">): Promise<{
         data?: {
             user?: {
@@ -27,6 +28,7 @@ export declare class UserAvailabilityResource extends BaseResource {
             } | undefined;
         }[] | undefined;
     }>;
+    /** Get daily availability for a user in a date range */
     daily(params: RequestBody<"userAvailability.daily">): Promise<{
         data?: {
             user?: {

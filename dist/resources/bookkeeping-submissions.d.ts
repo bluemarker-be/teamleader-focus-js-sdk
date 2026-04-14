@@ -6,7 +6,7 @@ export declare class BookkeepingSubmissionsResource extends BaseResource {
             id?: string | undefined;
             subject?: {
                 id?: string | undefined;
-                type?: "incoming_invoice" | "incoming_credit_note" | "receipt" | undefined;
+                type?: "incomingInvoice" | "incomingCreditNote" | "receipt" | undefined;
             } | undefined;
             email_address?: string | undefined;
             status?: "sending" | "confirmed" | "failed" | undefined;

@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class CreditNotesResource extends BaseResource {
+    /** Get a list of credit notes */
     list(params?: RequestBody<"creditNotes.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -54,6 +55,7 @@ export declare class CreditNotesResource extends BaseResource {
             updated_at?: string | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single credit note */
     info(params: RequestBody<"creditNotes.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -178,6 +180,7 @@ export declare class CreditNotesResource extends BaseResource {
             peppol_status?: ("sending" | "sending_failed" | "sent" | "application_acknowledged" | "application_accepted" | "application_rejected" | "receiver_acknowledged" | "receiver_accepted" | "receiver_rejected" | "receiver_is_processing" | "receiver_awaits_feedback" | "receiver_conditionally_accepted" | "receiver_paid" | null) | undefined;
         }[] | undefined;
     }>;
+    /** Download a credit note PDF */
     download(params: RequestBody<"creditNotes.download">): Promise<{
         data?: {
             location?: string | undefined;

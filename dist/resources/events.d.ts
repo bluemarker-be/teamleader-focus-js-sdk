@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class EventsResource extends BaseResource {
+    /** Get a list of events */
     list(params?: RequestBody<"events.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -31,6 +32,7 @@ export declare class EventsResource extends BaseResource {
             }[] | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single event */
     info(params: RequestBody<"events.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -61,13 +63,16 @@ export declare class EventsResource extends BaseResource {
             }[] | undefined;
         } | undefined;
     }>;
+    /** Create a new event */
     create(params: RequestBody<"events.create">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing event */
     update(params: RequestBody<"events.update">): Promise<void>;
+    /** Cancel an event */
     cancel(params: RequestBody<"events.cancel">): Promise<void>;
 }
 //# sourceMappingURL=events.d.ts.map

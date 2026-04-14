@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class MeetingsResource extends BaseResource {
+    /** Get a list of meetings */
     list(params?: RequestBody<"meetings.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -55,6 +56,7 @@ export declare class MeetingsResource extends BaseResource {
             } | null | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single meeting */
     info(params: RequestBody<"meetings.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -159,20 +161,25 @@ export declare class MeetingsResource extends BaseResource {
             } | null | undefined;
         } | undefined;
     }>;
+    /** Schedule a new meeting */
     schedule(params: RequestBody<"meetings.schedule">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing meeting */
     update(params: RequestBody<"meetings.update">): Promise<void>;
+    /** Mark a meeting as complete */
     complete(params: RequestBody<"meetings.complete">): Promise<void>;
+    /** Create a report for a meeting */
     createReport(params: RequestBody<"meetings.createReport">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Delete a meeting */
     delete(params: RequestBody<"meetings.delete">): Promise<void>;
 }
 //# sourceMappingURL=meetings.d.ts.map

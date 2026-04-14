@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class FilesResource extends BaseResource {
+    /** Get a list of files */
     list(params: RequestBody<"files.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -19,6 +20,7 @@ export declare class FilesResource extends BaseResource {
             folder?: string | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single file */
     info(params: RequestBody<"files.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -37,18 +39,21 @@ export declare class FilesResource extends BaseResource {
             folder?: string | undefined;
         } | undefined;
     }>;
+    /** Upload a file */
     upload(params: RequestBody<"files.upload">): Promise<{
         data?: {
             location?: string | undefined;
             expires_at?: string | undefined;
         } | undefined;
     }>;
+    /** Download a file */
     download(params: RequestBody<"files.download">): Promise<{
         data?: {
             location?: string | undefined;
             expires_at?: string | undefined;
         } | undefined;
     }>;
+    /** Delete a file */
     delete(params: RequestBody<"files.delete">): Promise<void>;
 }
 //# sourceMappingURL=files.d.ts.map

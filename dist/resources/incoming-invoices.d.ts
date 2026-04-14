@@ -1,12 +1,14 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class IncomingInvoicesResource extends BaseResource {
+    /** Add a new incoming invoice */
     add(params: RequestBody<"incomingInvoices.add">): Promise<{
         data?: {
             type?: string | undefined;
             id?: string | undefined;
         } | undefined;
     }>;
+    /** Get details for a single incoming invoice */
     info(params: RequestBody<"incomingInvoices.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -47,12 +49,19 @@ export declare class IncomingInvoicesResource extends BaseResource {
             payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid" | undefined;
         } | undefined;
     }>;
+    /** Update an existing incoming invoice */
     update(params: RequestBody<"incomingInvoices.update">): Promise<void>;
+    /** Delete an incoming invoice */
     delete(params: RequestBody<"incomingInvoices.delete">): Promise<void>;
+    /** Approve an incoming invoice */
     approve(params: RequestBody<"incomingInvoices.approve">): Promise<void>;
+    /** Refuse an incoming invoice */
     refuse(params: RequestBody<"incomingInvoices.refuse">): Promise<void>;
+    /** Mark an incoming invoice as pending review */
     markAsPendingReview(params: RequestBody<"incomingInvoices.markAsPendingReview">): Promise<void>;
+    /** Send an incoming invoice to bookkeeping */
     sendToBookkeeping(params: RequestBody<"incomingInvoices.sendToBookkeeping">): Promise<void>;
+    /** Get a list of payments for an incoming invoice */
     listPayments(params: RequestBody<"incomingInvoices.listPayments">): Promise<{
         data?: {
             id?: string | undefined;
@@ -73,13 +82,16 @@ export declare class IncomingInvoicesResource extends BaseResource {
             } | undefined;
         } | undefined;
     }>;
+    /** Register a payment for an incoming invoice */
     registerPayment(params: RequestBody<"incomingInvoices.registerPayment">): Promise<{
         data?: {
             type?: string | undefined;
             id?: string | undefined;
         } | undefined;
     }>;
+    /** Remove a payment from an incoming invoice */
     removePayment(params: RequestBody<"incomingInvoices.removePayment">): Promise<void>;
+    /** Update a payment on an incoming invoice */
     updatePayment(params: RequestBody<"incomingInvoices.updatePayment">): Promise<void>;
 }
 //# sourceMappingURL=incoming-invoices.d.ts.map

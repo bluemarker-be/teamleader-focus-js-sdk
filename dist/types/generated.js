@@ -5,14 +5,15 @@
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
-// 1. NoteSubjectTypesCreate missing "meeting"
+// 1. [RESOLVED in spec 1.136.0] NoteSubjectTypesCreate missing "meeting"
 //    The API accepts "meeting" as subject.type in notes.create, but the
 //    OpenAPI spec omits it from the NoteSubjectTypesCreate enum.
 //    Patch: added "meeting" to all NoteSubjectTypesCreate occurrences.
+//    Status: spec now includes "meeting" natively — no patch needed.
 //
 // 2. dealPhases.duplicate returns 404
 //    The endpoint exists in the spec but is not functional in the API.
-//    No patch needed — the SDK includes the method, tests skip it.
+//    Method intentionally excluded from SDK. Listed in IGNORED_OPERATIONS.
 //
 // 5. Context enum: "deal" → "sale" + 6 missing contexts
 //    The spec uses "deal" but the API requires "sale". Also missing:
@@ -27,6 +28,11 @@
 // 7. tasks.list missing deal_id filter
 //    The API accepts deal_id as a filter on tasks.list but the spec omits it.
 //    Patch: added optional deal_id to the tasks.listrequest filter.
+//
+// 8. bookkeepingSubmissions filter.subject.type snake_case → camelCase
+//    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
+//    expects "incomingInvoice" | "incomingCreditNote".
+//    Patch: replaced enum values in all occurrences.
 //
 // 🧹 Post-generation cleanups (openapi-typescript artifacts):
 //

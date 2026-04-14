@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class TasksResource extends BaseResource {
+    /** Get a list of tasks */
     list(params?: RequestBody<"tasks.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -45,6 +46,7 @@ export declare class TasksResource extends BaseResource {
             priority?: "A" | "B" | "C" | "D" | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single task */
     info(params: RequestBody<"tasks.info">): Promise<{
         data?: {
             id?: string | undefined;
@@ -98,21 +100,27 @@ export declare class TasksResource extends BaseResource {
             priority?: "A" | "B" | "C" | "D" | undefined;
         } | undefined;
     }>;
+    /** Create a new task */
     create(params: RequestBody<"tasks.create">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Update an existing task */
     update(params: RequestBody<"tasks.update">): Promise<void>;
+    /** Mark a task as complete */
     complete(params: RequestBody<"tasks.complete">): Promise<void>;
+    /** Reopen a completed task */
     reopen(params: RequestBody<"tasks.reopen">): Promise<void>;
+    /** Schedule a task */
     schedule(params: RequestBody<"tasks.schedule">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Delete a task */
     delete(params: RequestBody<"tasks.delete">): Promise<void>;
 }
 //# sourceMappingURL=tasks.d.ts.map

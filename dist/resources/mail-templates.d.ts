@@ -1,6 +1,7 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class MailTemplatesResource extends BaseResource {
+    /** Get a list of mail templates */
     list(params: RequestBody<"mailTemplates.list">): Promise<{
         data?: {
             id?: string | undefined;

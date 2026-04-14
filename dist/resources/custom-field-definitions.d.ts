@@ -1,12 +1,14 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class CustomFieldDefinitionsResource extends BaseResource {
+    /** Create a new custom field definition */
     create(params: RequestBody<"customFieldDefinitions.create">): Promise<{
         data?: {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
     }>;
+    /** Get a list of custom field definitions */
     list(params?: RequestBody<"customFieldDefinitions.list">): Promise<{
         data?: {
             id?: string | undefined;
@@ -24,6 +26,7 @@ export declare class CustomFieldDefinitionsResource extends BaseResource {
             } | undefined;
         }[] | undefined;
     }>;
+    /** Get details for a single custom field definition */
     info(params: RequestBody<"customFieldDefinitions.info">): Promise<{
         data?: {
             id?: string | undefined;
