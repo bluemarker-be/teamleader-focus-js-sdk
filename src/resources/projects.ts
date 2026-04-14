@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class ProjectsResource extends BaseResource {
-  /** Get a list of projects */
-  list(params?: RequestBody<"NextgenProjects.list">) {
-    return this.client.request<ResponseBody<"NextgenProjects.list">>("/projects-v2/projects.list", params);
+  /** Iterate all NextgenProjects — auto-paginates across every page. */
+  list(params?: RequestBody<"NextgenProjects.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"NextgenProjects.list">>("/projects-v2/projects.list", params, options);
   }
 
   /** Get details for a single project */

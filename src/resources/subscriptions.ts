@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class SubscriptionsResource extends BaseResource {
-  /** Get a list of subscriptions */
-  list(params?: RequestBody<"subscriptions.list">) {
-    return this.client.request<ResponseBody<"subscriptions.list">>("/subscriptions.list", params);
+  /** Iterate all subscriptions — auto-paginates across every page. */
+  list(params?: RequestBody<"subscriptions.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"subscriptions.list">>("/subscriptions.list", params, options);
   }
 
   /** Get details for a single subscription */

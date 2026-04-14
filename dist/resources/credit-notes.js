@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class CreditNotesResource extends BaseResource {
-    /** Get a list of credit notes */
-    list(params) {
-        return this.client.request("/creditNotes.list", params);
+    /** Iterate all creditNotes — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/creditNotes.list", params, options);
     }
     /** Get details for a single credit note */
     info(params) {

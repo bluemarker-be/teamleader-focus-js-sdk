@@ -1,9 +1,9 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class TagsResource extends BaseResource {
-  /** Get a list of tags */
-  list(params?: RequestBody<"tags.list">) {
-    return this.client.request<ResponseBody<"tags.list">>("/tags.list", params);
+  /** Iterate all tags — auto-paginates across every page. */
+  list(params?: RequestBody<"tags.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"tags.list">>("/tags.list", params, options);
   }
 }

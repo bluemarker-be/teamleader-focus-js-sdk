@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ProductsResource extends BaseResource {
-    /** Get a list of products */
-    list(params) {
-        return this.client.request("/products.list", params);
+    /** Iterate all products — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/products.list", params, options);
     }
     /** Get details for a single product */
     info(params) {

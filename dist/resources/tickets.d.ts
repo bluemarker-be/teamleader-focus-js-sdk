@@ -1,43 +1,43 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class TicketsResource extends BaseResource {
-    /** Get a list of tickets */
-    list(params?: RequestBody<"tickets.list">): Promise<{
-        data?: {
+    /** Iterate all tickets — auto-paginates across every page. */
+    list(params?: RequestBody<"tickets.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        reference?: number | undefined;
+        subject?: string | undefined;
+        status?: {
             id?: string | undefined;
-            reference?: number | undefined;
-            subject?: string | undefined;
-            status?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            assignee?: {
-                type?: string | undefined;
-                id?: string | undefined;
-            } | null | undefined;
-            created_at?: string | undefined;
-            closed_at?: string | null | undefined;
+            type?: string | undefined;
+        } | undefined;
+        assignee?: {
+            type?: string | undefined;
+            id?: string | undefined;
+        } | null | undefined;
+        created_at?: string | undefined;
+        closed_at?: string | null | undefined;
+        customer?: {
+            type: "contact" | "company";
+            id: string;
+        } | undefined;
+        participant?: {
             customer?: {
-                type: "contact" | "company";
-                id: string;
+                id?: string | undefined;
+                type?: string | undefined;
             } | undefined;
-            participant?: {
-                customer?: {
-                    id?: string | undefined;
-                    type?: string | undefined;
-                } | undefined;
-            } | null | undefined;
-            project?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            milestone?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            last_message_at?: string | null | undefined;
-        }[] | undefined;
-    }>;
+        } | null | undefined;
+        project?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        milestone?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        last_message_at?: string | null | undefined;
+    }, void, undefined>;
     /** Get details for a single ticket */
     info(params: RequestBody<"tickets.info">): Promise<{
         id?: string | undefined;

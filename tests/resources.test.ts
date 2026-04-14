@@ -28,7 +28,7 @@ describe("Resources", () => {
   describe("contacts", () => {
     it("list → POST /contacts.list", async () => {
       const { client, calls } = createClient();
-      await client.contacts.list();
+      for await (const _ of client.contacts.list()) break;
       expect(calls[0].url).toContain("/contacts.list");
     });
 
@@ -101,7 +101,7 @@ describe("Resources", () => {
   describe("companies", () => {
     it("list → POST /companies.list", async () => {
       const { client, calls } = createClient();
-      await client.companies.list();
+      for await (const _ of client.companies.list()) break;
       expect(calls[0].url).toContain("/companies.list");
     });
 
@@ -155,7 +155,7 @@ describe("Resources", () => {
   describe("deals", () => {
     it("list → POST /deals.list", async () => {
       const { client, calls } = createClient();
-      await client.deals.list();
+      for await (const _ of client.deals.list()) break;
       expect(calls[0].url).toContain("/deals.list");
     });
 
@@ -216,7 +216,7 @@ describe("Resources", () => {
 
     it("list → POST /users.list", async () => {
       const { client, calls } = createClient();
-      await client.users.list();
+      for await (const _ of client.users.list()) break;
       expect(calls[0].url).toContain("/users.list");
     });
 
@@ -244,8 +244,13 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("invoices", () => {
+    it("list → POST /invoices.list", async () => {
+      const { client, calls } = createClient();
+      for await (const _ of client.invoices.list()) break;
+      expect(calls[0].url).toContain("/invoices.list");
+    });
+
     const invoiceEndpoints: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
-      ["invoices.list", (c) => c.invoices.list()],
       ["invoices.info", (c) => c.invoices.info({ id: "i1" })],
       ["invoices.download", (c) => c.invoices.download({ id: "i1", format: "pdf" })],
       ["invoices.draft", (c) => c.invoices.draft({
@@ -304,7 +309,7 @@ describe("Resources", () => {
   describe("quotations", () => {
     it("list → POST /quotations.list", async () => {
       const { client, calls } = createClient();
-      await client.quotations.list();
+      for await (const _ of client.quotations.list()) break;
       expect(calls[0].url).toContain("/quotations.list");
     });
 
@@ -367,7 +372,7 @@ describe("Resources", () => {
   describe("products", () => {
     it("list → POST /products.list", async () => {
       const { client, calls } = createClient();
-      await client.products.list();
+      for await (const _ of client.products.list()) break;
       expect(calls[0].url).toContain("/products.list");
     });
 
@@ -403,7 +408,7 @@ describe("Resources", () => {
   describe("projects (v2)", () => {
     it("list → POST /projects-v2/projects.list", async () => {
       const { client, calls } = createClient();
-      await client.projects.list();
+      for await (const _ of client.projects.list()) break;
       expect(calls[0].url).toContain("/projects-v2/projects.list");
     });
 
@@ -458,7 +463,7 @@ describe("Resources", () => {
   describe("events", () => {
     it("list → POST /events.list", async () => {
       const { client, calls } = createClient();
-      await client.events.list();
+      for await (const _ of client.events.list()) break;
       expect(calls[0].url).toContain("/events.list");
     });
 
@@ -499,7 +504,7 @@ describe("Resources", () => {
   describe("tasks", () => {
     it("list → POST /tasks.list", async () => {
       const { client, calls } = createClient();
-      await client.tasks.list();
+      for await (const _ of client.tasks.list()) break;
       expect(calls[0].url).toContain("/tasks.list");
     });
 
@@ -557,7 +562,7 @@ describe("Resources", () => {
   describe("meetings", () => {
     it("list → POST /meetings.list", async () => {
       const { client, calls } = createClient();
-      await client.meetings.list();
+      for await (const _ of client.meetings.list()) break;
       expect(calls[0].url).toContain("/meetings.list");
     });
 
@@ -613,7 +618,7 @@ describe("Resources", () => {
   describe("notes", () => {
     it("list → POST /notes.list", async () => {
       const { client, calls } = createClient();
-      await client.notes.list({ filter: { subject: { type: "contact", id: "c1" } } });
+      for await (const _ of client.notes.list({ filter: { subject: { type: "contact", id: "c1" } } })) break;
       expect(calls[0].url).toContain("/notes.list");
     });
 
@@ -637,7 +642,7 @@ describe("Resources", () => {
   describe("calls", () => {
     it("list → POST /calls.list", async () => {
       const { client, calls: c } = createClient();
-      await client.calls.list();
+      for await (const _ of client.calls.list()) break;
       expect(c[0].url).toContain("/calls.list");
     });
 
@@ -677,7 +682,7 @@ describe("Resources", () => {
   describe("timeTracking", () => {
     it("list → POST /timeTracking.list", async () => {
       const { client, calls } = createClient();
-      await client.timeTracking.list();
+      for await (const _ of client.timeTracking.list()) break;
       expect(calls[0].url).toContain("/timeTracking.list");
     });
 
@@ -727,7 +732,7 @@ describe("Resources", () => {
   describe("creditNotes", () => {
     it("list → POST /creditNotes.list", async () => {
       const { client, calls } = createClient();
-      await client.creditNotes.list();
+      for await (const _ of client.creditNotes.list()) break;
       expect(calls[0].url).toContain("/creditNotes.list");
     });
 
@@ -757,7 +762,7 @@ describe("Resources", () => {
   describe("tickets", () => {
     it("list → POST /tickets.list", async () => {
       const { client, calls } = createClient();
-      await client.tickets.list();
+      for await (const _ of client.tickets.list()) break;
       expect(calls[0].url).toContain("/tickets.list");
     });
 
@@ -826,7 +831,7 @@ describe("Resources", () => {
   describe("files", () => {
     it("list → POST /files.list", async () => {
       const { client, calls } = createClient();
-      await client.files.list({ filter: { subject: { type: "contact", id: "c1" } } });
+      for await (const _ of client.files.list({ filter: { subject: { type: "contact", id: "c1" } } })) break;
       expect(calls[0].url).toContain("/files.list");
     });
 
@@ -865,7 +870,7 @@ describe("Resources", () => {
   describe("subscriptions", () => {
     it("list → POST /subscriptions.list", async () => {
       const { client, calls } = createClient();
-      await client.subscriptions.list();
+      for await (const _ of client.subscriptions.list()) break;
       expect(calls[0].url).toContain("/subscriptions.list");
     });
 
@@ -916,7 +921,7 @@ describe("Resources", () => {
 
     it("list → POST /webhooks.list", async () => {
       const { client, calls } = createClient();
-      await client.webhooks.list();
+      for await (const _ of client.webhooks.list()) break;
       expect(calls[0].url).toContain("/webhooks.list");
     });
 
@@ -934,7 +939,7 @@ describe("Resources", () => {
   describe("dealPipelines", () => {
     it("list → POST /dealPipelines.list", async () => {
       const { client, calls } = createClient();
-      await client.dealPipelines.list();
+      for await (const _ of client.dealPipelines.list()) break;
       expect(calls[0].url).toContain("/dealPipelines.list");
     });
 
@@ -976,7 +981,7 @@ describe("Resources", () => {
   describe("dealPhases", () => {
     it("list → POST /dealPhases.list", async () => {
       const { client, calls } = createClient();
-      await client.dealPhases.list({ filter: { deal_pipeline_id: "dp1" } });
+      for await (const _ of client.dealPhases.list({ filter: { deal_pipeline_id: "dp1" } })) break;
       expect(calls[0].url).toContain("/dealPhases.list");
     });
 
@@ -1019,7 +1024,7 @@ describe("Resources", () => {
   describe("customFieldDefinitions", () => {
     it("list → POST /customFieldDefinitions.list", async () => {
       const { client, calls } = createClient();
-      await client.customFieldDefinitions.list();
+      for await (const _ of client.customFieldDefinitions.list()) break;
       expect(calls[0].url).toContain("/customFieldDefinitions.list");
     });
 
@@ -1047,7 +1052,7 @@ describe("Resources", () => {
   describe("closingDays", () => {
     it("list → POST /closingDays.list", async () => {
       const { client, calls } = createClient();
-      await client.closingDays.list();
+      for await (const _ of client.closingDays.list()) break;
       expect(calls[0].url).toContain("/closingDays.list");
     });
 
@@ -1071,7 +1076,7 @@ describe("Resources", () => {
   describe("dayOffTypes", () => {
     it("list → POST /dayOffTypes.list", async () => {
       const { client, calls } = createClient();
-      await client.dayOffTypes.list();
+      for await (const _ of client.dayOffTypes.list()) break;
       expect(calls[0].url).toContain("/dayOffTypes.list");
     });
 
@@ -1151,8 +1156,13 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("legacyProjects", () => {
+    it("list → POST /projects.list", async () => {
+      const { client, calls } = createClient();
+      for await (const _ of client.legacyProjects.list()) break;
+      expect(calls[0].url).toContain("/projects.list");
+    });
+
     const dataMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
-      ["projects.list", (c) => c.legacyProjects.list()],
       ["projects.info", (c) => c.legacyProjects.info({ id: "lp1" })],
       ["projects.create", (c) => c.legacyProjects.create({
         title: "LP",
@@ -1193,8 +1203,13 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("legacyMilestones", () => {
+    it("list → POST /milestones.list", async () => {
+      const { client, calls } = createClient();
+      for await (const _ of client.legacyMilestones.list({ filter: { project_id: "p1" } })) break;
+      expect(calls[0].url).toContain("/milestones.list");
+    });
+
     const dataMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
-      ["milestones.list", (c) => c.legacyMilestones.list()],
       ["milestones.info", (c) => c.legacyMilestones.info({ id: "ms1" })],
       ["milestones.create", (c) => c.legacyMilestones.create({
         project_id: "lp1",
@@ -1234,8 +1249,13 @@ describe("Resources", () => {
   // ---------------------------------------------------------------------------
 
   describe("projectGroups", () => {
+    it("list → POST /projects-v2/projectGroups.list", async () => {
+      const { client, calls } = createClient();
+      for await (const _ of client.projectGroups.list()) break;
+      expect(calls[0].url).toContain("/projects-v2/projectGroups.list");
+    });
+
     const dataMethods: Array<[string, (c: TeamleaderFocusClient) => Promise<unknown>]> = [
-      ["projectGroups.list", (c) => c.projectGroups.list()],
       ["projectGroups.info", (c) => c.projectGroups.info({ id: "pg1" })],
       ["projectGroups.create", (c) => c.projectGroups.create({ project_id: "p1", title: "G1" })],
       ["projectGroups.duplicate", (c) => c.projectGroups.duplicate({ origin_id: "pg1" })],
@@ -1273,7 +1293,7 @@ describe("Resources", () => {
     it("list → POST /projects-v2/tasks.list", async () => {
       const { client, calls } = createClient();
       // projectTasks.list filter only supports ids
-      await client.projectTasks.list({ filter: { ids: ["pt1"] } });
+      for await (const _ of client.projectTasks.list({ filter: { ids: ["pt1"] } })) break;
       expect(calls[0].url).toContain("/projects-v2/tasks.list");
     });
 
@@ -1319,7 +1339,7 @@ describe("Resources", () => {
     it("list → POST /projects-v2/materials.list", async () => {
       const { client, calls } = createClient();
       // projectMaterials.list filter only supports ids
-      await client.projectMaterials.list({ filter: { ids: ["pm1"] } });
+      for await (const _ of client.projectMaterials.list({ filter: { ids: ["pm1"] } })) break;
       expect(calls[0].url).toContain("/projects-v2/materials.list");
     });
 
@@ -1364,7 +1384,7 @@ describe("Resources", () => {
   describe("projectLines", () => {
     it("list → POST /projects-v2/projectLines.list", async () => {
       const { client, calls } = createClient();
-      await client.projectLines.list({ project_id: "p1" });
+      for await (const _ of client.projectLines.list({ project_id: "p1" })) break;
       expect(calls[0].url).toContain("/projects-v2/projectLines.list");
     });
 
@@ -1597,7 +1617,7 @@ describe("Resources", () => {
   describe("reservations", () => {
     it("list → POST /reservations.list", async () => {
       const { client, calls } = createClient();
-      await client.reservations.list();
+      for await (const _ of client.reservations.list()) break;
       expect(calls[0].url).toContain("/reservations.list");
     });
 
@@ -1680,7 +1700,7 @@ describe("Resources", () => {
   describe("plannableItems", () => {
     it("list → POST /plannableItems.list", async () => {
       const { client, calls } = createClient();
-      await client.plannableItems.list();
+      for await (const _ of client.plannableItems.list()) break;
       expect(calls[0].url).toContain("/plannableItems.list");
     });
 
@@ -1694,7 +1714,7 @@ describe("Resources", () => {
   describe("emailTracking", () => {
     it("list → POST /emailTracking.list", async () => {
       const { client, calls } = createClient();
-      await client.emailTracking.list({ filter: { subject: { type: "contact", id: "c1" } } });
+      for await (const _ of client.emailTracking.list({ filter: { subject: { type: "contact", id: "c1" } } })) break;
       expect(calls[0].url).toContain("/emailTracking.list");
     });
 
@@ -1727,7 +1747,7 @@ describe("Resources", () => {
   describe("orders", () => {
     it("list → POST /orders.list", async () => {
       const { client, calls } = createClient();
-      await client.orders.list();
+      for await (const _ of client.orders.list()) break;
       expect(calls[0].url).toContain("/orders.list");
     });
 
@@ -1744,27 +1764,27 @@ describe("Resources", () => {
 
   describe("list-only resources", () => {
     const cases: Array<[string, (client: TeamleaderFocusClient) => Promise<unknown>]> = [
-      ["departments.list", (c) => c.departments.list()],
-      ["teams.list", (c) => c.teams.list()],
-      ["tags.list", (c) => c.tags.list()],
-      ["taxRates.list", (c) => c.taxRates.list()],
-      ["paymentTerms.list", (c) => c.paymentTerms.list()],
-      ["activityTypes.list", (c) => c.activityTypes.list()],
-      ["businessTypes.list", (c) => c.businessTypes.list({ country: "BE" })],
-      ["lostReasons.list", (c) => c.lostReasons.list()],
-      ["workTypes.list", (c) => c.workTypes.list()],
-      ["ticketStatus.list", (c) => c.ticketStatus.list()],
-      ["callOutcomes.list", (c) => c.callOutcomes.list()],
-      ["unitsOfMeasure.list", (c) => c.unitsOfMeasure.list()],
-      ["commercialDiscounts.list", (c) => c.commercialDiscounts.list()],
-      ["withholdingTaxRates.list", (c) => c.withholdingTaxRates.list()],
-      ["paymentMethods.list", (c) => c.paymentMethods.list()],
-      ["bookkeepingSubmissions.list", (c) => c.bookkeepingSubmissions.list()],
-      ["productCategories.list", (c) => c.productCategories.list()],
-      ["priceLists.list", (c) => c.priceLists.list()],
-      ["dealSources.list", (c) => c.dealSources.list()],
-      ["expenses.list", (c) => c.expenses.list()],
-      ["dayOffTypes.list", (c) => c.dayOffTypes.list()],
+      ["departments.list", (c) => (async () => { for await (const _ of c.departments.list()) break; })()],
+      ["teams.list", (c) => (async () => { for await (const _ of c.teams.list()) break; })()],
+      ["tags.list", (c) => (async () => { for await (const _ of c.tags.list()) break; })()],
+      ["taxRates.list", (c) => (async () => { for await (const _ of c.taxRates.list()) break; })()],
+      ["paymentTerms.list", (c) => (async () => { for await (const _ of c.paymentTerms.list()) break; })()],
+      ["activityTypes.list", (c) => (async () => { for await (const _ of c.activityTypes.list()) break; })()],
+      ["businessTypes.list", (c) => (async () => { for await (const _ of c.businessTypes.list({ country: "BE" })) break; })()],
+      ["lostReasons.list", (c) => (async () => { for await (const _ of c.lostReasons.list()) break; })()],
+      ["workTypes.list", (c) => (async () => { for await (const _ of c.workTypes.list()) break; })()],
+      ["ticketStatus.list", (c) => (async () => { for await (const _ of c.ticketStatus.list()) break; })()],
+      ["callOutcomes.list", (c) => (async () => { for await (const _ of c.callOutcomes.list()) break; })()],
+      ["unitsOfMeasure.list", (c) => (async () => { for await (const _ of c.unitsOfMeasure.list()) break; })()],
+      ["commercialDiscounts.list", (c) => (async () => { for await (const _ of c.commercialDiscounts.list()) break; })()],
+      ["withholdingTaxRates.list", (c) => (async () => { for await (const _ of c.withholdingTaxRates.list()) break; })()],
+      ["paymentMethods.list", (c) => (async () => { for await (const _ of c.paymentMethods.list()) break; })()],
+      ["bookkeepingSubmissions.list", (c) => (async () => { for await (const _ of c.bookkeepingSubmissions.list()) break; })()],
+      ["productCategories.list", (c) => (async () => { for await (const _ of c.productCategories.list()) break; })()],
+      ["priceLists.list", (c) => (async () => { for await (const _ of c.priceLists.list()) break; })()],
+      ["dealSources.list", (c) => (async () => { for await (const _ of c.dealSources.list()) break; })()],
+      ["expenses.list", (c) => (async () => { for await (const _ of c.expenses.list()) break; })()],
+      ["dayOffTypes.list", (c) => (async () => { for await (const _ of c.dayOffTypes.list()) break; })()],
     ];
 
     for (const [endpoint, fn] of cases) {
@@ -1789,21 +1809,21 @@ describe("Resources", () => {
 
     it("documentTemplates.list → POST /documentTemplates.list", async () => {
       const { client, calls } = createClient();
-      await client.documentTemplates.list({
+      for await (const _ of client.documentTemplates.list({
         filter: { department_id: "dep1", document_type: "quotation" },
-      });
+      })) break;
       expect(calls[0].url).toContain("/documentTemplates.list");
     });
 
     it("levelTwoAreas.list → POST /levelTwoAreas.list", async () => {
       const { client, calls } = createClient();
-      await client.levelTwoAreas.list({ country: "BE" });
+      for await (const _ of client.levelTwoAreas.list({ country: "BE" })) break;
       expect(calls[0].url).toContain("/levelTwoAreas.list");
     });
 
     it("mailTemplates.list → POST /mailTemplates.list", async () => {
       const { client, calls } = createClient();
-      await client.mailTemplates.list({ filter: { type: "invoice" } });
+      for await (const _ of client.mailTemplates.list({ filter: { type: "invoice" } })) break;
       expect(calls[0].url).toContain("/mailTemplates.list");
     });
   });

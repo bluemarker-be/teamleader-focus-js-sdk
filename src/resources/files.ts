@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class FilesResource extends BaseResource {
-  /** Get a list of files */
-  list(params: RequestBody<"files.list">) {
-    return this.client.request<ResponseBody<"files.list">>("/files.list", params);
+  /** Iterate all files — auto-paginates across every page. */
+  list(params: RequestBody<"files.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"files.list">>("/files.list", params, options);
   }
 
   /** Get details for a single file */

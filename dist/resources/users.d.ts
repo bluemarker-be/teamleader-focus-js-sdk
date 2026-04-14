@@ -30,30 +30,30 @@ export declare class UsersResource extends BaseResource {
             } | undefined;
         } | undefined;
     }>;
-    /** Get a list of users */
-    list(params?: RequestBody<"users.list">): Promise<{
-        data?: {
+    /** Iterate all users — auto-paginates across every page. */
+    list(params?: RequestBody<"users.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        account?: {
             id?: string | undefined;
-            account?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            first_name?: string | undefined;
-            last_name?: string | undefined;
-            email?: string | undefined;
-            telephones?: {
-                type?: "phone" | "mobile" | "fax" | undefined;
-                number?: string | undefined;
-            }[] | undefined;
-            language?: string | undefined;
-            function?: string | undefined;
-            status?: "active" | "deactivated" | undefined;
-            teams?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            }[] | undefined;
+            type?: string | undefined;
+        } | undefined;
+        first_name?: string | undefined;
+        last_name?: string | undefined;
+        email?: string | undefined;
+        telephones?: {
+            type?: "phone" | "mobile" | "fax" | undefined;
+            number?: string | undefined;
         }[] | undefined;
-    }>;
+        language?: string | undefined;
+        function?: string | undefined;
+        status?: "active" | "deactivated" | undefined;
+        teams?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        }[] | undefined;
+    }, void, undefined>;
     /** Get details for a single user */
     info(params: RequestBody<"users.info">): Promise<{
         data?: {

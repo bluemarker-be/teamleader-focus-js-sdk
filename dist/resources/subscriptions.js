@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class SubscriptionsResource extends BaseResource {
-    /** Get a list of subscriptions */
-    list(params) {
-        return this.client.request("/subscriptions.list", params);
+    /** Iterate all subscriptions — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/subscriptions.list", params, options);
     }
     /** Get details for a single subscription */
     info(params) {

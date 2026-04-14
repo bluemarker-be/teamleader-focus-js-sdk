@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class CallsResource extends BaseResource {
-    /** Get a list of calls */
-    list(params) {
-        return this.client.request("/calls.list", params);
+    /** Iterate all calls — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/calls.list", params, options);
     }
     /** Get details for a single call */
     info(params) {

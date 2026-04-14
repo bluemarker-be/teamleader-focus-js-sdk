@@ -1,60 +1,60 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class CreditNotesResource extends BaseResource {
-    /** Get a list of credit notes */
-    list(params?: RequestBody<"creditNotes.list">): Promise<{
-        data?: {
+    /** Iterate all creditNotes — auto-paginates across every page. */
+    list(params?: RequestBody<"creditNotes.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        department?: {
             id?: string | undefined;
-            department?: {
+            type?: string | undefined;
+        } | undefined;
+        credit_note_number?: string | null | undefined;
+        credit_note_date?: string | null | undefined;
+        status?: "booked" | undefined;
+        invoice?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        paid?: boolean | undefined;
+        paid_at?: string | null | undefined;
+        invoicee?: {
+            name?: string | undefined;
+            vat_number?: string | null | undefined;
+            customer?: {
                 id?: string | undefined;
                 type?: string | undefined;
             } | undefined;
-            credit_note_number?: string | null | undefined;
-            credit_note_date?: string | null | undefined;
-            status?: "booked" | undefined;
-            invoice?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            paid?: boolean | undefined;
-            paid_at?: string | null | undefined;
-            invoicee?: {
-                name?: string | undefined;
-                vat_number?: string | null | undefined;
-                customer?: {
-                    id?: string | undefined;
-                    type?: string | undefined;
-                } | undefined;
+        } | undefined;
+        total?: {
+            tax_exclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            total?: {
-                tax_exclusive?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                tax_inclusive?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                payable?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                taxes?: {
-                    rate?: number | undefined;
-                    taxable?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                    tax?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                }[] | undefined;
+            tax_inclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            created_at?: string | undefined;
-            updated_at?: string | undefined;
-        }[] | undefined;
-    }>;
+            payable?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            taxes?: {
+                rate?: number | undefined;
+                taxable?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+                tax?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+            }[] | undefined;
+        } | undefined;
+        created_at?: string | undefined;
+        updated_at?: string | undefined;
+    }, void, undefined>;
     /** Get details for a single credit note */
     info(params: RequestBody<"creditNotes.info">): Promise<{
         data?: {

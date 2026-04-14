@@ -1,5 +1,5 @@
 import { describe, it, expect, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, delay, isoDate } from "./setup.js";
+import { getClient, noToken, cleanupAll, delay, isoDate, collect } from "./setup.js";
 import {
   TeamleaderFocusError,
   TeamleaderFocusValidationError,
@@ -97,11 +97,11 @@ describe.skipIf(noToken)("Error Boundaries", () => {
       const cRes = await client.contacts.add({ first_name: "SDK", last_name: "ErrorTest" });
       contactId = (cRes.data as { id: string }).id;
 
-      const depRes = await client.departments.list();
-      departmentId = (depRes.data as Array<{ id: string }>)[0].id;
+      const depRes = await collect(client.departments.list(undefined, { maxPages: 1 }));
+      departmentId = (depRes as Array<{ id: string }>)[0].id;
 
-      const trRes = await client.taxRates.list();
-      const rates = trRes.data as Array<{ id: string; department?: { id: string } }>;
+      const trRes = await collect(client.taxRates.list(undefined, { maxPages: 1 }));
+      const rates = trRes as Array<{ id: string; department?: { id: string } }>;
       taxRateId = rates.find((r) => r.department?.id === departmentId)!.id;
 
       // Create and book an invoice
@@ -126,8 +126,8 @@ describe.skipIf(noToken)("Error Boundaries", () => {
       // Create and win a deal
       const pRes = await client.dealPipelines.create({ name: "SDK Error Test Pipeline" });
       pipelineId = (pRes.data as { id: string }).id;
-      const phRes = await client.dealPhases.list({ filter: { deal_pipeline_id: pipelineId } });
-      const phaseId = (phRes.data as Array<{ id: string }>)[0].id;
+      const phRes = await collect(client.dealPhases.list({ filter: { deal_pipeline_id: pipelineId } }, { maxPages: 1 }));
+      const phaseId = (phRes as Array<{ id: string }>)[0].id;
 
       const dRes = await client.deals.create({
         title: "SDK Error Test Deal",

@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class FilesResource extends BaseResource {
-    /** Get a list of files */
-    list(params) {
-        return this.client.request("/files.list", params);
+    /** Iterate all files — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/files.list", params, options);
     }
     /** Get details for a single file */
     info(params) {

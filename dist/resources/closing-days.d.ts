@@ -1,19 +1,13 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class ClosingDaysResource extends BaseResource {
-    list(params?: RequestBody<"closingDays.list">): Promise<{
-        data?: {
-            id?: string | undefined;
-            date?: string | undefined;
-        }[] | undefined;
-        meta?: {
-            page?: {
-                size?: number | undefined;
-                number?: number | undefined;
-            } | undefined;
-            matches?: number | undefined;
-        } | undefined;
-    }>;
+    /** Iterate all closingDays — auto-paginates across every page. */
+    list(params?: RequestBody<"closingDays.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        date?: string | undefined;
+    }, void, undefined>;
     add(params: RequestBody<"closingDays.add">): Promise<{
         data?: {
             type?: string | undefined;

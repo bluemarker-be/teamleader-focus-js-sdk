@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ExpensesResource extends BaseResource {
-    /** Get a list of expenses */
-    list(params) {
-        return this.client.request("/expenses.list", params);
+    /** Iterate all expenses — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/expenses.list", params, options);
     }
 }
 //# sourceMappingURL=expenses.js.map

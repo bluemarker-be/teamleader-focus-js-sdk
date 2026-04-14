@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class TagsResource extends BaseResource {
-    /** Get a list of tags */
-    list(params) {
-        return this.client.request("/tags.list", params);
+    /** Iterate all tags — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/tags.list", params, options);
     }
 }
 //# sourceMappingURL=tags.js.map

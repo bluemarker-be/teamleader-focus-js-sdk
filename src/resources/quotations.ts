@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class QuotationsResource extends BaseResource {
-  /** Get a list of quotations */
-  list(params?: RequestBody<"quotations.list">) {
-    return this.client.request<ResponseBody<"quotations.list">>("/quotations.list", params);
+  /** Iterate all quotations — auto-paginates across every page. */
+  list(params?: RequestBody<"quotations.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"quotations.list">>("/quotations.list", params, options);
   }
 
   /** Get details for a single quotation */

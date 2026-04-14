@@ -1,4 +1,4 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class UsersResource extends BaseResource {
@@ -7,9 +7,9 @@ export class UsersResource extends BaseResource {
     return this.client.request<ResponseBody<"users.me">>("/users.me");
   }
 
-  /** Get a list of users */
-  list(params?: RequestBody<"users.list">) {
-    return this.client.request<ResponseBody<"users.list">>("/users.list", params);
+  /** Iterate all users — auto-paginates across every page. */
+  list(params?: RequestBody<"users.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"users.list">>("/users.list", params, options);
   }
 
   /** Get details for a single user */

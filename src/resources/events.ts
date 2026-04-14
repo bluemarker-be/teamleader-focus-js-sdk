@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class EventsResource extends BaseResource {
-  /** Get a list of events */
-  list(params?: RequestBody<"events.list">) {
-    return this.client.request<ResponseBody<"events.list">>("/events.list", params);
+  /** Iterate all events — auto-paginates across every page. */
+  list(params?: RequestBody<"events.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"events.list">>("/events.list", params, options);
   }
 
   /** Get details for a single event */

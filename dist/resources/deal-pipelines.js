@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class DealPipelinesResource extends BaseResource {
-    /** Get a list of deal pipelines */
-    list(params) {
-        return this.client.request("/dealPipelines.list", params);
+    /** Iterate all dealPipelines — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/dealPipelines.list", params, options);
     }
     /** Create a new deal pipeline */
     create(params) {

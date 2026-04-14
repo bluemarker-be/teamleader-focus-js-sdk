@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class TicketsResource extends BaseResource {
-    /** Get a list of tickets */
-    list(params) {
-        return this.client.request("/tickets.list", params);
+    /** Iterate all tickets — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/tickets.list", params, options);
     }
     /** Get details for a single ticket */
     info(params) {

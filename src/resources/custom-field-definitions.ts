@@ -1,4 +1,4 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class CustomFieldDefinitionsResource extends BaseResource {
@@ -7,9 +7,9 @@ export class CustomFieldDefinitionsResource extends BaseResource {
     return this.client.request<ResponseBody<"customFieldDefinitions.create">>("/customFieldDefinitions.create", params);
   }
 
-  /** Get a list of custom field definitions */
-  list(params?: RequestBody<"customFieldDefinitions.list">) {
-    return this.client.request<ResponseBody<"customFieldDefinitions.list">>("/customFieldDefinitions.list", params);
+  /** Iterate all customFieldDefinitions — auto-paginates across every page. */
+  list(params?: RequestBody<"customFieldDefinitions.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"customFieldDefinitions.list">>("/customFieldDefinitions.list", params, options);
   }
 
   /** Get details for a single custom field definition */

@@ -1,9 +1,9 @@
 import { BaseResource } from "./base.js";
 /** Groups within Projects v2 */
 export class ProjectGroupsResource extends BaseResource {
-    /** Get a list of project groups */
-    list(params) {
-        return this.client.request("/projects-v2/projectGroups.list", params);
+    /** Iterate all projectGroups — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/projects-v2/projectGroups.list", params, options);
     }
     /** Get details for a single project group */
     info(params) {

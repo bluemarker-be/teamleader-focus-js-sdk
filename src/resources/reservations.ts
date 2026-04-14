@@ -1,9 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class ReservationsResource extends BaseResource {
-  list(params?: RequestBody<"reservations.list">) {
-    return this.client.request<ResponseBody<"reservations.list">>("/reservations.list", params);
+  /** Iterate all reservations — auto-paginates across every page. */
+  list(params?: RequestBody<"reservations.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"reservations.list">>("/reservations.list", params, options);
   }
 
   create(params: RequestBody<"reservations.create">) {

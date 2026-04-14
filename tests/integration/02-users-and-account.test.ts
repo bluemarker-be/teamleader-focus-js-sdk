@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getClient, noToken, isoDate, futureDate } from "./setup.js";
+import { getClient, noToken, isoDate, futureDate, collect } from "./setup.js";
 
 describe.skipIf(noToken)("Users & Account", () => {
   const client = getClient();
@@ -19,10 +19,9 @@ describe.skipIf(noToken)("Users & Account", () => {
     });
 
     it("list", async () => {
-      const res = await client.users.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
-      expect(res.data.length).toBeGreaterThan(0);
+      const res = await collect(client.users.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
+      expect(res.length).toBeGreaterThan(0);
     });
 
     it("info", async () => {

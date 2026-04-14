@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class DealPhasesResource extends BaseResource {
-    /** Get a list of deal phases for a pipeline */
-    list(params) {
-        return this.client.request("/dealPhases.list", params);
+    /** Iterate all dealPhases — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/dealPhases.list", params, options);
     }
     /** Create a new deal phase */
     create(params) {

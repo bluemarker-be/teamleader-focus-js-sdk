@@ -4,6 +4,37 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.6.0] - 2026-04-13
+
+### Changed (breaking)
+- `.list()` methods on every resource now return an `AsyncIterable<Item>`
+  that auto-paginates across every page, instead of a `Promise` resolving
+  to a single page `{ data, meta }`. This eliminates the need to reason
+  about pagination at the call site — just iterate.
+
+  **Migration:**
+  ```diff
+  - const { data } = await teamleader.contacts.list({ filter: { term: "John" } });
+  - for (const contact of data) { /* … */ }
+  + for await (const contact of teamleader.contacts.list({ filter: { term: "John" } })) {
+  +   /* … */
+  + }
+  ```
+
+  Each `.list(params, options)` call accepts an optional `options` object
+  (`{ maxPages?: number }`) as a second argument. Resources without a
+  request body (e.g. `dayOffTypes.list`) use `list(undefined, options)`.
+
+  The low-level client primitives `client.paginateItems(endpoint, params, options)`
+  and `client.paginatePages(endpoint, params, options)` are unchanged —
+  use them if you need access to per-page `meta` or to iterate endpoints
+  not covered by a resource class.
+
+### Added
+- `ListItem<Op>` type helper in `types/common.ts` — extracts the element
+  type from a list-style response, used by every `.list()` signature so
+  each yielded item is fully typed.
+
 ## [0.5.0] - 2026-04-14
 
 ### Changed (breaking)

@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ProjectsResource extends BaseResource {
-    /** Get a list of projects */
-    list(params) {
-        return this.client.request("/projects-v2/projects.list", params);
+    /** Iterate all NextgenProjects — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/projects-v2/projects.list", params, options);
     }
     /** Get details for a single project */
     info(params) {

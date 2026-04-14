@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class MeetingsResource extends BaseResource {
-    /** Get a list of meetings */
-    list(params) {
-        return this.client.request("/meetings.list", params);
+    /** Iterate all meetings — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/meetings.list", params, options);
     }
     /** Get details for a single meeting */
     info(params) {

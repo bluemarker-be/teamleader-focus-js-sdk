@@ -1,37 +1,37 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class EventsResource extends BaseResource {
-    /** Get a list of events */
-    list(params?: RequestBody<"events.list">): Promise<{
-        data?: {
+    /** Iterate all events — auto-paginates across every page. */
+    list(params?: RequestBody<"events.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        creator?: {
             id?: string | undefined;
-            creator?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            task?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            activity_type?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            title?: string | undefined;
-            description?: string | undefined;
-            starts_at?: string | undefined;
-            ends_at?: string | undefined;
-            location?: string | undefined;
-            attendees?: {
-                type?: "user" | "contact" | undefined;
-                id?: string | undefined;
-            }[] | undefined;
-            links?: {
-                id?: string | undefined;
-                type?: "company" | "contact" | "deal" | undefined;
-            }[] | undefined;
+            type?: string | undefined;
+        } | undefined;
+        task?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+        activity_type?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+        title?: string | undefined;
+        description?: string | undefined;
+        starts_at?: string | undefined;
+        ends_at?: string | undefined;
+        location?: string | undefined;
+        attendees?: {
+            type?: "user" | "contact" | undefined;
+            id?: string | undefined;
         }[] | undefined;
-    }>;
+        links?: {
+            id?: string | undefined;
+            type?: "company" | "contact" | "deal" | undefined;
+        }[] | undefined;
+    }, void, undefined>;
     /** Get details for a single event */
     info(params: RequestBody<"events.info">): Promise<{
         data?: {

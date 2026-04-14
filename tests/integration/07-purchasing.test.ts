@@ -1,5 +1,5 @@
 import { describe, it, expect, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, futureDate, isoDate, isoDateTime, delay } from "./setup.js";
+import { getClient, noToken, cleanupAll, futureDate, isoDate, isoDateTime, delay, collect } from "./setup.js";
 
 describe.skipIf(noToken)("Purchasing", () => {
   const client = getClient();

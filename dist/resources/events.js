@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class EventsResource extends BaseResource {
-    /** Get a list of events */
-    list(params) {
-        return this.client.request("/events.list", params);
+    /** Iterate all events — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/events.list", params, options);
     }
     /** Get details for a single event */
     info(params) {

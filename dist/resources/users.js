@@ -4,9 +4,9 @@ export class UsersResource extends BaseResource {
     me() {
         return this.client.request("/users.me");
     }
-    /** Get a list of users */
-    list(params) {
-        return this.client.request("/users.list", params);
+    /** Iterate all users — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/users.list", params, options);
     }
     /** Get details for a single user */
     info(params) {

@@ -1,11 +1,11 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 /** Groups within Projects v2 */
 export class ProjectGroupsResource extends BaseResource {
-  /** Get a list of project groups */
-  list(params?: RequestBody<"projectGroups.list">) {
-    return this.client.request<ResponseBody<"projectGroups.list">>("/projects-v2/projectGroups.list", params);
+  /** Iterate all projectGroups — auto-paginates across every page. */
+  list(params?: RequestBody<"projectGroups.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"projectGroups.list">>("/projects-v2/projectGroups.list", params, options);
   }
 
   /** Get details for a single project group */

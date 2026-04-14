@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class QuotationsResource extends BaseResource {
-    /** Get a list of quotations */
-    list(params) {
-        return this.client.request("/quotations.list", params);
+    /** Iterate all quotations — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/quotations.list", params, options);
     }
     /** Get details for a single quotation */
     info(params) {

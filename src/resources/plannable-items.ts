@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class PlannableItemsResource extends BaseResource {
-  /** Get a list of plannable items */
-  list(params?: RequestBody<"plannableItems.list">) {
-    return this.client.request<ResponseBody<"plannableItems.list">>("/plannableItems.list", params);
+  /** Iterate all plannableItems — auto-paginates across every page. */
+  list(params?: RequestBody<"plannableItems.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"plannableItems.list">>("/plannableItems.list", params, options);
   }
 
   /** Get details for a single plannable item */

@@ -1,5 +1,5 @@
 import { describe, it, beforeAll, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, delay } from "./setup.js";
+import { getClient, noToken, cleanupAll, delay, collect } from "./setup.js";
 import { TeamleaderFocusError } from "../../src/errors.js";
 
 /**
@@ -47,14 +47,14 @@ describe.skipIf(noToken)("Currency exchange_rate — required vs optional", () =
     });
 
     it("fetch department ID", async () => {
-      const res = await client.departments.list();
-      const depts = res.data as Array<{ id: string }>;
+      const res = await collect(client.departments.list(undefined, { maxPages: 1 }));
+      const depts = res as Array<{ id: string }>;
       departmentId = depts[0].id;
     });
 
     it("fetch tax rate ID", async () => {
-      const res = await client.taxRates.list();
-      const rates = res.data as Array<{
+      const res = await collect(client.taxRates.list(undefined, { maxPages: 1 }));
+      const rates = res as Array<{
         id: string;
         department?: { type: string; id: string };
       }>;
@@ -70,10 +70,10 @@ describe.skipIf(noToken)("Currency exchange_rate — required vs optional", () =
       });
       pipelineId = (pRes.data as { id: string }).id;
 
-      const phRes = await client.dealPhases.list({
+      const phRes = await collect(client.dealPhases.list({
         filter: { deal_pipeline_id: pipelineId },
-      });
-      const phases = phRes.data as Array<{ id: string }>;
+      }, { maxPages: 1 }));
+      const phases = phRes as Array<{ id: string }>;
       if (phases.length > 0) {
         phaseId = phases[0].id;
       } else {

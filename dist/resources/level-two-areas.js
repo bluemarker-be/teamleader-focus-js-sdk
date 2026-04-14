@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class LevelTwoAreasResource extends BaseResource {
-    /** Get a list of level two areas */
-    list(params) {
-        return this.client.request("/levelTwoAreas.list", params);
+    /** Iterate all levelTwoAreas — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/levelTwoAreas.list", params, options);
     }
 }
 //# sourceMappingURL=level-two-areas.js.map

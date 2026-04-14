@@ -21,11 +21,9 @@ Deno.serve(async () => {
   });
 
   try {
-    // 1. List all companies (paginated)
-    const companies: Array<{ id: string; name: string }> = [];
-    for await (const company of teamleader.paginateItems<{ id: string; name: string }>(
-      "/companies.list",
-    )) {
+    // 1. List all companies — .list() auto-paginates across every page
+    const companies = [];
+    for await (const company of teamleader.companies.list()) {
       companies.push(company);
     }
 

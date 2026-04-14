@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class TimeTrackingResource extends BaseResource {
-  /** Get a list of time tracking entries */
-  list(params?: RequestBody<"timeTracking.list">) {
-    return this.client.request<ResponseBody<"timeTracking.list">>("/timeTracking.list", params);
+  /** Iterate all timeTracking — auto-paginates across every page. */
+  list(params?: RequestBody<"timeTracking.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"timeTracking.list">>("/timeTracking.list", params, options);
   }
 
   /** Get details for a single time tracking entry */

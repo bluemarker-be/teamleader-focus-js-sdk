@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class PaymentMethodsResource extends BaseResource {
-    list(params) {
-        return this.client.request("/paymentMethods.list", params);
+    /** Iterate all paymentMethods — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/paymentMethods.list", params, options);
     }
 }
 //# sourceMappingURL=payment-methods.js.map

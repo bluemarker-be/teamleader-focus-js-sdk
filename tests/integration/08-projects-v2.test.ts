@@ -1,5 +1,5 @@
 import { describe, it, expect, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, delay } from "./setup.js";
+import { getClient, noToken, cleanupAll, delay, collect } from "./setup.js";
 
 /**
  * Projects v2 tests — skipped if account is not migrated to Projects v2.
@@ -83,11 +83,10 @@ describe.skipIf(noToken)("Projects v2", () => {
 
     it("list", async () => {
       if (!isV2) return;
-      const res = await client.projects.list({
+      const res = await collect(client.projects.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -162,10 +161,10 @@ describe.skipIf(noToken)("Projects v2", () => {
       });
       pipelineId = (pRes.data as { id: string }).id;
 
-      const phRes = await client.dealPhases.list({
+      const phRes = await collect(client.dealPhases.list({
         filter: { deal_pipeline_id: pipelineId },
-      });
-      const phases = phRes.data as Array<{ id: string }>;
+      }, { maxPages: 1 }));
+      const phases = phRes as Array<{ id: string }>;
       phaseId = phases[0].id;
 
       const dRes = await client.deals.create({
@@ -195,12 +194,12 @@ describe.skipIf(noToken)("Projects v2", () => {
     it("setup: create quotation for linking", async () => {
       if (!isV2) return;
       // Fetch department + tax rate for quotation
-      const depRes = await client.departments.list();
-      const depts = depRes.data as Array<{ id: string }>;
+      const depRes = await collect(client.departments.list(undefined, { maxPages: 1 }));
+      const depts = depRes as Array<{ id: string }>;
       departmentId = depts[0].id;
 
-      const trRes = await client.taxRates.list();
-      const rates = trRes.data as Array<{
+      const trRes = await collect(client.taxRates.list(undefined, { maxPages: 1 }));
+      const rates = trRes as Array<{
         id: string;
         department?: { type: string; id: string };
       }>;
@@ -290,11 +289,10 @@ describe.skipIf(noToken)("Projects v2", () => {
 
     it("list", async () => {
       if (!isV2) return;
-      const res = await client.projectGroups.list({
+      const res = await collect(client.projectGroups.list({
         filter: { project_id: projectId },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -357,11 +355,10 @@ describe.skipIf(noToken)("Projects v2", () => {
     it("list", async () => {
       if (!isV2) return;
       // Per spec, filter only supports `ids` — no project_id filter
-      const res = await client.projectTasks.list({
+      const res = await collect(client.projectTasks.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -424,9 +421,8 @@ describe.skipIf(noToken)("Projects v2", () => {
     it("list", async () => {
       if (!isV2) return;
       // Per spec, filter only supports `ids` — no project_id filter, no page
-      const res = await client.projectMaterials.list({});
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.projectMaterials.list({}, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -470,13 +466,12 @@ describe.skipIf(noToken)("Projects v2", () => {
   describe.sequential("projectLines", () => {
     it("list", async () => {
       if (!isV2) return;
-      const res = await client.projectLines.list({
+      const res = await collect(client.projectLines.list({
         project_id: projectId,
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
       // Get a line ID from existing tasks/materials
-      const lines = res.data as Array<{ id: string }>;
+      const lines = res as Array<{ id: string }>;
       if (lines.length > 0) {
         lineId = lines[0].id;
       }

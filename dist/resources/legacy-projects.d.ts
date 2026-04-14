@@ -2,74 +2,74 @@ import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 /** Legacy projects (pre-v2). Use ProjectsResource for the newer Projects v2 API. */
 export declare class LegacyProjectsResource extends BaseResource {
-    /** Get a list of legacy projects */
-    list(params?: RequestBody<"LegacyProjects.list">): Promise<{
-        data?: {
+    /** Iterate all LegacyProjects — auto-paginates across every page. */
+    list(params?: RequestBody<"LegacyProjects.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        reference?: string | undefined;
+        title?: string | undefined;
+        description?: string | undefined;
+        status?: "active" | "on_hold" | "done" | "cancelled" | undefined;
+        customer?: {
             id?: string | undefined;
-            reference?: string | undefined;
-            title?: string | undefined;
-            description?: string | undefined;
-            status?: "active" | "on_hold" | "done" | "cancelled" | undefined;
-            customer?: {
-                id?: string | undefined;
-                type?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+        starts_on?: string | undefined;
+        due_on?: string | undefined;
+        created_at?: string | undefined;
+        source?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+        actuals?: {
+            billable_amount?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            starts_on?: string | undefined;
-            due_on?: string | undefined;
-            created_at?: string | undefined;
-            source?: {
-                id?: string | undefined;
-                type?: string | undefined;
+            costs?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            actuals?: {
-                billable_amount?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                costs?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                result?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                profit_percentage?: number | undefined;
+            result?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            budget?: {
-                provided?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                spent?: {
-                    total?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                    time?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                    materials?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                } | undefined;
-                remaining?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                allocated?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | null | undefined;
-                forecasted?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | null | undefined;
+            profit_percentage?: number | undefined;
+        } | undefined;
+        budget?: {
+            provided?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-        }[] | undefined;
-    }>;
+            spent?: {
+                total?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+                time?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+                materials?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+            } | undefined;
+            remaining?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            allocated?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | null | undefined;
+            forecasted?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | null | undefined;
+        } | undefined;
+    }, void, undefined>;
     /** Get details for a single legacy project */
     info(params: RequestBody<"LegacyProjects.info">): Promise<{
         data?: {

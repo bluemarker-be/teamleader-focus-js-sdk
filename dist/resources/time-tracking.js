@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class TimeTrackingResource extends BaseResource {
-    /** Get a list of time tracking entries */
-    list(params) {
-        return this.client.request("/timeTracking.list", params);
+    /** Iterate all timeTracking — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/timeTracking.list", params, options);
     }
     /** Get details for a single time tracking entry */
     info(params) {

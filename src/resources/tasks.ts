@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class TasksResource extends BaseResource {
-  /** Get a list of tasks */
-  list(params?: RequestBody<"tasks.list">) {
-    return this.client.request<ResponseBody<"tasks.list">>("/tasks.list", params);
+  /** Iterate all tasks — auto-paginates across every page. */
+  list(params?: RequestBody<"tasks.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"tasks.list">>("/tasks.list", params, options);
   }
 
   /** Get details for a single task */

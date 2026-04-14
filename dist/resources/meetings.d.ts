@@ -1,61 +1,61 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class MeetingsResource extends BaseResource {
-    /** Get a list of meetings */
-    list(params?: RequestBody<"meetings.list">): Promise<{
-        data?: {
+    /** Iterate all meetings — auto-paginates across every page. */
+    list(params?: RequestBody<"meetings.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        title?: string | undefined;
+        description?: string | undefined;
+        created_at?: string | undefined;
+        created_by?: {
             id?: string | undefined;
-            title?: string | undefined;
-            description?: string | undefined;
-            created_at?: string | undefined;
-            created_by?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            scheduled_at?: string | undefined;
-            duration?: {
+            type?: string | undefined;
+        } | null | undefined;
+        scheduled_at?: string | undefined;
+        duration?: {
+            unit?: "min" | undefined;
+            value?: number | undefined;
+        } | undefined;
+        tracked_time?: {
+            total?: {
                 unit?: "min" | undefined;
                 value?: number | undefined;
             } | undefined;
-            tracked_time?: {
-                total?: {
-                    unit?: "min" | undefined;
-                    value?: number | undefined;
-                } | undefined;
+        } | undefined;
+        estimated_time?: {
+            total?: {
+                unit?: "s" | undefined;
+                value?: number | undefined;
             } | undefined;
-            estimated_time?: {
-                total?: {
-                    unit?: "s" | undefined;
-                    value?: number | undefined;
-                } | undefined;
-            } | undefined;
-            customer?: {
-                type: "contact" | "company";
-                id: string;
-            } | null | undefined;
-            project?: {
-                id?: string | undefined;
-                type?: "project" | "nextgenProject" | undefined;
-            } | null | undefined;
-            milestone?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            group?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            attendees?: {
-                type?: "user" | "contact" | undefined;
-                id?: string | undefined;
-            }[] | undefined;
-            status?: "open" | "done" | undefined;
-            recurrence?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
+        } | undefined;
+        customer?: {
+            type: "contact" | "company";
+            id: string;
+        } | null | undefined;
+        project?: {
+            id?: string | undefined;
+            type?: "project" | "nextgenProject" | undefined;
+        } | null | undefined;
+        milestone?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        group?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        attendees?: {
+            type?: "user" | "contact" | undefined;
+            id?: string | undefined;
         }[] | undefined;
-    }>;
+        status?: "open" | "done" | undefined;
+        recurrence?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+    }, void, undefined>;
     /** Get details for a single meeting */
     info(params: RequestBody<"meetings.info">): Promise<{
         data?: {

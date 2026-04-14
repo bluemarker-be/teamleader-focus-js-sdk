@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class InvoicesResource extends BaseResource {
-  /** Get a list of invoices */
-  list(params?: RequestBody<"invoices.list">) {
-    return this.client.request<ResponseBody<"invoices.list">>("/invoices.list", params);
+  /** Iterate all invoices — auto-paginates across every page. */
+  list(params?: RequestBody<"invoices.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"invoices.list">>("/invoices.list", params, options);
   }
 
   /** Get details for a single invoice */

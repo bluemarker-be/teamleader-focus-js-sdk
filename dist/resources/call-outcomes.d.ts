@@ -1,12 +1,12 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class CallOutcomesResource extends BaseResource {
-    /** Get a list of call outcomes */
-    list(params?: RequestBody<"callOutcomes.list">): Promise<{
-        data?: {
-            id?: string | undefined;
-            name?: string | undefined;
-        }[] | undefined;
-    }>;
+    /** Iterate all callOutcomes — auto-paginates across every page. */
+    list(params?: RequestBody<"callOutcomes.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        name?: string | undefined;
+    }, void, undefined>;
 }
 //# sourceMappingURL=call-outcomes.d.ts.map

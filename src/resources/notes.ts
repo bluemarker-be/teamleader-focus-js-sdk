@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class NotesResource extends BaseResource {
-  /** Get a list of notes */
-  list(params: RequestBody<"notes.list">) {
-    return this.client.request<ResponseBody<"notes.list">>("/notes.list", params);
+  /** Iterate all notes — auto-paginates across every page. */
+  list(params: RequestBody<"notes.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"notes.list">>("/notes.list", params, options);
   }
 
   /** Create a new note */

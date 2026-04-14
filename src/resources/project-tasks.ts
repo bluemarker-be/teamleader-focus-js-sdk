@@ -1,11 +1,11 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 /** Tasks within Projects v2 (not to be confused with standalone Tasks) */
 export class ProjectTasksResource extends BaseResource {
-  /** Get a list of project tasks */
-  list(params?: RequestBody<"NextgenProjectsTasks.list">) {
-    return this.client.request<ResponseBody<"NextgenProjectsTasks.list">>("/projects-v2/tasks.list", params);
+  /** Iterate all NextgenProjectsTasks — auto-paginates across every page. */
+  list(params?: RequestBody<"NextgenProjectsTasks.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"NextgenProjectsTasks.list">>("/projects-v2/tasks.list", params, options);
   }
 
   /** Get details for a single project task */

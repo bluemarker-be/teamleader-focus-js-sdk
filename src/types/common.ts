@@ -50,6 +50,15 @@ export type ResponseBody<Op extends keyof operations> =
       ? JsonContent<C>
       : void;
 
+/** Extract the item type from a list-style response, i.e. `ResponseBody<Op>["data"][number]`.
+ *  Used by resource `list()` methods to type each yielded item in the async iterator. */
+export type ListItem<Op extends keyof operations> =
+  ResponseBody<Op> extends { data?: (infer U)[] | null | undefined }
+    ? U
+    : ResponseBody<Op> extends { data: (infer U)[] }
+      ? U
+      : never;
+
 // ---------------------------------------------------------------------------
 // Common shared types
 // ---------------------------------------------------------------------------

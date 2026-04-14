@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class DealPipelinesResource extends BaseResource {
-  /** Get a list of deal pipelines */
-  list(params?: RequestBody<"dealPipelines.list">) {
-    return this.client.request<ResponseBody<"dealPipelines.list">>("/dealPipelines.list", params);
+  /** Iterate all dealPipelines — auto-paginates across every page. */
+  list(params?: RequestBody<"dealPipelines.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"dealPipelines.list">>("/dealPipelines.list", params, options);
   }
 
   /** Create a new deal pipeline */

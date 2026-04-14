@@ -4,9 +4,9 @@ export class WebhooksResource extends BaseResource {
     register(params) {
         return this.client.request("/webhooks.register", params);
     }
-    /** Get a list of registered webhooks */
-    list(params) {
-        return this.client.request("/webhooks.list", params);
+    /** Iterate all webhooks — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/webhooks.list", params, options);
     }
     /** Unregister a webhook */
     unregister(params) {

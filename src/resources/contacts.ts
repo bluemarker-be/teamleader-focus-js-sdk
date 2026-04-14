@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class ContactsResource extends BaseResource {
-  /** Get a list of contacts */
-  list(params?: RequestBody<"contacts.list">) {
-    return this.client.request<ResponseBody<"contacts.list">>("/contacts.list", params);
+  /** Iterate all contacts — auto-paginates across every page. */
+  list(params?: RequestBody<"contacts.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"contacts.list">>("/contacts.list", params, options);
   }
 
   /** Get details for a single contact */

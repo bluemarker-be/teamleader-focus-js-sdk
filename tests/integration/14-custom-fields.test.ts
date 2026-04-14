@@ -1,5 +1,5 @@
 import { describe, it, expect, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, delay } from "./setup.js";
+import { getClient, noToken, cleanupAll, delay, collect } from "./setup.js";
 
 describe.skipIf(noToken)("Custom Fields", () => {
   const client = getClient();

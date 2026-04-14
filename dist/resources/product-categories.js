@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ProductCategoriesResource extends BaseResource {
-    list(params) {
-        return this.client.request("/productCategories.list", params);
+    /** Iterate all productCategories — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/productCategories.list", params, options);
     }
 }
 //# sourceMappingURL=product-categories.js.map

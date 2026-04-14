@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class TicketsResource extends BaseResource {
-  /** Get a list of tickets */
-  list(params?: RequestBody<"tickets.list">) {
-    return this.client.request<ResponseBody<"tickets.list">>("/tickets.list", params);
+  /** Iterate all tickets — auto-paginates across every page. */
+  list(params?: RequestBody<"tickets.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"tickets.list">>("/tickets.list", params, options);
   }
 
   /** Get details for a single ticket */

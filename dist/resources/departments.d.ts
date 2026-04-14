@@ -1,19 +1,20 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class DepartmentsResource extends BaseResource {
-    list(params?: RequestBody<"departments.list">): Promise<{
-        data?: {
-            id?: string | undefined;
-            name?: string | undefined;
-            vat_number?: string | undefined;
-            currency?: string | undefined;
-            emails?: {
-                type?: "primary" | "invoicing" | undefined;
-                email?: string | undefined;
-            }[] | undefined;
-            status?: "active" | "archived" | undefined;
+    /** Iterate all departments — auto-paginates across every page. */
+    list(params?: RequestBody<"departments.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        name?: string | undefined;
+        vat_number?: string | undefined;
+        currency?: string | undefined;
+        emails?: {
+            type?: "primary" | "invoicing" | undefined;
+            email?: string | undefined;
         }[] | undefined;
-    }>;
+        status?: "active" | "archived" | undefined;
+    }, void, undefined>;
     info(params: RequestBody<"departments.info">): Promise<{
         data?: {
             id?: string | undefined;

@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class CompaniesResource extends BaseResource {
-  /** Get a list of companies */
-  list(params?: RequestBody<"companies.list">) {
-    return this.client.request<ResponseBody<"companies.list">>("/companies.list", params);
+  /** Iterate all companies — auto-paginates across every page. */
+  list(params?: RequestBody<"companies.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"companies.list">>("/companies.list", params, options);
   }
 
   /** Get details for a single company */

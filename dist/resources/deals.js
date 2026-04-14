@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class DealsResource extends BaseResource {
-    /** Get a list of deals */
-    list(params) {
-        return this.client.request("/deals.list", params);
+    /** Iterate all deals — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/deals.list", params, options);
     }
     /** Get details for a single deal */
     info(params) {

@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class MeetingsResource extends BaseResource {
-  /** Get a list of meetings */
-  list(params?: RequestBody<"meetings.list">) {
-    return this.client.request<ResponseBody<"meetings.list">>("/meetings.list", params);
+  /** Iterate all meetings — auto-paginates across every page. */
+  list(params?: RequestBody<"meetings.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"meetings.list">>("/meetings.list", params, options);
   }
 
   /** Get details for a single meeting */

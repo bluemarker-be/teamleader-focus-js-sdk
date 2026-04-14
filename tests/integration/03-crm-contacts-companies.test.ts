@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, delay } from "./setup.js";
+import { getClient, noToken, cleanupAll, delay, collect } from "./setup.js";
 
 describe.skipIf(noToken)("CRM — Contacts & Companies", () => {
   const client = getClient();
@@ -39,12 +39,11 @@ describe.skipIf(noToken)("CRM — Contacts & Companies", () => {
     });
 
     it("list", async () => {
-      const res = await client.contacts.list({
+      const res = await collect(client.contacts.list({
         filter: { term: "SDK IntegrationTest" },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -117,12 +116,11 @@ describe.skipIf(noToken)("CRM — Contacts & Companies", () => {
     });
 
     it("list", async () => {
-      const res = await client.companies.list({
+      const res = await collect(client.companies.list({
         filter: { term: "SDK Test Corp" },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -214,12 +212,11 @@ describe.skipIf(noToken)("CRM — Contacts & Companies", () => {
     });
 
     it("list", async () => {
-      const res = await client.notes.list({
+      const res = await collect(client.notes.list({
         filter: { subject: { type: "contact", id: contactId } },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
-      expect(res.data.length).toBeGreaterThan(0);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
+      expect(res.length).toBeGreaterThan(0);
     });
 
     it("update", async () => {
@@ -262,12 +259,11 @@ describe.skipIf(noToken)("CRM — Contacts & Companies", () => {
     });
 
     it("list (find uploaded file)", async () => {
-      const res = await client.files.list({
+      const res = await collect(client.files.list({
         filter: { subject: { type: "contact", id: contactId } },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
-      const files = res.data as Array<{ id: string; name?: string }>;
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
+      const files = res as Array<{ id: string; name?: string }>;
       const uploaded = files.find((f) => f.name === "sdk-test.pdf");
       expect(uploaded).toBeDefined();
       fileId = uploaded!.id;

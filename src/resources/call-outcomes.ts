@@ -1,9 +1,9 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class CallOutcomesResource extends BaseResource {
-  /** Get a list of call outcomes */
-  list(params?: RequestBody<"callOutcomes.list">) {
-    return this.client.request<ResponseBody<"callOutcomes.list">>("/callOutcomes.list", params);
+  /** Iterate all callOutcomes — auto-paginates across every page. */
+  list(params?: RequestBody<"callOutcomes.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"callOutcomes.list">>("/callOutcomes.list", params, options);
   }
 }

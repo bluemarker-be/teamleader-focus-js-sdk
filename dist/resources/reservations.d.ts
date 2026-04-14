@@ -1,28 +1,29 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class ReservationsResource extends BaseResource {
-    list(params?: RequestBody<"reservations.list">): Promise<{
-        data?: {
+    /** Iterate all reservations — auto-paginates across every page. */
+    list(params?: RequestBody<"reservations.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        plannable_item?: {
             id?: string | undefined;
-            plannable_item?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            date?: string | undefined;
-            duration?: {
-                unit?: "minutes" | undefined;
-                value?: number | undefined;
-            } | undefined;
-            assignee?: {
-                type: "user" | "team";
-                id?: string | undefined;
-            } | undefined;
-            origin?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-        }[] | undefined;
-    }>;
+            type?: string | undefined;
+        } | undefined;
+        date?: string | undefined;
+        duration?: {
+            unit?: "minutes" | undefined;
+            value?: number | undefined;
+        } | undefined;
+        assignee?: {
+            type: "user" | "team";
+            id?: string | undefined;
+        } | undefined;
+        origin?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+    }, void, undefined>;
     create(params: RequestBody<"reservations.create">): Promise<{
         data?: {
             id?: string | undefined;

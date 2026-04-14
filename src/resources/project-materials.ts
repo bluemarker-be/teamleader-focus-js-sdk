@@ -1,11 +1,11 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 /** Materials within Projects v2 */
 export class ProjectMaterialsResource extends BaseResource {
-  /** Get a list of project materials */
-  list(params?: RequestBody<"NextgenProjectsMaterials.list">) {
-    return this.client.request<ResponseBody<"NextgenProjectsMaterials.list">>("/projects-v2/materials.list", params);
+  /** Iterate all NextgenProjectsMaterials — auto-paginates across every page. */
+  list(params?: RequestBody<"NextgenProjectsMaterials.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"NextgenProjectsMaterials.list">>("/projects-v2/materials.list", params, options);
   }
 
   /** Get details for a single project material */

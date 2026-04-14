@@ -1,11 +1,11 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 /** Legacy milestones (pre-v2). Only available for accounts not yet migrated to Projects v2. */
 export class LegacyMilestonesResource extends BaseResource {
-  /** Get a list of milestones */
-  list(params?: RequestBody<"LegacyMilestones.list">) {
-    return this.client.request<ResponseBody<"LegacyMilestones.list">>("/milestones.list", params);
+  /** Iterate all LegacyMilestones — auto-paginates across every page. */
+  list(params?: RequestBody<"LegacyMilestones.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"LegacyMilestones.list">>("/milestones.list", params, options);
   }
 
   /** Get details for a single milestone */

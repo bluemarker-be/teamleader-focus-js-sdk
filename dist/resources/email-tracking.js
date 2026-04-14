@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class EmailTrackingResource extends BaseResource {
-    list(params) {
-        return this.client.request("/emailTracking.list", params);
+    /** Iterate all emailTracking — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/emailTracking.list", params, options);
     }
     create(params) {
         return this.client.request("/emailTracking.create", params);

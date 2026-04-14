@@ -1,9 +1,9 @@
 import { BaseResource } from "./base.js";
 /** Materials within Projects v2 */
 export class ProjectMaterialsResource extends BaseResource {
-    /** Get a list of project materials */
-    list(params) {
-        return this.client.request("/projects-v2/materials.list", params);
+    /** Iterate all NextgenProjectsMaterials — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/projects-v2/materials.list", params, options);
     }
     /** Get details for a single project material */
     info(params) {

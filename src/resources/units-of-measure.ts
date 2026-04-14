@@ -1,9 +1,9 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class UnitsOfMeasureResource extends BaseResource {
-  /** Get a list of units of measure */
-  list(params?: RequestBody<"unitsOfMeasure.list">) {
-    return this.client.request<ResponseBody<"unitsOfMeasure.list">>("/unitsOfMeasure.list", params);
+  /** Iterate all unitsOfMeasure — auto-paginates across every page. */
+  list(params?: RequestBody<"unitsOfMeasure.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"unitsOfMeasure.list">>("/unitsOfMeasure.list", params, options);
   }
 }

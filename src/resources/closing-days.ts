@@ -1,9 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class ClosingDaysResource extends BaseResource {
-  list(params?: RequestBody<"closingDays.list">) {
-    return this.client.request<ResponseBody<"closingDays.list">>("/closingDays.list", params);
+  /** Iterate all closingDays — auto-paginates across every page. */
+  list(params?: RequestBody<"closingDays.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"closingDays.list">>("/closingDays.list", params, options);
   }
 
   add(params: RequestBody<"closingDays.add">) {

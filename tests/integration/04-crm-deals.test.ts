@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, delay } from "./setup.js";
+import { getClient, noToken, cleanupAll, delay, collect } from "./setup.js";
 
 describe.skipIf(noToken)("CRM — Deals", () => {
   const client = getClient();
@@ -40,9 +40,8 @@ describe.skipIf(noToken)("CRM — Deals", () => {
 
   describe.sequential("dealPipelines", () => {
     it("list", async () => {
-      const res = await client.dealPipelines.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.dealPipelines.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("create", async () => {
@@ -79,14 +78,13 @@ describe.skipIf(noToken)("CRM — Deals", () => {
 
   describe.sequential("dealPhases", () => {
     it("list", async () => {
-      const res = await client.dealPhases.list({
+      const res = await collect(client.dealPhases.list({
         filter: { deal_pipeline_id: pipelineId },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
       // Pipeline was just created — it may have default phases
-      if (res.data.length > 0) {
-        existingPhaseId = (res.data[0] as { id: string }).id;
+      if (res.length > 0) {
+        existingPhaseId = (res[0] as { id: string }).id;
       }
     });
 
@@ -155,12 +153,11 @@ describe.skipIf(noToken)("CRM — Deals", () => {
     });
 
     it("list", async () => {
-      const res = await client.deals.list({
+      const res = await collect(client.deals.list({
         filter: { term: "SDK Test Deal" },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {

@@ -7,6 +7,7 @@ import {
   isoDate,
   isoDateTime,
   delay,
+  collect,
 } from "./setup.js";
 
 describe.skipIf(noToken)("Admin & Special", () => {
@@ -27,8 +28,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("fetch work type", async () => {
-      const res = await client.workTypes.list();
-      const types = res.data as Array<{ id: string }>;
+      const res = await collect(client.workTypes.list(undefined, { maxPages: 1 }));
+      const types = res as Array<{ id: string }>;
       expect(types.length).toBeGreaterThan(0);
       workTypeId = types[0].id;
     });
@@ -71,11 +72,10 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.customFieldDefinitions.list({
+      const res = await collect(client.customFieldDefinitions.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     // Note: no delete endpoint exists for custom field definitions
@@ -108,9 +108,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.dayOffTypes.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.dayOffTypes.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -215,9 +214,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.closingDays.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.closingDays.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("delete", async () => {
@@ -247,8 +245,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
       taskId = (taskRes.data as { id: string }).id;
 
       // Try all plannable items to find one that can accept a reservation
-      const res = await client.plannableItems.list();
-      const items = res.data as Array<{
+      const res = await collect(client.plannableItems.list(undefined, { maxPages: 1 }));
+      const items = res as Array<{
         id: string;
         source?: { type: string };
         unplanned_duration?: { value: number };
@@ -291,9 +289,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.reservations.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.reservations.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -334,8 +331,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("setup: fetch ticket status", async () => {
-      const res = await client.ticketStatus.list();
-      const statuses = res.data as Array<{ id: string }>;
+      const res = await collect(client.ticketStatus.list(undefined, { maxPages: 1 }));
+      const statuses = res as Array<{ id: string }>;
       expect(statuses.length).toBeGreaterThan(0);
       ticketStatusId = statuses[0].id;
     });
@@ -358,11 +355,10 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.tickets.list({
+      const res = await collect(client.tickets.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -433,9 +429,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.webhooks.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.webhooks.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("unregister", async () => {
@@ -471,11 +466,10 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.emailTracking.list({
+      const res = await collect(client.emailTracking.list({
         filter: { subject: { type: "contact", id: etContactId } },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("cleanup", async () => {
@@ -500,8 +494,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
   describe("cloudPlatforms", () => {
     it("url", async () => {
       // cloudPlatforms.url accepts "invoice", "quotation", or "ticket"
-      const invRes = await client.invoices.list({ page: { size: 1, number: 1 } });
-      const invoices = invRes.data as Array<{ id: string }>;
+      const invRes = await collect(client.invoices.list({ page: { size: 1, number: 1 } }, { maxPages: 1 }));
+      const invoices = invRes as Array<{ id: string }>;
       expect(invoices.length).toBeGreaterThan(0);
 
       const res = await client.cloudPlatforms.url({
@@ -534,16 +528,15 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("list", async () => {
-      const res = await client.bookkeepingSubmissions.list({
+      const res = await collect(client.bookkeepingSubmissions.list({
         filter: {
           subject: {
             type: "incomingInvoice",
             id: incomingInvoiceId,
           },
         },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("cleanup", async () => {
@@ -604,9 +597,8 @@ describe.skipIf(noToken)("Admin & Special", () => {
 
     it("list", async () => {
       if (isV2) return;
-      const res = await client.legacyProjects.list();
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      const res = await collect(client.legacyProjects.list(undefined, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -716,11 +708,10 @@ describe.skipIf(noToken)("Admin & Special", () => {
 
     it("list", async () => {
       if (isV2) return;
-      const res = await client.legacyMilestones.list({
+      const res = await collect(client.legacyMilestones.list({
         filter: { project_id: projectId },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {

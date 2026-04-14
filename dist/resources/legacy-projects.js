@@ -1,9 +1,9 @@
 import { BaseResource } from "./base.js";
 /** Legacy projects (pre-v2). Use ProjectsResource for the newer Projects v2 API. */
 export class LegacyProjectsResource extends BaseResource {
-    /** Get a list of legacy projects */
-    list(params) {
-        return this.client.request("/projects.list", params);
+    /** Iterate all LegacyProjects — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/projects.list", params, options);
     }
     /** Get details for a single legacy project */
     info(params) {

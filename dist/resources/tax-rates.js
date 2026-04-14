@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class TaxRatesResource extends BaseResource {
-    list(params) {
-        return this.client.request("/taxRates.list", params);
+    /** Iterate all taxRates — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/taxRates.list", params, options);
     }
 }
 //# sourceMappingURL=tax-rates.js.map

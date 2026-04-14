@@ -1,80 +1,80 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class SubscriptionsResource extends BaseResource {
-    /** Get a list of subscriptions */
-    list(params?: RequestBody<"subscriptions.list">): Promise<{
-        data?: {
+    /** Iterate all subscriptions — auto-paginates across every page. */
+    list(params?: RequestBody<"subscriptions.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        title?: string | undefined;
+        note?: string | null | undefined;
+        status?: "active" | "deactivated" | undefined;
+        department?: {
             id?: string | undefined;
-            title?: string | undefined;
-            note?: string | null | undefined;
-            status?: "active" | "deactivated" | undefined;
-            department?: {
-                id?: string | undefined;
-                type?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+        invoicee?: {
+            customer?: {
+                type: "contact" | "company";
+                id: string;
             } | undefined;
-            invoicee?: {
-                customer?: {
-                    type: "contact" | "company";
-                    id: string;
-                } | undefined;
-                for_attention_of?: {
-                    name?: string | null | undefined;
-                    contact?: {
-                        id?: string | undefined;
-                        type?: string | undefined;
-                    } | null | undefined;
+            for_attention_of?: {
+                name?: string | null | undefined;
+                contact?: {
+                    id?: string | undefined;
+                    type?: string | undefined;
                 } | null | undefined;
-            } | undefined;
-            project?: {
-                id?: string | undefined;
-                type?: string | undefined;
             } | null | undefined;
-            starts_on?: string | undefined;
-            ends_on?: string | null | undefined;
-            next_renewal_date?: string | null | undefined;
-            billing_cycle?: {
-                periodicity?: {
-                    unit: "week";
-                    period: 1 | 2;
-                } | {
-                    unit: "month";
-                    period: 1 | 2 | 3 | 4 | 6;
-                } | {
-                    unit: "year";
-                    period: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-                } | undefined;
-                days_in_advance?: 0 | 7 | 14 | 21 | 28 | undefined;
+        } | undefined;
+        project?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        starts_on?: string | undefined;
+        ends_on?: string | null | undefined;
+        next_renewal_date?: string | null | undefined;
+        billing_cycle?: {
+            periodicity?: {
+                unit: "week";
+                period: 1 | 2;
+            } | {
+                unit: "month";
+                period: 1 | 2 | 3 | 4 | 6;
+            } | {
+                unit: "year";
+                period: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
             } | undefined;
-            total?: {
-                tax_exclusive?: {
+            days_in_advance?: 0 | 7 | 14 | 21 | 28 | undefined;
+        } | undefined;
+        total?: {
+            tax_exclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            tax_inclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            taxes?: {
+                rate?: number | undefined;
+                taxable?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 } | undefined;
-                tax_inclusive?: {
+                tax?: {
                     amount: number;
                     currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 } | undefined;
-                taxes?: {
-                    rate?: number | undefined;
-                    taxable?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                    tax?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                }[] | undefined;
-            } | undefined;
-            web_url?: string | undefined;
-            purchase_order_number?: string | null | undefined;
-            delivery_information?: {
-                type?: "set_days_after_invoice_date" | undefined;
-                number_of_days_after_invoice_date?: number | undefined;
-            } | null | undefined;
-            created_at?: string | null | undefined;
-        }[] | undefined;
-    }>;
+            }[] | undefined;
+        } | undefined;
+        web_url?: string | undefined;
+        purchase_order_number?: string | null | undefined;
+        delivery_information?: {
+            type?: "set_days_after_invoice_date" | undefined;
+            number_of_days_after_invoice_date?: number | undefined;
+        } | null | undefined;
+        created_at?: string | null | undefined;
+    }, void, undefined>;
     /** Get details for a single subscription */
     info(params: RequestBody<"subscriptions.info">): Promise<{
         data?: {

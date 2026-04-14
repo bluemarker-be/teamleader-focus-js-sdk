@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ContactsResource extends BaseResource {
-    /** Get a list of contacts */
-    list(params) {
-        return this.client.request("/contacts.list", params);
+    /** Iterate all contacts — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/contacts.list", params, options);
     }
     /** Get details for a single contact */
     info(params) {

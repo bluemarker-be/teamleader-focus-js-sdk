@@ -8,7 +8,7 @@ Reference implementations showing how to use the SDK.
 
 A minimal Supabase Edge Function that:
 
-1. Paginates all companies via `teamleader.paginateItems("/companies.list")`
+1. Iterates all companies via `for await (const c of teamleader.companies.list())` — auto-paginates
 2. Creates 3 contacts with `teamleader.contacts.add(...)`
 3. Links each contact to the first company with `teamleader.contacts.linkToCompany(...)`
 4. Catches any `TeamleaderFocusError` and returns a matching HTTP status

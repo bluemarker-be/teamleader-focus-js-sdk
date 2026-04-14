@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class CreditNotesResource extends BaseResource {
-  /** Get a list of credit notes */
-  list(params?: RequestBody<"creditNotes.list">) {
-    return this.client.request<ResponseBody<"creditNotes.list">>("/creditNotes.list", params);
+  /** Iterate all creditNotes — auto-paginates across every page. */
+  list(params?: RequestBody<"creditNotes.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"creditNotes.list">>("/creditNotes.list", params, options);
   }
 
   /** Get details for a single credit note */

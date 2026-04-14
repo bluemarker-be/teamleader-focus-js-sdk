@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class CallOutcomesResource extends BaseResource {
-    /** Get a list of call outcomes */
-    list(params) {
-        return this.client.request("/callOutcomes.list", params);
+    /** Iterate all callOutcomes — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/callOutcomes.list", params, options);
     }
 }
 //# sourceMappingURL=call-outcomes.js.map

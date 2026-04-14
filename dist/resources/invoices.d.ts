@@ -1,106 +1,106 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class InvoicesResource extends BaseResource {
-    /** Get a list of invoices */
-    list(params?: RequestBody<"invoices.list">): Promise<{
-        data?: {
+    /** Iterate all invoices — auto-paginates across every page. */
+    list(params?: RequestBody<"invoices.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        department?: {
             id?: string | undefined;
-            department?: {
+            type?: string | undefined;
+        } | undefined;
+        invoice_number?: string | null | undefined;
+        invoice_date?: string | null | undefined;
+        status?: "draft" | "outstanding" | "matched" | undefined;
+        due_on?: string | null | undefined;
+        paid?: boolean | undefined;
+        paid_at?: string | null | undefined;
+        sent?: boolean | undefined;
+        purchase_order_number?: string | null | undefined;
+        payment_reference?: string | null | undefined;
+        invoicee?: {
+            name?: string | undefined;
+            vat_number?: string | null | undefined;
+            customer?: {
                 id?: string | undefined;
                 type?: string | undefined;
             } | undefined;
-            invoice_number?: string | null | undefined;
-            invoice_date?: string | null | undefined;
-            status?: "draft" | "outstanding" | "matched" | undefined;
-            due_on?: string | null | undefined;
-            paid?: boolean | undefined;
-            paid_at?: string | null | undefined;
-            sent?: boolean | undefined;
-            purchase_order_number?: string | null | undefined;
-            payment_reference?: string | null | undefined;
-            invoicee?: {
-                name?: string | undefined;
-                vat_number?: string | null | undefined;
-                customer?: {
+            for_attention_of?: {
+                name?: string | null | undefined;
+                contact?: {
                     id?: string | undefined;
                     type?: string | undefined;
-                } | undefined;
-                for_attention_of?: {
-                    name?: string | null | undefined;
-                    contact?: {
-                        id?: string | undefined;
-                        type?: string | undefined;
-                    } | null | undefined;
                 } | null | undefined;
+            } | null | undefined;
+        } | undefined;
+        total?: {
+            tax_exclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            total?: {
-                tax_exclusive?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                tax_inclusive?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                payable?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                taxes?: {
-                    rate?: number | undefined;
-                    taxable?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                    tax?: {
-                        amount: number;
-                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                    } | undefined;
-                }[] | undefined;
-                due?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                due_incasso_inclusive?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                fixed_late_fee?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                interest?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
+            tax_inclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            currency_exchange_rate?: {
-                from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") | undefined;
-                to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") | undefined;
+            payable?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            taxes?: {
                 rate?: number | undefined;
+                taxable?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+                tax?: {
+                    amount: number;
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                } | undefined;
+            }[] | undefined;
+            due?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
-            created_at?: string | undefined;
-            updated_at?: string | undefined;
-            web_url?: string | undefined;
-            file?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            deal?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            project?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            subscription?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | null | undefined;
-            delivery_date?: string | null | undefined;
-        }[] | undefined;
-    }>;
+            due_incasso_inclusive?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            fixed_late_fee?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+            interest?: {
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | undefined;
+        } | undefined;
+        currency_exchange_rate?: {
+            from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") | undefined;
+            to?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") | undefined;
+            rate?: number | undefined;
+        } | undefined;
+        created_at?: string | undefined;
+        updated_at?: string | undefined;
+        web_url?: string | undefined;
+        file?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        deal?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        project?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        subscription?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        delivery_date?: string | null | undefined;
+    }, void, undefined>;
     /** Get details for a single invoice */
     info(params: RequestBody<"invoices.info">): Promise<{
         data?: {

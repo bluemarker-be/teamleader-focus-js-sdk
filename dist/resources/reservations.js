@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ReservationsResource extends BaseResource {
-    list(params) {
-        return this.client.request("/reservations.list", params);
+    /** Iterate all reservations — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/reservations.list", params, options);
     }
     create(params) {
         return this.client.request("/reservations.create", params);

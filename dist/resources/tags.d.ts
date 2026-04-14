@@ -1,11 +1,11 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class TagsResource extends BaseResource {
-    /** Get a list of tags */
-    list(params?: RequestBody<"tags.list">): Promise<{
-        data?: {
-            tag?: string | undefined;
-        }[] | undefined;
-    }>;
+    /** Iterate all tags — auto-paginates across every page. */
+    list(params?: RequestBody<"tags.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        tag?: string | undefined;
+    }, void, undefined>;
 }
 //# sourceMappingURL=tags.d.ts.map

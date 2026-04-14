@@ -1,8 +1,9 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class PriceListsResource extends BaseResource {
-  list(params?: RequestBody<"priceLists.list">) {
-    return this.client.request<ResponseBody<"priceLists.list">>("/priceLists.list", params);
+  /** Iterate all priceLists — auto-paginates across every page. */
+  list(params?: RequestBody<"priceLists.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"priceLists.list">>("/priceLists.list", params, options);
   }
 }

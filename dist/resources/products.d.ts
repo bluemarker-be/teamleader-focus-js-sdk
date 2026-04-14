@@ -1,30 +1,30 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class ProductsResource extends BaseResource {
-    /** Get a list of products */
-    list(params?: RequestBody<"products.list">): Promise<{
-        data?: {
+    /** Iterate all products — auto-paginates across every page. */
+    list(params?: RequestBody<"products.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        name?: string | null | undefined;
+        description?: string | null | undefined;
+        code?: string | null | undefined;
+        unit?: {
             id?: string | undefined;
-            name?: string | null | undefined;
-            description?: string | null | undefined;
-            code?: string | null | undefined;
-            unit?: {
-                id?: string | undefined;
-                type?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
+        added_at?: string | undefined;
+        updated_at?: string | undefined;
+        stock?: {
+            amount?: number | null | undefined;
+        } | undefined;
+        configuration?: {
+            stock_threshold?: {
+                minimum?: number | undefined;
+                action?: "notify" | undefined;
             } | null | undefined;
-            added_at?: string | undefined;
-            updated_at?: string | undefined;
-            stock?: {
-                amount?: number | null | undefined;
-            } | undefined;
-            configuration?: {
-                stock_threshold?: {
-                    minimum?: number | undefined;
-                    action?: "notify" | undefined;
-                } | null | undefined;
-            } | null | undefined;
-        }[] | undefined;
-    }>;
+        } | null | undefined;
+    }, void, undefined>;
     /** Get details for a single product */
     info(params: RequestBody<"products.info">): Promise<{
         data?: {

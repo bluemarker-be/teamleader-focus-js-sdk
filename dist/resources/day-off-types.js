@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class DayOffTypesResource extends BaseResource {
-    list() {
-        return this.client.request("/dayOffTypes.list");
+    /** Iterate all dayOffTypes — auto-paginates across every page. */
+    list(_params, options) {
+        return this.client.paginateItems("/dayOffTypes.list", undefined, options);
     }
     create(params) {
         return this.client.request("/dayOffTypes.create", params);

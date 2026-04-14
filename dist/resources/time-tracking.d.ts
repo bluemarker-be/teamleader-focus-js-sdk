@@ -1,57 +1,57 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class TimeTrackingResource extends BaseResource {
-    /** Get a list of time tracking entries */
-    list(params?: RequestBody<"timeTracking.list">): Promise<{
-        data?: {
+    /** Iterate all timeTracking — auto-paginates across every page. */
+    list(params?: RequestBody<"timeTracking.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        user?: {
             id?: string | undefined;
-            user?: {
+            type?: string | undefined;
+        } | undefined;
+        work_type?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | undefined;
+        started_on?: string | undefined;
+        started_at?: string | null | undefined;
+        ended_at?: string | null | undefined;
+        duration?: number | undefined;
+        description?: string | undefined;
+        subject?: {
+            id?: string | undefined;
+            type?: "company" | "contact" | "milestone" | "ticket" | "todo" | "event" | undefined;
+        } | undefined;
+        invoiceable?: boolean | undefined;
+        billing_info?: {
+            type?: "invoice" | "prepaid" | undefined;
+            invoice?: {
                 id?: string | undefined;
                 type?: string | undefined;
-            } | undefined;
-            work_type?: {
-                id?: string | undefined;
-                type?: string | undefined;
-            } | undefined;
-            started_on?: string | undefined;
-            started_at?: string | null | undefined;
-            ended_at?: string | null | undefined;
-            duration?: number | undefined;
-            description?: string | undefined;
-            subject?: {
-                id?: string | undefined;
-                type?: "company" | "contact" | "milestone" | "ticket" | "todo" | "event" | undefined;
-            } | undefined;
-            invoiceable?: boolean | undefined;
-            billing_info?: {
-                type?: "invoice" | "prepaid" | undefined;
-                invoice?: {
-                    id?: string | undefined;
-                    type?: string | undefined;
-                } | null | undefined;
             } | null | undefined;
-            materials?: {
-                product?: {
-                    id?: string | undefined;
-                    type?: string | undefined;
-                } | null | undefined;
-                description?: string | undefined;
-                unit_price?: {
-                    amount: number;
-                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-                } | undefined;
-                quantity?: number | undefined;
-            }[] | undefined;
-            relates_to?: {
+        } | null | undefined;
+        materials?: {
+            product?: {
                 id?: string | undefined;
-                type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | undefined;
-            }[] | undefined;
-            hourly_rate?: {
+                type?: string | undefined;
+            } | null | undefined;
+            description?: string | undefined;
+            unit_price?: {
                 amount: number;
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
+            quantity?: number | undefined;
         }[] | undefined;
-    }>;
+        relates_to?: {
+            id?: string | undefined;
+            type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | undefined;
+        }[] | undefined;
+        hourly_rate?: {
+            amount: number;
+            currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+        } | undefined;
+    }, void, undefined>;
     /** Get details for a single time tracking entry */
     info(params: RequestBody<"timeTracking.info">): Promise<{
         data?: {

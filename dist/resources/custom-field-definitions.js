@@ -4,9 +4,9 @@ export class CustomFieldDefinitionsResource extends BaseResource {
     create(params) {
         return this.client.request("/customFieldDefinitions.create", params);
     }
-    /** Get a list of custom field definitions */
-    list(params) {
-        return this.client.request("/customFieldDefinitions.list", params);
+    /** Iterate all customFieldDefinitions — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/customFieldDefinitions.list", params, options);
     }
     /** Get details for a single custom field definition */
     info(params) {

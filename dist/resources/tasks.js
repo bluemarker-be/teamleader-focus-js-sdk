@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class TasksResource extends BaseResource {
-    /** Get a list of tasks */
-    list(params) {
-        return this.client.request("/tasks.list", params);
+    /** Iterate all tasks — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/tasks.list", params, options);
     }
     /** Get details for a single task */
     info(params) {

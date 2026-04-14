@@ -1,5 +1,5 @@
 import { describe, it, expect, afterAll } from "vitest";
-import { getClient, noToken, cleanupAll, futureDate, isoDate, isoDateTime } from "./setup.js";
+import { getClient, noToken, cleanupAll, futureDate, isoDate, isoDateTime, collect } from "./setup.js";
 
 describe.skipIf(noToken)("Products & Invoicing", () => {
   const client = getClient();
@@ -32,15 +32,15 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
     });
 
     it("fetch department ID", async () => {
-      const res = await client.departments.list();
-      const depts = res.data as Array<{ id: string }>;
+      const res = await collect(client.departments.list(undefined, { maxPages: 1 }));
+      const depts = res as Array<{ id: string }>;
       expect(depts.length).toBeGreaterThan(0);
       departmentId = depts[0].id;
     });
 
     it("fetch tax rate ID", async () => {
-      const res = await client.taxRates.list();
-      const rates = res.data as Array<{
+      const res = await collect(client.taxRates.list(undefined, { maxPages: 1 }));
+      const rates = res as Array<{
         id: string;
         department?: { type: string; id: string };
       }>;
@@ -59,10 +59,10 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
       pipelineId = (pRes.data as { id: string }).id;
 
       // Get auto-created phases
-      const phRes = await client.dealPhases.list({
+      const phRes = await collect(client.dealPhases.list({
         filter: { deal_pipeline_id: pipelineId },
-      });
-      const phases = phRes.data as Array<{ id: string }>;
+      }, { maxPages: 1 }));
+      const phases = phRes as Array<{ id: string }>;
       if (phases.length > 0) {
         phaseId = phases[0].id;
       } else {
@@ -106,12 +106,11 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
     });
 
     it("list", async () => {
-      const res = await client.products.list({
+      const res = await collect(client.products.list({
         filter: { term: "SDK Test Product" },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -156,11 +155,10 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
     });
 
     it("list", async () => {
-      const res = await client.quotations.list({
+      const res = await collect(client.quotations.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -272,11 +270,10 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
     });
 
     it("list", async () => {
-      const res = await client.invoices.list({
+      const res = await collect(client.invoices.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update (draft)", async () => {
@@ -415,11 +412,10 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
 
   describe.sequential("creditNotes", () => {
     it("list", async () => {
-      const res = await client.creditNotes.list({
+      const res = await collect(client.creditNotes.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("info", async () => {
@@ -484,11 +480,10 @@ describe.skipIf(noToken)("Products & Invoicing", () => {
     });
 
     it("list", async () => {
-      const res = await client.subscriptions.list({
+      const res = await collect(client.subscriptions.list({
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {

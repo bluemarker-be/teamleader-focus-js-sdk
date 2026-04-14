@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class CompaniesResource extends BaseResource {
-    /** Get a list of companies */
-    list(params) {
-        return this.client.request("/companies.list", params);
+    /** Iterate all companies — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/companies.list", params, options);
     }
     /** Get details for a single company */
     info(params) {

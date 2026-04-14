@@ -1,11 +1,11 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 /** Legacy projects (pre-v2). Use ProjectsResource for the newer Projects v2 API. */
 export class LegacyProjectsResource extends BaseResource {
-  /** Get a list of legacy projects */
-  list(params?: RequestBody<"LegacyProjects.list">) {
-    return this.client.request<ResponseBody<"LegacyProjects.list">>("/projects.list", params);
+  /** Iterate all LegacyProjects — auto-paginates across every page. */
+  list(params?: RequestBody<"LegacyProjects.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"LegacyProjects.list">>("/projects.list", params, options);
   }
 
   /** Get details for a single legacy project */

@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class ClosingDaysResource extends BaseResource {
-    list(params) {
-        return this.client.request("/closingDays.list", params);
+    /** Iterate all closingDays — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/closingDays.list", params, options);
     }
     add(params) {
         return this.client.request("/closingDays.add", params);

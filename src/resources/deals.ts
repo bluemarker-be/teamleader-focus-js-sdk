@@ -1,10 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class DealsResource extends BaseResource {
-  /** Get a list of deals */
-  list(params?: RequestBody<"deals.list">) {
-    return this.client.request<ResponseBody<"deals.list">>("/deals.list", params);
+  /** Iterate all deals — auto-paginates across every page. */
+  list(params?: RequestBody<"deals.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"deals.list">>("/deals.list", params, options);
   }
 
   /** Get details for a single deal */

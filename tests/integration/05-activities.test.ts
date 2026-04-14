@@ -7,6 +7,7 @@ import {
   isoDate,
   isoDateTime,
   futureDate,
+  collect,
 } from "./setup.js";
 
 describe.skipIf(noToken)("Activities", () => {
@@ -36,16 +37,16 @@ describe.skipIf(noToken)("Activities", () => {
     });
 
     it("fetch activity type", async () => {
-      const res = await client.activityTypes.list();
-      const types = res.data as Array<{ id: string; type?: string }>;
+      const res = await collect(client.activityTypes.list(undefined, { maxPages: 1 }));
+      const types = res as Array<{ id: string; type?: string }>;
       expect(types.length).toBeGreaterThan(0);
       // Use first available activity type
       activityTypeId = types[0].id;
     });
 
     it("fetch work type", async () => {
-      const res = await client.workTypes.list();
-      const types = res.data as Array<{ id: string }>;
+      const res = await collect(client.workTypes.list(undefined, { maxPages: 1 }));
+      const types = res as Array<{ id: string }>;
       expect(types.length).toBeGreaterThan(0);
       workTypeId = types[0].id;
     });
@@ -77,12 +78,11 @@ describe.skipIf(noToken)("Activities", () => {
     });
 
     it("list", async () => {
-      const res = await client.tasks.list({
+      const res = await collect(client.tasks.list({
         filter: { user_id: userId },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -139,15 +139,14 @@ describe.skipIf(noToken)("Activities", () => {
     });
 
     it("list", async () => {
-      const res = await client.meetings.list({
+      const res = await collect(client.meetings.list({
         filter: {
           start_date: isoDate(),
           end_date: futureDate(30),
         },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -201,7 +200,7 @@ describe.skipIf(noToken)("Activities", () => {
     });
 
     it("list", async () => {
-      const res = await client.events.list({
+      const res = await collect(client.events.list({
         filter: {
           // API requires datetime format (not date). Spec uses ends_after
           // as "start of period" and starts_before as "end of period".
@@ -209,9 +208,8 @@ describe.skipIf(noToken)("Activities", () => {
           starts_before: isoDateTime(24 * 60),
         },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -239,8 +237,8 @@ describe.skipIf(noToken)("Activities", () => {
     });
 
     it("fetch callOutcome ID", async () => {
-      const res = await client.callOutcomes.list();
-      const outcomes = res.data as Array<{ id: string }>;
+      const res = await collect(client.callOutcomes.list(undefined, { maxPages: 1 }));
+      const outcomes = res as Array<{ id: string }>;
       if (outcomes.length > 0) {
         callOutcomeId = outcomes[0].id;
       }
@@ -265,12 +263,11 @@ describe.skipIf(noToken)("Activities", () => {
 
     it("list", async () => {
       // calls.list filter has no user_id — use date range instead
-      const res = await client.calls.list({
+      const res = await collect(client.calls.list({
         filter: { scheduled_after: isoDate() },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {
@@ -360,12 +357,11 @@ describe.skipIf(noToken)("Activities", () => {
     });
 
     it("list", async () => {
-      const res = await client.timeTracking.list({
+      const res = await collect(client.timeTracking.list({
         filter: { user_id: userId },
         page: { size: 10, number: 1 },
-      });
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
+      }, { maxPages: 1 }));
+      expect(Array.isArray(res)).toBe(true);
     });
 
     it("update", async () => {

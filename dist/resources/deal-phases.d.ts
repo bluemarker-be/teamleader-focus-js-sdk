@@ -1,19 +1,19 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class DealPhasesResource extends BaseResource {
-    /** Get a list of deal phases for a pipeline */
-    list(params: RequestBody<"dealPhases.list">): Promise<{
-        data?: {
-            id?: string | undefined;
-            name?: string | undefined;
-            actions?: ("create_event" | "create_call" | "create_task")[] | undefined;
-            requires_attention_after?: {
-                amount?: number | undefined;
-                unit?: "days" | "weeks" | undefined;
-            } | undefined;
-            probability?: number | undefined;
-        }[] | undefined;
-    }>;
+    /** Iterate all dealPhases — auto-paginates across every page. */
+    list(params: RequestBody<"dealPhases.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        name?: string | undefined;
+        actions?: ("create_event" | "create_call" | "create_task")[] | undefined;
+        requires_attention_after?: {
+            amount?: number | undefined;
+            unit?: "days" | "weeks" | undefined;
+        } | undefined;
+        probability?: number | undefined;
+    }, void, undefined>;
     /** Create a new deal phase */
     create(params: RequestBody<"dealPhases.create">): Promise<{
         data?: {

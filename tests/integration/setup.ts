@@ -142,3 +142,16 @@ export function futureDate(daysFromNow = 30): string {
   d.setDate(d.getDate() + daysFromNow);
   return isoDate(d);
 }
+
+/**
+ * Collects items from an AsyncIterable into an array. Use with `.list()`
+ * methods, which return an AsyncIterable that auto-paginates. Pass
+ * `{ maxPages: 1 }` to the list call to keep integration tests fast.
+ */
+export async function collect<T>(iter: AsyncIterable<T>): Promise<T[]> {
+  const items: T[] = [];
+  for await (const item of iter) {
+    items.push(item);
+  }
+  return items;
+}

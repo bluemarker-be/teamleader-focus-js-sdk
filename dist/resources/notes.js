@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class NotesResource extends BaseResource {
-    /** Get a list of notes */
-    list(params) {
-        return this.client.request("/notes.list", params);
+    /** Iterate all notes — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/notes.list", params, options);
     }
     /** Create a new note */
     create(params) {

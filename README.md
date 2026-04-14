@@ -53,11 +53,19 @@ const teamleader = new TeamleaderFocusClient({
 ## Usage
 
 ```typescript
-// List contacts
-const { data } = await teamleader.contacts.list({
-  filter: { term: "John" },
-  page: { size: 50, number: 1 },
-});
+// List contacts — .list() returns an async iterator that auto-paginates
+for await (const contact of teamleader.contacts.list({ filter: { term: "John" } })) {
+  console.log(contact.first_name, contact.last_name);
+}
+
+// Collect all items into an array
+const contacts = [];
+for await (const c of teamleader.contacts.list()) contacts.push(c);
+
+// Safety limit — stop after N pages
+for await (const c of teamleader.contacts.list({}, { maxPages: 3 })) {
+  // …
+}
 
 // Get a single deal
 const { data: deal } = await teamleader.deals.info({ id: "deal-uuid" });
@@ -193,26 +201,42 @@ const newTokens = await refreshTokens({
 
 ## Pagination
 
-Pagination is available as async iterator methods on the client. Page size
-is clamped to the API maximum (100); defaults are `size: 100`, `maxPages: 100`.
+Every `.list()` method returns an async iterator that auto-paginates across
+every page. Page size is clamped to the API maximum (100); default safety
+limit is 100 pages.
 
 ```typescript
-// Iterate over all items across pages
-for await (const contact of teamleader.paginateItems("/contacts.list", {
-  filter: { term: "John" },
-})) {
+// Iterate all contacts — pages are fetched lazily as you consume
+for await (const contact of teamleader.contacts.list({ filter: { term: "John" } })) {
   console.log(contact);
 }
 
-// Or iterate per page
+// Stop early after N pages
+for await (const deal of teamleader.deals.list({}, { maxPages: 5 })) {
+  // stops after 5 pages (max 500 items at size: 100)
+}
+
+// Break out when you have what you need
+for await (const c of teamleader.contacts.list()) {
+  if (c.email === "target@example.com") break;
+}
+```
+
+### Low-level pagination
+
+If you need access to the raw page response (e.g. to read `meta` or call
+an endpoint not covered by a resource class), use the client primitives:
+
+```typescript
+// Per-page iterator — yields each page's full response body
 for await (const page of teamleader.paginatePages("/contacts.list")) {
   console.log(page.data);   // array of contacts
   console.log(page.meta);   // { page: { size, number }, matches }
 }
 
-// Safety limit (default: 100 pages max)
-for await (const item of teamleader.paginateItems("/deals.list", {}, { maxPages: 5 })) {
-  // stops after 5 pages
+// Per-item iterator on an arbitrary endpoint
+for await (const item of teamleader.paginateItems("/contacts.list", { filter: { term: "John" } })) {
+  console.log(item);
 }
 ```
 
@@ -228,7 +252,7 @@ import {
 } from "teamleader-focus-js-sdk";
 
 try {
-  await teamleader.contacts.list();
+  const { data } = await teamleader.contacts.info({ id: "uuid" });
 } catch (err) {
   if (err instanceof TeamleaderFocusAuthenticationError) {
     // 401 — token expired or invalid

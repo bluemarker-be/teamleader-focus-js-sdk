@@ -1,9 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class DayOffTypesResource extends BaseResource {
-  list() {
-    return this.client.request<ResponseBody<"dayOffTypes.list">>("/dayOffTypes.list");
+  /** Iterate all dayOffTypes — auto-paginates across every page. */
+  list(_params?: undefined, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"dayOffTypes.list">>("/dayOffTypes.list", undefined, options);
   }
 
   create(params: RequestBody<"dayOffTypes.create">) {

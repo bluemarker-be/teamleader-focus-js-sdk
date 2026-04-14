@@ -1,4 +1,4 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class WebhooksResource extends BaseResource {
@@ -7,9 +7,9 @@ export class WebhooksResource extends BaseResource {
     return this.client.request<void>("/webhooks.register", params);
   }
 
-  /** Get a list of registered webhooks */
-  list(params?: RequestBody<"webhooks.list">) {
-    return this.client.request<ResponseBody<"webhooks.list">>("/webhooks.list", params);
+  /** Iterate all webhooks — auto-paginates across every page. */
+  list(params?: RequestBody<"webhooks.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"webhooks.list">>("/webhooks.list", params, options);
   }
 
   /** Unregister a webhook */

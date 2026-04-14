@@ -1,9 +1,9 @@
 import { BaseResource } from "./base.js";
 /** Tasks within Projects v2 (not to be confused with standalone Tasks) */
 export class ProjectTasksResource extends BaseResource {
-    /** Get a list of project tasks */
-    list(params) {
-        return this.client.request("/projects-v2/tasks.list", params);
+    /** Iterate all NextgenProjectsTasks — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/projects-v2/tasks.list", params, options);
     }
     /** Get details for a single project task */
     info(params) {

@@ -1,9 +1,10 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class EmailTrackingResource extends BaseResource {
-  list(params: RequestBody<"emailTracking.list">) {
-    return this.client.request<ResponseBody<"emailTracking.list">>("/emailTracking.list", params);
+  /** Iterate all emailTracking — auto-paginates across every page. */
+  list(params: RequestBody<"emailTracking.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"emailTracking.list">>("/emailTracking.list", params, options);
   }
 
   create(params: RequestBody<"emailTracking.create">) {

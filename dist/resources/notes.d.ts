@@ -1,18 +1,18 @@
 import type { RequestBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 export declare class NotesResource extends BaseResource {
-    /** Get a list of notes */
-    list(params: RequestBody<"notes.list">): Promise<{
-        data?: {
+    /** Iterate all notes — auto-paginates across every page. */
+    list(params: RequestBody<"notes.list">, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<{
+        id?: string | undefined;
+        content?: string | undefined;
+        subject?: {
             id?: string | undefined;
-            content?: string | undefined;
-            subject?: {
-                id?: string | undefined;
-                type?: "company" | "contact" | "product" | "project" | "invoice" | "subscription" | "meeting" | "quotation" | "creditNote" | "deal" | "nextgenProject" | undefined;
-            } | undefined;
-            added_at?: string | undefined;
-        }[] | undefined;
-    }>;
+            type?: "company" | "contact" | "product" | "project" | "invoice" | "subscription" | "meeting" | "quotation" | "creditNote" | "deal" | "nextgenProject" | undefined;
+        } | undefined;
+        added_at?: string | undefined;
+    }, void, undefined>;
     /** Create a new note */
     create(params: RequestBody<"notes.create">): Promise<{
         data?: {

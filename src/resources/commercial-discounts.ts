@@ -1,8 +1,9 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class CommercialDiscountsResource extends BaseResource {
-  list(params?: RequestBody<"commercialDiscounts.list">) {
-    return this.client.request<ResponseBody<"commercialDiscounts.list">>("/commercialDiscounts.list", params);
+  /** Iterate all commercialDiscounts — auto-paginates across every page. */
+  list(params?: RequestBody<"commercialDiscounts.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"commercialDiscounts.list">>("/commercialDiscounts.list", params, options);
   }
 }

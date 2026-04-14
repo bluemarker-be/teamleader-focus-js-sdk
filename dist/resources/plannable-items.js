@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class PlannableItemsResource extends BaseResource {
-    /** Get a list of plannable items */
-    list(params) {
-        return this.client.request("/plannableItems.list", params);
+    /** Iterate all plannableItems — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/plannableItems.list", params, options);
     }
     /** Get details for a single plannable item */
     info(params) {

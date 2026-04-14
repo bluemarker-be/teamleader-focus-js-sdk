@@ -1,8 +1,8 @@
 import { BaseResource } from "./base.js";
 export class InvoicesResource extends BaseResource {
-    /** Get a list of invoices */
-    list(params) {
-        return this.client.request("/invoices.list", params);
+    /** Iterate all invoices — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/invoices.list", params, options);
     }
     /** Get details for a single invoice */
     info(params) {

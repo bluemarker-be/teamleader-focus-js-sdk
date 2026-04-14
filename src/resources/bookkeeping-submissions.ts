@@ -1,8 +1,9 @@
-import type { RequestBody, ResponseBody } from "../types/common.js";
+import type { ListItem, RequestBody, ResponseBody } from "../types/common.js";
 import { BaseResource } from "./base.js";
 
 export class BookkeepingSubmissionsResource extends BaseResource {
-  list(params?: RequestBody<"bookkeepingSubmissions.list">) {
-    return this.client.request<ResponseBody<"bookkeepingSubmissions.list">>("/bookkeepingSubmissions.list", params);
+  /** Iterate all bookkeepingSubmissions — auto-paginates across every page. */
+  list(params?: RequestBody<"bookkeepingSubmissions.list">, options?: { maxPages?: number }) {
+    return this.client.paginateItems<ListItem<"bookkeepingSubmissions.list">>("/bookkeepingSubmissions.list", params, options);
   }
 }

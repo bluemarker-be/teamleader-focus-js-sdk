@@ -1,7 +1,8 @@
 import { BaseResource } from "./base.js";
 export class TeamsResource extends BaseResource {
-    list(params) {
-        return this.client.request("/teams.list", params);
+    /** Iterate all teams — auto-paginates across every page. */
+    list(params, options) {
+        return this.client.paginateItems("/teams.list", params, options);
     }
 }
 //# sourceMappingURL=teams.js.map
