@@ -157,19 +157,25 @@ describe.skipIf(noToken)("Admin & Special", () => {
 
     it("import", async () => {
       if (!externalDaysOffEnabled || !dayOffTypeId) return;
-      // SDK types this as void (spec says 201 no-content), but the API returns data
-      // with the imported ids. Cast through unknown to read what the real API returns.
-      const res = (await client.daysOff.import({
+      // daysOff.import returns 201 no-content on success (errors returned via HTTP status
+      // on the error body). No IDs returned — we look them up via users.listDaysOff below.
+      await client.daysOff.import({
         user_id: userId,
         leave_type_id: dayOffTypeId,
         days: [{ starts_at: futureDate(200), ends_at: futureDate(201) }],
-      })) as unknown as { data?: { id: string } | Array<{ id: string }> } | undefined;
-      const data = res?.data;
-      if (Array.isArray(data)) {
-        importedIds = data.map((d) => d.id);
-      } else if (data && typeof data === "object" && "id" in data) {
-        importedIds = [data.id];
-      }
+      });
+    });
+
+    it("look up imported ids via users.listDaysOff", async () => {
+      if (!externalDaysOffEnabled || !dayOffTypeId) return;
+      const res = await client.users.listDaysOff({
+        id: userId,
+        filter: { starts_after: futureDate(199), ends_before: futureDate(202) },
+      });
+      const items = (res.data ?? []) as Array<{ id?: string; leave_type?: { id?: string } }>;
+      importedIds = items
+        .filter((d) => d.leave_type?.id === dayOffTypeId && d.id)
+        .map((d) => d.id as string);
     });
 
     it("bulkDelete", async () => {
@@ -348,9 +354,7 @@ describe.skipIf(noToken)("Admin & Special", () => {
     });
 
     it("info", async () => {
-      // SDK types this response as the ticket directly (per spec), but the real API
-      // wraps it in { data: ... }. Cast through unknown to read the wrapped id.
-      const res = (await client.tickets.info({ id: ticketId })) as unknown as { data: { id: string } };
+      const res = await client.tickets.info({ id: ticketId });
       expect(res).toHaveProperty("data");
       expect(res.data.id).toBe(ticketId);
     });

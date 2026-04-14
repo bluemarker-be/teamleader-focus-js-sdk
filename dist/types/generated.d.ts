@@ -49468,80 +49468,82 @@ export interface operations {
                      *     }
                      */
                     "application/json": {
-                        /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
-                        id?: string;
-                        /** @example 123 */
-                        reference?: number;
-                        subject?: string;
-                        /** TypeAndId */
-                        status?: {
-                            /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
-                            id?: string;
-                            type?: string;
-                        };
-                        /** @description Null if unassigned */
-                        assignee?: {
-                            /** @example user */
-                            type?: string;
-                            /** @example 66abace2-62af-0836-a927-fe3f44b9b47b */
-                            id?: string;
-                        } | null;
-                        /** @example 2017-05-09T11:25:11+00:00 */
-                        created_at?: string;
-                        /** @example 2017-05-09T11:25:11+00:00 */
-                        closed_at?: string | null;
-                        /** Customer */
-                        customer?: {
-                            /**
-                             * @example contact
-                             * @enum {string}
-                             */
-                            type: "contact" | "company";
+                        data: {
                             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
-                            id: string;
-                        };
-                        participant?: {
+                            id?: string;
+                            /** @example 123 */
+                            reference?: number;
+                            subject?: string;
                             /** TypeAndId */
+                            status?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            };
+                            /** @description Null if unassigned */
+                            assignee?: {
+                                /** @example user */
+                                type?: string;
+                                /** @example 66abace2-62af-0836-a927-fe3f44b9b47b */
+                                id?: string;
+                            } | null;
+                            /** @example 2017-05-09T11:25:11+00:00 */
+                            created_at?: string;
+                            /** @example 2017-05-09T11:25:11+00:00 */
+                            closed_at?: string | null;
+                            /** Customer */
                             customer?: {
-                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
-                                id?: string;
-                                type?: string;
-                            };
-                        } | null;
-                        /** @example 2017-05-09T11:25:11+00:00 */
-                        last_message_at?: string | null;
-                        /** @example My ticket details */
-                        description?: string;
-                        project?: {
-                            /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
-                            id?: string;
-                            type?: string;
-                        } | null;
-                        milestone?: {
-                            /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
-                            id?: string;
-                            type?: string;
-                        } | null;
-                        custom_fields?: {
-                            definition?: {
-                                /** @example customFieldDefinition */
-                                type?: string;
-                                /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
-                                id?: string;
-                            };
-                            value?: string | number | string[] | boolean | ({
-                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
-                                id?: string;
-                                type?: string;
-                            } & {
                                 /**
-                                 * @description For related Teamleader objects
-                                 * @example company
+                                 * @example contact
                                  * @enum {string}
                                  */
-                                type?: "company" | "contact" | "product" | "user";
-                            });
-                        }[];
+                                type: "contact" | "company";
+                                /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
+                                id: string;
+                            };
+                            participant?: {
+                                /** TypeAndId */
+                                customer?: {
+                                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                    id?: string;
+                                    type?: string;
+                                };
+                            } | null;
+                            /** @example 2017-05-09T11:25:11+00:00 */
+                            last_message_at?: string | null;
+                            /** @example My ticket details */
+                            description?: string;
+                            project?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } | null;
+                            milestone?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } | null;
+                            custom_fields?: {
+                                definition?: {
+                                    /** @example customFieldDefinition */
+                                    type?: string;
+                                    /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
+                                    id?: string;
+                                };
+                                value?: string | number | string[] | boolean | ({
+                                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                    id?: string;
+                                    type?: string;
+                                } & {
+                                    /**
+                                     * @description For related Teamleader objects
+                                     * @example company
+                                     * @enum {string}
+                                     */
+                                    type?: "company" | "contact" | "product" | "user";
+                                });
+                            }[];
+                        };
                     };
                 };
             };

@@ -78,6 +78,12 @@ async function main() {
 //    expects "incomingInvoice" | "incomingCreditNote".
 //    Patch: replaced enum values in all occurrences.
 //
+// 9. tickets.info response missing { data } wrapper
+//    The spec returns the ticket fields at top level, but the real API wraps
+//    them in { data: { ...fields... } }. All other entity .info() responses
+//    use this wrapper — tickets.info is the only outlier.
+//    Patch: wrapped tickets.info 200 response body in { data: ... }.
+//
 // 🧹 Post-generation cleanups (openapi-typescript artifacts):
 //
 // 3. Removed "& unknown" intersection artifacts (~500 occurrences)
@@ -188,6 +194,49 @@ async function main() {
     console.log(`Patch 8: Fixed bookkeepingSubmissions subject.type enum — snake_case → camelCase (${bookkeepingPatchCount} occurrences)`);
   } else {
     console.log("Patch 8: bookkeepingSubmissions enum already fixed (or pattern changed)");
+  }
+
+  // Patch 9: tickets.info response — spec returns the ticket fields at top level,
+  // but the real API wraps it as { data: { ...fields... } }. Wrap the content.
+  {
+    const opName = "tickets.info";
+    const opStart = patched.indexOf(`"${opName}": {`);
+    if (opStart === -1) {
+      console.warn(`Patch 9: "${opName}" operation not found — skipped`);
+    } else {
+      // Anchor to the RESPONSES block, not the requestBody
+      const responsesStart = patched.indexOf("responses: {", opStart);
+      const contentMarker = '"application/json": {';
+      const contentStart =
+        responsesStart === -1
+          ? -1
+          : patched.indexOf(contentMarker, responsesStart);
+      if (contentStart === -1 || contentStart > opStart + 20000) {
+        console.warn(`Patch 9: response application/json not found in "${opName}" — skipped`);
+      } else {
+        // Walk from the opening `{` and brace-count to find the matching `}`
+        const bodyStart = contentStart + contentMarker.length;
+        let depth = 1;
+        let i = bodyStart;
+        while (i < patched.length && depth > 0) {
+          const ch = patched[i];
+          if (ch === "{") depth++;
+          else if (ch === "}") depth--;
+          i++;
+        }
+        const bodyEnd = i - 1; // index of the matching `}`
+        if (depth !== 0 || bodyEnd > opStart + 20000) {
+          console.warn(`Patch 9: could not match braces for ${opName} response — skipped`);
+        } else if (/^\s*data\??:/.test(patched.slice(bodyStart, bodyStart + 20))) {
+          console.log(`Patch 9: tickets.info response already wrapped in { data } — skipped`);
+        } else {
+          const inner = patched.slice(bodyStart, bodyEnd);
+          const wrapped = ` data: {${inner}}; `;
+          patched = patched.slice(0, bodyStart) + wrapped + patched.slice(bodyEnd);
+          console.log(`Patch 9: Wrapped tickets.info response in { data: ... }`);
+        }
+      }
+    }
   }
 
   // ---------------------------------------------------------------------------

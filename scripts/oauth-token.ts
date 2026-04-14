@@ -9,11 +9,11 @@
  *   2. Starts a tiny local HTTP server on port 3000
  *   3. Opens the Teamleader authorization URL in your browser
  *   4. Catches the callback, exchanges the code for tokens
- *   5. Saves the tokens to .env (TL_ACCESS_TOKEN / TL_REFRESH_TOKEN)
+ *   5. Saves the tokens to .env (ACCESS_TOKEN / REFRESH_TOKEN)
  *
  * Prerequisites:
  *   - A Teamleader integration with redirect URI: http://localhost:3000/callback
- *   - A .env file with at least TL_CLIENT_ID and TL_CLIENT_SECRET
+ *   - A .env file with at least CLIENT_ID and CLIENT_SECRET
  */
 
 import { createServer } from "node:http";
@@ -33,7 +33,7 @@ const REDIRECT_URI = `http://localhost:${PORT}/callback`;
 // ---------------------------------------------------------------------------
 function loadEnv(): Record<string, string> {
   if (!existsSync(ENV_PATH)) {
-    console.error("❌ No .env file found. Create one with TL_CLIENT_ID and TL_CLIENT_SECRET.");
+    console.error("❌ No .env file found. Create one with CLIENT_ID and CLIENT_SECRET.");
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -75,11 +75,11 @@ function openBrowser(url: string): void {
 // Main
 // ---------------------------------------------------------------------------
 const env = loadEnv();
-const clientId = env.TL_CLIENT_ID;
-const clientSecret = env.TL_CLIENT_SECRET;
+const clientId = env.CLIENT_ID;
+const clientSecret = env.CLIENT_SECRET;
 
 if (!clientId || !clientSecret) {
-  console.error("❌ .env must contain TL_CLIENT_ID and TL_CLIENT_SECRET");
+  console.error("❌ .env must contain CLIENT_ID and CLIENT_SECRET");
   process.exit(1);
 }
 
@@ -135,8 +135,8 @@ const server = createServer(async (req, res) => {
     };
 
     // Save to .env
-    updateEnvValue("TL_ACCESS_TOKEN", tokens.access_token);
-    updateEnvValue("TL_REFRESH_TOKEN", tokens.refresh_token);
+    updateEnvValue("ACCESS_TOKEN", tokens.access_token);
+    updateEnvValue("REFRESH_TOKEN", tokens.refresh_token);
 
     console.log("✅ Tokens saved to .env");
     console.log(`   Access token:  ${tokens.access_token.slice(0, 20)}...`);

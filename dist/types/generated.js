@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-04-12T05:31:02.431Z
+// Generated: 2026-04-14T11:23:16.689Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -33,6 +33,12 @@
 //    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
 //    expects "incomingInvoice" | "incomingCreditNote".
 //    Patch: replaced enum values in all occurrences.
+//
+// 9. tickets.info response missing { data } wrapper
+//    The spec returns the ticket fields at top level, but the real API wraps
+//    them in { data: { ...fields... } }. All other entity .info() responses
+//    use this wrapper — tickets.info is the only outlier.
+//    Patch: wrapped tickets.info 200 response body in { data: ... }.
 //
 // 🧹 Post-generation cleanups (openapi-typescript artifacts):
 //

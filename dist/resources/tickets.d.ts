@@ -40,49 +40,51 @@ export declare class TicketsResource extends BaseResource {
     }, void, undefined>;
     /** Get details for a single ticket */
     info(params: RequestBody<"tickets.info">): Promise<{
-        id?: string | undefined;
-        reference?: number | undefined;
-        subject?: string | undefined;
-        status?: {
+        data: {
             id?: string | undefined;
-            type?: string | undefined;
-        } | undefined;
-        assignee?: {
-            type?: string | undefined;
-            id?: string | undefined;
-        } | null | undefined;
-        created_at?: string | undefined;
-        closed_at?: string | null | undefined;
-        customer?: {
-            type: "contact" | "company";
-            id: string;
-        } | undefined;
-        participant?: {
+            reference?: number | undefined;
+            subject?: string | undefined;
+            status?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            } | undefined;
+            assignee?: {
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
+            created_at?: string | undefined;
+            closed_at?: string | null | undefined;
             customer?: {
+                type: "contact" | "company";
+                id: string;
+            } | undefined;
+            participant?: {
+                customer?: {
+                    id?: string | undefined;
+                    type?: string | undefined;
+                } | undefined;
+            } | null | undefined;
+            last_message_at?: string | null | undefined;
+            description?: string | undefined;
+            project?: {
                 id?: string | undefined;
                 type?: string | undefined;
-            } | undefined;
-        } | null | undefined;
-        last_message_at?: string | null | undefined;
-        description?: string | undefined;
-        project?: {
-            id?: string | undefined;
-            type?: string | undefined;
-        } | null | undefined;
-        milestone?: {
-            id?: string | undefined;
-            type?: string | undefined;
-        } | null | undefined;
-        custom_fields?: {
-            definition?: {
+            } | null | undefined;
+            milestone?: {
+                id?: string | undefined;
                 type?: string | undefined;
-                id?: string | undefined;
-            } | undefined;
-            value?: string | number | boolean | string[] | {
-                id?: string | undefined;
-                type?: "user" | "company" | "contact" | "product" | undefined;
-            } | undefined;
-        }[] | undefined;
+            } | null | undefined;
+            custom_fields?: {
+                definition?: {
+                    type?: string | undefined;
+                    id?: string | undefined;
+                } | undefined;
+                value?: string | number | boolean | string[] | {
+                    id?: string | undefined;
+                    type?: "user" | "company" | "contact" | "product" | undefined;
+                } | undefined;
+            }[] | undefined;
+        };
     }>;
     /** Create a new ticket */
     create(params: RequestBody<"tickets.create">): Promise<{

@@ -506,13 +506,22 @@ describe.skipIf(noToken)("Projects v2", () => {
   describe.sequential("externalParties", () => {
     it("addToProject", async () => {
       if (!isV2) return;
-      // SDK types this as void (spec says 204), but the API returns { data: { id } }.
-      // Cast to unknown to read the id we need for update/delete.
-      const res = (await client.externalParties.addToProject({
+      // addToProject returns 204 no-content — no id returned.
+      // We look it up via projects.info → external_parties[] below.
+      await client.externalParties.addToProject({
         project_id: projectId,
         customer: { type: "contact", id: contactId },
-      })) as unknown as { data?: { id: string } } | undefined;
-      externalPartyId = res?.data?.id ?? "";
+      });
+    });
+
+    it("look up externalPartyId via projects.info", async () => {
+      if (!isV2) return;
+      const res = await client.projects.info({ id: projectId });
+      const project = res.data as
+        | { external_parties?: Array<{ id?: string; customer?: { id?: string } }> }
+        | undefined;
+      const party = project?.external_parties?.find((p) => p.customer?.id === contactId);
+      externalPartyId = party?.id ?? "";
     });
 
     it("update", async () => {
