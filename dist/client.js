@@ -1,5 +1,6 @@
 import { TeamleaderAuthenticationError, TeamleaderError, TeamleaderNetworkError, TeamleaderRateLimitError, TeamleaderValidationError, } from "./errors.js";
 import { refreshTokens } from "./oauth.js";
+import { paginatePages, paginateItems } from "./paginator.js";
 import { AccountsResource } from "./resources/accounts.js";
 import { ActivityTypesResource } from "./resources/activity-types.js";
 import { BookkeepingSubmissionsResource } from "./resources/bookkeeping-submissions.js";
@@ -247,6 +248,34 @@ export class TeamleaderClient {
      */
     async request(endpoint, body) {
         return this.requestWithRetry(endpoint, body, 0);
+    }
+    /**
+     * Async iterator that yields each page of a paginated endpoint.
+     *
+     * @example
+     * ```ts
+     * for await (const page of client.paginatePages("/contacts.list", { filter: { term: "John" } })) {
+     *   console.log(page.data);   // array of contacts
+     *   console.log(page.meta);   // { page: { size, number }, matches }
+     * }
+     * ```
+     */
+    paginatePages(endpoint, params, options) {
+        return paginatePages(this, endpoint, params, options);
+    }
+    /**
+     * Async iterator that yields each item across all pages of a paginated endpoint.
+     * Page size is clamped to the API maximum (100). Defaults: size=100, maxPages=100.
+     *
+     * @example
+     * ```ts
+     * for await (const contact of client.paginateItems("/contacts.list")) {
+     *   console.log(contact.first_name);
+     * }
+     * ```
+     */
+    paginateItems(endpoint, params, options) {
+        return paginateItems(this, endpoint, params, options);
     }
     // authRetryState tracks where we are in the 401 recovery flow:
     // 0 = first attempt

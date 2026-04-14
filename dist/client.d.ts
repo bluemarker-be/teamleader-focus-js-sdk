@@ -215,6 +215,46 @@ export declare class TeamleaderClient {
      * Handles token refresh, rate limiting, and error mapping.
      */
     request<T>(endpoint: string, body?: unknown): Promise<T>;
+    /**
+     * Async iterator that yields each page of a paginated endpoint.
+     *
+     * @example
+     * ```ts
+     * for await (const page of client.paginatePages("/contacts.list", { filter: { term: "John" } })) {
+     *   console.log(page.data);   // array of contacts
+     *   console.log(page.meta);   // { page: { size, number }, matches }
+     * }
+     * ```
+     */
+    paginatePages<T>(endpoint: string, params?: {
+        page?: {
+            size?: number;
+            number?: number;
+        };
+        [key: string]: unknown;
+    }, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<import("./paginator.js").PaginatedResponse<T>, void, undefined>;
+    /**
+     * Async iterator that yields each item across all pages of a paginated endpoint.
+     * Page size is clamped to the API maximum (100). Defaults: size=100, maxPages=100.
+     *
+     * @example
+     * ```ts
+     * for await (const contact of client.paginateItems("/contacts.list")) {
+     *   console.log(contact.first_name);
+     * }
+     * ```
+     */
+    paginateItems<T>(endpoint: string, params?: {
+        page?: {
+            size?: number;
+            number?: number;
+        };
+        [key: string]: unknown;
+    }, options?: {
+        maxPages?: number;
+    }): AsyncGenerator<T, void, undefined>;
     private requestWithRetry;
     /**
      * Re-reads tokens from the shared store via getTokens callback.

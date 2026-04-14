@@ -4,6 +4,28 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.4.0] - 2026-04-14
+
+### Changed (breaking)
+- Pagination is now on the client: `client.paginateItems(endpoint, params, options)`
+  and `client.paginatePages(endpoint, params, options)` instead of the top-level
+  `paginateItems(client, ...)` / `paginatePages(client, ...)` exports.
+  The old named exports are removed. Only exports kept are the type aliases
+  `PaginatedRequest` and `PaginatedResponse`.
+
+  **Migration:**
+  ```diff
+  - import { paginateItems } from "teamleader-focus-js-sdk";
+  - for await (const x of paginateItems(client, "/contacts.list", {})) {}
+  + for await (const x of client.paginateItems("/contacts.list", {})) {}
+  ```
+
+### Added
+- Example: `examples/supabase-companies-and-contacts.ts` — full-featured
+  Supabase Edge Function showing pagination, error handling, cleanup on
+  partial failure, token persistence via Supabase tables, and `getTokens`
+  for multi-process safety.
+
 ## [0.3.1] - 2026-04-14
 
 ### Added

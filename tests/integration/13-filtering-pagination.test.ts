@@ -1,6 +1,5 @@
 import { describe, it, expect, afterAll } from "vitest";
 import { getClient, noToken, cleanupAll, delay } from "./setup.js";
-import { paginatePages, paginateItems } from "../../src/paginator.js";
 
 describe.skipIf(noToken)("Filtering & Pagination", () => {
   const client = getClient();
@@ -104,10 +103,9 @@ describe.skipIf(noToken)("Filtering & Pagination", () => {
       }
     });
 
-    it("paginateItems collects all items across pages", async () => {
+    it("client.paginateItems collects all items across pages", async () => {
       const allItems: Array<{ id: string }> = [];
-      for await (const item of paginateItems<{ id: string }>(
-        client,
+      for await (const item of client.paginateItems<{ id: string }>(
         "/contacts.list",
         { filter: { term: "SDKPage" }, page: { size: 2 } },
       )) {
@@ -121,10 +119,9 @@ describe.skipIf(noToken)("Filtering & Pagination", () => {
       }
     });
 
-    it("paginatePages yields non-empty pages", async () => {
+    it("client.paginatePages yields non-empty pages", async () => {
       const pages: Array<{ data: unknown[] }> = [];
-      for await (const page of paginatePages(
-        client,
+      for await (const page of client.paginatePages(
         "/contacts.list",
         { filter: { term: "SDKPage" }, page: { size: 2 } },
       )) {

@@ -1,12 +1,12 @@
 import type { TeamleaderClient } from "./client.js";
-interface PaginatedRequest {
+export interface PaginatedRequest {
     page?: {
         size?: number;
         number?: number;
     };
     [key: string]: unknown;
 }
-interface PaginatedResponse<T> {
+export interface PaginatedResponse<T> {
     data: T[];
     meta?: {
         page: {
@@ -42,5 +42,4 @@ export declare function paginatePages<T>(client: TeamleaderClient, endpoint: str
 export declare function paginateItems<T>(client: TeamleaderClient, endpoint: string, params?: PaginatedRequest, options?: {
     maxPages?: number;
 }): AsyncGenerator<T, void, undefined>;
-export {};
 //# sourceMappingURL=paginator.d.ts.map

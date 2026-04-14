@@ -149,6 +149,13 @@ All 68 resources are available — see the full list below.
 | `withholdingTaxRates` | `list` |
 | `workTypes` | `list` |
 
+## Examples
+
+See the [`examples/`](./examples/) folder for end-to-end reference
+implementations — including a Supabase Edge Function that paginates
+companies, creates contacts, links them, and handles every
+`TeamleaderError` subclass with cleanup-on-failure.
+
 ## OAuth2 flow
 
 If your users need to authorize via Teamleader's OAuth2 flow:
@@ -186,25 +193,25 @@ const newTokens = await refreshTokens({
 
 ## Pagination
 
-```typescript
-import { paginateItems, paginatePages } from "teamleader-focus-js-sdk";
+Pagination is available as async iterator methods on the client. Page size
+is clamped to the API maximum (100); defaults are `size: 100`, `maxPages: 100`.
 
+```typescript
 // Iterate over all items across pages
-for await (const contact of paginateItems(teamleader, "/contacts.list", {
+for await (const contact of teamleader.paginateItems("/contacts.list", {
   filter: { term: "John" },
-  page: { size: 100 },
 })) {
   console.log(contact);
 }
 
 // Or iterate per page
-for await (const page of paginatePages(teamleader, "/contacts.list")) {
+for await (const page of teamleader.paginatePages("/contacts.list")) {
   console.log(page.data);   // array of contacts
   console.log(page.meta);   // { page: { size, number }, matches }
 }
 
 // Safety limit (default: 100 pages max)
-for await (const item of paginateItems(teamleader, "/deals.list", {}, { maxPages: 5 })) {
+for await (const item of teamleader.paginateItems("/deals.list", {}, { maxPages: 5 })) {
   // stops after 5 pages
 }
 ```

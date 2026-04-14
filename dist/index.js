@@ -4,8 +4,6 @@ export { TeamleaderClient } from "./client.js";
 export { createAuthorizationUrl, exchangeCodeForTokens, refreshTokens, } from "./oauth.js";
 // Errors
 export { TeamleaderError, TeamleaderAuthenticationError, TeamleaderTokenRefreshError, TeamleaderRateLimitError, TeamleaderValidationError, TeamleaderNetworkError, } from "./errors.js";
-// Pagination
-export { paginatePages, paginateItems } from "./paginator.js";
 // Resource classes (for advanced usage / extending)
 export { AccountsResource } from "./resources/accounts.js";
 export { ActivityTypesResource } from "./resources/activity-types.js";

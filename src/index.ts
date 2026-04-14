@@ -24,8 +24,8 @@ export {
   TeamleaderNetworkError,
 } from "./errors.js";
 
-// Pagination
-export { paginatePages, paginateItems } from "./paginator.js";
+// Pagination types (use via client.paginatePages() / client.paginateItems())
+export type { PaginatedRequest, PaginatedResponse } from "./paginator.js";
 
 // Types
 export type {

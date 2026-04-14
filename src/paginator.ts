@@ -1,11 +1,11 @@
 import type { TeamleaderClient } from "./client.js";
 
-interface PaginatedRequest {
+export interface PaginatedRequest {
   page?: { size?: number; number?: number };
   [key: string]: unknown;
 }
 
-interface PaginatedResponse<T> {
+export interface PaginatedResponse<T> {
   data: T[];
   meta?: {
     page: { size: number; number: number };
