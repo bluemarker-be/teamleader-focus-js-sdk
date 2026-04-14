@@ -6,24 +6,64 @@ Types are auto-generated from the official OpenAPI spec — your editor gives yo
 
 ## Installation
 
-This SDK is distributed via GitHub (private repository). Install a specific version
-with a git tag:
+### Node.js / Bun
+
+Install a pinned version via git tag:
 
 ```bash
-# HTTPS (requires a GitHub Personal Access Token with repo scope)
-npm install git+https://github.com/henkdeblauw/teamleader-focus-js-sdk.git#v0.3.1
+# HTTPS (requires a GitHub Personal Access Token with repo:read scope)
+npm install git+https://github.com/henkdeblauw/teamleader-focus-js-sdk.git#v1.0.0
 
 # SSH (requires your GitHub SSH key)
-npm install git+ssh://git@github.com:henkdeblauw/teamleader-focus-js-sdk.git#v0.3.1
+npm install git+ssh://git@github.com:henkdeblauw/teamleader-focus-js-sdk.git#v1.0.0
 ```
 
-Or install the latest commit on `main`:
+Pinning to a tag is strongly recommended for production use.
 
-```bash
-npm install git+ssh://git@github.com:henkdeblauw/teamleader-focus-js-sdk.git
+### Deno / Supabase Edge Functions
+
+Deno imports modules directly from URLs. For a private repo, configure Deno
+with a Bearer token for `raw.githubusercontent.com` and import from the tag:
+
+```ts
+// supabase/functions/my-function/index.ts
+import { TeamleaderFocusClient } from
+  "https://raw.githubusercontent.com/henkdeblauw/teamleader-focus-js-sdk/v1.0.0/dist/index.js";
 ```
 
-Pinning to a tag is recommended for production use.
+Sub-imports (resource classes, helpers) are resolved relatively to the source
+URL, so the same auth token covers everything.
+
+**Setting the auth token:**
+
+1. Create a GitHub [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new)
+   with `Contents: Read-only` scoped to just this repository. This keeps
+   blast radius small if the token ever leaks.
+
+2. Expose it to Deno via the `DENO_AUTH_TOKENS` environment variable. The
+   format is `<token>@<host>`:
+
+   ```bash
+   # Local Deno
+   export DENO_AUTH_TOKENS="github_pat_xxxxx@raw.githubusercontent.com"
+
+   # Supabase Edge Functions
+   supabase secrets set DENO_AUTH_TOKENS="github_pat_xxxxx@raw.githubusercontent.com"
+   ```
+
+   Deno then sends `Authorization: Bearer <token>` on every request to
+   `raw.githubusercontent.com`, which GitHub accepts for private repo content.
+
+3. Deploy the Edge Function as usual:
+
+   ```bash
+   supabase functions deploy my-function
+   ```
+
+**Updating the SDK version** means changing the URL in your import statement
+(e.g. `v1.0.0` → `v1.1.0`) — no separate install step. See
+[`examples/supabase-with-private-import.ts`](./examples/supabase-with-private-import.ts)
+for a complete Edge Function example.
 
 ## Setup
 
