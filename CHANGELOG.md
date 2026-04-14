@@ -4,6 +4,42 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3.1] - 2026-04-14
+
+### Added
+- `scripts/verify-endpoints.ts` — TypeScript-compiler-based verification: per
+  endpoint checks SDK method presence, endpoint URL match, and type-validity
+  of every unit + integration test call. Run with `npm run verify:endpoints`.
+- Integration test setup now persists refreshed OAuth tokens back to `.env`
+  so subsequent runs don't fail with "Token has been revoked" after a rotation.
+
+### Fixed
+Discovered via `verify:endpoints`, fixed against the actual spec:
+
+**Integration test bugs (25)**:
+- `users.listDaysOff`: `started_after`/`ended_before` → `starts_after`/`ends_before`
+- `tasks.list`: `assignee_id` → `user_id`
+- `meetings.list`: `starts_after`/`ends_before` → `start_date`/`end_date`
+- `events.list`: `starts_after`/`ends_before` → `ends_after`/`starts_before` (datetime format)
+- `calls.list`: removed unsupported `user_id`, use `scheduled_after`
+- `calls.complete`: `outcome_id` → `call_outcome_id`
+- `timers.update`: operates on current running timer, no `id` parameter
+- `timers.stop`: takes no body
+- `timeTracking.update`: added required `duration` + `started_on`/`started_at`
+- `invoices.draft`: added required `payment_term`
+- `receipts.add`: removed non-existent `tax_exclusive` field
+- `projects.close`: added required `closing_strategy`
+- `projects.delete` / `projectTasks.delete` / `projectGroups.delete`: added required `delete_strategy`
+- `projectMaterials.list`: removed unsupported `page` field
+- `tickets.getMessage`: only `message_id` (no ticket id)
+- `legacyProjects.updateParticipant`: added required `role`
+- `businessTypes.list`: body itself is required (`list({})`)
+
+**Unit tests**: removed all 117 unjustified `as any` casts in `tests/resources.test.ts`. Every unit-test call now uses fully-typed minimal params verified against the generated types. Along the way, 40+ unit-test calls had wrong field names or missing required fields — all fixed.
+
+### Changed
+- Tests folder is no longer in `.gitignore` (was a mistake — integration tests must be version-controlled).
+
 ## [0.3.0] - 2026-04-13
 
 ### Added

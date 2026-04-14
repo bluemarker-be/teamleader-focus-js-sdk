@@ -225,11 +225,43 @@ const teamleader = new TeamleaderClient({
 });
 ```
 
+## Type safety & spec alignment
+
+The SDK is generated from Teamleader's official OpenAPI spec
+(`api-specs/<version>.yaml`, fetched from `@teamleader/focus-api-specification`).
+A small set of documented patches (in `scripts/generate-types.ts`) corrects
+known divergences between spec and runtime API (e.g. enum values the API
+actually accepts but the spec omits). Each patch explains what and why.
+
+### Verification scripts
+
+```bash
+npm run check-spec         # fetch latest remote spec, show diff, report patch status
+npm run diff-spec          # detailed structural diff (endpoints + schemas + tags)
+npm run test:coverage      # which endpoints have integration tests
+npm run verify:endpoints   # TypeScript-level verification per endpoint:
+                           #   - SDK has a resource method
+                           #   - Endpoint URL matches the spec
+                           #   - Every unit + integration test call is type-valid
+                           #   - Reports `as any` casts and type mismatches
+```
+
+`verify:endpoints` uses the TypeScript compiler API, so its output is as
+accurate as the compiler itself. When the spec changes, run `npm run generate`
+then `npm run verify:endpoints` to see exactly which tests need updating.
+
 ## Development
 
 ```bash
-npm run generate  # regenerate types from OpenAPI spec
-npm run build     # compile to dist/
-npm run test      # run tests
-npm run dev       # watch mode
+npm run generate         # regenerate types from OpenAPI spec
+npm run build            # compile to dist/
+npm run test             # run unit tests (mocked)
+npm run test:integration # run integration tests against real API (needs .env credentials)
+npm run dev              # watch mode
 ```
+
+Integration tests require these environment variables (see `.env.example`):
+- `ACCESS_TOKEN`, `REFRESH_TOKEN`, `CLIENT_ID`, `CLIENT_SECRET`
+
+Running the integration suite will rotate the refresh token; the suite writes
+fresh tokens back to `.env` automatically so subsequent runs still work.
