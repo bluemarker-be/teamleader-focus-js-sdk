@@ -10,7 +10,7 @@ describe.skipIf(noToken)("CRM — Deals", () => {
   let phaseId: string;
   let phase2Id: string;
   let dupPipelineId: string;
-  let dupPhaseId: string;
+  let dupPhaseId: string | undefined;
   let dealId: string;
   let deal2Id: string;
   let existingPhaseId: string;

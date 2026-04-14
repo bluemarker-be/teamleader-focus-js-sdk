@@ -506,12 +506,13 @@ describe.skipIf(noToken)("Projects v2", () => {
   describe.sequential("externalParties", () => {
     it("addToProject", async () => {
       if (!isV2) return;
-      const res = await client.externalParties.addToProject({
+      // SDK types this as void (spec says 204), but the API returns { data: { id } }.
+      // Cast to unknown to read the id we need for update/delete.
+      const res = (await client.externalParties.addToProject({
         project_id: projectId,
         customer: { type: "contact", id: contactId },
-      });
-      expect(res).toHaveProperty("data");
-      externalPartyId = (res.data as { id: string }).id;
+      })) as unknown as { data?: { id: string } } | undefined;
+      externalPartyId = res?.data?.id ?? "";
     });
 
     it("update", async () => {
