@@ -50,6 +50,28 @@ const teamleader = new TeamleaderFocusClient({
 });
 ```
 
+### Other config
+
+```typescript
+const teamleader = new TeamleaderFocusClient({
+  accessToken: "...",
+  userAgent: "MyApp/1.2",          // identify your integration in TL's logs
+  signal: abortController.signal,  // cancel all requests from this client
+  timeout: 30_000,                 // per-request timeout in ms
+  maxRetries: 3,                   // retries on 429/500/502/503
+  apiVersion: "2023-09-26",        // pin X-API-Version header
+});
+```
+
+### Reading custom fields
+
+```typescript
+import { customField } from "teamleader-focus-js-sdk";
+
+const { data: contact } = await teamleader.contacts.info({ id: "abc" });
+const birthday = customField<string>(contact, "bf6765de-56eb-40ec-ad14-9096c5dc5fe1");
+```
+
 ## Usage
 
 ```typescript
@@ -202,8 +224,9 @@ const newTokens = await refreshTokens({
 ## Pagination
 
 Every `.list()` method returns an async iterator that auto-paginates across
-every page. Page size is clamped to the API maximum (100); default safety
-limit is 100 pages.
+every page. Page size is clamped to the API maximum (100). There is no
+default cap — the iterator stops when the API returns an empty or short
+page, so iterating naturally yields every item.
 
 ```typescript
 // Iterate all contacts — pages are fetched lazily as you consume
@@ -211,7 +234,7 @@ for await (const contact of teamleader.contacts.list({ filter: { term: "John" } 
   console.log(contact);
 }
 
-// Stop early after N pages
+// Opt-in safety cap
 for await (const deal of teamleader.deals.list({}, { maxPages: 5 })) {
   // stops after 5 pages (max 500 items at size: 100)
 }
@@ -219,6 +242,13 @@ for await (const deal of teamleader.deals.list({}, { maxPages: 5 })) {
 // Break out when you have what you need
 for await (const c of teamleader.contacts.list()) {
   if (c.email === "target@example.com") break;
+}
+
+// Cancel mid-flight via AbortController
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5000);
+for await (const c of teamleader.contacts.list({}, { signal: controller.signal })) {
+  // stops cleanly after 5s
 }
 ```
 

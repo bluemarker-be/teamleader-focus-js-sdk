@@ -4,6 +4,10 @@ export { TeamleaderFocusClient } from "./client.js";
 export { createAuthorizationUrl, exchangeCodeForTokens, refreshTokens, } from "./oauth.js";
 // Errors
 export { TeamleaderFocusError, TeamleaderFocusAuthenticationError, TeamleaderFocusTokenRefreshError, TeamleaderFocusRateLimitError, TeamleaderFocusValidationError, TeamleaderFocusNetworkError, } from "./errors.js";
+// Helpers
+export { customField } from "./helpers/custom-fields.js";
+// SDK version constant (matches package.json, sent as default User-Agent)
+export { SDK_VERSION } from "./client.js";
 // Resource classes (for advanced usage / extending)
 export { AccountsResource } from "./resources/accounts.js";
 export { ActivityTypesResource } from "./resources/activity-types.js";

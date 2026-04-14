@@ -28,6 +28,7 @@ export interface PaginatedResponse<T> {
  */
 export declare function paginatePages<T>(client: TeamleaderFocusClient, endpoint: string, params?: PaginatedRequest, options?: {
     maxPages?: number;
+    signal?: AbortSignal;
 }): AsyncGenerator<PaginatedResponse<T>, void, undefined>;
 /**
  * Async iterator that yields individual items from a paginated endpoint.
@@ -41,5 +42,6 @@ export declare function paginatePages<T>(client: TeamleaderFocusClient, endpoint
  */
 export declare function paginateItems<T>(client: TeamleaderFocusClient, endpoint: string, params?: PaginatedRequest, options?: {
     maxPages?: number;
+    signal?: AbortSignal;
 }): AsyncGenerator<T, void, undefined>;
 //# sourceMappingURL=paginator.d.ts.map

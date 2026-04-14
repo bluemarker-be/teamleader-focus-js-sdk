@@ -27,6 +27,13 @@ export {
 // Pagination types (use via client.paginatePages() / client.paginateItems())
 export type { PaginatedRequest, PaginatedResponse } from "./paginator.js";
 
+// Helpers
+export { customField } from "./helpers/custom-fields.js";
+export type { HasCustomFields } from "./helpers/custom-fields.js";
+
+// SDK version constant (matches package.json, sent as default User-Agent)
+export { SDK_VERSION } from "./client.js";
+
 // Types
 export type {
   RequestBody,

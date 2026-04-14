@@ -67,6 +67,8 @@ import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
 import { WithholdingTaxRatesResource } from "./resources/withholding-tax-rates.js";
 import { WorkTypesResource } from "./resources/work-types.js";
+/** Bumped in lockstep with package.json. Sent as the default User-Agent. */
+export declare const SDK_VERSION = "0.7.0";
 interface TeamleaderFocusClientConfigBase {
     /** OAuth2 refresh token — required for auto-refresh */
     refreshToken?: string;
@@ -95,6 +97,18 @@ interface TeamleaderFocusClientConfigBase {
      * @see https://developer.teamleader.eu/#/introduction/ap-i-versions
      */
     apiVersion?: string;
+    /**
+     * User-Agent header sent with every request.
+     * Defaults to `teamleader-focus-js-sdk/<version>` — set this to identify
+     * your integration in Teamleader's server logs, e.g. "MyApp/1.2".
+     */
+    userAgent?: string;
+    /**
+     * AbortSignal applied to every request from this client.
+     * When the signal aborts, all in-flight requests and paginated iterators
+     * tied to this client stop.
+     */
+    signal?: AbortSignal;
 }
 interface TeamleaderFocusClientConfigWithToken extends TeamleaderFocusClientConfigBase {
     /** OAuth2 access token */
@@ -140,6 +154,8 @@ export declare class TeamleaderFocusClient {
     private readonly timeout;
     private readonly maxRetries;
     private readonly apiVersion?;
+    private readonly userAgent;
+    private readonly clientSignal?;
     private refreshPromise;
     readonly accounts: AccountsResource;
     readonly activityTypes: ActivityTypesResource;
@@ -213,8 +229,14 @@ export declare class TeamleaderFocusClient {
     /**
      * Make an authenticated POST request to the Teamleader API.
      * Handles token refresh, rate limiting, and error mapping.
+     *
+     * Pass `{ signal }` to cancel the request via AbortController. The signal
+     * is combined with the client-level signal (if any) and the timeout — whichever
+     * aborts first wins.
      */
-    request<T>(endpoint: string, body?: unknown): Promise<T>;
+    request<T>(endpoint: string, body?: unknown, options?: {
+        signal?: AbortSignal;
+    }): Promise<T>;
     /**
      * Async iterator that yields each page of a paginated endpoint.
      *
@@ -234,10 +256,12 @@ export declare class TeamleaderFocusClient {
         [key: string]: unknown;
     }, options?: {
         maxPages?: number;
+        signal?: AbortSignal;
     }): AsyncGenerator<import("./paginator.js").PaginatedResponse<T>, void, undefined>;
     /**
      * Async iterator that yields each item across all pages of a paginated endpoint.
-     * Page size is clamped to the API maximum (100). Defaults: size=100, maxPages=100.
+     * Page size is clamped to the API maximum (100). The iterator stops naturally
+     * when the API returns an empty / short page; pass `maxPages` to cap earlier.
      *
      * @example
      * ```ts
@@ -254,6 +278,7 @@ export declare class TeamleaderFocusClient {
         [key: string]: unknown;
     }, options?: {
         maxPages?: number;
+        signal?: AbortSignal;
     }): AsyncGenerator<T, void, undefined>;
     private requestWithRetry;
     /**

@@ -4,6 +4,42 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.7.0] - 2026-04-14
+
+### Changed (breaking)
+- `.list()` / `paginateItems()` / `paginatePages()` no longer default to
+  `maxPages: 100`. Default is now `Infinity` — the iterator stops naturally
+  when the API returns an empty or short page, so `for await` reliably
+  yields *every* item. Users who want a safety cap can still pass
+  `{ maxPages: N }` explicitly. This prevents silent data truncation at
+  10k items for anyone with a large dataset.
+
+### Added
+- **`AbortSignal` support.** Pass `signal` on the client config to cancel
+  every request from that client, or per-request via
+  `client.request(endpoint, body, { signal })`. Paginating iterators
+  (`paginateItems`, `paginatePages`, every resource `.list()`) accept
+  `{ signal }` in their options and stop cleanly mid-iteration.
+  ```ts
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), 5000);
+  for await (const c of client.contacts.list({}, { signal: controller.signal })) {
+    // stops after 5s
+  }
+  ```
+- **`userAgent` config.** Identify your integration in Teamleader's
+  server logs. Default: `teamleader-focus-js-sdk/<version>`. Override:
+  ```ts
+  new TeamleaderFocusClient({ accessToken, userAgent: "MyApp/1.2" });
+  ```
+- **`customField(entity, fieldId)` helper.** One-line reader for
+  `entity.custom_fields[].value` by definition id, with generic typing:
+  ```ts
+  import { customField } from "teamleader-focus-js-sdk";
+  const birthday = customField<string>(contact, "bf6765de-...");
+  ```
+- Exported `SDK_VERSION` constant for runtime introspection.
+
 ## [0.6.0] - 2026-04-13
 
 ### Changed (breaking)

@@ -81,6 +81,10 @@ const DEFAULT_BASE_URL = "https://api.focus.teamleader.eu";
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_MAX_RETRIES = 3;
 
+/** Bumped in lockstep with package.json. Sent as the default User-Agent. */
+export const SDK_VERSION = "0.7.0";
+const DEFAULT_USER_AGENT = `teamleader-focus-js-sdk/${SDK_VERSION}`;
+
 interface TeamleaderFocusClientConfigBase {
   /** OAuth2 refresh token — required for auto-refresh */
   refreshToken?: string;
@@ -115,6 +119,20 @@ interface TeamleaderFocusClientConfigBase {
    * @see https://developer.teamleader.eu/#/introduction/ap-i-versions
    */
   apiVersion?: string;
+
+  /**
+   * User-Agent header sent with every request.
+   * Defaults to `teamleader-focus-js-sdk/<version>` — set this to identify
+   * your integration in Teamleader's server logs, e.g. "MyApp/1.2".
+   */
+  userAgent?: string;
+
+  /**
+   * AbortSignal applied to every request from this client.
+   * When the signal aborts, all in-flight requests and paginated iterators
+   * tied to this client stop.
+   */
+  signal?: AbortSignal;
 }
 
 interface TeamleaderFocusClientConfigWithToken extends TeamleaderFocusClientConfigBase {
@@ -152,6 +170,8 @@ export class TeamleaderFocusClient {
   private readonly timeout: number;
   private readonly maxRetries: number;
   private readonly apiVersion?: string;
+  private readonly userAgent: string;
+  private readonly clientSignal?: AbortSignal;
 
   // Mutex for token refresh — prevents multiple concurrent refreshes
   private refreshPromise: Promise<void> | null = null;
@@ -238,6 +258,8 @@ export class TeamleaderFocusClient {
     this.timeout = config.timeout ?? DEFAULT_TIMEOUT_MS;
     this.maxRetries = config.maxRetries ?? DEFAULT_MAX_RETRIES;
     this.apiVersion = config.apiVersion;
+    this.userAgent = config.userAgent ?? DEFAULT_USER_AGENT;
+    this.clientSignal = config.signal;
 
     // Warn if clientSecret is used in browser context
     if (config.clientSecret && typeof (globalThis as Record<string, unknown>).window !== "undefined") {
@@ -321,12 +343,17 @@ export class TeamleaderFocusClient {
   /**
    * Make an authenticated POST request to the Teamleader API.
    * Handles token refresh, rate limiting, and error mapping.
+   *
+   * Pass `{ signal }` to cancel the request via AbortController. The signal
+   * is combined with the client-level signal (if any) and the timeout — whichever
+   * aborts first wins.
    */
   async request<T>(
     endpoint: string,
     body?: unknown,
+    options?: { signal?: AbortSignal },
   ): Promise<T> {
-    return this.requestWithRetry(endpoint, body, 0);
+    return this.requestWithRetry(endpoint, body, 0, 0, options?.signal);
   }
 
   /**
@@ -343,14 +370,15 @@ export class TeamleaderFocusClient {
   paginatePages<T>(
     endpoint: string,
     params?: { page?: { size?: number; number?: number }; [key: string]: unknown },
-    options?: { maxPages?: number },
+    options?: { maxPages?: number; signal?: AbortSignal },
   ) {
     return paginatePages<T>(this, endpoint, params, options);
   }
 
   /**
    * Async iterator that yields each item across all pages of a paginated endpoint.
-   * Page size is clamped to the API maximum (100). Defaults: size=100, maxPages=100.
+   * Page size is clamped to the API maximum (100). The iterator stops naturally
+   * when the API returns an empty / short page; pass `maxPages` to cap earlier.
    *
    * @example
    * ```ts
@@ -362,7 +390,7 @@ export class TeamleaderFocusClient {
   paginateItems<T>(
     endpoint: string,
     params?: { page?: { size?: number; number?: number }; [key: string]: unknown },
-    options?: { maxPages?: number },
+    options?: { maxPages?: number; signal?: AbortSignal },
   ) {
     return paginateItems<T>(this, endpoint, params, options);
   }
@@ -377,15 +405,36 @@ export class TeamleaderFocusClient {
     body: unknown,
     authRetryState: number,
     retryCount = 0,
+    externalSignal?: AbortSignal,
   ): Promise<T> {
     const url = new URL(endpoint, this.baseUrl);
+
+    // Compose external signals (client-level + per-request) with the timeout controller.
+    // If any aborts, we forward to `controller` so fetch() aborts. We use addEventListener
+    // rather than AbortSignal.any() to stay compatible with Node 18.
+    const parentSignals: AbortSignal[] = [];
+    if (this.clientSignal) parentSignals.push(this.clientSignal);
+    if (externalSignal) parentSignals.push(externalSignal);
+    const alreadyAborted = parentSignals.find((s) => s.aborted);
+    if (alreadyAborted) {
+      // Throw synchronously — don't start a fetch we're going to cancel immediately
+      throw alreadyAborted.reason instanceof Error
+        ? alreadyAborted.reason
+        : new DOMException("The operation was aborted.", "AbortError");
+    }
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+    const abortHandler = () => controller.abort();
+    for (const s of parentSignals) {
+      s.addEventListener("abort", abortHandler, { once: true });
+    }
 
     let response: Response;
     try {
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
+        "User-Agent": this.userAgent,
         Authorization: `Bearer ${this.accessToken}`,
       };
       if (this.apiVersion) {
@@ -400,6 +449,10 @@ export class TeamleaderFocusClient {
       });
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") {
+        // Distinguish timeout from user-initiated abort
+        if (parentSignals.some((s) => s.aborted)) {
+          throw error; // propagate AbortError as-is
+        }
         throw new TeamleaderFocusNetworkError(
           new Error(`Request timed out after ${this.timeout}ms`),
         );
@@ -407,6 +460,9 @@ export class TeamleaderFocusClient {
       throw new TeamleaderFocusNetworkError(error as Error);
     } finally {
       clearTimeout(timeoutId);
+      for (const s of parentSignals) {
+        s.removeEventListener("abort", abortHandler);
+      }
     }
 
     // 204 No Content — success with no body (delete/update operations)
@@ -420,7 +476,7 @@ export class TeamleaderFocusClient {
       if (authRetryState === 0 && this.getTokensFn) {
         const changed = await this.fetchLatestTokens();
         if (changed) {
-          return this.requestWithRetry(endpoint, body, 1, retryCount);
+          return this.requestWithRetry(endpoint, body, 1, retryCount, externalSignal);
         }
         // Not changed — fall through to refresh
       }
@@ -429,13 +485,13 @@ export class TeamleaderFocusClient {
       if (authRetryState <= 1 && this.canRefreshToken()) {
         try {
           await this.performTokenRefresh();
-          return this.requestWithRetry(endpoint, body, 2, retryCount);
+          return this.requestWithRetry(endpoint, body, 2, retryCount, externalSignal);
         } catch (refreshError) {
           // Step 3: Refresh failed — try getTokens one more time (another process may have refreshed)
           if (this.getTokensFn) {
             const changed = await this.fetchLatestTokens();
             if (changed) {
-              return this.requestWithRetry(endpoint, body, 3, retryCount);
+              return this.requestWithRetry(endpoint, body, 3, retryCount, externalSignal);
             }
           }
           throw refreshError;
@@ -450,14 +506,14 @@ export class TeamleaderFocusClient {
       const retryAfter = this.parseRetryAfter(response);
       const waitMs = Math.max(100, retryAfter.getTime() - Date.now());
       await this.sleep(waitMs);
-      return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
+      return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1, externalSignal);
     }
 
     // 500/502/503 Server Error — retry with exponential backoff
     if ((response.status === 500 || response.status === 502 || response.status === 503) && retryCount < this.maxRetries) {
       const backoffMs = Math.min(1000 * 2 ** retryCount, 10_000) * (0.5 + Math.random() * 0.5);
       await this.sleep(backoffMs);
-      return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1);
+      return this.requestWithRetry(endpoint, body, authRetryState, retryCount + 1, externalSignal);
     }
 
     // Parse response body

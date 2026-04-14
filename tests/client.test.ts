@@ -20,10 +20,34 @@ describe("TeamleaderFocusClient", () => {
     expect(calls).toHaveLength(1);
     expect(calls[0].url).toBe("https://api.focus.teamleader.eu/contacts.info");
     expect(calls[0].init.method).toBe("POST");
-    expect(calls[0].init.headers).toEqual({
+    expect(calls[0].init.headers).toMatchObject({
       "Content-Type": "application/json",
       Authorization: "Bearer test-token",
     });
+  });
+
+  it("sends default User-Agent header", async () => {
+    const { fetchFn, calls } = mockFetch({ body: { data: [] } });
+    const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
+
+    await client.contacts.info({ id: "abc" });
+
+    const headers = calls[0].init.headers as Record<string, string>;
+    expect(headers["User-Agent"]).toMatch(/^teamleader-focus-js-sdk\/\d+\.\d+\.\d+/);
+  });
+
+  it("sends custom User-Agent header when configured", async () => {
+    const { fetchFn, calls } = mockFetch({ body: { data: [] } });
+    const client = new TeamleaderFocusClient({
+      accessToken: "tok",
+      fetch: fetchFn,
+      userAgent: "MyApp/1.2",
+    });
+
+    await client.contacts.info({ id: "abc" });
+
+    const headers = calls[0].init.headers as Record<string, string>;
+    expect(headers["User-Agent"]).toBe("MyApp/1.2");
   });
 
   it("sends request body as JSON", async () => {
@@ -151,7 +175,7 @@ describe("TeamleaderFocusClient", () => {
 
     await client.contacts.info({ id: "abc" });
 
-    expect(calls[0].init.headers).toEqual({
+    expect(calls[0].init.headers).toMatchObject({
       "Content-Type": "application/json",
       Authorization: "Bearer tok",
       "X-API-Version": "2023-09-26",
@@ -638,6 +662,64 @@ describe("TeamleaderFocusClient", () => {
       const result = await client.contacts.info({ id: "abc" });
       expect(calls).toHaveLength(3);
       expect(result).toEqual({ data: [{ id: "1" }] });
+    });
+  });
+
+  describe("AbortSignal", () => {
+    it("per-request signal aborts the fetch", async () => {
+      // Mock fetch that never resolves — we'll abort it
+      const fetchFn = ((_url: string, init?: RequestInit) => {
+        return new Promise<Response>((_, reject) => {
+          init?.signal?.addEventListener("abort", () => {
+            reject(new DOMException("aborted", "AbortError"));
+          });
+        });
+      }) as typeof globalThis.fetch;
+
+      const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
+      const controller = new AbortController();
+
+      const promise = client.request("/contacts.info", { id: "abc" }, { signal: controller.signal });
+      controller.abort();
+
+      await expect(promise).rejects.toThrow(/abort/i);
+    });
+
+    it("client-level signal aborts all requests", async () => {
+      const fetchFn = ((_url: string, init?: RequestInit) => {
+        return new Promise<Response>((_, reject) => {
+          init?.signal?.addEventListener("abort", () => {
+            reject(new DOMException("aborted", "AbortError"));
+          });
+        });
+      }) as typeof globalThis.fetch;
+
+      const controller = new AbortController();
+      const client = new TeamleaderFocusClient({
+        accessToken: "tok",
+        fetch: fetchFn,
+        signal: controller.signal,
+      });
+
+      const promise = client.contacts.info({ id: "abc" });
+      controller.abort();
+
+      await expect(promise).rejects.toThrow(/abort/i);
+    });
+
+    it("pre-aborted signal rejects immediately without fetching", async () => {
+      const { fetchFn, calls } = mockFetch({ body: { data: [] } });
+      const client = new TeamleaderFocusClient({ accessToken: "tok", fetch: fetchFn });
+
+      const controller = new AbortController();
+      controller.abort();
+
+      await expect(
+        client.request("/contacts.info", { id: "abc" }, { signal: controller.signal }),
+      ).rejects.toThrow(/abort/i);
+
+      // fetch was never started — we threw before calling it
+      expect(calls).toHaveLength(0);
     });
   });
 });

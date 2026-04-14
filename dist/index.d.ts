@@ -4,6 +4,9 @@ export { createAuthorizationUrl, exchangeCodeForTokens, refreshTokens, } from ".
 export type { AuthorizationUrlParams, ExchangeCodeParams, RefreshTokenParams, } from "./oauth.js";
 export { TeamleaderFocusError, TeamleaderFocusAuthenticationError, TeamleaderFocusTokenRefreshError, TeamleaderFocusRateLimitError, TeamleaderFocusValidationError, TeamleaderFocusNetworkError, } from "./errors.js";
 export type { PaginatedRequest, PaginatedResponse } from "./paginator.js";
+export { customField } from "./helpers/custom-fields.js";
+export type { HasCustomFields } from "./helpers/custom-fields.js";
+export { SDK_VERSION } from "./client.js";
 export type { RequestBody, ResponseBody, Page, PageMeta, TypeAndId, ListResponse, SingleResponse, CreatedResponse, OAuthTokens, OAuthConfig, } from "./types/common.js";
 export type { operations, paths, components } from "./types/generated.js";
 export { AccountsResource } from "./resources/accounts.js";

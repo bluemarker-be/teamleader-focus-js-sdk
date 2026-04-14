@@ -1,0 +1,31 @@
+/**
+ * Entity shape for anything the API returns that has custom fields.
+ * Matches the structure used across contacts, companies, deals, projects, etc.
+ */
+export interface HasCustomFields {
+    custom_fields?: Array<{
+        definition?: {
+            id?: string;
+            type?: string;
+        };
+        value?: unknown;
+    }>;
+}
+/**
+ * Read a custom field value from an entity by its definition id.
+ *
+ * Custom fields on Teamleader entities are returned as an array of
+ * `{ definition: { id }, value }` pairs. Looking up a specific field means
+ * iterating that array and matching on the definition id — this helper does
+ * that in one line and narrows the return type for you.
+ *
+ * @example
+ * ```ts
+ * const { data: contact } = await teamleader.contacts.info({ id: "abc" });
+ * const birthday = customField<string>(contact, "bf6765de-56eb-40ec-ad14-9096c5dc5fe1");
+ * ```
+ *
+ * @returns The field's value, or `undefined` when the field isn't set on this entity.
+ */
+export declare function customField<T = unknown>(entity: HasCustomFields | null | undefined, fieldId: string): T | undefined;
+//# sourceMappingURL=custom-fields.d.ts.map
