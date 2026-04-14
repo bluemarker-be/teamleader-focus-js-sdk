@@ -3,6 +3,5 @@ node_modules/
 .env.*
 *.tgz
 .DS_Store
-api-specs/
-tests/integration/*.test.ts
 tests/integration/reports/
+tests/live/

@@ -1,4 +1,48 @@
 import { TeamleaderClient } from "../../src/index.js";
+import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+// ---------------------------------------------------------------------------
+// .env persistence
+// ---------------------------------------------------------------------------
+
+const ENV_PATH = resolve(process.cwd(), ".env");
+
+/**
+ * Rewrites a single key=value pair in the .env file, preserving all other
+ * lines (comments, other variables, ordering, trailing newlines).
+ *
+ * Why: Teamleader refresh tokens are single-use. If we only update
+ * process.env, the next test-suite run loads the old (now-revoked) tokens
+ * from .env and all requests fail. Persisting to disk keeps .env in sync.
+ */
+function persistEnvVar(key: string, value: string): void {
+  let content: string;
+  try {
+    content = readFileSync(ENV_PATH, "utf-8");
+  } catch {
+    // No .env file — nothing to persist to
+    return;
+  }
+
+  const lines = content.split("\n");
+  let replaced = false;
+  const updated = lines.map((line) => {
+    const eq = line.indexOf("=");
+    if (eq === -1) return line;
+    const k = line.slice(0, eq).trim();
+    if (k !== key) return line;
+    replaced = true;
+    return `${key}=${value}`;
+  });
+
+  if (!replaced) {
+    // Key didn't exist — append it (but only if content doesn't already end with the key)
+    updated.push(`${key}=${value}`);
+  }
+
+  writeFileSync(ENV_PATH, updated.join("\n"), "utf-8");
+}
 
 // ---------------------------------------------------------------------------
 // Client singleton
@@ -28,9 +72,16 @@ export function getClient(): TeamleaderClient {
     apiVersion: "2023-09-26",
     maxRetries: 10, // More retries for integration tests (rate limits)
     onTokenRefresh: (tokens) => {
-      // Update the in-memory env so subsequent client recreation uses new tokens
+      // Update in-memory env for the current process
       process.env.ACCESS_TOKEN = tokens.access_token;
       process.env.REFRESH_TOKEN = tokens.refresh_token;
+      // Persist to .env so next suite run uses the fresh tokens
+      try {
+        persistEnvVar("ACCESS_TOKEN", tokens.access_token);
+        persistEnvVar("REFRESH_TOKEN", tokens.refresh_token);
+      } catch (err) {
+        console.warn("[setup.ts] Failed to persist tokens to .env:", err);
+      }
     },
   });
 

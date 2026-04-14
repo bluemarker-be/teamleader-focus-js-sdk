@@ -71,25 +71,25 @@ describe("Resources", () => {
 
     it("linkToCompany → POST /contacts.linkToCompany", async () => {
       const { client, calls } = createVoidClient();
-      await client.contacts.linkToCompany({ id: "abc", company_id: "comp1" } as any);
+      await client.contacts.linkToCompany({ id: "abc", company_id: "comp1" });
       expect(calls[0].url).toContain("/contacts.linkToCompany");
     });
 
     it("unlinkFromCompany → POST /contacts.unlinkFromCompany", async () => {
       const { client, calls } = createVoidClient();
-      await client.contacts.unlinkFromCompany({ id: "abc", company_id: "comp1" } as any);
+      await client.contacts.unlinkFromCompany({ id: "abc", company_id: "comp1" });
       expect(calls[0].url).toContain("/contacts.unlinkFromCompany");
     });
 
     it("updateCompanyLink → POST /contacts.updateCompanyLink", async () => {
       const { client, calls } = createVoidClient();
-      await client.contacts.updateCompanyLink({ id: "abc", company_id: "comp1" } as any);
+      await client.contacts.updateCompanyLink({ id: "abc", company_id: "comp1" });
       expect(calls[0].url).toContain("/contacts.updateCompanyLink");
     });
 
     it("uploadAvatar → POST /contacts.uploadAvatar", async () => {
       const { client, calls } = createVoidClient();
-      await client.contacts.uploadAvatar({ id: "abc" } as any);
+      await client.contacts.uploadAvatar({ id: "abc", image: null });
       expect(calls[0].url).toContain("/contacts.uploadAvatar");
     });
   });
@@ -143,7 +143,7 @@ describe("Resources", () => {
 
     it("uploadLogo → POST /companies.uploadLogo", async () => {
       const { client, calls } = createVoidClient();
-      await client.companies.uploadLogo({ id: "c1" } as any);
+      await client.companies.uploadLogo({ id: "c1", image: null });
       expect(calls[0].url).toContain("/companies.uploadLogo");
     });
   });
@@ -167,7 +167,7 @@ describe("Resources", () => {
 
     it("create → POST /deals.create", async () => {
       const { client, calls } = createClientWithBody({ data: { type: "deal", id: "d1" } });
-      await client.deals.create({ title: "Big deal", lead: { customer: { type: "contact", id: "c1" } } } as any);
+      await client.deals.create({ title: "Big deal", lead: { customer: { type: "contact", id: "c1" } } });
       expect(calls[0].url).toContain("/deals.create");
     });
 
@@ -191,7 +191,7 @@ describe("Resources", () => {
 
     it("lose → POST /deals.lose", async () => {
       const { client, calls } = createVoidClient();
-      await client.deals.lose({ id: "d1", on: "2026-01-01" } as any);
+      await client.deals.lose({ id: "d1" });
       expect(calls[0].url).toContain("/deals.lose");
     });
 
@@ -247,11 +247,19 @@ describe("Resources", () => {
     const invoiceEndpoints: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
       ["invoices.list", (c) => c.invoices.list()],
       ["invoices.info", (c) => c.invoices.info({ id: "i1" })],
-      ["invoices.download", (c) => c.invoices.download({ id: "i1" } as any)],
-      ["invoices.draft", (c) => c.invoices.draft({ invoicee: { customer: { type: "contact", id: "c1" } } } as any)],
-      ["invoices.copy", (c) => c.invoices.copy({ id: "i1" } as any)],
-      ["invoices.credit", (c) => c.invoices.credit({ id: "i1" } as any)],
-      ["invoices.creditPartially", (c) => c.invoices.creditPartially({ id: "i1" } as any)],
+      ["invoices.download", (c) => c.invoices.download({ id: "i1", format: "pdf" })],
+      ["invoices.draft", (c) => c.invoices.draft({
+        invoicee: { customer: { type: "contact", id: "c1" } },
+        department_id: "dep1",
+        payment_term: { type: "cash" },
+        grouped_lines: [{ line_items: [{ quantity: 1, description: "Line", tax_rate_id: "tr1" }] }],
+      })],
+      ["invoices.copy", (c) => c.invoices.copy({ id: "i1" })],
+      ["invoices.credit", (c) => c.invoices.credit({ id: "i1" })],
+      ["invoices.creditPartially", (c) => c.invoices.creditPartially({
+        id: "i1",
+        grouped_lines: [{ line_items: [{ quantity: 1, description: "Line", tax_rate_id: "tr1" }] }],
+      })],
     ];
 
     for (const [endpoint, fn] of invoiceEndpoints) {
@@ -263,14 +271,21 @@ describe("Resources", () => {
     }
 
     const voidEndpoints: Array<[string, (c: TeamleaderClient) => Promise<unknown>]> = [
-      ["invoices.update", (c) => c.invoices.update({ id: "i1" } as any)],
-      ["invoices.updateBooked", (c) => c.invoices.updateBooked({ id: "i1" } as any)],
-      ["invoices.book", (c) => c.invoices.book({ id: "i1" })],
+      ["invoices.update", (c) => c.invoices.update({ id: "i1" })],
+      ["invoices.updateBooked", (c) => c.invoices.updateBooked({ id: "i1" })],
+      ["invoices.book", (c) => c.invoices.book({ id: "i1", on: "2026-01-01" })],
       ["invoices.delete", (c) => c.invoices.delete({ id: "i1" })],
-      ["invoices.registerPayment", (c) => c.invoices.registerPayment({ id: "i1" } as any)],
-      ["invoices.removePayments", (c) => c.invoices.removePayments({ id: "i1" } as any)],
-      ["invoices.send", (c) => c.invoices.send({ id: "i1" } as any)],
-      ["invoices.sendViaPeppol", (c) => c.invoices.sendViaPeppol({ id: "i1" } as any)],
+      ["invoices.registerPayment", (c) => c.invoices.registerPayment({
+        id: "i1",
+        payment: { amount: 100, currency: "EUR" },
+        paid_at: "2026-01-01T10:00:00+00:00",
+      })],
+      ["invoices.removePayments", (c) => c.invoices.removePayments({ id: "i1" })],
+      ["invoices.send", (c) => c.invoices.send({
+        id: "i1",
+        content: { subject: "Inv", body: "Body" },
+      })],
+      ["invoices.sendViaPeppol", (c) => c.invoices.sendViaPeppol({ id: "i1" })],
     ];
 
     for (const [endpoint, fn] of voidEndpoints) {
@@ -301,25 +316,34 @@ describe("Resources", () => {
 
     it("download → POST /quotations.download", async () => {
       const { client, calls } = createClientWithBody({ data: {} });
-      await client.quotations.download({ id: "q1" } as any);
+      await client.quotations.download({ id: "q1", format: "pdf" });
       expect(calls[0].url).toContain("/quotations.download");
     });
 
     it("create → POST /quotations.create", async () => {
       const { client, calls } = createClientWithBody({ data: { type: "quotation", id: "q1" } });
-      await client.quotations.create({ deal_id: "d1" } as any);
+      await client.quotations.create({
+        deal_id: "d1",
+        grouped_lines: [{ line_items: [{ quantity: 1, description: "Line", tax_rate_id: "tr1" }] }],
+      });
       expect(calls[0].url).toContain("/quotations.create");
     });
 
     it("send → POST /quotations.send", async () => {
       const { client, calls } = createVoidClient();
-      await client.quotations.send({ id: "q1" } as any);
+      await client.quotations.send({
+        quotations: ["q1"],
+        recipients: { to: [{ email_address: "test@example.com" }] },
+        subject: "Quote",
+        content: "Body",
+        language: "en",
+      });
       expect(calls[0].url).toContain("/quotations.send");
     });
 
     it("update → POST /quotations.update", async () => {
       const { client, calls } = createVoidClient();
-      await client.quotations.update({ id: "q1" } as any);
+      await client.quotations.update({ id: "q1" });
       expect(calls[0].url).toContain("/quotations.update");
     });
 

@@ -24,7 +24,8 @@
     "oauth": "node --loader ts-node/esm scripts/oauth-token.ts",
     "check-spec": "node --loader ts-node/esm scripts/check-spec-update.ts",
     "diff-spec": "node --loader ts-node/esm scripts/diff-spec.ts",
-    "test:coverage": "node --loader ts-node/esm scripts/check-test-coverage.ts"
+    "test:coverage": "node --loader ts-node/esm scripts/check-test-coverage.ts",
+    "verify:endpoints": "node --loader ts-node/esm scripts/verify-endpoints.ts"
   },
   "devDependencies": {
     "openapi-typescript": "^7.13.0",
