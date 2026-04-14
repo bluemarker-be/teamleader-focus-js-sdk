@@ -68,7 +68,7 @@ import { WebhooksResource } from "./resources/webhooks.js";
 import { WithholdingTaxRatesResource } from "./resources/withholding-tax-rates.js";
 import { WorkTypesResource } from "./resources/work-types.js";
 /** Bumped in lockstep with package.json. Sent as the default User-Agent. */
-export declare const SDK_VERSION = "0.7.0";
+export declare const SDK_VERSION = "1.0.0";
 interface TeamleaderFocusClientConfigBase {
     /** OAuth2 refresh token — required for auto-refresh */
     refreshToken?: string;
@@ -94,7 +94,7 @@ interface TeamleaderFocusClientConfigBase {
      * Sent as `X-API-Version` header on every request.
      * When omitted, the version embedded in your OAuth token is used.
      *
-     * @see https://developer.teamleader.eu/#/introduction/ap-i-versions
+     * @see https://developer.focus.teamleader.eu/docs/changelog/breaking-changes
      */
     apiVersion?: string;
     /**

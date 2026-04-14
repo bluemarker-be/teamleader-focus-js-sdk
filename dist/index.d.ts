@@ -3,6 +3,7 @@ export type { TeamleaderFocusClientConfig } from "./client.js";
 export { createAuthorizationUrl, exchangeCodeForTokens, refreshTokens, } from "./oauth.js";
 export type { AuthorizationUrlParams, ExchangeCodeParams, RefreshTokenParams, } from "./oauth.js";
 export { TeamleaderFocusError, TeamleaderFocusAuthenticationError, TeamleaderFocusTokenRefreshError, TeamleaderFocusRateLimitError, TeamleaderFocusValidationError, TeamleaderFocusNetworkError, } from "./errors.js";
+export type { TeamleaderApiError, TeamleaderApiErrorBody } from "./errors.js";
 export type { PaginatedRequest, PaginatedResponse } from "./paginator.js";
 export { customField } from "./helpers/custom-fields.js";
 export type { HasCustomFields } from "./helpers/custom-fields.js";

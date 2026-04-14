@@ -1,3 +1,8 @@
+function isErrorBody(value) {
+    return (typeof value === "object" &&
+        value !== null &&
+        Array.isArray(value.errors));
+}
 /** Base error for all Teamleader API errors */
 export class TeamleaderFocusError extends Error {
     status;
@@ -7,6 +12,25 @@ export class TeamleaderFocusError extends Error {
         this.name = "TeamleaderFocusError";
         this.status = status;
         this.body = body;
+    }
+    /**
+     * Parsed errors array from Teamleader's standard error response.
+     * Returns `undefined` when `body` isn't the expected `{ errors: [...] }`
+     * shape (e.g. network errors, plain-text error bodies).
+     */
+    get errors() {
+        return isErrorBody(this.body) ? this.body.errors : undefined;
+    }
+    /** Convenience: the first error's `title`, if present. */
+    get title() {
+        return this.errors?.[0]?.title;
+    }
+    /**
+     * Convenience: the first error's `meta.field`, if present.
+     * Useful for validation errors that pinpoint the offending field.
+     */
+    get field() {
+        return this.errors?.[0]?.meta?.field;
     }
 }
 /** Thrown when the API returns 401 (invalid/expired token) */
@@ -21,19 +45,8 @@ export class TeamleaderFocusTokenRefreshError extends TeamleaderFocusAuthenticat
     constructor(body) {
         super(body);
         this.name = "TeamleaderFocusTokenRefreshError";
-        const hint = extractHint(body);
+        const hint = this.errors?.[0]?.meta?.hint;
         this.message = hint ? `Token refresh failed: ${hint}` : "Token refresh failed";
-    }
-}
-function extractHint(body) {
-    try {
-        const errors = body?.errors;
-        if (Array.isArray(errors) && errors.length > 0) {
-            return errors[0].meta?.hint;
-        }
-    }
-    catch {
-        // ignore
     }
 }
 /** Thrown when the API returns 429 (rate limit exceeded) */
@@ -48,10 +61,10 @@ export class TeamleaderFocusRateLimitError extends TeamleaderFocusError {
 /** Thrown when the API returns 400 or 422 (validation error) */
 export class TeamleaderFocusValidationError extends TeamleaderFocusError {
     constructor(status, body) {
-        const msg = typeof body === "object" && body !== null && "message" in body
-            ? String(body.message)
-            : "Validation error";
-        super(msg, status, body);
+        // Prefer the first error's title — that's the actual API message.
+        // Falls back to "Validation error" when the body isn't the expected shape.
+        const titleFromBody = isErrorBody(body) ? body.errors[0]?.title : undefined;
+        super(titleFromBody ?? "Validation error", status, body);
         this.name = "TeamleaderFocusValidationError";
     }
 }

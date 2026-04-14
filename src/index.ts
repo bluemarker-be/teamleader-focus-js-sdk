@@ -23,6 +23,7 @@ export {
   TeamleaderFocusValidationError,
   TeamleaderFocusNetworkError,
 } from "./errors.js";
+export type { TeamleaderApiError, TeamleaderApiErrorBody } from "./errors.js";
 
 // Pagination types (use via client.paginatePages() / client.paginateItems())
 export type { PaginatedRequest, PaginatedResponse } from "./paginator.js";

@@ -1,3 +1,49 @@
+/**
+ * A single entry in Teamleader's standard `{ errors: [...] }` response.
+ * Seen in practice across all error responses — shape is consistent enough
+ * to type, with optional fields where Teamleader sometimes omits them.
+ *
+ * @example
+ * ```json
+ * {
+ *   "code": 0,
+ *   "title": "id invalid uuid",
+ *   "status": 400,
+ *   "meta": { "field": "id" }
+ * }
+ * ```
+ */
+export interface TeamleaderApiError {
+  /** Numeric error code — usually 0, occasionally non-zero */
+  code?: number;
+  /** Human-readable error message */
+  title: string;
+  /** HTTP status code (matches the response status in most cases) */
+  status: number;
+  /** Optional metadata — most commonly `{ field }` for validation errors */
+  meta?: {
+    /** Field name that caused the error, when applicable */
+    field?: string;
+    /** OAuth refresh hints — e.g. "Token has been revoked" */
+    hint?: string;
+    /** Other keys Teamleader may add in the future */
+    [key: string]: unknown;
+  };
+}
+
+/** Shape of the JSON body Teamleader returns on error responses */
+export interface TeamleaderApiErrorBody {
+  errors: TeamleaderApiError[];
+}
+
+function isErrorBody(value: unknown): value is TeamleaderApiErrorBody {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    Array.isArray((value as { errors?: unknown }).errors)
+  );
+}
+
 /** Base error for all Teamleader API errors */
 export class TeamleaderFocusError extends Error {
   public readonly status: number;
@@ -8,6 +54,28 @@ export class TeamleaderFocusError extends Error {
     this.name = "TeamleaderFocusError";
     this.status = status;
     this.body = body;
+  }
+
+  /**
+   * Parsed errors array from Teamleader's standard error response.
+   * Returns `undefined` when `body` isn't the expected `{ errors: [...] }`
+   * shape (e.g. network errors, plain-text error bodies).
+   */
+  get errors(): TeamleaderApiError[] | undefined {
+    return isErrorBody(this.body) ? this.body.errors : undefined;
+  }
+
+  /** Convenience: the first error's `title`, if present. */
+  get title(): string | undefined {
+    return this.errors?.[0]?.title;
+  }
+
+  /**
+   * Convenience: the first error's `meta.field`, if present.
+   * Useful for validation errors that pinpoint the offending field.
+   */
+  get field(): string | undefined {
+    return this.errors?.[0]?.meta?.field;
   }
 }
 
@@ -24,19 +92,8 @@ export class TeamleaderFocusTokenRefreshError extends TeamleaderFocusAuthenticat
   constructor(body: unknown) {
     super(body);
     this.name = "TeamleaderFocusTokenRefreshError";
-    const hint = extractHint(body);
+    const hint = this.errors?.[0]?.meta?.hint;
     this.message = hint ? `Token refresh failed: ${hint}` : "Token refresh failed";
-  }
-}
-
-function extractHint(body: unknown): string | undefined {
-  try {
-    const errors = (body as Record<string, unknown>)?.errors;
-    if (Array.isArray(errors) && errors.length > 0) {
-      return ((errors[0] as Record<string, unknown>).meta as Record<string, unknown>)?.hint as string | undefined;
-    }
-  } catch {
-    // ignore
   }
 }
 
@@ -58,10 +115,10 @@ export class TeamleaderFocusRateLimitError extends TeamleaderFocusError {
 /** Thrown when the API returns 400 or 422 (validation error) */
 export class TeamleaderFocusValidationError extends TeamleaderFocusError {
   constructor(status: number, body: unknown) {
-    const msg = typeof body === "object" && body !== null && "message" in body
-      ? String((body as Record<string, unknown>).message)
-      : "Validation error";
-    super(msg, status, body);
+    // Prefer the first error's title — that's the actual API message.
+    // Falls back to "Validation error" when the body isn't the expected shape.
+    const titleFromBody = isErrorBody(body) ? body.errors[0]?.title : undefined;
+    super(titleFromBody ?? "Validation error", status, body);
     this.name = "TeamleaderFocusValidationError";
   }
 }

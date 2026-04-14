@@ -99,6 +99,13 @@ async function main() {
   // ---------------------------------------------------------------------------
   // Post-generation patches for known spec deviations
   // ---------------------------------------------------------------------------
+  // Each patch must apply cleanly against a fresh generation. If a patch's
+  // target pattern isn't found, it means one of:
+  //   (a) Teamleader fixed the upstream spec — the patch is obsolete
+  //   (b) The spec shape shifted — our regex needs updating
+  // Both require a human to look. We accumulate drift reports and fail the
+  // script at the end when any patch didn't apply.
+  const driftedPatches: string[] = [];
   let patched = output;
 
   // Patch 5: Fix context enum — "deal" → "sale" and add 6 missing contexts
@@ -114,7 +121,7 @@ async function main() {
     patched = patched.replaceAll(wrongContextEnum, fixedContextEnum);
     console.log(`Patch 5: Fixed context enum — "deal" → "sale" + 6 missing contexts (${contextPatchCount} occurrences)`);
   } else {
-    console.log('Patch 5: Context enum already fixed (or pattern changed)');
+    driftedPatches.push("Patch 5 (context enum): wrongContextEnum pattern not found");
   }
 
   // Patch 6: Add custom_fields_update_strategy?: "partial" to update request types
@@ -140,14 +147,14 @@ async function main() {
   for (const op of strategyTargetOps) {
     const opStart = patched.indexOf(`"${op}": {`);
     if (opStart === -1) {
-      console.warn(`Patch 6: Operation "${op}" not found — skipped`);
+      driftedPatches.push(`Patch 6 (custom_fields_update_strategy): operation "${op}" not found`);
       continue;
     }
 
     // Find custom_fields?: within the requestBody of this operation (bounded search)
     const cfIdx = patched.indexOf("custom_fields?:", opStart);
     if (cfIdx === -1 || cfIdx > opStart + 15000) {
-      console.warn(`Patch 6: custom_fields not found in "${op}" — skipped`);
+      driftedPatches.push(`Patch 6 (custom_fields_update_strategy): custom_fields not found in "${op}"`);
       continue;
     }
 
@@ -155,7 +162,7 @@ async function main() {
     const closingPattern = "}[];";
     const closingIdx = patched.indexOf(closingPattern, cfIdx);
     if (closingIdx === -1 || closingIdx > cfIdx + 2000) {
-      console.warn(`Patch 6: Closing "}[];" not found after custom_fields in "${op}" — skipped`);
+      driftedPatches.push(`Patch 6 (custom_fields_update_strategy): closing "}[];" not found after custom_fields in "${op}"`);
       continue;
     }
 
@@ -164,10 +171,10 @@ async function main() {
     strategyPatchCount++;
   }
 
-  if (strategyPatchCount > 0) {
+  if (strategyPatchCount === strategyTargetOps.length) {
     console.log(`Patch 6: Added custom_fields_update_strategy to ${strategyPatchCount} update operations`);
-  } else {
-    console.log('Patch 6: No operations patched (pattern may have changed)');
+  } else if (strategyPatchCount > 0) {
+    console.log(`Patch 6: Applied to ${strategyPatchCount}/${strategyTargetOps.length} operations — see drift report below`);
   }
 
   // Patch 7: Add deal_id filter to tasks.list request
@@ -180,7 +187,7 @@ async function main() {
     );
     console.log("Patch 7: Added deal_id filter to tasks.listrequest");
   } else {
-    console.log("Patch 7: tasks.listrequest filter pattern not found (or already patched)");
+    driftedPatches.push("Patch 7 (tasks.list deal_id filter): tasksListFilterMarker pattern not found");
   }
 
   // Patch 8: bookkeepingSubmissions filter.subject.type uses snake_case in spec but API expects camelCase
@@ -193,7 +200,7 @@ async function main() {
     patched = patched.replaceAll(wrongBookkeepingEnum, fixedBookkeepingEnum);
     console.log(`Patch 8: Fixed bookkeepingSubmissions subject.type enum — snake_case → camelCase (${bookkeepingPatchCount} occurrences)`);
   } else {
-    console.log("Patch 8: bookkeepingSubmissions enum already fixed (or pattern changed)");
+    driftedPatches.push("Patch 8 (bookkeepingSubmissions enum): wrongBookkeepingEnum pattern not found");
   }
 
   // Patch 9: tickets.info response — spec returns the ticket fields at top level,
@@ -202,7 +209,7 @@ async function main() {
     const opName = "tickets.info";
     const opStart = patched.indexOf(`"${opName}": {`);
     if (opStart === -1) {
-      console.warn(`Patch 9: "${opName}" operation not found — skipped`);
+      driftedPatches.push(`Patch 9 (tickets.info wrapper): "${opName}" operation not found`);
     } else {
       // Anchor to the RESPONSES block, not the requestBody
       const responsesStart = patched.indexOf("responses: {", opStart);
@@ -212,7 +219,7 @@ async function main() {
           ? -1
           : patched.indexOf(contentMarker, responsesStart);
       if (contentStart === -1 || contentStart > opStart + 20000) {
-        console.warn(`Patch 9: response application/json not found in "${opName}" — skipped`);
+        driftedPatches.push(`Patch 9 (tickets.info wrapper): response application/json not found in "${opName}"`);
       } else {
         // Walk from the opening `{` and brace-count to find the matching `}`
         const bodyStart = contentStart + contentMarker.length;
@@ -226,9 +233,11 @@ async function main() {
         }
         const bodyEnd = i - 1; // index of the matching `}`
         if (depth !== 0 || bodyEnd > opStart + 20000) {
-          console.warn(`Patch 9: could not match braces for ${opName} response — skipped`);
+          driftedPatches.push(`Patch 9 (tickets.info wrapper): could not match braces for ${opName} response`);
         } else if (/^\s*data\??:/.test(patched.slice(bodyStart, bodyStart + 20))) {
-          console.log(`Patch 9: tickets.info response already wrapped in { data } — skipped`);
+          // Already wrapped — upstream spec may have caught up. That's fine,
+          // but report it so someone removes the now-redundant patch.
+          driftedPatches.push(`Patch 9 (tickets.info wrapper): response is already { data: ... } — patch may be obsolete`);
         } else {
           const inner = patched.slice(bodyStart, bodyEnd);
           const wrapped = ` data: {${inner}}; `;
@@ -264,6 +273,20 @@ async function main() {
 
   writeFileSync(outPath, header + patched, "utf-8");
   console.log("Types written to:", outPath);
+
+  // Fail loudly if any patch didn't apply. Types are still written (so the
+  // user can inspect the generated shape), but exit 1 so CI/scripts know.
+  if (driftedPatches.length > 0) {
+    console.error("\n⚠️  Patch drift detected — one or more patches did not apply cleanly:");
+    for (const report of driftedPatches) {
+      console.error(`   • ${report}`);
+    }
+    console.error(
+      "\nEither the upstream spec has been fixed (patch obsolete) or its shape " +
+      "has shifted (patch needs updating). Review and resolve before shipping.\n",
+    );
+    process.exit(1);
+  }
 }
 
 main().catch((err) => {

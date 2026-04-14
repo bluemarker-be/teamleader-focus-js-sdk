@@ -287,8 +287,12 @@ try {
   if (err instanceof TeamleaderFocusAuthenticationError) {
     // 401 — token expired or invalid
   } else if (err instanceof TeamleaderFocusValidationError) {
-    // 400/422 — invalid request params
-    console.log(err.status, err.body);
+    // 400/422 — invalid request params.
+    // Typed accessors pull details from Teamleader's { errors: [...] } body:
+    console.log(err.title);   // "project_id must be valid"
+    console.log(err.field);   // "project_id"
+    console.log(err.errors);  // full array, typed as TeamleaderApiError[]
+    console.log(err.body);    // raw parsed JSON (unknown)
   } else if (err instanceof TeamleaderFocusRateLimitError) {
     // 429 — rate limited (auto-retried based on maxRetries)
     console.log(err.retryAfter); // Date

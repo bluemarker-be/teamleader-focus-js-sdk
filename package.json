@@ -1,6 +1,6 @@
 {
   "name": "teamleader-focus-js-sdk",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "TypeScript SDK for the Teamleader Focus API",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-04-14T11:23:16.689Z
+// Generated: 2026-04-14T15:02:28.921Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //

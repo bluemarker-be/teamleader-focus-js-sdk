@@ -82,7 +82,7 @@ const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_MAX_RETRIES = 3;
 
 /** Bumped in lockstep with package.json. Sent as the default User-Agent. */
-export const SDK_VERSION = "0.7.0";
+export const SDK_VERSION = "1.0.0";
 const DEFAULT_USER_AGENT = `teamleader-focus-js-sdk/${SDK_VERSION}`;
 
 interface TeamleaderFocusClientConfigBase {

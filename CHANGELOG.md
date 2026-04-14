@@ -4,6 +4,50 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.0.0] - 2026-04-14
+
+First stable release. Commits to semver: no breaking changes in minor versions
+from this point on — only in `2.0.0` and beyond.
+
+### Added
+- **Typed error body accessors on every error class.** Teamleader's error
+  response shape (`{ errors: [{ code?, title, status, meta? }] }`) is now
+  exposed via `err.errors`, `err.title`, and `err.field` getters, so users
+  don't need to cast `err.body` manually:
+  ```ts
+  } catch (err) {
+    if (err instanceof TeamleaderFocusValidationError) {
+      console.log(err.field);  // "project_id"
+      console.log(err.title);  // "project_id must be valid"
+      console.log(err.errors); // full array
+    }
+  }
+  ```
+  `err.body` still exposes the raw parsed JSON for advanced cases.
+- **`TeamleaderApiError` and `TeamleaderApiErrorBody`** exported from the
+  SDK root for typing code that wraps our errors.
+- **`TeamleaderFocusValidationError.message`** now defaults to the first
+  error's `title` instead of a generic "Validation error" string, making
+  unhandled errors log usefully out of the box.
+
+### Changed
+- **Spec-patch drift monitoring.** `npm run generate` now fails with exit 1
+  when any of the 9 post-generation patches doesn't apply cleanly. Types
+  are still written (so you can inspect the shape), but a clear drift
+  report is printed so you know whether the upstream spec was fixed
+  (patch obsolete) or its shape shifted (patch needs updating).
+
+### Concurrency & reliability (verified in `tests/stress.test.ts`)
+- Refresh mutex deduplicates 50+ concurrent 401s into a single token refresh
+- Rate-limit retry + exponential backoff recovers paginators under sustained 429s
+- `AbortSignal` stops paginators cleanly mid-iteration
+- `onTokenRefresh` callback fires exactly once per refresh, even under load
+
+### Integration-verified against the live API
+- Full `files.upload` → raw binary POST → `files.list` → `files.info` →
+  `files.download` → byte-identical roundtrip
+- All CRUD flows across 68 resources with 376 passing integration tests
+
 ## [0.7.0] - 2026-04-14
 
 ### Changed (breaking)
