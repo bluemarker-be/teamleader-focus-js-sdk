@@ -55,13 +55,25 @@ describe.skipIf(noToken)("Admin & Special", () => {
   describe.sequential("customFieldDefinitions", () => {
     let cfdId: string;
 
-    it("create", async () => {
+    // CFDs cannot be deleted via API — reuse an existing SDK test CFD if one
+    // exists (from previous runs), create only when none are found.
+    it("find or create SDK test CFD", async () => {
+      const all: Array<{ id?: string; label?: string; context?: string }> = [];
+      for await (const def of client.customFieldDefinitions.list()) {
+        all.push(def as typeof all[number]);
+      }
+      const existing = all.find(
+        (d) => d.context === "contact" && d.label?.startsWith("SDK "),
+      );
+      if (existing?.id) {
+        cfdId = existing.id;
+        return;
+      }
       const res = await client.customFieldDefinitions.create({
         context: "contact",
         label: `SDK Test Field ${Date.now()}`,
         type: "single_line",
       });
-      expect(res).toHaveProperty("data");
       cfdId = (res.data as { id: string }).id;
     });
 
@@ -77,8 +89,6 @@ describe.skipIf(noToken)("Admin & Special", () => {
       }, { maxPages: 1 }));
       expect(Array.isArray(res)).toBe(true);
     });
-
-    // Note: no delete endpoint exists for custom field definitions
   });
 
   // -----------------------------------------------------------------------
@@ -159,10 +169,12 @@ describe.skipIf(noToken)("Admin & Special", () => {
       if (!externalDaysOffEnabled || !dayOffTypeId) return;
       // daysOff.import returns 201 no-content on success (errors returned via HTTP status
       // on the error body). No IDs returned — we look them up via users.listDaysOff below.
+      // starts_at / ends_at must be full ISO datetimes, not YYYY-MM-DD.
+      const day = futureDate(200);
       await client.daysOff.import({
         user_id: userId,
         leave_type_id: dayOffTypeId,
-        days: [{ starts_at: futureDate(200), ends_at: futureDate(201) }],
+        days: [{ starts_at: `${day}T08:00:00+00:00`, ends_at: `${day}T17:00:00+00:00` }],
       });
     });
 

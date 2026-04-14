@@ -116,7 +116,7 @@ interface TeamleaderFocusClientConfigBase {
    * Sent as `X-API-Version` header on every request.
    * When omitted, the version embedded in your OAuth token is used.
    *
-   * @see https://developer.teamleader.eu/#/introduction/ap-i-versions
+   * @see https://developer.focus.teamleader.eu/docs/changelog/breaking-changes
    */
   apiVersion?: string;
 

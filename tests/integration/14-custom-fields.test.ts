@@ -17,24 +17,44 @@ describe.skipIf(noToken)("Custom Fields", () => {
       await delay(3000);
     });
 
-    it("create custom field 1 (single_line)", async () => {
-      const res = await client.customFieldDefinitions.create({
-        context: "contact",
-        label: `SDK CF1 ${Date.now()}`,
-        type: "single_line",
-      });
-      expect(res).toHaveProperty("data");
-      cfdId1 = (res.data as { id: string }).id;
-    });
+    // Custom field definitions cannot be deleted via API, so every test run
+    // that creates new ones permanently eats into the per-context quota. To
+    // stay idempotent we first look up any SDK-test CFDs from previous runs
+    // and only create new ones when there are <2.
+    it("find or create two SDK test custom fields", async () => {
+      const all: Array<{ id?: string; label?: string; context?: string; type?: string }> = [];
+      for await (const def of client.customFieldDefinitions.list()) {
+        all.push(def as typeof all[number]);
+      }
+      // Need two single_line custom fields on the contact context we can write to.
+      const reusable = all
+        .filter(
+          (d) =>
+            d.context === "contact" &&
+            d.type === "single_line" &&
+            d.label?.startsWith("SDK ") &&
+            d.id,
+        )
+        .slice(0, 2)
+        .map((d) => d.id as string);
 
-    it("create custom field 2 (single_line)", async () => {
-      const res = await client.customFieldDefinitions.create({
-        context: "contact",
-        label: `SDK CF2 ${Date.now()}`,
-        type: "single_line",
-      });
-      expect(res).toHaveProperty("data");
-      cfdId2 = (res.data as { id: string }).id;
+      if (reusable.length >= 2) {
+        [cfdId1, cfdId2] = reusable;
+        return;
+      }
+
+      // Fill in what's missing. If the account is at quota, these will throw
+      // — test fails visibly rather than silently skipping.
+      const existing = [...reusable];
+      for (let i = existing.length; i < 2; i++) {
+        const res = await client.customFieldDefinitions.create({
+          context: "contact",
+          label: `SDK CF${i + 1} ${Date.now()}`,
+          type: "single_line",
+        });
+        existing.push((res.data as { id: string }).id);
+      }
+      [cfdId1, cfdId2] = existing;
     });
   });
 
