@@ -12,10 +12,10 @@ Install a pinned version via git tag:
 
 ```bash
 # HTTPS (requires a GitHub Personal Access Token with repo:read scope)
-npm install git+https://github.com/henkdeblauw/teamleader-focus-js-sdk.git#v1.0.0
+npm install git+https://github.com/operative-bv/teamleader-focus-js-sdk.git#v1.0.0
 
 # SSH (requires your GitHub SSH key)
-npm install git+ssh://git@github.com:henkdeblauw/teamleader-focus-js-sdk.git#v1.0.0
+npm install git+ssh://git@github.com:operative-bv/teamleader-focus-js-sdk.git#v1.0.0
 ```
 
 Pinning to a tag is strongly recommended for production use.
@@ -28,7 +28,7 @@ with a Bearer token for `raw.githubusercontent.com` and import from the tag:
 ```ts
 // supabase/functions/my-function/index.ts
 import { TeamleaderFocusClient } from
-  "https://raw.githubusercontent.com/henkdeblauw/teamleader-focus-js-sdk/v1.0.0/dist/index.js";
+  "https://raw.githubusercontent.com/operative-bv/teamleader-focus-js-sdk/v1.0.0/dist/index.js";
 ```
 
 Sub-imports (resource classes, helpers) are resolved relatively to the source
