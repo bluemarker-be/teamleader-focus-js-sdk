@@ -22,6 +22,18 @@
         "V": "n/a",
         "VI": "n/a"
       },
+      "file": "scripts/audit-changelog.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
       "file": "scripts/audit-compliance.ts",
       "finding_ids": []
     },
@@ -46,6 +58,18 @@
         "V": "n/a",
         "VI": "n/a"
       },
+      "file": "scripts/audit-docs.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
       "file": "scripts/audit-lib/ast.ts",
       "finding_ids": []
     },
@@ -59,6 +83,18 @@
         "VI": "n/a"
       },
       "file": "scripts/audit-lib/findings.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-lib/git.ts",
       "finding_ids": []
     },
     {
@@ -1139,5 +1175,5 @@
     }
   ],
   "schema_version": "1",
-  "sha": "d5f9c2792de04bf2af048675cdf5ec4485acb0f2"
+  "sha": "996b993121e13369a8284c18147a30ff53c80dc1"
 }

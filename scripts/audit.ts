@@ -42,6 +42,8 @@ import {
   runCompliance,
   renderComplianceReportMd,
 } from "./audit-compliance.js";
+import { runDocs } from "./audit-docs.js";
+import { runChangelog } from "./audit-changelog.js";
 
 const MODULE_NAMES: readonly AuditModuleName[] = [
   "consistency",
@@ -60,20 +62,14 @@ interface CliArgs {
 }
 
 // ---------------------------------------------------------------------------
-// Module registry. Stubs are replaced by real implementations as each
-// per-story module lands (T015 → compliance, T020 → docs, T021 → changelog).
+// Module registry. All four modules are real now (US1 + US2 + US3 landed).
 // ---------------------------------------------------------------------------
-
-const stubModule: AuditModule = async (_ctx) => ({
-  findings: [],
-  artifact: null,
-});
 
 const MODULES: Record<AuditModuleName, AuditModule> = {
   consistency: runConsistency,
   compliance: runCompliance,
-  docs: stubModule,
-  changelog: stubModule,
+  docs: runDocs,
+  changelog: runChangelog,
 };
 
 /**

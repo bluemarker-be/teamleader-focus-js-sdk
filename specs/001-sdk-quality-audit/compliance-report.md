@@ -1,18 +1,21 @@
 # Compliance Report
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `d5f9c2792de04bf2af048675cdf5ec4485acb0f2`
+**Branch**: `001-sdk-quality-audit` · **SHA**: `996b993121e13369a8284c18147a30ff53c80dc1`
 
-Files audited: **94** · 221 ✓ · 1 ~ · 2 ✗ · 340 · (n/a)
+Files audited: **97** · 221 ✓ · 1 ~ · 2 ✗ · 358 · (n/a)
 
 ## Per-file × per-principle grid
 
 | File                                      | I | II | III | IV | V | VI | Findings                                             |
 |-------------------------------------------|---|----|-----|----|---|----|------------------------------------------------------|
 | package.json                              | · | ·  | ·   | ✓  | · | ·  |                                                      |
+| scripts/audit-changelog.ts                | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit-compliance.ts               | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit-consistency.ts              | · | ·  | ·   | ·  | · | ·  |                                                      |
+| scripts/audit-docs.ts                     | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit-lib/ast.ts                  | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit-lib/findings.ts             | · | ·  | ·   | ·  | · | ·  |                                                      |
+| scripts/audit-lib/git.ts                  | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit-lib/render.ts               | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit-lib/types.ts                | · | ·  | ·   | ·  | · | ·  |                                                      |
 | scripts/audit.ts                          | · | ·  | ·   | ·  | · | ·  |                                                      |

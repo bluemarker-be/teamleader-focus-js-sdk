@@ -1,6 +1,126 @@
 {
   "findings": [
     {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "0a84385eadb848c5",
+      "location": {
+        "end_line": 249,
+        "file": "CHANGELOG.md",
+        "start_line": 249
+      },
+      "message": "CHANGELOG declares `[0.1.1]` but no matching git tag `v0.1.1` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "0e319eb91a432b26",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingCreditNotes.removePayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "168d3a1e57b03e67",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingInvoices.registerPayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "261646c76069a5e0",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`calls.delete` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "2acdf0c355e7a98d",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "README lists `dealPhases.duplicate` but it doesn't exist on the resource",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Remove the stale README entry, or restore the documented symbol if it was removed unintentionally.",
+        "version_impact": "patch"
+      },
+      "severity": "high",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "2cc722a8055d4abd",
+      "location": {
+        "end_line": 204,
+        "file": "CHANGELOG.md",
+        "start_line": 204
+      },
+      "message": "CHANGELOG declares `[0.3.0]` but no matching git tag `v0.3.0` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
       "category": "principle-compliance",
       "classification": "non-trivial",
       "details": null,
@@ -36,6 +156,126 @@
         "kind": "task",
         "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
         "version_impact": "minor"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "3e16e905373e3c34",
+      "location": {
+        "end_line": 230,
+        "file": "CHANGELOG.md",
+        "start_line": 230
+      },
+      "message": "CHANGELOG declares `[0.2.0]` but no matching git tag `v0.2.0` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "678ed78675da556a",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingInvoices.listPayments` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "6efa01535564b88f",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingInvoices.updatePayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "770227a877ca7f99",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`receipts.updatePayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "808340bd160169a2",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingInvoices.removePayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "868f40d1cdd15c2e",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingCreditNotes.registerPayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
       },
       "severity": "medium",
       "variants": null
@@ -151,6 +391,26 @@
       "variants": null
     },
     {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "a6c8747695c30c3d",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`receipts.registerPayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
       "category": "principle-compliance",
       "classification": "non-trivial",
       "details": null,
@@ -166,6 +426,126 @@
         "kind": "task",
         "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
         "version_impact": "minor"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "b454277a9925b8b6",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingCreditNotes.updatePayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "be9a593870309b0f",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`incomingCreditNotes.listPayments` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "cb90c9cab059b4fb",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`receipts.listPayments` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "documentation",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "d1f8e01f956e3c57",
+      "location": {
+        "end_line": 0,
+        "file": "README.md",
+        "start_line": 0
+      },
+      "message": "`receipts.removePayment` exists but isn't listed in the README Resources table",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
+        "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "da53eb0c9b52ef5c",
+      "location": {
+        "end_line": 271,
+        "file": "CHANGELOG.md",
+        "start_line": 271
+      },
+      "message": "CHANGELOG declares `[0.0.1]` but no matching git tag `v0.0.1` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "dc860a2fd5e5bcab",
+      "location": {
+        "end_line": 258,
+        "file": "CHANGELOG.md",
+        "start_line": 258
+      },
+      "message": "CHANGELOG declares `[0.1.0]` but no matching git tag `v0.1.0` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
       },
       "severity": "medium",
       "variants": null
@@ -297,5 +677,5 @@
   ],
   "generated_for_branch": "001-sdk-quality-audit",
   "schema_version": "1",
-  "sha": "d5f9c2792de04bf2af048675cdf5ec4485acb0f2"
+  "sha": "996b993121e13369a8284c18147a30ff53c80dc1"
 }
