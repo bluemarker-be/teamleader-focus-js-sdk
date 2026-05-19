@@ -211,15 +211,11 @@
         "II": "n/a",
         "III": "yes",
         "IV": "n/a",
-        "V": "no",
+        "V": "yes",
         "VI": "n/a"
       },
       "file": "src/client.ts",
-      "finding_ids": [
-        "a1efe1a403b7d831",
-        "b0f2a062e828281a",
-        "317f220ee8378e37"
-      ]
+      "finding_ids": []
     },
     {
       "cells": {
@@ -275,13 +271,11 @@
         "II": "n/a",
         "III": "yes",
         "IV": "n/a",
-        "V": "no",
+        "V": "yes",
         "VI": "n/a"
       },
       "file": "src/paginator.ts",
-      "finding_ids": [
-        "315f1b37a6a17009"
-      ]
+      "finding_ids": []
     },
     {
       "cells": {
@@ -1173,5 +1167,5 @@
     }
   ],
   "schema_version": "1",
-  "sha": "a3ec05ad7141378e8bf103e09fcef6f164a00a06"
+  "sha": "7ee6e8fd63caca3e84cecb35d2561cefb0327cab"
 }

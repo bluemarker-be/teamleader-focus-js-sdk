@@ -314,14 +314,45 @@ function isNodeOnlyImport(specifier: string): boolean {
   return BARE_NODE_BUILTINS.has(specifier);
 }
 
-/** Throw sites that violate principle V (typed errors). */
+/**
+ * Throw sites that violate principle V (typed errors).
+ *
+ * Excluded — these are NOT bare throws even though they aren't a single
+ * `throw new TeamleaderFocus*` expression:
+ *   - **Re-throws** (`throw <identifier>`): propagate an already-typed
+ *     error from a catch binding. Principle V is about which class
+ *     surfaces the failure; re-throws don't construct a fresh one.
+ *   - **Conditional throws where every branch constructs an
+ *     acceptable type**: typically signal-cancellation handling like
+ *     `throw signal.reason ?? new DOMException("...", "AbortError")`.
+ *     `DOMException` is the Web Standard abort error; consumers
+ *     pattern-match on `error.name === "AbortError"`, not on a
+ *     Teamleader class. Wrapping it would be wrong.
+ *
+ * What IS flagged: a `throw new X(...)` where `X` isn't a
+ * `TeamleaderFocus*` subclass or `DOMException`.
+ */
 export function findBareThrows(throws: ExtractedThrow[]): ExtractedThrow[] {
-  return throws.filter((t) => !isTypedErrorCtor(t.ctor_class_name));
+  return throws.filter((t) => {
+    if (t.kind === "rethrow") return false;
+    if (t.kind === "other") return false;
+    if (t.kind === "new") return !isAcceptableErrorCtor(t.ctor_class_name);
+    // Conditional: every named constructor must be acceptable; if no
+    // names were reachable (e.g. ternary of identifiers), it's a
+    // re-throw-in-disguise and we don't flag it.
+    if (t.ctor_class_names_all.length === 0) return false;
+    return !t.ctor_class_names_all.every(isAcceptableErrorCtor);
+  });
 }
 
-function isTypedErrorCtor(name: string): boolean {
+function isAcceptableErrorCtor(name: string): boolean {
   if (!name) return false;
-  return name.startsWith("TeamleaderFocus") || name.startsWith("Teamleader");
+  if (name.startsWith("TeamleaderFocus") || name.startsWith("Teamleader")) {
+    return true;
+  }
+  // Web Standard abort signalling — principle V isn't about these.
+  if (name === "DOMException") return true;
+  return false;
 }
 
 /** Returns the names of declared runtime dependencies in a package.json. */

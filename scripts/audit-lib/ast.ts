@@ -287,9 +287,26 @@ export function getImports(sourceFile: ts.SourceFile): ExtractedImport[] {
 // Throw-site scanning (principle V — typed errors)
 // ---------------------------------------------------------------------------
 
+export type ThrowKind =
+  /** `throw new X(...)` — argument is a constructor call. */
+  | "new"
+  /** `throw <identifier>` — re-throwing an already-typed error from a catch binding. */
+  | "rethrow"
+  /** `throw cond ? A : B` — ternary; we capture every constructor name from both branches. */
+  | "conditional"
+  /** Anything else (function-call expression, throw of a literal, etc.). */
+  | "other";
+
 export interface ExtractedThrow {
-  /** Class name being instantiated in `throw new X(...)`. Empty if not a `new` expression. */
+  /**
+   * Primary class name being instantiated, when `kind === "new"`.
+   * For `"conditional"`, this is the first NewExpression encountered
+   * (use `ctor_class_names_all` for the full set). Empty otherwise.
+   */
   ctor_class_name: string;
+  /** Every constructor name reachable from the throw expression. */
+  ctor_class_names_all: string[];
+  kind: ThrowKind;
   /** 1-indexed line. */
   line: number;
 }
@@ -298,11 +315,16 @@ export function getThrowSites(sourceFile: ts.SourceFile): ExtractedThrow[] {
   const out: ExtractedThrow[] = [];
   const visit = (n: ts.Node): void => {
     if (ts.isThrowStatement(n)) {
-      const ctor = extractCtorName(n.expression);
       const { line } = sourceFile.getLineAndCharacterOfPosition(
         n.getStart(sourceFile),
       );
-      out.push({ ctor_class_name: ctor, line: line + 1 });
+      const { kind, names } = classifyThrow(n.expression);
+      out.push({
+        ctor_class_name: names[0] ?? "",
+        ctor_class_names_all: names,
+        kind,
+        line: line + 1,
+      });
     }
     ts.forEachChild(n, visit);
   };
@@ -310,8 +332,29 @@ export function getThrowSites(sourceFile: ts.SourceFile): ExtractedThrow[] {
   return out;
 }
 
-function extractCtorName(expr: ts.Expression): string {
-  if (!ts.isNewExpression(expr)) return "";
+function classifyThrow(expr: ts.Expression): {
+  kind: ThrowKind;
+  names: string[];
+} {
+  if (ts.isNewExpression(expr)) {
+    return { kind: "new", names: [extractCtorName(expr)].filter(Boolean) };
+  }
+  if (ts.isIdentifier(expr)) {
+    // `throw error` — re-throwing whatever the catch binding holds.
+    return { kind: "rethrow", names: [] };
+  }
+  if (ts.isConditionalExpression(expr)) {
+    const names: string[] = [];
+    for (const branch of [expr.whenTrue, expr.whenFalse]) {
+      const { names: branchNames } = classifyThrow(branch);
+      names.push(...branchNames);
+    }
+    return { kind: "conditional", names };
+  }
+  return { kind: "other", names: [] };
+}
+
+function extractCtorName(expr: ts.NewExpression): string {
   if (ts.isIdentifier(expr.expression)) return expr.expression.text;
   if (ts.isPropertyAccessExpression(expr.expression)) {
     return expr.expression.name.text;

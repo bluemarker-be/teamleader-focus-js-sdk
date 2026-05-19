@@ -104,26 +104,63 @@ describe("findBadImports (principle III)", () => {
 });
 
 describe("findBareThrows (principle V)", () => {
+  const newThrow = (name: string, line = 1) => ({
+    ctor_class_name: name,
+    ctor_class_names_all: name ? [name] : [],
+    kind: "new" as const,
+    line,
+  });
+  const rethrow = (line = 1) => ({
+    ctor_class_name: "",
+    ctor_class_names_all: [],
+    kind: "rethrow" as const,
+    line,
+  });
+  const conditionalThrow = (names: string[], line = 1) => ({
+    ctor_class_name: names[0] ?? "",
+    ctor_class_names_all: names,
+    kind: "conditional" as const,
+    line,
+  });
+
   it("flags `throw new Error(...)`", () => {
-    const bad = findBareThrows([{ ctor_class_name: "Error", line: 1 }]);
+    const bad = findBareThrows([newThrow("Error")]);
     expect(bad.length).toBe(1);
   });
 
   it("flags `throw new TypeError(...)` and other non-Teamleader ctors", () => {
-    const bad = findBareThrows([
-      { ctor_class_name: "TypeError", line: 1 },
-      { ctor_class_name: "RangeError", line: 2 },
-    ]);
+    const bad = findBareThrows([newThrow("TypeError", 1), newThrow("RangeError", 2)]);
     expect(bad.length).toBe(2);
   });
 
   it("does NOT flag TeamleaderFocus* subclasses", () => {
     const bad = findBareThrows([
-      { ctor_class_name: "TeamleaderFocusValidationError", line: 1 },
-      { ctor_class_name: "TeamleaderFocusAuthenticationError", line: 2 },
-      { ctor_class_name: "TeamleaderFocusError", line: 3 },
+      newThrow("TeamleaderFocusValidationError", 1),
+      newThrow("TeamleaderFocusAuthenticationError", 2),
+      newThrow("TeamleaderFocusError", 3),
     ]);
     expect(bad).toEqual([]);
+  });
+
+  it("does NOT flag re-throws (`throw <identifier>`)", () => {
+    const bad = findBareThrows([rethrow()]);
+    expect(bad).toEqual([]);
+  });
+
+  it("does NOT flag `throw new DOMException(...)` — Web standard abort signal", () => {
+    const bad = findBareThrows([newThrow("DOMException")]);
+    expect(bad).toEqual([]);
+  });
+
+  it("does NOT flag conditional throws where every branch is acceptable", () => {
+    // e.g. `throw signal.reason instanceof Error ? signal.reason : new DOMException(...)`
+    const bad = findBareThrows([conditionalThrow(["DOMException"])]);
+    expect(bad).toEqual([]);
+  });
+
+  it("DOES flag conditional throws if any branch constructs a non-acceptable type", () => {
+    const bad = findBareThrows([conditionalThrow(["DOMException", "Error"])]);
+    expect(bad.length).toBe(1);
   });
 });
 

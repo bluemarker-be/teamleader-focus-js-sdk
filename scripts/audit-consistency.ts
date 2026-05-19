@@ -28,6 +28,7 @@ import type {
   AuditContext,
   AuditModule,
   ConsistencyMatrix,
+  DivergenceAttribute,
   DivergenceCluster,
   DivergenceVariant,
   DivergenceVariantOnFinding,
@@ -56,6 +57,35 @@ const NAME_SYNONYM_GROUPS: ReadonlyArray<ReadonlyArray<string>> = [
   ["add", "create", "draft"],
   ["delete", "remove"],
   ["info", "get"],
+];
+
+/**
+ * Per-(resource, method, attribute) divergence exemptions — analogous
+ * to `INTENTIONALLY_SKIPPED` in `scripts/verify-endpoints.ts`. An entry
+ * here means: "this divergence is a deliberate modelling choice; don't
+ * count this occurrence when checking whether the cluster has multiple
+ * variants." If excluding the exempted occurrences leaves <2 variants,
+ * the cluster is suppressed entirely.
+ *
+ * Adding to this list is itself a reviewable decision — every entry
+ * needs a `reason` explaining why the deviation is correct, not just
+ * tolerated.
+ */
+export interface IntentionalDeviation {
+  resource: string;
+  method: string;
+  attribute: DivergenceAttribute;
+  reason: string;
+}
+
+export const INTENTIONAL_DEVIATIONS: ReadonlyArray<IntentionalDeviation> = [
+  {
+    resource: "dayOffTypes",
+    method: "list",
+    attribute: "param_shape",
+    reason:
+      "Upstream OpenAPI spec for /dayOffTypes.list declares no requestBody (only a Content-Type header). The `_params?: undefined` shape correctly models a parameterless endpoint; adding a typed parameter would mis-suggest that filters/sort are accepted.",
+  },
 ];
 
 export const runConsistency: AuditModule<ConsistencyMatrix> = async (ctx) => {
@@ -172,8 +202,9 @@ function detectDivergences(
   for (const [methodName, occurrences] of methodIndex) {
     if (occurrences.length < 2) continue;
 
+    const envelopeCandidates = excludeDeviations(occurrences, "return_envelope");
     const envelopeVariants = groupVariants(
-      occurrences,
+      envelopeCandidates,
       (o) => o.method.return_envelope,
     );
     if (envelopeVariants.length >= 2) {
@@ -182,7 +213,8 @@ function detectDivergences(
       clusters.push({ attribute: "return_envelope", variants: envelopeVariants, finding_id: f.id });
     }
 
-    const shapeVariants = groupVariants(occurrences, (o) => o.method.param_shape);
+    const shapeCandidates = excludeDeviations(occurrences, "param_shape");
+    const shapeVariants = groupVariants(shapeCandidates, (o) => o.method.param_shape);
     if (shapeVariants.length >= 2) {
       const f = makeDivergenceFinding("param_shape", methodName, shapeVariants, "medium");
       findings.push(f);
@@ -219,6 +251,21 @@ function detectDivergences(
   }
 
   return { clusters, findings };
+}
+
+function excludeDeviations(
+  occurrences: MethodOccurrence[],
+  attribute: DivergenceAttribute,
+): MethodOccurrence[] {
+  return occurrences.filter((o) => {
+    const exempt = INTENTIONAL_DEVIATIONS.some(
+      (d) =>
+        d.resource === o.resource &&
+        d.method === o.method.name &&
+        d.attribute === attribute,
+    );
+    return !exempt;
+  });
 }
 
 function groupVariants(
