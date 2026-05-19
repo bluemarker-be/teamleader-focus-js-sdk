@@ -1,26 +1,6 @@
 {
   "findings": [
     {
-      "category": "changelog",
-      "classification": "non-trivial",
-      "details": null,
-      "id": "0a84385eadb848c5",
-      "location": {
-        "end_line": 249,
-        "file": "CHANGELOG.md",
-        "start_line": 249
-      },
-      "message": "CHANGELOG declares `[0.1.1]` but no matching git tag `v0.1.1` exists",
-      "principle": null,
-      "remediation": {
-        "kind": "task",
-        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
-        "version_impact": "none"
-      },
-      "severity": "medium",
-      "variants": null
-    },
-    {
       "category": "documentation",
       "classification": "non-trivial",
       "details": null,
@@ -36,6 +16,26 @@
         "kind": "task",
         "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
         "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "13a5c3c5f237d98a",
+      "location": {
+        "end_line": 283,
+        "file": "CHANGELOG.md",
+        "start_line": 283
+      },
+      "message": "CHANGELOG declares `[0.1.0]` but no matching git tag `v0.1.0` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
       },
       "severity": "medium",
       "variants": null
@@ -101,26 +101,6 @@
       "variants": null
     },
     {
-      "category": "changelog",
-      "classification": "non-trivial",
-      "details": null,
-      "id": "2cc722a8055d4abd",
-      "location": {
-        "end_line": 204,
-        "file": "CHANGELOG.md",
-        "start_line": 204
-      },
-      "message": "CHANGELOG declares `[0.3.0]` but no matching git tag `v0.3.0` exists",
-      "principle": null,
-      "remediation": {
-        "kind": "task",
-        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
-        "version_impact": "none"
-      },
-      "severity": "medium",
-      "variants": null
-    },
-    {
       "category": "principle-compliance",
       "classification": "non-trivial",
       "details": null,
@@ -156,26 +136,6 @@
         "kind": "task",
         "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
         "version_impact": "minor"
-      },
-      "severity": "medium",
-      "variants": null
-    },
-    {
-      "category": "changelog",
-      "classification": "non-trivial",
-      "details": null,
-      "id": "3e16e905373e3c34",
-      "location": {
-        "end_line": 230,
-        "file": "CHANGELOG.md",
-        "start_line": 230
-      },
-      "message": "CHANGELOG declares `[0.2.0]` but no matching git tag `v0.2.0` exists",
-      "principle": null,
-      "remediation": {
-        "kind": "task",
-        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
-        "version_impact": "none"
       },
       "severity": "medium",
       "variants": null
@@ -236,6 +196,26 @@
         "kind": "task",
         "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
         "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "7cf4660a14f7693a",
+      "location": {
+        "end_line": 255,
+        "file": "CHANGELOG.md",
+        "start_line": 255
+      },
+      "message": "CHANGELOG declares `[0.2.0]` but no matching git tag `v0.2.0` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
       },
       "severity": "medium",
       "variants": null
@@ -451,6 +431,26 @@
       "variants": null
     },
     {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "bc8e9cfac0fdc4fd",
+      "location": {
+        "end_line": 229,
+        "file": "CHANGELOG.md",
+        "start_line": 229
+      },
+      "message": "CHANGELOG declares `[0.3.0]` but no matching git tag `v0.3.0` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
       "category": "documentation",
       "classification": "non-trivial",
       "details": null,
@@ -466,6 +466,26 @@
         "kind": "task",
         "proposed_approach": "Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).",
         "version_impact": "patch"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "changelog",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "c2cbfc0af94738ec",
+      "location": {
+        "end_line": 296,
+        "file": "CHANGELOG.md",
+        "start_line": 296
+      },
+      "message": "CHANGELOG declares `[0.0.1]` but no matching git tag `v0.0.1` exists",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
       },
       "severity": "medium",
       "variants": null
@@ -511,46 +531,6 @@
       "variants": null
     },
     {
-      "category": "changelog",
-      "classification": "non-trivial",
-      "details": null,
-      "id": "da53eb0c9b52ef5c",
-      "location": {
-        "end_line": 271,
-        "file": "CHANGELOG.md",
-        "start_line": 271
-      },
-      "message": "CHANGELOG declares `[0.0.1]` but no matching git tag `v0.0.1` exists",
-      "principle": null,
-      "remediation": {
-        "kind": "task",
-        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
-        "version_impact": "none"
-      },
-      "severity": "medium",
-      "variants": null
-    },
-    {
-      "category": "changelog",
-      "classification": "non-trivial",
-      "details": null,
-      "id": "dc860a2fd5e5bcab",
-      "location": {
-        "end_line": 258,
-        "file": "CHANGELOG.md",
-        "start_line": 258
-      },
-      "message": "CHANGELOG declares `[0.1.0]` but no matching git tag `v0.1.0` exists",
-      "principle": null,
-      "remediation": {
-        "kind": "task",
-        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
-        "version_impact": "none"
-      },
-      "severity": "medium",
-      "variants": null
-    },
-    {
       "category": "consistency",
       "classification": "non-trivial",
       "details": null,
@@ -588,20 +568,21 @@
       ]
     },
     {
-      "category": "principle-compliance",
-      "classification": "trivial",
+      "category": "changelog",
+      "classification": "non-trivial",
       "details": null,
-      "id": "f1e64031e524514a",
+      "id": "fc3e8d787a2bbfc7",
       "location": {
-        "end_line": 0,
-        "file": "src/resources/calls.ts",
-        "start_line": 0
+        "end_line": 274,
+        "file": "CHANGELOG.md",
+        "start_line": 274
       },
-      "message": "calls.delete (/calls.delete) has no live integration test",
-      "principle": "VI",
+      "message": "CHANGELOG declares `[0.1.1]` but no matching git tag `v0.1.1` exists",
+      "principle": null,
       "remediation": {
-        "description": "Add a live integration test for /calls.delete under tests/integration/, or — if the endpoint is unsafe to exercise against a production tenant — add it to scripts/verify-endpoints.ts INTENTIONALLY_SKIPPED with a reason.",
-        "kind": "in-pr"
+        "kind": "task",
+        "proposed_approach": "Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.",
+        "version_impact": "none"
       },
       "severity": "medium",
       "variants": null
@@ -677,5 +658,5 @@
   ],
   "generated_for_branch": "001-sdk-quality-audit",
   "schema_version": "1",
-  "sha": "996b993121e13369a8284c18147a30ff53c80dc1"
+  "sha": "b8ed99f4ecd0db07a144ddae9f488cb94d71412c"
 }

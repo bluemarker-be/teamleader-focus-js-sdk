@@ -10,6 +10,31 @@ API spec updated: → 1.157.0
 
 ### Added
 - `/calls.delete` endpoint
+- Live integration test for `calls.delete` in `tests/integration/05-activities.test.ts`
+  (closes the live-coverage gap surfaced by the audit's principle VI check).
+- **Internal: quality audit infrastructure.** New `npm run audit`
+  command runs four cross-cutting checks against the SDK source:
+  - **Cross-resource consistency** across all 68 resources (method
+    name divergences, parameter-shape divergences, return-envelope
+    divergences). Refuses to auto-arbitrate canonical forms; surfaces
+    every divergence with full variant context for human review.
+  - **Constitution-principle compliance** per file × per principle
+    (spec-generated types, multi-runtime portability, zero runtime
+    deps, typed errors, live integration coverage).
+  - **Documentation accuracy** — cross-checks the README Resources
+    table against the actual client exports + identifies snippet
+    drift.
+  - **CHANGELOG accuracy** — flags entries with no matching git tag
+    and ranges where `src/index.ts` changed but the entry is thin.
+  Each run produces six committable artifacts under
+  `specs/001-sdk-quality-audit/` (markdown for review + JSON sidecars
+  for diffing). Reproducible byte-for-byte on the same SHA (FR-009).
+  Zero new runtime or dev dependencies. See
+  `specs/001-sdk-quality-audit/quickstart.md` for usage.
+
+Target version for this Unreleased section: **1.0.1** (PATCH —
+audit infrastructure is internal tooling under `scripts/`, no public
+SDK surface change).
 
 ## [1.0.0] - 2026-04-14
 

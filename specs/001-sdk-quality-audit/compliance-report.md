@@ -1,8 +1,8 @@
 # Compliance Report
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `996b993121e13369a8284c18147a30ff53c80dc1`
+**Branch**: `001-sdk-quality-audit` · **SHA**: `b8ed99f4ecd0db07a144ddae9f488cb94d71412c`
 
-Files audited: **97** · 221 ✓ · 1 ~ · 2 ✗ · 358 · (n/a)
+Files audited: **97** · 222 ✓ · 0 ~ · 2 ✗ · 358 · (n/a)
 
 ## Per-file × per-principle grid
 
@@ -37,7 +37,7 @@ Files audited: **97** · 221 ✓ · 1 ~ · 2 ✗ · 358 · (n/a)
 | src/resources/bookkeeping-submissions.ts  | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |
 | src/resources/business-types.ts           | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |
 | src/resources/call-outcomes.ts            | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |
-| src/resources/calls.ts                    | · | ·  | ✓   | ·  | ✓ | ~  | f1e64031e524514a                                     |
+| src/resources/calls.ts                    | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |
 | src/resources/closing-days.ts             | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |
 | src/resources/cloud-platforms.ts          | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |
 | src/resources/commercial-discounts.ts     | · | ·  | ✓   | ·  | ✓ | ✓  |                                                      |

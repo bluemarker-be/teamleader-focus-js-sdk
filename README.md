@@ -226,6 +226,20 @@ implementations — including a Supabase Edge Function that paginates
 companies, creates contacts, links them, and handles every
 `TeamleaderFocusError` subclass with cleanup-on-failure.
 
+## Quality audit
+
+Run `npm run audit` to produce a reproducible quality report covering
+four dimensions: cross-resource consistency (every method shape across
+all 68 resources), constitution-principle compliance (per-file
+verdicts on the six rules in `.specify/memory/constitution.md`),
+README/exports drift, and CHANGELOG/git-log drift.
+
+Outputs land in [`specs/001-sdk-quality-audit/`](./specs/001-sdk-quality-audit/)
+as markdown (PR-reviewable) plus JSON sidecars (machine-diffable
+across runs). Recommended before every release; see
+[`specs/001-sdk-quality-audit/quickstart.md`](./specs/001-sdk-quality-audit/quickstart.md)
+for the full workflow.
+
 ## OAuth2 flow
 
 If your users need to authorize via Teamleader's OAuth2 flow:

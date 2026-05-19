@@ -1,8 +1,8 @@
 # Audit Findings
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `996b993121e13369a8284c18147a30ff53c80dc1`
+**Branch**: `001-sdk-quality-audit` · **SHA**: `b8ed99f4ecd0db07a144ddae9f488cb94d71412c`
 
-Total findings: **27**
+Total findings: **26**
 
 ## consistency (3)
 
@@ -15,7 +15,7 @@ Total findings: **27**
 
 - **fe2697a2ca7daa80** `src/resources/` — method_name divergence on synonym-group:add/create/draft: add (9) vs create (19) vs draft (1) (**non-trivial**; task (major): Reviewer to pick canonical form (audit does not auto-arbitrate, per Q3). Variants: add=[calls.add, closingDays.add, companies.add, contacts.add, incomingCreditNotes.add, incomingInvoices.add, products.add, receipts.add, timeTracking.add]; create=[customFieldDefinitions.create, dayOffTypes.create, dealPhases.create, dealPipelines.create, deals.create, emailTracking.create, events.create, legacyMilestones.create, legacyProjects.create, notes.create, projectGroups.create, projectMaterials.create, projectTasks.create, projects.create, quotations.create, reservations.create, subscriptions.create, tasks.create, tickets.create]; draft=[invoices.draft].)
 
-## principle-compliance (5)
+## principle-compliance (4)
 
 ### medium
 
@@ -23,7 +23,6 @@ Total findings: **27**
 - **317f220ee8378e37** `src/client.ts:497` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
 - **a1efe1a403b7d831** `src/client.ts:421` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
 - **b0f2a062e828281a** `src/client.ts:454` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
-- **f1e64031e524514a** `src/resources/calls.ts` — calls.delete (/calls.delete) has no live integration test (trivial; in-PR: Add a live integration test for /calls.delete under tests/integration/, or — if the endpoint is unsafe to exercise against a production tenant — add it to scripts/verify-endpoints.ts INTENTIONALLY_SKIPPED with a reason.)
 
 ## documentation (14)
 
@@ -51,8 +50,8 @@ Total findings: **27**
 
 ### medium
 
-- **0a84385eadb848c5** `CHANGELOG.md:249` — CHANGELOG declares `[0.1.1]` but no matching git tag `v0.1.1` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **2cc722a8055d4abd** `CHANGELOG.md:204` — CHANGELOG declares `[0.3.0]` but no matching git tag `v0.3.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **3e16e905373e3c34** `CHANGELOG.md:230` — CHANGELOG declares `[0.2.0]` but no matching git tag `v0.2.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **da53eb0c9b52ef5c** `CHANGELOG.md:271` — CHANGELOG declares `[0.0.1]` but no matching git tag `v0.0.1` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **dc860a2fd5e5bcab** `CHANGELOG.md:258` — CHANGELOG declares `[0.1.0]` but no matching git tag `v0.1.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
+- **13a5c3c5f237d98a** `CHANGELOG.md:283` — CHANGELOG declares `[0.1.0]` but no matching git tag `v0.1.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
+- **7cf4660a14f7693a** `CHANGELOG.md:255` — CHANGELOG declares `[0.2.0]` but no matching git tag `v0.2.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
+- **bc8e9cfac0fdc4fd** `CHANGELOG.md:229` — CHANGELOG declares `[0.3.0]` but no matching git tag `v0.3.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
+- **c2cbfc0af94738ec** `CHANGELOG.md:296` — CHANGELOG declares `[0.0.1]` but no matching git tag `v0.0.1` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
+- **fc3e8d787a2bbfc7** `CHANGELOG.md:274` — CHANGELOG declares `[0.1.1]` but no matching git tag `v0.1.1` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
