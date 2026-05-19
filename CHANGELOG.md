@@ -4,6 +4,13 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased] - 2026-05-19
+
+API spec updated: → 1.157.0
+
+### Added
+- `/calls.delete` endpoint
+
 ## [1.0.0] - 2026-04-14
 
 First stable release. Commits to semver: no breaking changes in minor versions

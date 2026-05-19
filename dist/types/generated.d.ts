@@ -1841,6 +1841,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/calls.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * calls.delete
+         * @description Deletes a call.
+         */
+        post: operations["calls.delete"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/callOutcomes.list": {
         parameters: {
             query?: never;
@@ -5824,8 +5844,8 @@ export interface components {
              */
             order?: "asc" | "desc";
         };
-        /** departments.listrequest */
-        "departments.listrequest": {
+        /** departments.list.request */
+        "departments.list.request": {
             filter?: {
                 /**
                  * @example [
@@ -5865,8 +5885,8 @@ export interface components {
             /** @example info@piedpiper.eu */
             email?: string;
         };
-        /** departments.listresponse */
-        "departments.listresponse": {
+        /** departments.list.response */
+        "departments.list.response": {
             data?: {
                 /** @example 67c576e7-7e6f-465d-b6ab-a864f6e5e95b */
                 id?: string;
@@ -5895,8 +5915,8 @@ export interface components {
                 status?: "active" | "archived";
             }[];
         };
-        /** departments.inforequest */
-        "departments.inforequest": {
+        /** departments.info.request */
+        "departments.info.request": {
             /** @example 92296ad0-2d61-4179-b174-9f354ca2157f */
             id: string;
         };
@@ -5935,8 +5955,8 @@ export interface components {
             /** @example 092980615 */
             number?: string;
         };
-        /** departments.inforesponse */
-        "departments.inforesponse": {
+        /** departments.info.response */
+        "departments.info.response": {
             /** data1 */
             data?: {
                 /** @example 67c576e7-7e6f-465d-b6ab-a864f6e5e95b */
@@ -6024,8 +6044,8 @@ export interface components {
             /** @example true */
             whitelabeling?: boolean;
         };
-        /** users.meresponse */
-        "users.meresponse": {
+        /** users.me.response */
+        "users.me.response": {
             data?: {
                 /** @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5 */
                 id?: string;
@@ -6087,8 +6107,8 @@ export interface components {
             /** @default 1 */
             number: number;
         };
-        /** users.listrequest */
-        "users.listrequest": {
+        /** users.list.request */
+        "users.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -6122,8 +6142,8 @@ export interface components {
                 number: number;
             };
         };
-        /** users.listresponse */
-        "users.listresponse": {
+        /** users.list.response */
+        "users.list.response": {
             data?: {
                 /** @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5 */
                 id?: string;
@@ -6169,8 +6189,8 @@ export interface components {
                 })[];
             }[];
         };
-        /** users.inforequest */
-        "users.inforequest": {
+        /** users.info.request */
+        "users.info.request": {
             /** @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5 */
             id: string;
             /**
@@ -6194,8 +6214,8 @@ export interface components {
              */
             currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
         };
-        /** users.inforesponse */
-        "users.inforesponse": {
+        /** users.info.response */
+        "users.info.response": {
             data?: {
                 /** @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5 */
                 id?: string;
@@ -6251,8 +6271,8 @@ export interface components {
                 } | null;
             };
         };
-        /** users.listDaysOffrequest */
-        "users.listDaysOffrequest": {
+        /** users.listDaysOff.request */
+        "users.listDaysOff.request": {
             /** @example 87982c96-f2fe-4b05-838c-ff42c0525758 */
             id: string;
             filter?: {
@@ -6297,8 +6317,8 @@ export interface components {
             /** @example 12 */
             matches?: number;
         };
-        /** users.listDaysOffresponse */
-        "users.listDaysOffresponse": {
+        /** users.listDaysOff.response */
+        "users.listDaysOff.response": {
             data?: {
                 /** @example f611da79-90c2-02b1-b819-a810e0c77291 */
                 id?: string;
@@ -6346,8 +6366,8 @@ export interface components {
                 matches?: number;
             };
         };
-        /** users.getWeekSchedulerequest */
-        "users.getWeekSchedulerequest": {
+        /** users.getWeekSchedule.request */
+        "users.getWeekSchedule.request": {
             /** @example 87982c96-f2fe-4b05-838c-ff42c0525758 */
             id: string;
         };
@@ -6356,8 +6376,8 @@ export interface components {
          * @enum {string}
          */
         Weekday: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
-        /** users.getWeekScheduleresponse */
-        "users.getWeekScheduleresponse": {
+        /** users.getWeekSchedule.response */
+        "users.getWeekSchedule.response": {
             data?: {
                 periods?: {
                     /**
@@ -6392,8 +6412,8 @@ export interface components {
                 }[];
             };
         };
-        /** teams.listrequest */
-        "teams.listrequest": {
+        /** teams.list.request */
+        "teams.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -6422,8 +6442,8 @@ export interface components {
                 field?: "name";
             })[];
         };
-        /** teams.listresponse */
-        "teams.listresponse": {
+        /** teams.list.response */
+        "teams.list.response": {
             data?: {
                 /** @example 4b5291aa-2d78-09d2-882c-6c1483f00d88 */
                 id?: string;
@@ -6448,8 +6468,8 @@ export interface components {
          * @enum {string}
          */
         Context: "contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen";
-        /** customFieldDefinitions.createrequest */
-        "customFieldDefinitions.createrequest": {
+        /** customFieldDefinitions.create.request */
+        "customFieldDefinitions.create.request": {
             label: string;
             type: ("single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user");
             context: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
@@ -6466,8 +6486,8 @@ export interface components {
                 searchable?: boolean;
             };
         };
-        /** customFieldDefinitions.createresponse */
-        "customFieldDefinitions.createresponse": {
+        /** customFieldDefinitions.create.response */
+        "customFieldDefinitions.create.response": {
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                 id?: string;
@@ -6477,8 +6497,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** customFieldDefinitions.listrequest */
-        "customFieldDefinitions.listrequest": {
+        /** customFieldDefinitions.list.request */
+        "customFieldDefinitions.list.request": {
             filter?: {
                 ids?: string[];
                 context?: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
@@ -6502,8 +6522,8 @@ export interface components {
                 field?: "label" | "context";
             })[];
         };
-        /** customFieldDefinitions.listresponse */
-        "customFieldDefinitions.listresponse": {
+        /** customFieldDefinitions.list.response */
+        "customFieldDefinitions.list.response": {
             data?: {
                 /** @example 74855f4a-2b61-429c-81d8-c79ad3675a76 */
                 id?: string;
@@ -6527,13 +6547,13 @@ export interface components {
                 };
             }[];
         };
-        /** customFieldDefinitions.inforequest */
-        "customFieldDefinitions.inforequest": {
+        /** customFieldDefinitions.info.request */
+        "customFieldDefinitions.info.request": {
             /** @example 9c64570b-4ec1-4e03-9662-af904f78f7fa */
             id: string;
         };
-        /** customFieldDefinitions.inforesponse */
-        "customFieldDefinitions.inforesponse": {
+        /** customFieldDefinitions.info.response */
+        "customFieldDefinitions.info.response": {
             data?: {
                 /** @example 74855f4a-2b61-429c-81d8-c79ad3675a76 */
                 id?: string;
@@ -6557,8 +6577,8 @@ export interface components {
                 };
             };
         };
-        /** workTypes.listrequest */
-        "workTypes.listrequest": {
+        /** workTypes.list.request */
+        "workTypes.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -6594,8 +6614,8 @@ export interface components {
             id?: string;
             name?: string;
         };
-        /** workTypes.listresponse */
-        "workTypes.listresponse": {
+        /** workTypes.list.response */
+        "workTypes.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
@@ -6608,8 +6628,8 @@ export interface components {
          * @enum {string}
          */
         DocumentType: "delivery_note" | "invoice" | "order" | "order_confirmation" | "quotation" | "timetracking_report" | "workorder";
-        /** documentTemplates.listrequest */
-        "documentTemplates.listrequest": {
+        /** documentTemplates.list.request */
+        "documentTemplates.list.request": {
             filter: {
                 /** @example a344c251-2494-0013-b433-ccee8e8435e5 */
                 department_id: string;
@@ -6622,8 +6642,8 @@ export interface components {
                 status?: ("active" | "archived")[];
             };
         };
-        /** documentTemplates.listresponse */
-        "documentTemplates.listresponse": {
+        /** documentTemplates.list.response */
+        "documentTemplates.list.response": {
             data?: {
                 /** @example a344c251-2494-0013-b433-ccee8e8435e5 */
                 id?: string;
@@ -6647,16 +6667,16 @@ export interface components {
                 status?: "active" | "archived";
             }[];
         };
-        /** currencies.exchangeRatesrequest */
-        "currencies.exchangeRatesrequest": {
+        /** currencies.exchangeRates.request */
+        "currencies.exchangeRates.request": {
             /**
              * CurrencyCode
              * @enum {string}
              */
             base: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
         };
-        /** currencies.exchangeRatesresponse */
-        "currencies.exchangeRatesresponse": {
+        /** currencies.exchangeRates.response */
+        "currencies.exchangeRates.response": {
             data?: {
                 /**
                  * CurrencyCode
@@ -6679,8 +6699,8 @@ export interface components {
          * @enum {string}
          */
         NoteSubjectTypes: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "project" | "quotation" | "subscription";
-        /** notes.listrequest */
-        "notes.listrequest": {
+        /** notes.list.request */
+        "notes.list.request": {
             filter: {
                 subject: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -6702,8 +6722,8 @@ export interface components {
                 number: number;
             };
         };
-        /** notes.listresponse */
-        "notes.listresponse": {
+        /** notes.list.response */
+        "notes.list.response": {
             data?: {
                 /** @example a344c251-2494-0013-b433-ccee8e8435e5 */
                 id?: string;
@@ -6729,8 +6749,8 @@ export interface components {
          * @enum {string}
          */
         NoteSubjectTypesCreate: "company" | "contact" | "creditNote" | "deal" | "invoice" | "meeting" | "nextgenProject" | "product" | "quotation" | "subscription";
-        /** notes.createrequest */
-        "notes.createrequest": {
+        /** notes.create.request */
+        "notes.create.request": {
             subject: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                 id?: string;
@@ -6756,8 +6776,8 @@ export interface components {
                 type: "user";
             })[];
         };
-        /** notes.createresponse */
-        "notes.createresponse": {
+        /** notes.create.response */
+        "notes.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -6765,8 +6785,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** notes.updaterequest */
-        "notes.updaterequest": {
+        /** notes.update.request */
+        "notes.update.request": {
             /** @example 36386b05-936e-4cc0-9523-bd20d797ebf5 */
             id: string;
             /** @example new note content */
@@ -6777,8 +6797,8 @@ export interface components {
          * @enum {string}
          */
         EmailTrackingSubjectTypes: "contact" | "company" | "deal" | "invoice" | "creditNote" | "subscription" | "product" | "quotation" | "nextgenProject";
-        /** emailTracking.listrequest */
-        "emailTracking.listrequest": {
+        /** emailTracking.list.request */
+        "emailTracking.list.request": {
             filter: {
                 subject: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -6800,8 +6820,8 @@ export interface components {
                 number: number;
             };
         };
-        /** emailTracking.listresponse */
-        "emailTracking.listresponse": {
+        /** emailTracking.list.response */
+        "emailTracking.list.response": {
             data?: {
                 /** @example a344c251-2494-0013-b433-ccee8e8435e5 */
                 id?: string;
@@ -6829,8 +6849,8 @@ export interface components {
                 }[];
             }[];
         };
-        /** emailTracking.createrequest */
-        "emailTracking.createrequest": {
+        /** emailTracking.create.request */
+        "emailTracking.create.request": {
             subject: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                 id?: string;
@@ -6849,8 +6869,8 @@ export interface components {
             /** @description All files must have the same subject as the email tracking subject */
             attachments?: string[];
         };
-        /** emailTracking.createresponse */
-        "emailTracking.createresponse": {
+        /** emailTracking.create.response */
+        "emailTracking.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -6858,8 +6878,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** closingDays.listrequest */
-        "closingDays.listrequest": {
+        /** closingDays.list.request */
+        "closingDays.list.request": {
             filter?: {
                 /**
                  * @description Start of the period for which to return closing days. This includes closing days starting on the date provided.
@@ -6880,8 +6900,8 @@ export interface components {
                 number: number;
             };
         };
-        /** closingDays.listresponse */
-        "closingDays.listresponse": {
+        /** closingDays.list.response */
+        "closingDays.list.response": {
             data?: {
                 /** @example 05676ac4-c61d-42bf-a3ea-a420fc1ec017 */
                 id?: string;
@@ -6900,13 +6920,13 @@ export interface components {
                 matches?: number;
             };
         };
-        /** closingDays.addrequest */
-        "closingDays.addrequest": {
+        /** closingDays.add.request */
+        "closingDays.add.request": {
             /** @example 2024-02-01 */
             day: string;
         };
-        /** closingDays.addresponse */
-        "closingDays.addresponse": {
+        /** closingDays.add.response */
+        "closingDays.add.response": {
             data?: {
                 /** @example closingDay */
                 type?: string;
@@ -6914,13 +6934,13 @@ export interface components {
                 id: string;
             };
         };
-        /** closingDays.deleterequest */
-        "closingDays.deleterequest": {
+        /** closingDays.delete.request */
+        "closingDays.delete.request": {
             /** @example eb264fd0-0e5c-0dbf-ae1e-49e7d6a8e6b8 */
             id: string;
         };
-        /** dayOffTypes.listresponse */
-        "dayOffTypes.listresponse": {
+        /** dayOffTypes.list.response */
+        "dayOffTypes.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
@@ -6934,8 +6954,8 @@ export interface components {
             /** @example 2025-05-05 */
             until?: string;
         };
-        /** dayOffTypes.createrequest */
-        "dayOffTypes.createrequest": {
+        /** dayOffTypes.create.request */
+        "dayOffTypes.create.request": {
             /** @example day off type */
             name: string;
             /** @example #00B2B2 */
@@ -6947,8 +6967,8 @@ export interface components {
                 until?: string;
             } | null;
         };
-        /** dayOffTypes.createresponse */
-        "dayOffTypes.createresponse": {
+        /** dayOffTypes.create.response */
+        "dayOffTypes.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -6956,8 +6976,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** dayOffTypes.updaterequest */
-        "dayOffTypes.updaterequest": {
+        /** dayOffTypes.update.request */
+        "dayOffTypes.update.request": {
             /** @example 1b7cece0-288c-0bbe-b916-5a315fbe9fe2 */
             id: string;
             /** @example day off type */
@@ -6971,13 +6991,13 @@ export interface components {
                 until?: string;
             } | null;
         };
-        /** dayOffTypes.deleterequest */
-        "dayOffTypes.deleterequest": {
+        /** dayOffTypes.delete.request */
+        "dayOffTypes.delete.request": {
             /** @example 1b7cece0-288c-0bbe-b916-5a315fbe9fe2 */
             id: string;
         };
-        /** daysOff.importrequest */
-        "daysOff.importrequest": {
+        /** daysOff.import.request */
+        "daysOff.import.request": {
             /**
              * @description The id of the user that the days off belong to.
              * @example f29abf48-337d-44b4-aad4-585f5277a456
@@ -6996,8 +7016,8 @@ export interface components {
                 ends_at: string;
             }[];
         };
-        /** daysOff.bulkDeleterequest */
-        "daysOff.bulkDeleterequest": {
+        /** daysOff.bulkDelete.request */
+        "daysOff.bulkDelete.request": {
             /**
              * @description The id of the user that the days off belong to.
              * @example f29abf48-337d-44b4-aad4-585f5277a456
@@ -7006,8 +7026,8 @@ export interface components {
             /** @description At least one day off id must be present. */
             ids?: string[];
         };
-        /** contacts.listrequest */
-        "contacts.listrequest": {
+        /** contacts.list.request */
+        "contacts.list.request": {
             filter?: {
                 email?: {
                     /** @example primary */
@@ -7100,8 +7120,8 @@ export interface components {
                 type?: "company" | "contact" | "product" | "user";
             });
         };
-        /** contacts.listresponse */
-        "contacts.listresponse": {
+        /** contacts.list.response */
+        "contacts.list.response": {
             data?: {
                 /** @example 2a39e420-3ba3-4384-8024-fa702ef99c9f */
                 id?: string;
@@ -7218,8 +7238,8 @@ export interface components {
                 };
             }[];
         };
-        /** contacts.inforequest */
-        "contacts.inforequest": {
+        /** contacts.info.request */
+        "contacts.info.request": {
             /** @example cde0bc5f-8602-4e12-b5d3-f03436b54c0d */
             id: string;
         };
@@ -7252,8 +7272,8 @@ export interface components {
                 addressee?: string;
             };
         };
-        /** contacts.inforesponse */
-        "contacts.inforesponse": {
+        /** contacts.info.response */
+        "contacts.info.response": {
             data?: {
                 /** @example cde0bc5f-8602-4e12-b5d3-f03436b54c0d */
                 id?: string;
@@ -7449,8 +7469,8 @@ export interface components {
                 type?: "company" | "contact" | "product" | "user";
             });
         };
-        /** contacts.addrequest */
-        "contacts.addrequest": {
+        /** contacts.add.request */
+        "contacts.add.request": {
             /** @example John */
             first_name?: string;
             /** @example Smith */
@@ -7537,8 +7557,8 @@ export interface components {
             /** @example false */
             marketing_mails_consent?: boolean;
         };
-        /** contacts.addresponse */
-        "contacts.addresponse": {
+        /** contacts.add.response */
+        "contacts.add.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -7546,8 +7566,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** contacts.updaterequest */
-        "contacts.updaterequest": {
+        /** contacts.update.request */
+        "contacts.update.request": {
             /** @example 76c9d03c-ec5c-4b21-9fc6-7ffee488b12d */
             id: string;
             /** @example John */
@@ -7639,25 +7659,25 @@ export interface components {
             /** @example false */
             marketing_mails_consent?: boolean;
         };
-        /** contacts.deleterequest */
-        "contacts.deleterequest": {
+        /** contacts.delete.request */
+        "contacts.delete.request": {
             /** @example 4e235f27-0af0-40e5-82f3-d32d0aa9edb3 */
             id: string;
         };
-        /** contacts.tagrequest */
-        "contacts.tagrequest": {
+        /** contacts.tag.request */
+        "contacts.tag.request": {
             /** @example cadd94ba-a41e-4eb4-a46e-39a7f6f96070 */
             id: string;
             tags: string[];
         };
-        /** contacts.untagrequest */
-        "contacts.untagrequest": {
+        /** contacts.untag.request */
+        "contacts.untag.request": {
             /** @example 518d2e5e-99bc-4c66-8509-78e6820a1418 */
             id: string;
             tags: string[];
         };
-        /** contacts.linkToCompanyrequest */
-        "contacts.linkToCompanyrequest": {
+        /** contacts.linkToCompany.request */
+        "contacts.linkToCompany.request": {
             /** @example 75596038-b9c8-4a37-969d-61059e300a28 */
             id: string;
             /** @example 4da20f00-0628-4336-b885-aa90e580dd85 */
@@ -7667,15 +7687,15 @@ export interface components {
             /** @example true */
             decision_maker?: boolean;
         };
-        /** contacts.unlinkFromCompanyrequest */
-        "contacts.unlinkFromCompanyrequest": {
+        /** contacts.unlinkFromCompany.request */
+        "contacts.unlinkFromCompany.request": {
             /** @example b4b3160a-b55e-4033-bdae-25b6d22949b4 */
             id: string;
             /** @example 3f1c8650-4292-4187-bb02-4aa00bbe9632 */
             company_id: string;
         };
-        /** contacts.updateCompanyLinkrequest */
-        "contacts.updateCompanyLinkrequest": {
+        /** contacts.updateCompanyLink.request */
+        "contacts.updateCompanyLink.request": {
             /** @example 75596038-b9c8-4a37-969d-61059e300a28 */
             id: string;
             /** @example 4da20f00-0628-4336-b885-aa90e580dd85 */
@@ -7685,8 +7705,8 @@ export interface components {
             /** @example true */
             decision_maker?: boolean;
         };
-        /** contacts.uploadAvatarrequest */
-        "contacts.uploadAvatarrequest": {
+        /** contacts.uploadAvatar.request */
+        "contacts.uploadAvatar.request": {
             /** @example 76c9d03c-ec5c-4b21-9fc6-7ffee488b12d */
             id: string;
             /**
@@ -7695,8 +7715,8 @@ export interface components {
              */
             image: string | null;
         };
-        /** companies.listrequest */
-        "companies.listrequest": {
+        /** companies.list.request */
+        "companies.list.request": {
             filter?: {
                 email?: {
                     /** @example primary */
@@ -7766,8 +7786,8 @@ export interface components {
             /** @example 092980615 */
             number: string;
         };
-        /** companies.listresponse */
-        "companies.listresponse": {
+        /** companies.list.response */
+        "companies.list.response": {
             data?: {
                 /** @example 96a38bbf-24ed-4083-8a5c-20db92aa471e */
                 id?: string;
@@ -7895,8 +7915,8 @@ export interface components {
                 };
             }[];
         };
-        /** companies.inforequest */
-        "companies.inforequest": {
+        /** companies.info.request */
+        "companies.info.request": {
             /** @example e8d31ae7-8258-4fcd-9b2d-78f41b0aa5d5 */
             id: string;
             /**
@@ -7920,8 +7940,8 @@ export interface components {
             /** @example false */
             is_decision_maker?: boolean;
         };
-        /** companies.inforesponse */
-        "companies.inforesponse": {
+        /** companies.info.response */
+        "companies.info.response": {
             data?: {
                 /** @example e8d31ae7-8258-4fcd-9b2d-78f41b0aa5d5 */
                 id?: string;
@@ -8079,8 +8099,8 @@ export interface components {
                 }[];
             };
         };
-        /** companies.addrequest */
-        "companies.addrequest": {
+        /** companies.add.request */
+        "companies.add.request": {
             /** @example Pied Piper */
             name: string;
             /** @example fd48d4a3-b9dc-4eac-8071-5889c9f21e5d */
@@ -8167,8 +8187,8 @@ export interface components {
             marketing_mails_consent?: boolean;
             preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & string;
         };
-        /** companies.addresponse */
-        "companies.addresponse": {
+        /** companies.add.response */
+        "companies.add.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -8176,8 +8196,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** companies.updaterequest */
-        "companies.updaterequest": {
+        /** companies.update.request */
+        "companies.update.request": {
             /** @example 4784189d-610b-4488-b3a5-5f324f752417 */
             id: string;
             /** @example Pied Piper */
@@ -8267,8 +8287,8 @@ export interface components {
             marketing_mails_consent?: boolean;
             preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & (string | null);
         };
-        /** companies.uploadLogorequest */
-        "companies.uploadLogorequest": {
+        /** companies.uploadLogo.request */
+        "companies.uploadLogo.request": {
             /** @example 4784189d-610b-4488-b3a5-5f324f752417 */
             id: string;
             /**
@@ -8277,30 +8297,30 @@ export interface components {
              */
             image: string | null;
         };
-        /** companies.deleterequest */
-        "companies.deleterequest": {
+        /** companies.delete.request */
+        "companies.delete.request": {
             /** @example f3d67f3e-b8a9-45e8-99b1-17a3b14de8a6 */
             id: string;
         };
-        /** companies.tagrequest */
-        "companies.tagrequest": {
+        /** companies.tag.request */
+        "companies.tag.request": {
             /** @example cadd94ba-a41e-4eb4-a46e-39a7f6f96070 */
             id: string;
             tags: string[];
         };
-        /** companies.untagrequest */
-        "companies.untagrequest": {
+        /** companies.untag.request */
+        "companies.untag.request": {
             /** @example 518d2e5e-99bc-4c66-8509-78e6820a1418 */
             id: string;
             tags: string[];
         };
-        /** businessTypes.listrequest */
-        "businessTypes.listrequest": {
+        /** businessTypes.list.request */
+        "businessTypes.list.request": {
             /** @example BE */
             country?: string;
         };
-        /** businessTypes.listresponse */
-        "businessTypes.listresponse": {
+        /** businessTypes.list.response */
+        "businessTypes.list.response": {
             data?: {
                 /** @example fd48d4a3-b9dc-4eac-8071-5889c9f21e5d */
                 id?: string;
@@ -8310,8 +8330,8 @@ export interface components {
                 country?: string;
             }[];
         };
-        /** tags.listrequest */
-        "tags.listrequest": {
+        /** tags.list.request */
+        "tags.list.request": {
             /** Page */
             page?: {
                 /** @default 20 */
@@ -8339,15 +8359,15 @@ export interface components {
                 order: "asc";
             })[];
         };
-        /** tags.listresponse */
-        "tags.listresponse": {
+        /** tags.list.response */
+        "tags.list.response": {
             data?: {
                 /** @example campaign */
                 tag?: string;
             }[];
         };
-        /** levelTwoAreas.listrequest */
-        "levelTwoAreas.listrequest": {
+        /** levelTwoAreas.list.request */
+        "levelTwoAreas.list.request": {
             /** @example BE */
             country: string;
             /**
@@ -8356,8 +8376,8 @@ export interface components {
              */
             language?: string;
         };
-        /** levelTwoAreas.listresponse */
-        "levelTwoAreas.listresponse": {
+        /** levelTwoAreas.list.response */
+        "levelTwoAreas.list.response": {
             data?: {
                 /** @example fd48d4a3-b9dc-4eac-8071-5889c9f21e5d */
                 id?: string;
@@ -8377,8 +8397,8 @@ export interface components {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id: string;
         };
-        /** deals.listrequest */
-        "deals.listrequest": {
+        /** deals.list.request */
+        "deals.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -8412,7 +8432,7 @@ export interface components {
                 estimated_closing_date_until?: string;
                 responsible_user_id?: string | string[];
                 /**
-                 * @description This date is inclusive
+                 * @description This is the last activity of the deal - this date is inclusive
                  * @example 2018-02-11T16:45:30+00:00
                  */
                 updated_since?: string;
@@ -8494,8 +8514,8 @@ export interface components {
             /** @example 1.1234 */
             rate?: number;
         };
-        /** deals.listresponse */
-        "deals.listresponse": {
+        /** deals.list.response */
+        "deals.list.response": {
             data?: {
                 /** @example 6e7fe84d-d4b3-4723-abae-9bc082d8f65a */
                 id?: string;
@@ -8632,13 +8652,13 @@ export interface components {
                 };
             }[];
         };
-        /** deals.inforequest */
-        "deals.inforequest": {
+        /** deals.info.request */
+        "deals.info.request": {
             /** @example f6871b06-6513-4750-b5e6-ff3503b5a029 */
             id: string;
         };
-        /** deals.inforesponse */
-        "deals.inforesponse": {
+        /** deals.info.response */
+        "deals.info.response": {
             data?: {
                 /** @example f6871b06-6513-4750-b5e6-ff3503b5a029 */
                 id?: string;
@@ -8820,8 +8840,8 @@ export interface components {
             /** @example 1.1238 */
             exchange_rate: number;
         };
-        /** deals.createrequest */
-        "deals.createrequest": {
+        /** deals.create.request */
+        "deals.create.request": {
             /** LeadRequest */
             lead: {
                 /** Customer */
@@ -8891,8 +8911,8 @@ export interface components {
                 exchange_rate: number;
             };
         };
-        /** deals.createresponse */
-        "deals.createresponse": {
+        /** deals.create.response */
+        "deals.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -8900,8 +8920,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** deals.updaterequest */
-        "deals.updaterequest": {
+        /** deals.update.request */
+        "deals.update.request": {
             /** @example 65a35860-dcca-4850-9fd6-47ff08469e0c */
             id: string;
             /** LeadRequest */
@@ -8971,20 +8991,20 @@ export interface components {
                 exchange_rate: number;
             };
         };
-        /** deals.moverequest */
-        "deals.moverequest": {
+        /** deals.move.request */
+        "deals.move.request": {
             /** @example e88131bf-50c4-49d3-8ae3-47e5d9626bf6 */
             id: string;
             /** @example 8776abee-d856-43c6-b98d-9ffc912e8b0b */
             phase_id: string;
         };
-        /** deals.winrequest */
-        "deals.winrequest": {
+        /** deals.win.request */
+        "deals.win.request": {
             /** @example e88131bf-50c4-49d3-8ae3-47e5d9626bf6 */
             id: string;
         };
-        /** deals.loserequest */
-        "deals.loserequest": {
+        /** deals.lose.request */
+        "deals.lose.request": {
             /** @example 460df7b2-fe82-4c6c-b215-6d0a1bd3c742 */
             id: string;
             /** @example da4c902f-2ae5-4c1f-be6f-b50308aabc5c */
@@ -8992,13 +9012,13 @@ export interface components {
             /** @example Not ready for a change, decision postponed */
             extra_info?: string;
         };
-        /** deals.deleterequest */
-        "deals.deleterequest": {
+        /** deals.delete.request */
+        "deals.delete.request": {
             /** @example 4e235f27-0af0-40e5-82f3-d32d0aa9edb3 */
             id: string;
         };
-        /** lostReasons.listrequest */
-        "lostReasons.listrequest": {
+        /** lostReasons.list.request */
+        "lostReasons.list.request": {
             filter?: {
                 ids?: string[];
             };
@@ -9029,16 +9049,16 @@ export interface components {
                 order: "asc";
             })[];
         };
-        /** lostReasons.listresponse */
-        "lostReasons.listresponse": {
+        /** lostReasons.list.response */
+        "lostReasons.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
                 name?: string;
             }[];
         };
-        /** dealPipelines.listrequest */
-        "dealPipelines.listrequest": {
+        /** dealPipelines.list.request */
+        "dealPipelines.list.request": {
             filter?: {
                 ids?: string[];
                 status?: ("open" | "pending_deletion")[];
@@ -9051,8 +9071,8 @@ export interface components {
                 number: number;
             };
         };
-        /** dealPipelines.listresponse */
-        "dealPipelines.listresponse": {
+        /** dealPipelines.list.response */
+        "dealPipelines.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
@@ -9075,13 +9095,13 @@ export interface components {
                 matches?: number;
             };
         };
-        /** dealPipelines.createrequest */
-        "dealPipelines.createrequest": {
+        /** dealPipelines.create.request */
+        "dealPipelines.create.request": {
             /** @example Primary Pipeline */
             name: string;
         };
-        /** dealPipelines.createresponse */
-        "dealPipelines.createresponse": {
+        /** dealPipelines.create.response */
+        "dealPipelines.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -9089,28 +9109,28 @@ export interface components {
                 type?: string;
             };
         };
-        /** dealPipelines.updaterequest */
-        "dealPipelines.updaterequest": {
+        /** dealPipelines.update.request */
+        "dealPipelines.update.request": {
             /** @example 254dc5ee-f8de-0791-9e31-a4f7817e64d2 */
             id: string;
             /** @example Main Pipeline */
             name: string;
         };
-        /** dealPipelines.markAsDefaultrequest */
-        "dealPipelines.markAsDefaultrequest": {
+        /** dealPipelines.markAsDefault.request */
+        "dealPipelines.markAsDefault.request": {
             /** @example f350e48a-fbc3-0a79-e62a-53aa1ae86d44 */
             id: string;
         };
-        /** dealPipelines.duplicaterequest */
-        "dealPipelines.duplicaterequest": {
+        /** dealPipelines.duplicate.request */
+        "dealPipelines.duplicate.request": {
             /**
              * @description Id from source pipeline
              * @example f350e48a-fbc3-0a79-e62a-53aa1ae86d44
              */
             id: string;
         };
-        /** dealPipelines.duplicateresponse */
-        "dealPipelines.duplicateresponse": {
+        /** dealPipelines.duplicate.response */
+        "dealPipelines.duplicate.response": {
             data?: {
                 /** @example closingDay */
                 type?: string;
@@ -9118,8 +9138,8 @@ export interface components {
                 id: string;
             };
         };
-        /** dealPipelines.deleterequest */
-        "dealPipelines.deleterequest": {
+        /** dealPipelines.delete.request */
+        "dealPipelines.delete.request": {
             /** @example f350e48a-fbc3-0a79-e62a-53aa1ae86d44 */
             id: string;
             /** @description Array of phase ids to migrate deals to */
@@ -9130,8 +9150,8 @@ export interface components {
                 new_phase_id: string;
             }[];
         };
-        /** dealPhases.listrequest */
-        "dealPhases.listrequest": {
+        /** dealPhases.list.request */
+        "dealPhases.list.request": {
             filter?: {
                 ids?: string[];
                 /** @example 53a7e592-a136-4bae-ae15-517befd3d75d */
@@ -9158,8 +9178,8 @@ export interface components {
              */
             unit?: "days" | "weeks";
         };
-        /** dealPhases.listresponse */
-        "dealPhases.listresponse": {
+        /** dealPhases.list.response */
+        "dealPhases.list.response": {
             data?: {
                 /** @example 21efc56e-1ba8-469d-926a-e89502591b47 */
                 id?: string;
@@ -9185,8 +9205,8 @@ export interface components {
          * @enum {string}
          */
         FollowUpActions: "create_event" | "create_call" | "create_task";
-        /** dealPhases.createrequest */
-        "dealPhases.createrequest": {
+        /** dealPhases.create.request */
+        "dealPhases.create.request": {
             /** @example Investigation */
             name: string;
             /** @example f350e48a-fbc3-0a79-e62a-53aa1ae86d44 */
@@ -9204,8 +9224,8 @@ export interface components {
             estimated_probability?: number;
             follow_up_actions?: ("create_event" | "create_call" | "create_task")[];
         };
-        /** dealPhases.createresponse */
-        "dealPhases.createresponse": {
+        /** dealPhases.create.response */
+        "dealPhases.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -9213,8 +9233,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** dealPhases.updaterequest */
-        "dealPhases.updaterequest": {
+        /** dealPhases.update.request */
+        "dealPhases.update.request": {
             /** @example 22364cbf-971e-022c-811b-a76c28000257 */
             id: string;
             /** @example Preparation */
@@ -9232,16 +9252,16 @@ export interface components {
             estimated_probability?: number;
             follow_up_actions?: ("create_event" | "create_call" | "create_task")[];
         };
-        /** dealPhases.duplicaterequest */
-        "dealPhases.duplicaterequest": {
+        /** dealPhases.duplicate.request */
+        "dealPhases.duplicate.request": {
             /**
              * @description Id from source phase
              * @example 22364cbf-971e-022c-811b-a76c28000257
              */
             id: string;
         };
-        /** dealPhases.duplicateresponse */
-        "dealPhases.duplicateresponse": {
+        /** dealPhases.duplicate.response */
+        "dealPhases.duplicate.response": {
             data?: {
                 /** @example dealPhase */
                 type?: string;
@@ -9249,15 +9269,15 @@ export interface components {
                 id: string;
             };
         };
-        /** dealPhases.moverequest */
-        "dealPhases.moverequest": {
+        /** dealPhases.move.request */
+        "dealPhases.move.request": {
             /** @example f350e48a-fbc3-0a79-e62a-53aa1ae86d44 */
             id: string;
             /** @example 22364cbf-971e-022c-811b-a76c28000257 */
             after_phase_id: string;
         };
-        /** dealPhases.deleterequest */
-        "dealPhases.deleterequest": {
+        /** dealPhases.delete.request */
+        "dealPhases.delete.request": {
             /** @example f350e48a-fbc3-0a79-e62a-53aa1ae86d44 */
             id: string;
             /**
@@ -9266,8 +9286,8 @@ export interface components {
              */
             new_phase_id?: string;
         };
-        /** dealSources.listrequest */
-        "dealSources.listrequest": {
+        /** dealSources.list.request */
+        "dealSources.list.request": {
             filter?: {
                 ids?: string[];
             };
@@ -9295,16 +9315,16 @@ export interface components {
                 order: "asc";
             })[];
         };
-        /** dealSources.listresponse */
-        "dealSources.listresponse": {
+        /** dealSources.list.response */
+        "dealSources.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
                 name?: string;
             }[];
         };
-        /** quotations.listrequest */
-        "quotations.listrequest": {
+        /** quotations.list.request */
+        "quotations.list.request": {
             filter?: {
                 ids?: string[];
             };
@@ -9351,8 +9371,8 @@ export interface components {
             /** @enum {string} */
             action_after_expiry?: "lock" | "none";
         };
-        /** quotations.listresponse */
-        "quotations.listresponse": {
+        /** quotations.list.response */
+        "quotations.list.response": {
             data?: {
                 /** @example 5b16f6ee-e302-0079-901b-50c26c4a55b1 */
                 id?: string;
@@ -9443,8 +9463,8 @@ export interface components {
                 };
             }[];
         };
-        /** quotations.inforequest */
-        "quotations.inforequest": {
+        /** quotations.info.request */
+        "quotations.info.request": {
             /** @example e7a3fe2b-2c75-480f-87b9-121816b5257b */
             id: string;
         };
@@ -9750,8 +9770,8 @@ export interface components {
             /** @example winter promotion */
             description?: string;
         };
-        /** quotations.inforesponse */
-        "quotations.inforesponse": {
+        /** quotations.info.response */
+        "quotations.info.response": {
             data?: {
                 /** @example e7a3fe2b-2c75-480f-87b9-121816b5257b */
                 id?: string;
@@ -10012,8 +10032,8 @@ export interface components {
                 };
             };
         };
-        /** quotations.downloadrequest */
-        "quotations.downloadrequest": {
+        /** quotations.download.request */
+        "quotations.download.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
             /**
@@ -10035,8 +10055,8 @@ export interface components {
              */
             expires?: string;
         };
-        /** quotations.downloadresponse */
-        "quotations.downloadresponse": {
+        /** quotations.download.response */
+        "quotations.download.response": {
             /** Download */
             data?: {
                 /**
@@ -10202,8 +10222,8 @@ export interface components {
                 }) | null;
             })[];
         };
-        /** quotations.createrequest */
-        "quotations.createrequest": {
+        /** quotations.create.request */
+        "quotations.create.request": {
             /** @example cef01135-7e51-4f6f-a6eb-6e5e5a885ac8 */
             deal_id: string;
             /** Currency */
@@ -10338,8 +10358,8 @@ export interface components {
                 expires_after?: string | null;
             };
         };
-        /** quotations.createresponse */
-        "quotations.createresponse": {
+        /** quotations.create.response */
+        "quotations.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -10387,8 +10407,8 @@ export interface components {
          * @enum {string}
          */
         QuotationLanguage: "en" | "nl" | "fr" | "ch" | "jp" | "de" | "es" | "pt" | "it" | "gr" | "tr" | "cs" | "so" | "sk" | "ru" | "ko" | "ir" | "iq" | "hu" | "gh" | "bg" | "bs" | "br" | "ar" | "ag" | "al" | "af" | "ro" | "pl" | "ca" | "da" | "uk" | "no" | "fi" | "sv";
-        /** quotations.sendrequest */
-        "quotations.sendrequest": {
+        /** quotations.send.request */
+        "quotations.send.request": {
             /** @description list of quotation ids you wish to send. These quotations need to come from the same deal. */
             quotations: string[];
             from?: {
@@ -10459,8 +10479,8 @@ export interface components {
              */
             language: "en" | "nl" | "fr" | "ch" | "jp" | "de" | "es" | "pt" | "it" | "gr" | "tr" | "cs" | "so" | "sk" | "ru" | "ko" | "ir" | "iq" | "hu" | "gh" | "bg" | "bs" | "br" | "ar" | "ag" | "al" | "af" | "ro" | "pl" | "ca" | "da" | "uk" | "no" | "fi" | "sv";
         };
-        /** quotations.updaterequest */
-        "quotations.updaterequest": {
+        /** quotations.update.request */
+        "quotations.update.request": {
             /** @example 5b16f6ee-e302-0079-901b-50c26c4a55b1 */
             id: string;
             /** Currency */
@@ -10595,18 +10615,18 @@ export interface components {
                 expires_after?: string | null;
             };
         };
-        /** quotations.acceptrequest */
-        "quotations.acceptrequest": {
+        /** quotations.accept.request */
+        "quotations.accept.request": {
             /** @example e7a3fe2b-2c75-480f-87b9-121816b5257b */
             id: string;
         };
-        /** quotations.deleterequest */
-        "quotations.deleterequest": {
+        /** quotations.delete.request */
+        "quotations.delete.request": {
             /** @example 4e235f27-0af0-40e5-82f3-d32d0aa9edb3 */
             id: string;
         };
-        /** meetings.listrequest */
-        "meetings.listrequest": {
+        /** meetings.list.request */
+        "meetings.list.request": {
             filter?: {
                 ids?: string[];
                 /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
@@ -10617,6 +10637,11 @@ export interface components {
                 end_date?: string;
                 /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
                 milestone_id?: string;
+                /**
+                 * @description filter by nextgen project group. Cannot be combined with `milestone_id`.
+                 * @example f29abf48-337d-44b4-aad4-585f5277a456
+                 */
+                group_id?: string;
                 /** @example funny joke HR meeting */
                 term?: string;
                 /** @example 1dfccc8e-68d0-0b83-8d1b-5cf1b0d99ab1 */
@@ -10678,8 +10703,8 @@ export interface components {
             /** @example 6ddd2666-65a0-497f-9f01-54c4343ec1a6 */
             id?: string;
         };
-        /** meetings.listresponse */
-        "meetings.listresponse": {
+        /** meetings.list.response */
+        "meetings.list.response": {
             data?: {
                 /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
                 id?: string;
@@ -10787,8 +10812,8 @@ export interface components {
                 } | null;
             }[];
         };
-        /** meetings.inforequest */
-        "meetings.inforequest": {
+        /** meetings.info.request */
+        "meetings.info.request": {
             /** @example 70af3fdd-b037-0936-ad1a-6d784dd44cf4 */
             id: string;
             /**
@@ -10830,7 +10855,7 @@ export interface components {
                 }) | null;
             };
         } | {
-            /** @example customLocation */
+            /** @example address */
             type?: string;
             /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
             id?: string;
@@ -10854,8 +10879,8 @@ export interface components {
                 }) | null;
             };
         };
-        /** meetings.inforesponse */
-        "meetings.inforesponse": {
+        /** meetings.info.response */
+        "meetings.info.response": {
             data?: {
                 /** @example 70af3fdd-b037-0936-ad1a-6d784dd44cf4 */
                 id?: string;
@@ -10983,7 +11008,7 @@ export interface components {
                         }) | null;
                     };
                 } | {
-                    /** @example customLocation */
+                    /** @example address */
                     type?: string;
                     /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
                     id?: string;
@@ -11081,7 +11106,7 @@ export interface components {
                 area_level_two_id?: string;
             };
         } | {
-            /** @example customLocation */
+            /** @example address */
             type: string;
             /** AddressRequest */
             address: {
@@ -11102,8 +11127,8 @@ export interface components {
             /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
             id?: string;
         };
-        /** meetings.schedulerequest */
-        "meetings.schedulerequest": {
+        /** meetings.schedule.request */
+        "meetings.schedule.request": {
             /** @example My meeting */
             title: string;
             /** @example 2023-10-01T09:00:00+01:00 */
@@ -11158,7 +11183,7 @@ export interface components {
                     area_level_two_id?: string;
                 };
             } | {
-                /** @example customLocation */
+                /** @example address */
                 type: string;
                 /** AddressRequest */
                 address: {
@@ -11214,8 +11239,8 @@ export interface components {
                 });
             }[];
         };
-        /** meetings.scheduleresponse */
-        "meetings.scheduleresponse": {
+        /** meetings.schedule.response */
+        "meetings.schedule.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -11223,8 +11248,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** meetings.updaterequest */
-        "meetings.updaterequest": {
+        /** meetings.update.request */
+        "meetings.update.request": {
             /** @example 00ed6266-a5bd-4aac-a292-2582017b6400 */
             id: string;
             /** @example My meeting */
@@ -11280,7 +11305,7 @@ export interface components {
                     area_level_two_id?: string;
                 };
             } | {
-                /** @example customLocation */
+                /** @example address */
                 type: string;
                 /** AddressRequest */
                 address: {
@@ -11334,18 +11359,18 @@ export interface components {
                 });
             }[];
         };
-        /** meetings.completerequest */
-        "meetings.completerequest": {
+        /** meetings.complete.request */
+        "meetings.complete.request": {
             /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
             id: string;
         };
-        /** meetings.deleterequest */
-        "meetings.deleterequest": {
+        /** meetings.delete.request */
+        "meetings.delete.request": {
             /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
             id: string;
         };
-        /** meetings.createReportrequest */
-        "meetings.createReportrequest": {
+        /** meetings.createReport.request */
+        "meetings.createReport.request": {
             /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
             id: string;
             attach_to: {
@@ -11375,8 +11400,8 @@ export interface components {
                 });
             }[];
         };
-        /** meetings.createReportresponse */
-        "meetings.createReportresponse": {
+        /** meetings.createReport.response */
+        "meetings.createReport.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -11384,8 +11409,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** calls.listrequest */
-        "calls.listrequest": {
+        /** calls.list.request */
+        "calls.list.request": {
             filter?: {
                 /**
                  * @description Filter on calls occurring on or after a given date
@@ -11436,8 +11461,8 @@ export interface components {
                 type?: string;
             } | null;
         };
-        /** calls.listresponse */
-        "calls.listresponse": {
+        /** calls.list.response */
+        "calls.list.response": {
             data?: {
                 /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
                 id?: string;
@@ -11494,13 +11519,13 @@ export interface components {
                 matches?: number;
             };
         };
-        /** calls.inforequest */
-        "calls.inforequest": {
+        /** calls.info.request */
+        "calls.info.request": {
             /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
             id: string;
         };
-        /** calls.inforesponse */
-        "calls.inforesponse": {
+        /** calls.info.response */
+        "calls.info.response": {
             data?: {
                 /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
                 id?: string;
@@ -11575,8 +11600,8 @@ export interface components {
             /** @example 66abace2-62af-0836-a927-fe3f44b9b47b */
             id?: string;
         };
-        /** calls.addrequest */
-        "calls.addrequest": {
+        /** calls.add.request */
+        "calls.add.request": {
             /** @example Description of the call */
             description?: string;
             participant: {
@@ -11623,8 +11648,8 @@ export interface components {
                 });
             }[];
         };
-        /** calls.addresponse */
-        "calls.addresponse": {
+        /** calls.add.response */
+        "calls.add.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -11632,8 +11657,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** calls.updaterequest */
-        "calls.updaterequest": {
+        /** calls.update.request */
+        "calls.update.request": {
             /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
             id: string;
             /** @example Description of the call */
@@ -11682,8 +11707,8 @@ export interface components {
                 });
             }[];
         };
-        /** calls.completerequest */
-        "calls.completerequest": {
+        /** calls.complete.request */
+        "calls.complete.request": {
             /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
             id: string;
             /** @example 2b43633b-22d1-41b6-b87b-e1fd742325d4 */
@@ -11691,8 +11716,13 @@ export interface components {
             /** @example Called, but was not available */
             outcome_summary?: string;
         };
-        /** callOutcomes.listrequest */
-        "callOutcomes.listrequest": {
+        /** calls.delete.request */
+        "calls.delete.request": {
+            /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
+            id: string;
+        };
+        /** callOutcomes.list.request */
+        "callOutcomes.list.request": {
             /** Page */
             page?: {
                 /** @default 20 */
@@ -11701,8 +11731,8 @@ export interface components {
                 number: number;
             };
         };
-        /** callOutcomes.listresponse */
-        "callOutcomes.listresponse": {
+        /** callOutcomes.list.response */
+        "callOutcomes.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
@@ -11719,8 +11749,8 @@ export interface components {
             /** @example 2659dc4d-444b-4ced-b51c-b87591f604d7 */
             id: string;
         };
-        /** events.listrequest */
-        "events.listrequest": {
+        /** events.list.request */
+        "events.list.request": {
             filter?: {
                 ids?: string[];
                 /** @example 5309c8c9-e313-47b0-90ba-6850c3dc3e33 */
@@ -11795,8 +11825,8 @@ export interface components {
                 order: "asc" | "desc";
             })[];
         };
-        /** events.listresponse */
-        "events.listresponse": {
+        /** events.list.response */
+        "events.list.response": {
             data?: {
                 /** @example 6d64488c-75d8-4de9-b140-2555566fa27d */
                 id?: string;
@@ -11848,13 +11878,13 @@ export interface components {
                 })[];
             }[];
         };
-        /** events.inforequest */
-        "events.inforequest": {
+        /** events.info.request */
+        "events.info.request": {
             /** @example 9a5a3984-abfc-40cd-a880-f97683c6a99c */
             id: string;
         };
-        /** events.inforesponse */
-        "events.inforesponse": {
+        /** events.info.response */
+        "events.info.response": {
             data?: {
                 /** @example 9a5a3984-abfc-40cd-a880-f97683c6a99c */
                 id?: string;
@@ -11906,8 +11936,8 @@ export interface components {
                 })[];
             };
         };
-        /** events.createrequest */
-        "events.createrequest": {
+        /** events.create.request */
+        "events.create.request": {
             /** @example Meeting with stakeholders */
             title: string;
             description?: string;
@@ -11941,8 +11971,8 @@ export interface components {
                 type: "contact" | "company" | "deal";
             })[];
         };
-        /** events.createresponse */
-        "events.createresponse": {
+        /** events.create.response */
+        "events.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -11950,8 +11980,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** events.updaterequest */
-        "events.updaterequest": {
+        /** events.update.request */
+        "events.update.request": {
             /** @example f22fc69d-5d07-40cf-af46-015698a74b63 */
             id: string;
             /** @example Meeting with stakeholders */
@@ -11985,13 +12015,13 @@ export interface components {
                 type: "contact" | "company" | "deal";
             })[];
         };
-        /** events.cancelrequest */
-        "events.cancelrequest": {
+        /** events.cancel.request */
+        "events.cancel.request": {
             /** @example b519491e-ca80-4efb-bb7b-3f08544936b0 */
             id: string;
         };
-        /** activityTypes.listrequest */
-        "activityTypes.listrequest": {
+        /** activityTypes.list.request */
+        "activityTypes.list.request": {
             filter?: {
                 ids?: string[];
             };
@@ -12003,16 +12033,16 @@ export interface components {
                 number: number;
             };
         };
-        /** activityTypes.listresponse */
-        "activityTypes.listresponse": {
+        /** activityTypes.list.response */
+        "activityTypes.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
                 name?: string;
             }[];
         };
-        /** invoices.listrequest */
-        "invoices.listrequest": {
+        /** invoices.list.request */
+        "invoices.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -12134,8 +12164,8 @@ export interface components {
                 } | null;
             } | null;
         };
-        /** invoices.listresponse */
-        "invoices.listresponse": {
+        /** invoices.list.response */
+        "invoices.list.response": {
             data?: {
                 /** @example 2aa4a6a9-9ce8-4851-a9b3-26aea2ea14c4 */
                 id?: string;
@@ -12321,8 +12351,8 @@ export interface components {
                 delivery_date?: string | null;
             }[];
         };
-        /** invoices.inforequest */
-        "invoices.inforequest": {
+        /** invoices.info.request */
+        "invoices.info.request": {
             /** @example 27300f09-6250-4a23-8557-d84c52f99ecf */
             id?: string;
             /**
@@ -12466,10 +12496,10 @@ export interface components {
         /** ExpectedPaymentMethod */
         ExpectedPaymentMethod: {
             /**
-             * @example sepa_direct_debit
+             * @example credit_card
              * @enum {string}
              */
-            method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+            method?: "direct_debit" | "credit_card";
             /** @example AB1234 */
             reference?: string | null;
         } | {
@@ -12478,6 +12508,14 @@ export interface components {
              * @enum {string}
              */
             method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+        } | {
+            /**
+             * @example sepa_direct_debit
+             * @enum {string}
+             */
+            method?: "sepa_direct_debit";
+            /** @example AB1234 */
+            reference: string;
         };
         /**
          * PeppolStatus
@@ -12485,8 +12523,8 @@ export interface components {
          * @enum {string|null}
          */
         PeppolStatus: "sending" | "sending_failed" | "sent" | "application_acknowledged" | "application_accepted" | "application_rejected" | "receiver_acknowledged" | "receiver_accepted" | "receiver_rejected" | "receiver_is_processing" | "receiver_awaits_feedback" | "receiver_conditionally_accepted" | "receiver_paid" | null;
-        /** invoices.inforesponse */
-        "invoices.inforesponse": {
+        /** invoices.info.response */
+        "invoices.info.response": {
             data?: {
                 /** @example e540fe7e-dce2-459e-bf7e-24e605fc18b3 */
                 id?: string;
@@ -12837,10 +12875,10 @@ export interface components {
                 };
                 expected_payment_method?: ({
                     /**
-                     * @example sepa_direct_debit
+                     * @example credit_card
                      * @enum {string}
                      */
-                    method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+                    method?: "direct_debit" | "credit_card";
                     /** @example AB1234 */
                     reference?: string | null;
                 } | {
@@ -12849,6 +12887,14 @@ export interface components {
                      * @enum {string}
                      */
                     method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+                } | {
+                    /**
+                     * @example sepa_direct_debit
+                     * @enum {string}
+                     */
+                    method?: "sepa_direct_debit";
+                    /** @example AB1234 */
+                    reference: string;
                 }) | null;
                 file?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -12908,14 +12954,14 @@ export interface components {
          * @enum {string}
          */
         InvoiceDownloadFormat: "pdf" | "ubl/e-fff" | "ubl/peppol_bis_3";
-        /** invoices.downloadrequest */
-        "invoices.downloadrequest": {
+        /** invoices.download.request */
+        "invoices.download.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
             format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3");
         };
-        /** invoices.downloadresponse */
-        "invoices.downloadresponse": {
+        /** invoices.download.response */
+        "invoices.download.response": {
             /** Download */
             data?: {
                 /**
@@ -12998,8 +13044,8 @@ export interface components {
                 product_category_id?: string;
             })[];
         };
-        /** invoices.draftrequest */
-        "invoices.draftrequest": {
+        /** invoices.draft.request */
+        "invoices.draft.request": {
             /** InvoicesRequestInvoicee */
             invoicee: {
                 /** Customer */
@@ -13108,10 +13154,10 @@ export interface components {
             note?: string;
             expected_payment_method?: ({
                 /**
-                 * @example sepa_direct_debit
+                 * @example credit_card
                  * @enum {string}
                  */
-                method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+                method?: "direct_debit" | "credit_card";
                 /** @example AB1234 */
                 reference?: string | null;
             } | {
@@ -13120,6 +13166,14 @@ export interface components {
                  * @enum {string}
                  */
                 method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+            } | {
+                /**
+                 * @example sepa_direct_debit
+                 * @enum {string}
+                 */
+                method?: "sepa_direct_debit";
+                /** @example AB1234 */
+                reference: string;
             }) | null;
             custom_fields?: {
                 /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
@@ -13141,8 +13195,8 @@ export interface components {
             /** @example 2025-12-08 */
             delivery_date?: string | null;
         };
-        /** invoices.draftresponse */
-        "invoices.draftresponse": {
+        /** invoices.draft.response */
+        "invoices.draft.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -13150,8 +13204,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** invoices.updaterequest */
-        "invoices.updaterequest": {
+        /** invoices.update.request */
+        "invoices.update.request": {
             /** @example b7023c11-455e-4fa5-bb96-87f37dbc7d07 */
             id: string;
             /** InvoicesRequestInvoicee */
@@ -13259,10 +13313,10 @@ export interface components {
             }[];
             expected_payment_method?: ({
                 /**
-                 * @example sepa_direct_debit
+                 * @example credit_card
                  * @enum {string}
                  */
-                method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+                method?: "direct_debit" | "credit_card";
                 /** @example AB1234 */
                 reference?: string | null;
             } | {
@@ -13271,6 +13325,14 @@ export interface components {
                  * @enum {string}
                  */
                 method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+            } | {
+                /**
+                 * @example sepa_direct_debit
+                 * @enum {string}
+                 */
+                method?: "sepa_direct_debit";
+                /** @example AB1234 */
+                reference: string;
             }) | null;
             custom_fields?: {
                 /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
@@ -13292,8 +13354,8 @@ export interface components {
             /** @example 2025-12-08 */
             delivery_date?: string | null;
         };
-        /** invoices.updateBookedrequest */
-        "invoices.updateBookedrequest": {
+        /** invoices.updateBooked.request */
+        "invoices.updateBooked.request": {
             /** @example b7023c11-455e-4fa5-bb96-87f37dbc7d07 */
             id: string;
             /** InvoicesRequestInvoicee */
@@ -13375,6 +13437,29 @@ export interface components {
             invoice_date?: string;
             /** @example Some comments about the invoice */
             note?: string | null;
+            expected_payment_method?: ({
+                /**
+                 * @example credit_card
+                 * @enum {string}
+                 */
+                method?: "direct_debit" | "credit_card";
+                /** @example AB1234 */
+                reference?: string | null;
+            } | {
+                /**
+                 * @example cash
+                 * @enum {string}
+                 */
+                method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+            } | {
+                /**
+                 * @example sepa_direct_debit
+                 * @enum {string}
+                 */
+                method?: "sepa_direct_debit";
+                /** @example AB1234 */
+                reference: string;
+            }) | null;
             custom_fields?: {
                 /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
                 id?: string;
@@ -13391,13 +13476,13 @@ export interface components {
                 });
             }[];
         };
-        /** invoices.copyrequest */
-        "invoices.copyrequest": {
+        /** invoices.copy.request */
+        "invoices.copy.request": {
             /** @example b7023c11-455e-4fa5-bb96-87f37dbc7d07 */
             id: string;
         };
-        /** invoices.copyresponse */
-        "invoices.copyresponse": {
+        /** invoices.copy.response */
+        "invoices.copy.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -13405,20 +13490,20 @@ export interface components {
                 type?: string;
             };
         };
-        /** invoices.bookrequest */
-        "invoices.bookrequest": {
+        /** invoices.book.request */
+        "invoices.book.request": {
             /** @example 7abb325c-e063-42a4-8fb4-1b730759645a */
             id: string;
             /** @example 2016-02-04 */
             on: string;
         };
-        /** invoices.deleterequest */
-        "invoices.deleterequest": {
+        /** invoices.delete.request */
+        "invoices.delete.request": {
             /** @example 7517d21c-75c1-4b89-8956-0e67f46c8532 */
             id: string;
         };
-        /** invoices.registerPaymentrequest */
-        "invoices.registerPaymentrequest": {
+        /** invoices.registerPayment.request */
+        "invoices.registerPayment.request": {
             /** @example 7abb325c-e063-42a4-8fb4-1b730759645a */
             id: string;
             /** Money */
@@ -13436,20 +13521,20 @@ export interface components {
             /** @example bb9589ec-6e08-0d5f-9b23-7be9b9c3ea2d */
             payment_method_id?: string;
         };
-        /** invoices.removePaymentsrequest */
-        "invoices.removePaymentsrequest": {
+        /** invoices.removePayments.request */
+        "invoices.removePayments.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
         };
-        /** invoices.creditrequest */
-        "invoices.creditrequest": {
+        /** invoices.credit.request */
+        "invoices.credit.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
             /** @example 2016-02-04 */
             credit_note_date?: string;
         };
-        /** invoices.creditresponse */
-        "invoices.creditresponse": {
+        /** invoices.credit.response */
+        "invoices.credit.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -13457,8 +13542,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** invoices.creditPartiallyrequest */
-        "invoices.creditPartiallyrequest": {
+        /** invoices.creditPartially.request */
+        "invoices.creditPartially.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
             /** @example 2016-02-04 */
@@ -13523,8 +13608,8 @@ export interface components {
                 description?: string;
             }[];
         };
-        /** invoices.creditPartiallyresponse */
-        "invoices.creditPartiallyresponse": {
+        /** invoices.creditPartially.response */
+        "invoices.creditPartially.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -13560,8 +13645,8 @@ export interface components {
             /** @example info@teamleader.eu */
             email: string;
         };
-        /** invoices.sendrequest */
-        "invoices.sendrequest": {
+        /** invoices.send.request */
+        "invoices.send.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
             content: {
@@ -13617,12 +13702,12 @@ export interface components {
             attachments?: string[];
         };
         /** invoices.sendViaPeppol */
-        "invoices.sendViaPeppol": {
+        "invoices.sendViaPeppol.request": {
             /** @example 018d5965-19fb-701a-af11-e80451931551 */
             id: string;
         };
-        /** creditNotes.listrequest */
-        "creditNotes.listrequest": {
+        /** creditNotes.list.request */
+        "creditNotes.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -13678,8 +13763,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** creditNotes.listresponse */
-        "creditNotes.listresponse": {
+        /** creditNotes.list.response */
+        "creditNotes.list.response": {
             data?: {
                 /** @example 2b43633b-22d1-41b6-b87b-e1fd742325d4 */
                 id?: string;
@@ -13782,8 +13867,8 @@ export interface components {
                 updated_at?: string;
             }[];
         };
-        /** creditNotes.inforequest */
-        "creditNotes.inforequest": {
+        /** creditNotes.info.request */
+        "creditNotes.info.request": {
             /** @example 27300f09-6250-4a23-8557-d84c52f99ecf */
             id: string;
         };
@@ -13912,8 +13997,8 @@ export interface components {
                 }));
             })[];
         };
-        /** creditNotes.inforesponse */
-        "creditNotes.inforesponse": {
+        /** creditNotes.info.response */
+        "creditNotes.info.response": {
             data?: {
                 /** @example 27300f09-6250-4a23-8557-d84c52f99ecf */
                 id?: string;
@@ -14161,14 +14246,14 @@ export interface components {
          * @enum {string}
          */
         CreditNoteDownloadFormat: "pdf" | "ubl/e-fff";
-        /** creditNotes.downloadrequest */
-        "creditNotes.downloadrequest": {
+        /** creditNotes.download.request */
+        "creditNotes.download.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
             format: ("pdf" | "ubl/e-fff");
         };
-        /** creditNotes.downloadresponse */
-        "creditNotes.downloadresponse": {
+        /** creditNotes.download.response */
+        "creditNotes.download.response": {
             /** Download */
             data?: {
                 /**
@@ -14184,12 +14269,12 @@ export interface components {
             };
         };
         /** creditNotes.sendViaPeppol */
-        "creditNotes.sendViaPeppol": {
+        "creditNotes.sendViaPeppol.request": {
             /** @example 018d5965-19fb-701a-af11-e80451931551 */
             id: string;
         };
-        /** subscriptions.listrequest */
-        "subscriptions.listrequest": {
+        /** subscriptions.list.request */
+        "subscriptions.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -14308,8 +14393,8 @@ export interface components {
              */
             days_in_advance?: 0 | 7 | 14 | 21 | 28;
         };
-        /** subscriptions.listresponse */
-        "subscriptions.listresponse": {
+        /** subscriptions.list.response */
+        "subscriptions.list.response": {
             data?: {
                 /** @example e2314517-3cab-4aa9-8471-450e73449041 */
                 id?: string;
@@ -14467,8 +14552,8 @@ export interface components {
                 created_at?: string | null;
             }[];
         };
-        /** subscriptions.inforequest */
-        "subscriptions.inforequest": {
+        /** subscriptions.info.request */
+        "subscriptions.info.request": {
             /** @example e2314517-3cab-4aa9-8471-450e73449041 */
             id: string;
         };
@@ -14578,8 +14663,8 @@ export interface components {
                 } | null;
             })[];
         };
-        /** subscriptions.inforesponse */
-        "subscriptions.inforesponse": {
+        /** subscriptions.info.response */
+        "subscriptions.info.response": {
             data?: {
                 /** @example e2314517-3cab-4aa9-8471-450e73449041 */
                 id?: string;
@@ -14966,8 +15051,8 @@ export interface components {
             /** @enum {string} */
             payment_method?: "direct_debit";
         };
-        /** subscriptions.createrequest */
-        "subscriptions.createrequest": {
+        /** subscriptions.create.request */
+        "subscriptions.create.request": {
             /** InvoicesRequestInvoicee */
             invoicee: {
                 /** Customer */
@@ -15149,8 +15234,8 @@ export interface components {
                 number_of_days_after_invoice_date: number;
             } | null;
         };
-        /** subscriptions.createresponse */
-        "subscriptions.createresponse": {
+        /** subscriptions.create.response */
+        "subscriptions.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -15183,8 +15268,8 @@ export interface components {
             /** @enum {string|null} */
             payment_method?: "direct_debit" | null;
         };
-        /** subscriptions.updaterequest */
-        "subscriptions.updaterequest": {
+        /** subscriptions.update.request */
+        "subscriptions.update.request": {
             /** @example 5b16f6ee-e302-0079-901b-50c26c4a55b1 */
             id: string;
             /**
@@ -15370,13 +15455,13 @@ export interface components {
                 number_of_days_after_invoice_date: number;
             } | null;
         };
-        /** subscriptions.deactivaterequest */
-        "subscriptions.deactivaterequest": {
+        /** subscriptions.deactivate.request */
+        "subscriptions.deactivate.request": {
             /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
             id: string;
         };
-        /** taxRates.listrequest */
-        "taxRates.listrequest": {
+        /** taxRates.list.request */
+        "taxRates.list.request": {
             filter?: {
                 /**
                  * @description The ID of the department you wish to filter on.
@@ -15405,8 +15490,8 @@ export interface components {
                 order?: "asc" | "desc";
             })[];
         };
-        /** taxRates.listresponse */
-        "taxRates.listresponse": {
+        /** taxRates.list.response */
+        "taxRates.list.response": {
             data?: {
                 /** @example c93ddb52-0af8-47d9-8551-441435be66a7 */
                 id?: string;
@@ -15422,8 +15507,8 @@ export interface components {
                 };
             }[];
         };
-        /** paymentTerms.listresponse */
-        "paymentTerms.listresponse": {
+        /** paymentTerms.list.response */
+        "paymentTerms.list.response": {
             data?: {
                 /** @example c93ddb52-0af8-47d9-8551-441435be66a7 */
                 id?: string;
@@ -15442,8 +15527,8 @@ export interface components {
                 default?: string;
             };
         };
-        /** withholdingTaxRates.listrequest */
-        "withholdingTaxRates.listrequest": {
+        /** withholdingTaxRates.list.request */
+        "withholdingTaxRates.list.request": {
             filter?: {
                 /**
                  * @description The ID of the department you wish to filter on.
@@ -15452,8 +15537,8 @@ export interface components {
                 department_id?: string;
             };
         };
-        /** withholdingTaxRates.listresponse */
-        "withholdingTaxRates.listresponse": {
+        /** withholdingTaxRates.list.response */
+        "withholdingTaxRates.list.response": {
             data?: {
                 /** @example c93ddb52-0af8-47d9-8551-441435be66a7 */
                 id?: string;
@@ -15469,15 +15554,15 @@ export interface components {
                 };
             }[];
         };
-        /** commercialDiscounts.listrequest */
-        "commercialDiscounts.listrequest": {
+        /** commercialDiscounts.list.request */
+        "commercialDiscounts.list.request": {
             filter?: {
                 /** @example 6a6343fc-fdd8-4bc0-aa69-3a004c710e87 */
                 department_id?: string;
             };
         };
-        /** commercialDiscounts.listresponse */
-        "commercialDiscounts.listresponse": {
+        /** commercialDiscounts.list.response */
+        "commercialDiscounts.list.response": {
             data?: {
                 /** @example My holiday discount */
                 name?: string;
@@ -15489,8 +15574,8 @@ export interface components {
                 };
             }[];
         };
-        /** paymentMethods.listrequest */
-        "paymentMethods.listrequest": {
+        /** paymentMethods.list.request */
+        "paymentMethods.list.request": {
             filter?: {
                 /**
                  * @example [
@@ -15510,8 +15595,8 @@ export interface components {
                 number: number;
             };
         };
-        /** paymentMethods.listresponse */
-        "paymentMethods.listresponse": {
+        /** paymentMethods.list.response */
+        "paymentMethods.list.response": {
             data?: {
                 /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
                 id?: string;
@@ -15524,7 +15609,7 @@ export interface components {
                 status: "active" | "archived";
             }[];
         };
-        "expenses.listrequest": {
+        "expenses.list.request": {
             filter?: {
                 /** @description Filters by document number and supplier name, case-insensitive */
                 term?: string;
@@ -15584,7 +15669,7 @@ export interface components {
                 field?: "document_date" | "due_date" | "supplier_name";
             })[];
         };
-        "expenses.listresponse": {
+        "expenses.list.response": {
             data?: {
                 source?: {
                     /** @enum {string} */
@@ -15651,12 +15736,12 @@ export interface components {
                 matches?: number;
             };
         };
-        /** incomingCreditNotes.listPaymentsrequest */
-        "incomingCreditNotes.listPaymentsrequest": {
+        /** incomingCreditNotes.listPayments.request */
+        "incomingCreditNotes.listPayments.request": {
             id: string;
         };
-        /** receipts.listPaymentsresponse */
-        "incomingCreditNotes.listPaymentsresponse": {
+        /** receipts.listPayments.response */
+        "incomingCreditNotes.listPayments.response": {
             data?: {
                 id?: string;
                 /** Money */
@@ -15684,7 +15769,7 @@ export interface components {
             };
         };
         /** receipts.incomingCreditNotes */
-        "incomingCreditNotes.registerPaymentrequest": {
+        "incomingCreditNotes.registerPayment.request": {
             id: string;
             /** Money */
             payment: {
@@ -15701,20 +15786,20 @@ export interface components {
             payment_method_id?: string | null;
             remark?: string | null;
         };
-        /** receipts.registerPaymentresponse */
-        "incomingCreditNotes.registerPaymentresponse": {
+        /** receipts.registerPayment.response */
+        "incomingCreditNotes.registerPayment.response": {
             data?: {
                 type?: string;
                 id?: string;
             };
         };
-        /** receipts.removePaymentrequest */
-        "incomingCreditNotes.removePaymentrequest": {
+        /** receipts.removePayment.request */
+        "incomingCreditNotes.removePayment.request": {
             id: string;
             payment_id: string;
         };
-        /** incomingCreditNotes.updatePaymentrequest */
-        "incomingCreditNotes.updatePaymentrequest": {
+        /** incomingCreditNotes.updatePayment.request */
+        "incomingCreditNotes.updatePayment.request": {
             id: string;
             payment_id: string;
             /** Money */
@@ -15732,12 +15817,12 @@ export interface components {
             payment_method_id?: string | null;
             remark?: string | null;
         };
-        /** incomingInvoices.listPaymentsrequest */
-        "incomingInvoices.listPaymentsrequest": {
+        /** incomingInvoices.listPayments.request */
+        "incomingInvoices.listPayments.request": {
             id: string;
         };
-        /** receipts.listPaymentsresponse */
-        "incomingInvoices.listPaymentsresponse": {
+        /** receipts.listPayments.response */
+        "incomingInvoices.listPayments.response": {
             data?: {
                 id?: string;
                 /** Money */
@@ -15764,8 +15849,8 @@ export interface components {
                 };
             };
         };
-        /** incomingInvoices.registerPaymentrequest */
-        "incomingInvoices.registerPaymentrequest": {
+        /** incomingInvoices.registerPayment.request */
+        "incomingInvoices.registerPayment.request": {
             id: string;
             /** Money */
             payment: {
@@ -15782,20 +15867,20 @@ export interface components {
             payment_method_id?: string | null;
             remark?: string | null;
         };
-        /** receipts.registerPaymentresponse */
-        "incomingInvoices.registerPaymentresponse": {
+        /** receipts.registerPayment.response */
+        "incomingInvoices.registerPayment.response": {
             data?: {
                 type?: string;
                 id?: string;
             };
         };
-        /** incomingInvoices.removePaymentrequest */
-        "incomingInvoices.removePaymentrequest": {
+        /** incomingInvoices.removePayment.request */
+        "incomingInvoices.removePayment.request": {
             id: string;
             payment_id: string;
         };
-        /** incomingInvoices.updatePaymentrequest */
-        "incomingInvoices.updatePaymentrequest": {
+        /** incomingInvoices.updatePayment.request */
+        "incomingInvoices.updatePayment.request": {
             id: string;
             payment_id: string;
             /** Money */
@@ -15813,12 +15898,12 @@ export interface components {
             payment_method_id?: string | null;
             remark?: string | null;
         };
-        /** receipts.listPaymentsrequest */
-        "receipts.listPaymentsrequest": {
+        /** receipts.listPayments.request */
+        "receipts.listPayments.request": {
             id: string;
         };
-        /** receipts.listPaymentsresponse */
-        "receipts.listPaymentsresponse": {
+        /** receipts.listPayments.response */
+        "receipts.listPayments.response": {
             data?: {
                 id?: string;
                 /** Money */
@@ -15845,8 +15930,8 @@ export interface components {
                 };
             };
         };
-        /** receipts.registerPaymentrequest */
-        "receipts.registerPaymentrequest": {
+        /** receipts.registerPayment.request */
+        "receipts.registerPayment.request": {
             id: string;
             /** Money */
             payment: {
@@ -15863,20 +15948,20 @@ export interface components {
             payment_method_id?: string | null;
             remark?: string | null;
         };
-        /** receipts.registerPaymentresponse */
-        "receipts.registerPaymentresponse": {
+        /** receipts.registerPayment.response */
+        "receipts.registerPayment.response": {
             data?: {
                 type?: string;
                 id?: string;
             };
         };
-        /** receipts.removePaymentrequest */
-        "receipts.removePaymentrequest": {
+        /** receipts.removePayment.request */
+        "receipts.removePayment.request": {
             id: string;
             payment_id: string;
         };
-        /** receipts.updatePaymentrequest */
-        "receipts.updatePaymentrequest": {
+        /** receipts.updatePayment.request */
+        "receipts.updatePayment.request": {
             id: string;
             payment_id: string;
             /** Money */
@@ -15894,8 +15979,8 @@ export interface components {
             payment_method_id?: string | null;
             remark?: string | null;
         };
-        /** productCategories.listrequest */
-        "productCategories.listrequest": {
+        /** productCategories.list.request */
+        "productCategories.list.request": {
             filter?: {
                 /**
                  * @description The ID of the department you wish to filter on.
@@ -15904,8 +15989,8 @@ export interface components {
                 department_id?: string;
             };
         };
-        /** productCategories.listresponse */
-        "productCategories.listresponse": {
+        /** productCategories.list.response */
+        "productCategories.list.response": {
             data?: {
                 /** @example 2aa4a6a9-9ce8-4851-a9b3-26aea2ea14c4 */
                 id?: string;
@@ -15923,8 +16008,8 @@ export interface components {
                 }[];
             }[];
         };
-        /** products.listrequest */
-        "products.listrequest": {
+        /** products.list.request */
+        "products.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -15964,8 +16049,8 @@ export interface components {
                 action?: "notify";
             } | null;
         };
-        /** products.listresponse */
-        "products.listresponse": {
+        /** products.list.response */
+        "products.list.response": {
             data?: {
                 /** @example 2aa4a6a9-9ce8-4851-a9b3-26aea2ea14c4 */
                 id?: string;
@@ -16005,8 +16090,8 @@ export interface components {
                 } | null;
             }[];
         };
-        /** products.inforequest */
-        "products.inforequest": {
+        /** products.info.request */
+        "products.info.request": {
             /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
             id: string;
             /**
@@ -16015,8 +16100,8 @@ export interface components {
              */
             includes?: string;
         };
-        /** products.inforesponse */
-        "products.inforesponse": {
+        /** products.info.response */
+        "products.info.response": {
             data?: {
                 /** @example f8ae61ec-62f3-0538-b028-185c4a5f217f */
                 id?: string;
@@ -16171,8 +16256,8 @@ export interface components {
                 action: "notify";
             } | null;
         };
-        /** products.addrequest */
-        "products.addrequest": {
+        /** products.add.request */
+        "products.add.request": {
             /** @example cookies */
             name?: string;
             /** @example COOK-DARKCHOC-42 */
@@ -16251,8 +16336,8 @@ export interface components {
                 });
             }[];
         };
-        /** products.addresponse */
-        "products.addresponse": {
+        /** products.add.response */
+        "products.add.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -16260,8 +16345,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** products.updaterequest */
-        "products.updaterequest": {
+        /** products.update.request */
+        "products.update.request": {
             /** @example 71e91f91-b222-033f-8c7e-59bcc1521e3d */
             id: string;
             /** @example Hosting */
@@ -16332,27 +16417,27 @@ export interface components {
                 });
             }[];
         };
-        /** products.deleterequest */
-        "products.deleterequest": {
+        /** products.delete.request */
+        "products.delete.request": {
             /** @example 71e91f91-b222-033f-8c7e-59bcc1521e3d */
             id: string;
         };
-        /** unitsOfMeasure.listresponse */
-        "unitsOfMeasure.listresponse": {
+        /** unitsOfMeasure.list.response */
+        "unitsOfMeasure.list.response": {
             data?: {
                 /** @example 811a5825-96f4-4318-83c3-2840935c6003 */
                 id?: string;
                 name?: string;
             }[];
         };
-        /** priceLists.listrequest */
-        "priceLists.listrequest": {
+        /** priceLists.list.request */
+        "priceLists.list.request": {
             filter?: {
                 ids?: string[];
             };
         };
-        /** priceLists.listresponse */
-        "priceLists.listresponse": {
+        /** priceLists.list.response */
+        "priceLists.list.response": {
             data?: {
                 /** @example 2aa4a6a9-9ce8-4851-a9b3-26aea2ea14c4 */
                 id?: string;
@@ -16365,8 +16450,8 @@ export interface components {
                 calculation_method?: "manual" | "based_on_price_list" | "based_on_purchase_price";
             }[];
         };
-        /** projects.listrequest */
-        "projects.listrequest": {
+        /** projects.list.request */
+        "projects.list.request": {
             filter?: {
                 /** Customer */
                 customer?: {
@@ -16529,8 +16614,8 @@ export interface components {
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | null;
         };
-        /** projects.listresponse */
-        "projects.listresponse": {
+        /** projects.list.response */
+        "projects.list.response": {
             data?: {
                 /** @example 624ca743-8998-4f8c-add1-c427bb022166 */
                 id?: string;
@@ -16668,8 +16753,8 @@ export interface components {
                 };
             }[];
         };
-        /** projects.inforequest */
-        "projects.inforequest": {
+        /** projects.info.request */
+        "projects.info.request": {
             /** @example 8a04371b-2ffb-407b-9b24-d5b5452009c7 */
             id: string;
         };
@@ -16697,8 +16782,8 @@ export interface components {
              */
             role?: "decision_maker" | "member";
         };
-        /** projects.inforesponse */
-        "projects.inforesponse": {
+        /** projects.info.response */
+        "projects.info.response": {
             data?: {
                 /** @example 8a04371b-2ffb-407b-9b24-d5b5452009c7 */
                 id?: string;
@@ -16883,8 +16968,8 @@ export interface components {
                 };
             };
         };
-        /** projects.createrequest */
-        "projects.createrequest": {
+        /** projects.create.request */
+        "projects.create.request": {
             /** @example New company website */
             title: string;
             description?: string;
@@ -16954,8 +17039,8 @@ export interface components {
                 id: string;
             };
         };
-        /** projects.createresponse */
-        "projects.createresponse": {
+        /** projects.create.response */
+        "projects.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -16963,8 +17048,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects.updaterequest */
-        "projects.updaterequest": {
+        /** projects.update.request */
+        "projects.update.request": {
             /** @example dcc2e8ed-51be-4cb6-9c01-034aedac86fd */
             id: string;
             /** @example New company website */
@@ -17012,23 +17097,23 @@ export interface components {
                 });
             }[];
         };
-        /** projects.closerequest */
-        "projects.closerequest": {
+        /** projects.close.request */
+        "projects.close.request": {
             /** @example 01548b10-4932-4a18-8a89-005ad09db2c8 */
             id: string;
         };
-        /** projects.reopenrequest */
-        "projects.reopenrequest": {
+        /** projects.reopen.request */
+        "projects.reopen.request": {
             /** @example 01548b10-4932-4a18-8a89-005ad09db2c8 */
             id: string;
         };
-        /** projects.deleterequest */
-        "projects.deleterequest": {
+        /** projects.delete.request */
+        "projects.delete.request": {
             /** @example 01548b10-4932-4a18-8a89-005ad09db2c8 */
             id: string;
         };
-        /** projects.addParticipantrequest */
-        "projects.addParticipantrequest": {
+        /** projects.addParticipant.request */
+        "projects.addParticipant.request": {
             /** @example 8dbfa9db-c53f-410c-97d3-755b19685809 */
             id: string;
             /** TypeAndId */
@@ -17043,8 +17128,8 @@ export interface components {
              */
             role?: "decision_maker" | "member";
         };
-        /** projects.updateParticipantrequest */
-        "projects.updateParticipantrequest": {
+        /** projects.updateParticipant.request */
+        "projects.updateParticipant.request": {
             /** @example 55fbe14f-7399-48e5-b4e0-64b7f5c50451 */
             id: string;
             /** TypeAndId */
@@ -17059,8 +17144,8 @@ export interface components {
              */
             role: "decision_maker" | "member";
         };
-        /** milestones.listrequest */
-        "milestones.listrequest": {
+        /** milestones.list.request */
+        "milestones.list.request": {
             filter?: {
                 ids?: string[];
                 /** @example 082e6289-30c5-45ad-bcd0-190b02d21e81 */
@@ -17193,8 +17278,8 @@ export interface components {
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | null;
         };
-        /** milestones.listresponse */
-        "milestones.listresponse": {
+        /** milestones.list.response */
+        "milestones.list.response": {
             data?: {
                 /** @example cfb4146d-06be-41f1-bb39-aa3c929c71dc */
                 id?: string;
@@ -17319,13 +17404,13 @@ export interface components {
                 };
             }[];
         };
-        /** milestones.inforequest */
-        "milestones.inforequest": {
+        /** milestones.info.request */
+        "milestones.info.request": {
             /** @example 64349fa2-6ca2-4b19-82e6-d3258ceab2d8 */
             id: string;
         };
-        /** milestones.inforesponse */
-        "milestones.inforesponse": {
+        /** milestones.info.response */
+        "milestones.info.response": {
             data?: {
                 /** @example 64349fa2-6ca2-4b19-82e6-d3258ceab2d8 */
                 id?: string;
@@ -17471,8 +17556,8 @@ export interface components {
                 }[];
             };
         };
-        /** milestones.createrequest */
-        "milestones.createrequest": {
+        /** milestones.create.request */
+        "milestones.create.request": {
             /** @example 1c159f98-4b07-438a-9f42-fb4206b9530d */
             project_id: string;
             /** @example 2017-01-01 */
@@ -17531,8 +17616,8 @@ export interface components {
                 currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             };
         });
-        /** milestones.createresponse */
-        "milestones.createresponse": {
+        /** milestones.create.response */
+        "milestones.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -17540,8 +17625,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** milestones.updaterequest */
-        "milestones.updaterequest": {
+        /** milestones.update.request */
+        "milestones.update.request": {
             /** @example 67e80ad8-d14f-4510-a2bd-a4c6aa578c37 */
             id: string;
             /** @example 2017-01-01 */
@@ -17573,23 +17658,23 @@ export interface components {
                 });
             }[];
         };
-        /** milestones.deleterequest */
-        "milestones.deleterequest": {
+        /** milestones.delete.request */
+        "milestones.delete.request": {
             /** @example 67e80ad8-d14f-4510-a2bd-a4c6aa578c37 */
             id: string;
         };
-        /** milestones.closerequest */
-        "milestones.closerequest": {
+        /** milestones.close.request */
+        "milestones.close.request": {
             /** @example 67e80ad8-d14f-4510-a2bd-a4c6aa578c37 */
             id: string;
         };
-        /** milestones.openrequest */
-        "milestones.openrequest": {
+        /** milestones.open.request */
+        "milestones.open.request": {
             /** @example 67e80ad8-d14f-4510-a2bd-a4c6aa578c37 */
             id: string;
         };
-        /** projects-v2.listrequest */
-        "projects-v2.listrequest": {
+        /** projects-v2_projects.list.request */
+        "projects-v2_projects.list.request": {
             filter?: {
                 ids?: string[];
                 /**
@@ -17670,8 +17755,8 @@ export interface components {
              */
             assign_type?: "manual" | "auto_assigned" | "manual_and_auto_assigned";
         };
-        /** projects-v2.listresponse */
-        "projects-v2.listresponse": {
+        /** projects-v2_projects.list.response */
+        "projects-v2_projects.list.response": {
             data?: {
                 /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
                 id?: string;
@@ -17938,8 +18023,8 @@ export interface components {
                 matches?: number;
             };
         };
-        /** projects-v2.inforequest */
-        "projects-v2.inforequest": {
+        /** projects-v2_projects.info.request */
+        "projects-v2_projects.info.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /**
@@ -17949,7 +18034,7 @@ export interface components {
             includes?: string;
         };
         /** projects.inforesponse1 */
-        "projects-v2.inforesponse": {
+        "projects-v2_projects.info.response": {
             data?: {
                 /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
                 id?: string;
@@ -18241,8 +18326,8 @@ export interface components {
                 }[];
             };
         };
-        /** projects-v2.createrequest */
-        "projects-v2.createrequest": {
+        /** projects-v2_projects.create.request */
+        "projects-v2_projects.create.request": {
             /** @example My cool new project */
             title: string;
             /** @example My project description */
@@ -18402,6 +18487,15 @@ export interface components {
                 });
             }[];
         };
+        /** projects-v2_projects.create.response */
+        "projects-v2_projects.create.response": {
+            /** TypeAndId */
+            data?: {
+                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                id?: string;
+                type?: string;
+            };
+        };
         /** BillingMethod */
         BillingMethod: {
             /** @example time_and_materials */
@@ -18412,8 +18506,8 @@ export interface components {
              */
             update_strategy: "none" | "cascade";
         };
-        /** projects-v2.updaterequest */
-        "projects-v2.updaterequest": {
+        /** projects-v2_projects.update.request */
+        "projects-v2_projects.update.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /** @example A different project title */
@@ -18489,6 +18583,58 @@ export interface components {
             /** @example 0d0dec5a-7096-4009-be37-07eab117db07 */
             company_entity_id?: string | null;
             color?: ("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20");
+            initial_time_tracked?: ({
+                /** @example 60 */
+                value?: number;
+                /** @example minutes */
+                unit?: string;
+            } & {
+                /**
+                 * @example minutes
+                 * @enum {string}
+                 */
+                unit: "hours" | "minutes" | "seconds";
+            }) | null;
+            /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+            initial_price?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | null;
+            /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+            initial_cost?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | null;
+            /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+            initial_amount_billed?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | null;
+            /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+            initial_amount_paid?: {
+                /** @example 123.3 */
+                amount: number;
+                /**
+                 * CurrencyCode
+                 * @enum {string}
+                 */
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            } | null;
             /** @description Auto-increment custom fields are not supported on projects. */
             custom_fields?: {
                 /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
@@ -18506,22 +18652,27 @@ export interface components {
                 });
             }[];
         };
-        /** projects-v2.closerequest */
-        "projects-v2.closerequest": {
+        /** projects-v2_projects.close.request */
+        "projects-v2_projects.close.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /** @enum {string} */
             closing_strategy: "mark_tasks_and_materials_as_done" | "none";
         };
-        /** projects-v2.duplicaterequest */
-        "projects-v2.duplicaterequest": {
+        /** projects-v2_projects.reopen.request */
+        "projects-v2_projects.reopen.request": {
+            /** @example 01548b10-4932-4a18-8a89-005ad09db2c8 */
+            id: string;
+        };
+        /** projects-v2_projects.duplicate.request */
+        "projects-v2_projects.duplicate.request": {
             /** @example 81df9996-6d2c-4844-86d6-202c08d2837e */
             id: string;
             /** @example Copy of my project */
             title: string;
         };
-        /** projects-v2.duplicateresponse */
-        "projects-v2.duplicateresponse": {
+        /** projects-v2_projects.duplicate.response */
+        "projects-v2_projects.duplicate.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -18529,8 +18680,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2.deleterequest */
-        "projects-v2.deleterequest": {
+        /** projects-v2_projects.delete.request */
+        "projects-v2_projects.delete.request": {
             /** @example 81df9996-6d2c-4844-86d6-202c08d2837e */
             id: string;
             /**
@@ -18539,22 +18690,22 @@ export interface components {
              */
             delete_strategy: "unlink_tasks_and_time_trackings" | "delete_tasks_and_time_trackings" | "delete_tasks_unlink_time_trackings";
         };
-        /** projects-v2.addOwnerrequest */
-        "projects-v2.addOwnerrequest": {
+        /** projects-v2_projects.addOwner.request */
+        "projects-v2_projects.addOwner.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /** @example 66abace2-62af-0836-a927-fe3f44b9b47b */
             user_id: string;
         };
-        /** projects-v2.removeOwnerrequest */
-        "projects-v2.removeOwnerrequest": {
+        /** projects-v2_projects.removeOwner.request */
+        "projects-v2_projects.removeOwner.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /** @example 66abace2-62af-0836-a927-fe3f44b9b47b */
             user_id: string;
         };
-        /** projects-v2.assignrequest */
-        "projects-v2.assignrequest": {
+        /** projects-v2_projects.assign.request */
+        "projects-v2_projects.assign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -18570,8 +18721,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2.unassignrequest */
-        "projects-v2.unassignrequest": {
+        /** projects-v2_projects.unassign.request */
+        "projects-v2_projects.unassign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -18587,8 +18738,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2.addCustomerrequest */
-        "projects-v2.addCustomerrequest": {
+        /** projects-v2_projects.addCustomer.request */
+        "projects-v2_projects.addCustomer.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /** Customer */
@@ -18602,8 +18753,8 @@ export interface components {
                 id: string;
             };
         };
-        /** projects-v2.removeCustomerrequest */
-        "projects-v2.removeCustomerrequest": {
+        /** projects-v2_projects.removeCustomer.request */
+        "projects-v2_projects.removeCustomer.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             /** Customer */
@@ -18617,36 +18768,36 @@ export interface components {
                 id: string;
             };
         };
-        /** projects-v2.addDealrequest */
-        "projects-v2.addDealrequest": {
+        /** projects-v2_projects.addDeal.request */
+        "projects-v2_projects.addDeal.request": {
             /** @example d27909aa-fc0e-4ed4-acec-fcbffda5111b */
             id: string;
             /** @example 8385b072-587f-4ebf-a32b-5f48baea1b1c */
             deal_id: string;
         };
-        /** projects-v2.removeDealrequest */
-        "projects-v2.removeDealrequest": {
+        /** projects-v2_projects.removeDeal.request */
+        "projects-v2_projects.removeDeal.request": {
             /** @example d27909aa-fc0e-4ed4-acec-fcbffda5111b */
             id: string;
             /** @example 8385b072-587f-4ebf-a32b-5f48baea1b1c */
             deal_id: string;
         };
-        /** projects-v2.addQuotationrequest */
-        "projects-v2.addQuotationrequest": {
+        /** projects-v2_projects.addQuotation.request */
+        "projects-v2_projects.addQuotation.request": {
             /** @example d27909aa-fc0e-4ed4-acec-fcbffda5111b */
             id: string;
             /** @example 8385b072-587f-4ebf-a32b-5f48baea1b1c */
             quotation_id: string;
         };
-        /** projects-v2.removeQuotationrequest */
-        "projects-v2.removeQuotationrequest": {
+        /** projects-v2_projects.removeQuotation.request */
+        "projects-v2_projects.removeQuotation.request": {
             /** @example d27909aa-fc0e-4ed4-acec-fcbffda5111b */
             id: string;
             /** @example 8385b072-587f-4ebf-a32b-5f48baea1b1c */
             quotation_id: string;
         };
-        /** projects-v2_externalParties.addToProjectrequest */
-        "projects-v2_externalParties.addToProjectrequest": {
+        /** projects-v2_externalParties.addToProject.request */
+        "projects-v2_externalParties.addToProject.request": {
             /** @example 7257b535-d40f-4699-b3bd-63679379b579 */
             project_id: string;
             /** Customer */
@@ -18664,8 +18815,8 @@ export interface components {
             /** @example Project Coordinator */
             sub_function?: string;
         };
-        /** projects-v2_externalParties.updaterequest */
-        "projects-v2_externalParties.updaterequest": {
+        /** projects-v2_externalParties.update.request */
+        "projects-v2_externalParties.update.request": {
             /** @example 6126596f-6193-445a-935a-60c10df9f632 */
             id: string;
             /** Customer */
@@ -18683,13 +18834,13 @@ export interface components {
             /** @example Project Coordinator */
             sub_function?: string | null;
         };
-        /** projects-v2_externalParties.deleterequest */
-        "projects-v2_externalParties.deleterequest": {
+        /** projects-v2_externalParties.delete.request */
+        "projects-v2_externalParties.delete.request": {
             /** @example 6126596f-6193-445a-935a-60c10df9f632 */
             id: string;
         };
-        /** projects-v2_projectLines.listrequest */
-        "projects-v2_projectLines.listrequest": {
+        /** projects-v2_projectLines.list.request */
+        "projects-v2_projectLines.list.request": {
             /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
             project_id: string;
             filter?: {
@@ -18709,8 +18860,8 @@ export interface components {
                 })[];
             };
         };
-        /** projects-v2_projectLines.listresponse */
-        "projects-v2_projectLines.listresponse": {
+        /** projects-v2_projectLines.list.response */
+        "projects-v2_projectLines.list.response": {
             data?: {
                 line?: {
                     /**
@@ -18732,8 +18883,8 @@ export interface components {
                 }) | null;
             }[];
         };
-        /** projects-v2_projectLines.addToGrouprequest */
-        "projects-v2_projectLines.addToGrouprequest": {
+        /** projects-v2_projectLines.addToGroup.request */
+        "projects-v2_projectLines.addToGroup.request": {
             /**
              * @description The ID of the task or material. May not be a group.
              * @example a14a464d-320a-49bb-b6ee-b510c7f4f66c
@@ -18742,16 +18893,16 @@ export interface components {
             /** @example 0daf76e6-5141-4fb0-866f-01916a873a38 */
             group_id: string;
         };
-        /** projects-v2_projectLines.removeFromGrouprequest */
-        "projects-v2_projectLines.removeFromGrouprequest": {
+        /** projects-v2_projectLines.removeFromGroup.request */
+        "projects-v2_projectLines.removeFromGroup.request": {
             /**
              * @description The ID of the task or material. May not be a group.
              * @example a14a464d-320a-49bb-b6ee-b510c7f4f66c
              */
             line_id: string;
         };
-        /** projects-v2_projectGroups.listrequest */
-        "projects-v2_projectGroups.listrequest": {
+        /** projects-v2_projectGroups.list.request */
+        "projects-v2_projectGroups.list.request": {
             filter?: {
                 ids?: string[];
                 /** @example 01859b27-1525-7372-bd40-26a6363c8bfe */
@@ -18764,8 +18915,8 @@ export interface components {
          * @enum {string}
          */
         BillingStatus: "not_billable" | "not_billed" | "partially_billed" | "fully_billed";
-        /** projects-v2_projectGroups.listresponse */
-        "projects-v2_projectGroups.listresponse": {
+        /** projects-v2_projectGroups.list.response */
+        "projects-v2_projectGroups.list.response": {
             data?: {
                 /** @example 0185a0af-97a6-7f44-8aec-254d8daf72f3 */
                 id?: string;
@@ -18927,13 +19078,13 @@ export interface components {
                 }) | null;
             }[];
         };
-        /** projects-v2_projectGroups.inforequest */
-        "projects-v2_projectGroups.inforequest": {
+        /** projects-v2_projectGroups.info.request */
+        "projects-v2_projectGroups.info.request": {
             /** @example cfe2666c-b0f4-4e85-8d6f-9e1284706d0a */
             id: string;
         };
-        /** projects-v2_projectGroups.inforesponse */
-        "projects-v2_projectGroups.inforesponse": {
+        /** projects-v2_projectGroups.info.response */
+        "projects-v2_projectGroups.info.response": {
             data?: {
                 /** @example cfe2666c-b0f4-4e85-8d6f-9e1284706d0a */
                 id?: string;
@@ -19097,8 +19248,8 @@ export interface components {
                 }) | null;
             };
         };
-        /** projects-v2_projectGroups.createrequest */
-        "projects-v2_projectGroups.createrequest": {
+        /** projects-v2_projectGroups.create.request */
+        "projects-v2_projectGroups.create.request": {
             /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
             project_id: string;
             /** @example My project group */
@@ -19155,8 +19306,8 @@ export interface components {
                 type: "team" | "user";
             })[];
         };
-        /** projects-v2_projectGroups.createresponse */
-        "projects-v2_projectGroups.createresponse": {
+        /** projects-v2_projectGroups.create.response */
+        "projects-v2_projectGroups.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -19164,8 +19315,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2_projectGroups.updaterequest */
-        "projects-v2_projectGroups.updaterequest": {
+        /** projects-v2_projectGroups.update.request */
+        "projects-v2_projectGroups.update.request": {
             /** @example e8478f2c-05a1-4e69-b3c4-e08507640f01 */
             id: string;
             /** @example My updated group */
@@ -19226,16 +19377,16 @@ export interface components {
             /** @example 2023-03-22 */
             end_date?: string | null;
         };
-        /** projects-v2_projectGroups.duplicaterequest */
-        "projects-v2_projectGroups.duplicaterequest": {
+        /** projects-v2_projectGroups.duplicate.request */
+        "projects-v2_projectGroups.duplicate.request": {
             /**
              * @description The id of the group that is being duplicated
              * @example 0186a6b5-2fdc-749a-983a-c4a1303546d7
              */
             origin_id: string;
         };
-        /** projects-v2_projectGroups.duplicateresponse */
-        "projects-v2_projectGroups.duplicateresponse": {
+        /** projects-v2_projectGroups.duplicate.response */
+        "projects-v2_projectGroups.duplicate.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -19243,8 +19394,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2_projectGroups.deleterequest */
-        "projects-v2_projectGroups.deleterequest": {
+        /** projects-v2_projectGroups.delete.request */
+        "projects-v2_projectGroups.delete.request": {
             /** @example 01866e6f-f264-7fe5-8b7c-a3f739fa292c */
             id: string;
             /**
@@ -19253,8 +19404,8 @@ export interface components {
              */
             delete_strategy: "ungroup_tasks_and_materials" | "delete_tasks_and_materials" | "delete_tasks_materials_and_unbilled_timetrackings";
         };
-        /** projects-v2_projectGroups.assignrequest */
-        "projects-v2_projectGroups.assignrequest": {
+        /** projects-v2_projectGroups.assign.request */
+        "projects-v2_projectGroups.assign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -19270,8 +19421,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2_projectGroups.unassignrequest */
-        "projects-v2_projectGroups.unassignrequest": {
+        /** projects-v2_projectGroups.unassign.request */
+        "projects-v2_projectGroups.unassign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -19287,8 +19438,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2_tasks.listrequest */
-        "projects-v2_tasks.listrequest": {
+        /** projects-v2_tasks.list.request */
+        "projects-v2_tasks.list.request": {
             filter?: {
                 ids?: string[];
             };
@@ -19300,8 +19451,8 @@ export interface components {
                 number: number;
             };
         };
-        /** projects-v2_tasks.listresponse */
-        "projects-v2_tasks.listresponse": {
+        /** projects-v2_tasks.list.response */
+        "projects-v2_tasks.list.response": {
             data?: {
                 /** @example 39c64ba9-ebf1-491a-8486-a0b96ff21c07 */
                 id?: string;
@@ -19512,13 +19663,13 @@ export interface components {
                 }) | null;
             }[];
         };
-        /** tasks.inforequest */
-        "tasks.inforequest": {
+        /** projects-v2_tasks.info.request */
+        "projects-v2_tasks.info.request": {
             /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
             id: string;
         };
-        /** projects-v2_tasks.inforesponse */
-        "projects-v2_tasks.inforesponse": {
+        /** projects-v2_tasks.info.response */
+        "projects-v2_tasks.info.response": {
             data?: {
                 /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
                 id?: string;
@@ -19751,8 +19902,8 @@ export interface components {
                 }[];
             };
         };
-        /** projects-v2_tasks.createrequest */
-        "projects-v2_tasks.createrequest": {
+        /** projects-v2_tasks.create.request */
+        "projects-v2_tasks.create.request": {
             /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
             project_id: string;
             /** @example My task */
@@ -19846,8 +19997,8 @@ export interface components {
                 type: "team" | "user";
             })[];
         };
-        /** tasks.createresponse */
-        "tasks.createresponse": {
+        /** projects-v2_tasks.create.response */
+        "projects-v2_tasks.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -19855,8 +20006,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2_tasks.updaterequest */
-        "projects-v2_tasks.updaterequest": {
+        /** projects-v2_tasks.update.request */
+        "projects-v2_tasks.update.request": {
             /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
             id: string;
             /**
@@ -19938,16 +20089,16 @@ export interface components {
                 unit: "hours" | "minutes" | "seconds";
             }) | null;
         };
-        /** projects-v2_tasks.duplicaterequest */
-        "projects-v2_tasks.duplicaterequest": {
+        /** projects-v2_tasks.duplicate.request */
+        "projects-v2_tasks.duplicate.request": {
             /**
              * @description The id of the task that is being duplicated
              * @example 0186a6b5-32d9-73d4-a416-d9f86cba567d
              */
             origin_id: string;
         };
-        /** projects-v2_tasks.duplicateresponse */
-        "projects-v2_tasks.duplicateresponse": {
+        /** projects-v2_tasks.duplicate.response */
+        "projects-v2_tasks.duplicate.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -19955,8 +20106,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2_tasks.deleterequest */
-        "projects-v2_tasks.deleterequest": {
+        /** projects-v2_tasks.delete.request */
+        "projects-v2_tasks.delete.request": {
             /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
             id: string;
             /**
@@ -19965,8 +20116,8 @@ export interface components {
              */
             delete_strategy: "unlink_time_tracking" | "delete_time_tracking";
         };
-        /** projects-v2_tasks.assignrequest */
-        "projects-v2_tasks.assignrequest": {
+        /** projects-v2_tasks.assign.request */
+        "projects-v2_tasks.assign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -19982,8 +20133,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2_tasks.unassignrequest */
-        "projects-v2_tasks.unassignrequest": {
+        /** projects-v2_tasks.unassign.request */
+        "projects-v2_tasks.unassign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -19999,14 +20150,14 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2_materials.listrequest */
-        "projects-v2_materials.listrequest": {
+        /** projects-v2_materials.list.request */
+        "projects-v2_materials.list.request": {
             filter?: {
                 ids?: string[];
             };
         };
-        /** projects-v2_materials.listresponse */
-        "projects-v2_materials.listresponse": {
+        /** projects-v2_materials.list.response */
+        "projects-v2_materials.list.response": {
             data?: {
                 /** @example 39c64ba9-ebf1-491a-8486-a0b96ff21c07 */
                 id?: string;
@@ -20036,7 +20187,7 @@ export interface components {
                  * @example unit_price
                  * @enum {string}
                  */
-                billing_method?: "fixed_price" | "unit_price" | "non_billable";
+                billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
                 billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                 quantity?: number | null;
                 quantity_estimated?: number | null;
@@ -20181,13 +20332,13 @@ export interface components {
                 }) | null;
             }[];
         };
-        /** projects-v2_materials.inforequest */
-        "projects-v2_materials.inforequest": {
+        /** projects-v2_materials.info.request */
+        "projects-v2_materials.info.request": {
             /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
             id: string;
         };
-        /** projects-v2_materials.inforesponse */
-        "projects-v2_materials.inforesponse": {
+        /** projects-v2_materials.info.response */
+        "projects-v2_materials.info.response": {
             data?: {
                 /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
                 id?: string;
@@ -20222,7 +20373,7 @@ export interface components {
                  * @example unit_price
                  * @enum {string}
                  */
-                billing_method?: "fixed_price" | "unit_price" | "non_billable";
+                billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
                 billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                 quantity?: number | null;
                 quantity_estimated?: number | null;
@@ -20367,8 +20518,8 @@ export interface components {
                 }) | null;
             };
         };
-        /** projects-v2_materials.createrequest */
-        "projects-v2_materials.createrequest": {
+        /** projects-v2_materials.create.request */
+        "projects-v2_materials.create.request": {
             /** @example 49b403be-a32e-0901-9b1c-25214f9027c6 */
             project_id: string;
             /** @example Some material */
@@ -20386,10 +20537,11 @@ export interface components {
             /** @example Protects metal from rust and corrosion, penetrates stuck parts, displaces moisture and lubricates almost anything. */
             description?: string;
             /**
+             * @description `parent_fixed_price` is only valid if the parent is fixed price.
              * @example unit_price
              * @enum {string}
              */
-            billing_method?: "fixed_price" | "unit_price" | "non_billable";
+            billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
             quantity?: number;
             quantity_estimated?: number;
             unit_price?: {
@@ -20458,8 +20610,8 @@ export interface components {
                 type: "team" | "user";
             })[];
         };
-        /** projects-v2_materials.createresponse */
-        "projects-v2_materials.createresponse": {
+        /** projects-v2_materials.create.response */
+        "projects-v2_materials.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -20467,8 +20619,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2_materials.updaterequest */
-        "projects-v2_materials.updaterequest": {
+        /** projects-v2_materials.update.request */
+        "projects-v2_materials.update.request": {
             /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
             id: string;
             /** @example WD-40® Multi-Use Product Industrial Size */
@@ -20481,10 +20633,11 @@ export interface components {
              */
             status?: "to_do" | "in_progress" | "on_hold" | "done";
             /**
+             * @description `parent_fixed_price` is only valid if the parent is fixed price.
              * @example unit_price
              * @enum {string}
              */
-            billing_method?: "fixed_price" | "unit_price" | "non_billable";
+            billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
             quantity?: number | null;
             quantity_estimated?: number | null;
             unit_price?: {
@@ -20540,16 +20693,16 @@ export interface components {
             /** @example 1c5cf7a1-7248-469c-9dcd-9f0581321ec2 */
             product_id?: string | null;
         };
-        /** projects-v2_materials.duplicaterequest */
-        "projects-v2_materials.duplicaterequest": {
+        /** projects-v2_materials.duplicate.request */
+        "projects-v2_materials.duplicate.request": {
             /**
              * @description The id of the material that is being duplicated
              * @example 0186a74b-b640-7458-9717-7c84356b26fd
              */
             origin_id: string;
         };
-        /** projects-v2_materials.duplicateresponse */
-        "projects-v2_materials.duplicateresponse": {
+        /** projects-v2_materials.duplicate.response */
+        "projects-v2_materials.duplicate.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -20557,13 +20710,13 @@ export interface components {
                 type?: string;
             };
         };
-        /** projects-v2_materials.deleterequest */
-        "projects-v2_materials.deleterequest": {
+        /** projects-v2_materials.delete.request */
+        "projects-v2_materials.delete.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
         };
-        /** projects-v2_materials.assignrequest */
-        "projects-v2_materials.assignrequest": {
+        /** projects-v2_materials.assign.request */
+        "projects-v2_materials.assign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -20579,8 +20732,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** projects-v2_materials.unassignrequest */
-        "projects-v2_materials.unassignrequest": {
+        /** projects-v2_materials.unassign.request */
+        "projects-v2_materials.unassign.request": {
             /** @example 0184f276-811b-716d-8b79-17628c9573c6 */
             id: string;
             assignee: {
@@ -20597,7 +20750,7 @@ export interface components {
             };
         };
         /** tasks.listrequest1 */
-        "tasks.listrequest": {
+        "tasks.list.request": {
             filter?: {
                 ids?: string[];
                 /** @description Filter tasks linked to a specific deal. */
@@ -20661,7 +20814,7 @@ export interface components {
          */
         Priority: "A" | "B" | "C" | "D";
         /** tasks.listresponse1 */
-        "tasks.listresponse": {
+        "tasks.list.response": {
             data?: {
                 /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
                 id?: string;
@@ -20743,8 +20896,13 @@ export interface components {
                 priority?: "A" | "B" | "C" | "D";
             }[];
         };
+        /** tasks.info.request */
+        "tasks.info.request": {
+            /** @example ff19a113-50ba-4afc-9fff-2e5c5c5a5485 */
+            id: string;
+        };
         /** tasks.inforesponse1 */
-        "tasks.inforesponse": {
+        "tasks.info.response": {
             data?: {
                 /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
                 id?: string;
@@ -20845,7 +21003,7 @@ export interface components {
             };
         };
         /** tasks.createrequest1 */
-        "tasks.createrequest": {
+        "tasks.create.request": {
             title: string;
             description?: string;
             /** @example 2016-02-04 */
@@ -20915,8 +21073,17 @@ export interface components {
                 });
             }[];
         };
+        /** tasks.create.response */
+        "tasks.create.response": {
+            /** TypeAndId */
+            data?: {
+                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                id?: string;
+                type?: string;
+            };
+        };
         /** tasks.updaterequest1 */
-        "tasks.updaterequest": {
+        "tasks.update.request": {
             /** @example 00ed6266-a5bd-4aac-a292-2582017b6400 */
             id: string;
             title?: string;
@@ -20988,23 +21155,23 @@ export interface components {
                 });
             }[];
         };
-        /** tasks.completerequest */
-        "tasks.completerequest": {
+        /** tasks.complete.request */
+        "tasks.complete.request": {
             /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
             id: string;
         };
-        /** tasks.reopenrequest */
-        "tasks.reopenrequest": {
+        /** tasks.reopen.request */
+        "tasks.reopen.request": {
             /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
             id: string;
         };
         /** tasks.deleterequest1 */
-        "tasks.deleterequest": {
+        "tasks.delete.request": {
             /** @example 5f0afd8a-8a40-48a4-bbe6-7d0e9c61bb6d */
             id: string;
         };
-        /** tasks.schedulerequest */
-        "tasks.schedulerequest": {
+        /** tasks.schedule.request */
+        "tasks.schedule.request": {
             /** @example 7c70c54e-6e50-4e6a-b5fd-80234eb535cf */
             id: string;
             /** @example 2016-02-04T16:00:00+00:00 */
@@ -21012,8 +21179,8 @@ export interface components {
             /** @example 2016-02-04T18:00:00+00:00 */
             ends_at: string;
         };
-        /** tasks.scheduleresponse */
-        "tasks.scheduleresponse": {
+        /** tasks.schedule.response */
+        "tasks.schedule.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -21021,8 +21188,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** timeTracking.listrequest */
-        "timeTracking.listrequest": {
+        /** timeTracking.list.request */
+        "timeTracking.list.request": {
             filter?: {
                 ids?: string[];
                 /** @example 87982c96-f2fe-4b05-838c-ff42c0525758 */
@@ -21132,9 +21299,9 @@ export interface components {
          * TimeTrackingRelatesToTypes
          * @enum {string}
          */
-        TimeTrackingRelatesToTypes: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
-        /** timeTracking.listresponse */
-        "timeTracking.listresponse": {
+        TimeTrackingRelatesToTypes: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | "nextgenTask";
+        /** timeTracking.list.response */
+        "timeTracking.list.response": {
             data?: {
                 /** @example 4f4288b2-c21b-4dac-87f6-a97511309079 */
                 id?: string;
@@ -21217,7 +21384,7 @@ export interface components {
                      * TimeTrackingRelatesToTypes
                      * @enum {string}
                      */
-                    type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
+                    type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | "nextgenTask";
                 })[];
                 /** @description Only included for users with access to invoicing */
                 hourly_rate?: {
@@ -21231,8 +21398,8 @@ export interface components {
                 };
             }[];
         };
-        /** timeTracking.inforequest */
-        "timeTracking.inforequest": {
+        /** timeTracking.info.request */
+        "timeTracking.info.request": {
             /** @example 6caeea11-aa83-4da9-9859-5b62bbf3a476 */
             id: string;
             /**
@@ -21241,8 +21408,8 @@ export interface components {
              */
             includes?: string;
         };
-        /** timeTracking.inforesponse */
-        "timeTracking.inforesponse": {
+        /** timeTracking.info.response */
+        "timeTracking.info.response": {
             data?: {
                 /** @example 6caeea11-aa83-4da9-9859-5b62bbf3a476 */
                 id?: string;
@@ -21330,7 +21497,7 @@ export interface components {
                      * TimeTrackingRelatesToTypes
                      * @enum {string}
                      */
-                    type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
+                    type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | "nextgenTask";
                 })[];
                 /** @description Only included for users with access to invoicing */
                 hourly_rate?: {
@@ -21351,8 +21518,8 @@ export interface components {
                 updatable?: boolean;
             };
         };
-        /** timeTracking.addrequest */
-        "timeTracking.addrequest": {
+        /** timeTracking.add.request */
+        "timeTracking.add.request": {
             /** @example 2175597d-484e-4a1c-a781-cbc3d9f893ba */
             work_type_id?: string;
             description?: string;
@@ -21400,8 +21567,8 @@ export interface components {
             /** @example 3600 */
             duration: number;
         });
-        /** timeTracking.addresponse */
-        "timeTracking.addresponse": {
+        /** timeTracking.add.response */
+        "timeTracking.add.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -21409,8 +21576,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** timeTracking.updaterequest */
-        "timeTracking.updaterequest": {
+        /** timeTracking.update.request */
+        "timeTracking.update.request": {
             /** @example 66621f54-3d0d-420f-8d4b-ddd7fc473bf2 */
             id: string;
             /** @example a12f4289-3580-4780-bb6d-b4e9f84f80ad */
@@ -21445,8 +21612,8 @@ export interface components {
              */
             started_on: string;
         });
-        /** timeTracking.resumerequest */
-        "timeTracking.resumerequest": {
+        /** timeTracking.resume.request */
+        "timeTracking.resume.request": {
             /** @example 06dfa08a-b769-4005-a912-45ab885c5737 */
             id: string;
             /**
@@ -21455,8 +21622,8 @@ export interface components {
              */
             started_at?: string;
         };
-        /** timeTracking.resumeresponse */
-        "timeTracking.resumeresponse": {
+        /** timeTracking.resume.response */
+        "timeTracking.resume.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -21464,13 +21631,13 @@ export interface components {
                 type?: string;
             };
         };
-        /** timeTracking.deleterequest */
-        "timeTracking.deleterequest": {
+        /** timeTracking.delete.request */
+        "timeTracking.delete.request": {
             /** @example 6caeea11-aa83-4da9-9859-5b62bbf3a476 */
             id: string;
         };
-        /** timers.currentresponse */
-        "timers.currentresponse": {
+        /** timers.current.response */
+        "timers.current.response": {
             data?: {
                 /** @example 2b282dec-ba9d-4faa-9b39-944b99ee5c0a */
                 id?: string;
@@ -21502,8 +21669,8 @@ export interface components {
                 invoiceable?: boolean;
             };
         };
-        /** timers.startrequest */
-        "timers.startrequest": {
+        /** timers.start.request */
+        "timers.start.request": {
             /** @example db41328a-7a25-4e85-8fb9-830baacb7f40 */
             work_type_id?: string;
             /**
@@ -21523,8 +21690,8 @@ export interface components {
             /** @example true */
             invoiceable?: boolean;
         };
-        /** timers.startresponse */
-        "timers.startresponse": {
+        /** timers.start.response */
+        "timers.start.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -21532,8 +21699,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** timers.stopresponse */
-        "timers.stopresponse": {
+        /** timers.stop.response */
+        "timers.stop.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -21541,8 +21708,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** timers.updaterequest */
-        "timers.updaterequest": {
+        /** timers.update.request */
+        "timers.update.request": {
             /** @example db41328a-7a25-4e85-8fb9-830baacb7f40 */
             work_type_id?: string | null;
             /** @example 2017-04-26T10:01:49+00:00 */
@@ -21560,8 +21727,8 @@ export interface components {
             /** @example true */
             invoiceable?: boolean;
         };
-        /** tickets.listrequest */
-        "tickets.listrequest": {
+        /** tickets.list.request */
+        "tickets.list.request": {
             filter?: {
                 ids?: string[];
                 relates_to?: {
@@ -21589,8 +21756,8 @@ export interface components {
                 number: number;
             };
         };
-        /** tickets.listresponse */
-        "tickets.listresponse": {
+        /** tickets.list.response */
+        "tickets.list.response": {
             data?: {
                 /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
                 id?: string;
@@ -21646,13 +21813,13 @@ export interface components {
                 last_message_at?: string | null;
             }[];
         };
-        /** tickets.inforequest */
-        "tickets.inforequest": {
+        /** tickets.info.request */
+        "tickets.info.request": {
             /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
             id: string;
         };
-        /** tickets.inforesponse */
-        "tickets.inforesponse": {
+        /** tickets.info.response */
+        "tickets.info.response": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id?: string;
             /** @example 123 */
@@ -21738,8 +21905,8 @@ export interface components {
             /** @example 2659dc4d-444b-4ced-b51c-b87591f604d7 */
             id: string;
         };
-        /** tickets.createrequest */
-        "tickets.createrequest": {
+        /** tickets.create.request */
+        "tickets.create.request": {
             /** @example My ticket subject */
             subject: string;
             /** Customer */
@@ -21806,8 +21973,8 @@ export interface components {
             /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
             milestone_id?: string;
         };
-        /** tickets.createresponse */
-        "tickets.createresponse": {
+        /** tickets.create.response */
+        "tickets.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -21815,8 +21982,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** tickets.updaterequest */
-        "tickets.updaterequest": {
+        /** tickets.update.request */
+        "tickets.update.request": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id: string;
             /** @example My ticket subject */
@@ -21879,8 +22046,8 @@ export interface components {
             /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
             milestone_id?: string | null;
         };
-        /** tickets.listMessagesrequest */
-        "tickets.listMessagesrequest": {
+        /** tickets.listMessages.request */
+        "tickets.listMessages.request": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id?: string;
             filter?: {
@@ -21912,8 +22079,8 @@ export interface components {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id?: string;
         };
-        /** tickets.listMessagesresponse */
-        "tickets.listMessagesresponse": {
+        /** tickets.listMessages.response */
+        "tickets.listMessages.response": {
             data?: {
                 /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
                 message_id?: string;
@@ -21957,13 +22124,13 @@ export interface components {
                 matches?: number;
             };
         };
-        /** tickets.getMessagerequest */
-        "tickets.getMessagerequest": {
+        /** tickets.getMessage.request */
+        "tickets.getMessage.request": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             message_id?: string;
         };
-        /** tickets.getMessageresponse */
-        "tickets.getMessageresponse": {
+        /** tickets.getMessage.response */
+        "tickets.getMessage.response": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             message_id?: string;
             /**
@@ -22005,8 +22172,8 @@ export interface components {
              */
             type?: "customer" | "internal" | "thirdParty";
         };
-        /** tickets.importMessagerequest */
-        "tickets.importMessagerequest": {
+        /** tickets.importMessage.request */
+        "tickets.importMessage.request": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id: string;
             /**
@@ -22028,8 +22195,8 @@ export interface components {
             /** @description All files must have the ticket as a subject */
             attachments?: string[];
         };
-        /** tickets.importMessageresponse */
-        "tickets.importMessageresponse": {
+        /** tickets.importMessage.response */
+        "tickets.importMessage.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -22037,8 +22204,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** tickets.addReplyrequest */
-        "tickets.addReplyrequest": {
+        /** tickets.addReply.request */
+        "tickets.addReply.request": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id: string;
             /**
@@ -22051,8 +22218,8 @@ export interface components {
             /** @description All files must have the ticket as a subject */
             attachments?: string[];
         };
-        /** tickets.addReplyresponse */
-        "tickets.addReplyresponse": {
+        /** tickets.addReply.response */
+        "tickets.addReply.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -22060,8 +22227,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** tickets.addInternalMessagerequest */
-        "tickets.addInternalMessagerequest": {
+        /** tickets.addInternalMessage.request */
+        "tickets.addInternalMessage.request": {
             /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
             id: string;
             /**
@@ -22074,8 +22241,8 @@ export interface components {
             /** @description All files must have the ticket as a subject */
             attachments?: string[];
         };
-        /** tickets.addInternalMessageresponse */
-        "tickets.addInternalMessageresponse": {
+        /** tickets.addInternalMessage.response */
+        "tickets.addInternalMessage.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -22083,14 +22250,14 @@ export interface components {
                 type?: string;
             };
         };
-        /** ticketStatus.listrequest */
-        "ticketStatus.listrequest": {
+        /** ticketStatus.list.request */
+        "ticketStatus.list.request": {
             filter?: {
                 ids?: string[];
             };
         };
-        /** ticketStatus.listresponse */
-        "ticketStatus.listresponse": {
+        /** ticketStatus.list.response */
+        "ticketStatus.list.response": {
             data?: {
                 /** @example 46156648-87c6-478d-8aa7-1dc3a00dacab */
                 id?: string;
@@ -22106,8 +22273,8 @@ export interface components {
                 label?: string;
             }[];
         };
-        /** files.listrequest */
-        "files.listrequest": {
+        /** files.list.request */
+        "files.list.request": {
             filter: {
                 subject: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -22153,8 +22320,8 @@ export interface components {
          * @enum {string}
          */
         MimeType: "application/msword" | "application/octet-stream" | "application/pdf" | "application/vnd.ms-excel" | "application/vnd.ms-powerpoint" | "application/vnd.openxmlformats-officedocument.presentationml.presentation" | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "application/xml" | "application/zip" | "audio/mpeg" | "audio/wav" | "image/gif" | "image/jpeg" | "image/png" | "text/css" | "text/csv" | "text/html" | "text/javascript" | "text/plain" | "video/3gpp" | "video/mpeg" | "video/quicktime" | "video/x-msvideo";
-        /** files.listresponse */
-        "files.listresponse": {
+        /** files.list.response */
+        "files.list.response": {
             data?: {
                 /** @example a856642a-a476-4b69-8e42-e7d1badb2ce9 */
                 id?: string;
@@ -22192,13 +22359,13 @@ export interface components {
                 folder?: string;
             }[];
         };
-        /** files.inforequest */
-        "files.inforequest": {
+        /** files.info.request */
+        "files.info.request": {
             /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
             id: string;
         };
-        /** files.inforesponse */
-        "files.inforesponse": {
+        /** files.info.response */
+        "files.info.response": {
             data?: {
                 /** @example a856642a-a476-4b69-8e42-e7d1badb2ce9 */
                 id?: string;
@@ -22236,13 +22403,13 @@ export interface components {
                 folder?: string;
             };
         };
-        /** files.downloadrequest */
-        "files.downloadrequest": {
+        /** files.download.request */
+        "files.download.request": {
             /** @example 4afb0a9c-91c6-49ed-a2e5-ce7c1e3a87fb */
             id: string;
         };
-        /** files.downloadresponse */
-        "files.downloadresponse": {
+        /** files.download.response */
+        "files.download.response": {
             data?: {
                 /**
                  * @description A temporary url where the requested file can be downloaded
@@ -22256,8 +22423,8 @@ export interface components {
                 expires_at?: string;
             };
         };
-        /** files.uploadrequest */
-        "files.uploadrequest": {
+        /** files.upload.request */
+        "files.upload.request": {
             /**
              * @description Name under which the file will be stored. This name should contain the same extension as the file that the user wants to upload.
              * @example Important meeting note from August 2022.docx
@@ -22282,8 +22449,8 @@ export interface components {
              */
             folder?: string;
         };
-        /** files.uploadresponse */
-        "files.uploadresponse": {
+        /** files.upload.response */
+        "files.upload.response": {
             data?: {
                 /**
                  * @description The temporary API endpoint (URL) that should be used for sending a POST request to with the binary file contents (not form-data) to complete the file upload.
@@ -22297,13 +22464,13 @@ export interface components {
                 expires_at?: string;
             };
         };
-        /** files.deleterequest */
-        "files.deleterequest": {
+        /** files.delete.request */
+        "files.delete.request": {
             /** @example 4afb0a9c-91c6-49ed-a2e5-ce7c1e3a87fb */
             id: string;
         };
-        /** mailTemplates.listrequest */
-        "mailTemplates.listrequest": {
+        /** mailTemplates.list.request */
+        "mailTemplates.list.request": {
             filter: {
                 /** @example a344c251-2494-0013-b433-ccee8e8435e5 */
                 department_id?: string;
@@ -22314,8 +22481,8 @@ export interface components {
                 type: "invoice" | "quotation" | "work_order" | "credit_note";
             };
         };
-        /** mailTemplates.listresponse */
-        "mailTemplates.listresponse": {
+        /** mailTemplates.list.response */
+        "mailTemplates.list.response": {
             data?: {
                 /** @example a344c251-2494-0013-b433-ccee8e8435e5 */
                 id?: string;
@@ -22341,8 +22508,8 @@ export interface components {
                 type?: "invoice" | "quotation" | "work_order" | "credit_note";
             }[];
         };
-        /** migrate.idrequest */
-        "migrate.idrequest": {
+        /** migrate.id.request */
+        "migrate.id.request": {
             /**
              * @example contact
              * @enum {string}
@@ -22351,8 +22518,8 @@ export interface components {
             /** @example 1 */
             id?: number;
         };
-        /** migrate.idresponse */
-        "migrate.idresponse": {
+        /** migrate.id.response */
+        "migrate.id.response": {
             data?: {
                 /**
                  * @example contact
@@ -22363,15 +22530,15 @@ export interface components {
                 id?: string;
             };
         };
-        /** migrate.taxRaterequest */
-        "migrate.taxRaterequest": {
+        /** migrate.taxRate.request */
+        "migrate.taxRate.request": {
             /** @example 6ad54ec6-ee2d-4500-afe6-0917c1aa7a38 */
             department_id?: string;
             /** @example 21 */
             tax_rate?: string;
         };
-        /** migrate.taxRateresponse */
-        "migrate.taxRateresponse": {
+        /** migrate.taxRate.response */
+        "migrate.taxRate.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -22379,16 +22546,16 @@ export interface components {
                 type?: string;
             };
         };
-        /** migrate.activityTyperequest */
-        "migrate.activityTyperequest": {
+        /** migrate.activityType.request */
+        "migrate.activityType.request": {
             /**
              * @example meeting
              * @enum {string}
              */
             type?: "meeting" | "call" | "task";
         };
-        /** migrate.activityTyperesponse */
-        "migrate.activityTyperesponse": {
+        /** migrate.activityType.response */
+        "migrate.activityType.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -22396,8 +22563,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** orders.inforequest */
-        "orders.inforequest": {
+        /** orders.info.request */
+        "orders.info.request": {
             /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
             id: string;
             /**
@@ -22532,8 +22699,8 @@ export interface components {
                 } | null;
             })[];
         };
-        /** orders.inforesponse */
-        "orders.inforesponse": {
+        /** orders.info.response */
+        "orders.info.response": {
             data?: {
                 /** @example 31b9d864-da1d-060e-9811-f683896aeb11 */
                 id?: string;
@@ -22794,8 +22961,8 @@ export interface components {
                 }[];
             };
         };
-        /** orders.listrequest */
-        "orders.listrequest": {
+        /** orders.list.request */
+        "orders.list.request": {
             filter?: {
                 ids?: string[];
             };
@@ -22805,8 +22972,8 @@ export interface components {
              */
             includes?: string;
         };
-        /** orders.listresponse */
-        "orders.listresponse": {
+        /** orders.list.response */
+        "orders.list.response": {
             data?: {
                 /** @example 31b9d864-da1d-060e-9811-f683896aeb11 */
                 id?: string;
@@ -22952,8 +23119,8 @@ export interface components {
             /** @description Array of event types that fire the webhook */
             types: ("account.deactivated" | "account.deleted" | "call.added" | "call.completed" | "call.deleted" | "call.updated" | "company.added" | "company.deleted" | "company.updated" | "contact.added" | "contact.deleted" | "contact.linkedToCompany" | "contact.unlinkedFromCompany" | "contact.updatedLinkToCompany" | "contact.updated" | "creditNote.booked" | "creditNote.deleted" | "creditNote.peppolSubmissionFailed" | "creditNote.peppolSubmissionSucceeded" | "creditNote.sent" | "creditNote.updated" | "deal.created" | "deal.deleted" | "deal.lost" | "deal.moved" | "deal.updated" | "deal.won" | "incomingCreditNote.added" | "incomingCreditNote.approved" | "incomingCreditNote.bookkeepingSubmissionFailed" | "incomingCreditNote.bookkeepingSubmissionSucceeded" | "incomingCreditNote.deleted" | "incomingCreditNote.refused" | "incomingCreditNote.updated" | "incomingInvoice.added" | "incomingInvoice.approved" | "incomingInvoice.bookkeepingSubmissionFailed" | "incomingInvoice.bookkeepingSubmissionSucceeded" | "incomingInvoice.deleted" | "incomingInvoice.refused" | "incomingInvoice.updated" | "invoice.booked" | "invoice.deleted" | "invoice.drafted" | "invoice.paymentRegistered" | "invoice.paymentRemoved" | "invoice.peppolSubmissionFailed" | "invoice.peppolSubmissionSucceeded" | "invoice.sent" | "invoice.updated" | "meeting.created" | "meeting.completed" | "meeting.deleted" | "meeting.updated" | "milestone.created" | "milestone.updated" | "nextgenProject.created" | "nextgenProject.updated" | "nextgenProject.closed" | "nextgenProject.deleted" | "nextgenTask.completed" | "nextgenTask.created" | "nextgenTask.deleted" | "nextgenTask.updated" | "product.added" | "product.updated" | "product.deleted" | "project.created" | "project.deleted" | "project.updated" | "receipt.added" | "receipt.approved" | "receipt.bookkeepingSubmissionFailed" | "receipt.bookkeepingSubmissionSucceeded" | "receipt.deleted" | "receipt.refused" | "receipt.updated" | "subscription.added" | "subscription.deactivated" | "subscription.deleted" | "subscription.updated" | "task.completed" | "task.created" | "task.deleted" | "task.updated" | "ticket.closed" | "ticket.created" | "ticket.deleted" | "ticket.reopened" | "ticket.updated" | "ticketMessage.added" | "timeTracking.added" | "timeTracking.deleted" | "timeTracking.updated" | "user.deactivated")[];
         };
-        /** webhooks.listresponse */
-        "webhooks.listresponse": {
+        /** webhooks.list.response */
+        "webhooks.list.response": {
             data?: {
                 /**
                  * @description Your webhook URL
@@ -22964,22 +23131,22 @@ export interface components {
                 types: ("account.deactivated" | "account.deleted" | "call.added" | "call.completed" | "call.deleted" | "call.updated" | "company.added" | "company.deleted" | "company.updated" | "contact.added" | "contact.deleted" | "contact.linkedToCompany" | "contact.unlinkedFromCompany" | "contact.updatedLinkToCompany" | "contact.updated" | "creditNote.booked" | "creditNote.deleted" | "creditNote.peppolSubmissionFailed" | "creditNote.peppolSubmissionSucceeded" | "creditNote.sent" | "creditNote.updated" | "deal.created" | "deal.deleted" | "deal.lost" | "deal.moved" | "deal.updated" | "deal.won" | "incomingCreditNote.added" | "incomingCreditNote.approved" | "incomingCreditNote.bookkeepingSubmissionFailed" | "incomingCreditNote.bookkeepingSubmissionSucceeded" | "incomingCreditNote.deleted" | "incomingCreditNote.refused" | "incomingCreditNote.updated" | "incomingInvoice.added" | "incomingInvoice.approved" | "incomingInvoice.bookkeepingSubmissionFailed" | "incomingInvoice.bookkeepingSubmissionSucceeded" | "incomingInvoice.deleted" | "incomingInvoice.refused" | "incomingInvoice.updated" | "invoice.booked" | "invoice.deleted" | "invoice.drafted" | "invoice.paymentRegistered" | "invoice.paymentRemoved" | "invoice.peppolSubmissionFailed" | "invoice.peppolSubmissionSucceeded" | "invoice.sent" | "invoice.updated" | "meeting.created" | "meeting.completed" | "meeting.deleted" | "meeting.updated" | "milestone.created" | "milestone.updated" | "nextgenProject.created" | "nextgenProject.updated" | "nextgenProject.closed" | "nextgenProject.deleted" | "nextgenTask.completed" | "nextgenTask.created" | "nextgenTask.deleted" | "nextgenTask.updated" | "product.added" | "product.updated" | "product.deleted" | "project.created" | "project.deleted" | "project.updated" | "receipt.added" | "receipt.approved" | "receipt.bookkeepingSubmissionFailed" | "receipt.bookkeepingSubmissionSucceeded" | "receipt.deleted" | "receipt.refused" | "receipt.updated" | "subscription.added" | "subscription.deactivated" | "subscription.deleted" | "subscription.updated" | "task.completed" | "task.created" | "task.deleted" | "task.updated" | "ticket.closed" | "ticket.created" | "ticket.deleted" | "ticket.reopened" | "ticket.updated" | "ticketMessage.added" | "timeTracking.added" | "timeTracking.deleted" | "timeTracking.updated" | "user.deactivated")[];
             }[];
         };
-        /** cloudPlatforms.urlrequest */
-        "cloudPlatforms.urlrequest": {
+        /** cloudPlatforms.url.request */
+        "cloudPlatforms.url.request": {
             /** @enum {string} */
             type: "invoice" | "quotation" | "ticket";
             /** @example b7023c11-455e-4fa5-bb96-87f37dbc7d07 */
             id: string;
         };
-        /** cloudPlatforms.urlresponse */
-        "cloudPlatforms.urlresponse": {
+        /** cloudPlatforms.url.response */
+        "cloudPlatforms.url.response": {
             data?: {
                 /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/ */
                 url?: string;
             };
         };
-        /** accounts.projects-v2-statusresponse */
-        "accounts.projects-v2-statusresponse": {
+        /** accounts.projects-v2-status.response */
+        "accounts.projects-v2-status.response": {
             data?: {
                 /**
                  * @example projects-v2
@@ -22993,8 +23160,8 @@ export interface components {
                 will_be_automatically_switched_on?: string;
             };
         };
-        /** plannableItems.listrequest */
-        "plannableItems.listrequest": {
+        /** plannableItems.list.request */
+        "plannableItems.list.request": {
             filter?: {
                 ids?: string[];
                 status?: ("active" | "deactivated")[];
@@ -23056,8 +23223,8 @@ export interface components {
             /** @example 60 */
             value?: number;
         };
-        /** plannableItems.listresponse */
-        "plannableItems.listresponse": {
+        /** plannableItems.list.response */
+        "plannableItems.list.response": {
             data?: {
                 /** @example 018d55af-d0d7-76be-8185-ee970a7f3826 */
                 id?: string;
@@ -23098,8 +23265,8 @@ export interface components {
                 };
             }[];
         };
-        /** plannableItems.inforequest */
-        "plannableItems.inforequest": {
+        /** plannableItems.info.request */
+        "plannableItems.info.request": {
             /** @example 018d79a1-2b99-7fbd-b323-500b01305371 */
             id?: string;
             source?: {
@@ -23111,8 +23278,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** plannableItems.inforesponse */
-        "plannableItems.inforesponse": {
+        /** plannableItems.info.response */
+        "plannableItems.info.response": {
             data?: {
                 /** @example 018d55af-d0d7-76be-8185-ee970a7f3826 */
                 id?: string;
@@ -23158,10 +23325,12 @@ export interface components {
          * @enum {string}
          */
         SourceType: "call" | "closingDay" | "dayOffType" | "externalEvent" | "meeting" | "task";
-        /** reservations.listrequest */
-        "reservations.listrequest": {
+        /** reservations.list.request */
+        "reservations.list.request": {
             filter?: {
                 plannable_item_ids?: string[];
+                project_ids?: string[];
+                work_type_ids?: string[];
                 /** @example 2024-01-11 */
                 start_date?: string;
                 /** @example 2024-01-12 */
@@ -23191,6 +23360,7 @@ export interface components {
                     type?: "call" | "closingDay" | "dayOffType" | "externalEvent" | "meeting" | "task";
                 })[];
                 source_types?: ("call" | "closingDay" | "dayOffType" | "externalEvent" | "meeting" | "task")[];
+                term?: string;
             };
             /** Page */
             page?: {
@@ -23200,8 +23370,8 @@ export interface components {
                 number: number;
             };
         };
-        /** reservations.listresponse */
-        "reservations.listresponse": {
+        /** reservations.list.response */
+        "reservations.list.response": {
             data?: {
                 /** @example 39c64ba9-ebf1-491a-8486-a0b96ff21c07 */
                 id?: string;
@@ -23246,8 +23416,8 @@ export interface components {
                 };
             }[];
         };
-        /** reservations.createrequest */
-        "reservations.createrequest": {
+        /** reservations.create.request */
+        "reservations.create.request": {
             /** @example e82cec33-24c9-4d13-96cb-d515a1660c8d */
             plannable_item_id: string;
             /** @example 2024-01-12 */
@@ -23274,8 +23444,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** reservations.createresponse */
-        "reservations.createresponse": {
+        /** reservations.create.response */
+        "reservations.create.response": {
             /** TypeAndId */
             data?: {
                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -23283,8 +23453,8 @@ export interface components {
                 type?: string;
             };
         };
-        /** reservations.updaterequest */
-        "reservations.updaterequest": {
+        /** reservations.update.request */
+        "reservations.update.request": {
             /** @example 01878019-c72c-70dc-b097-7e519c775e35 */
             id: string;
             /** @example 2024-01-12 */
@@ -23311,8 +23481,8 @@ export interface components {
                 type: "team" | "user";
             };
         };
-        /** reservations.deleterequest */
-        "reservations.deleterequest": {
+        /** reservations.delete.request */
+        "reservations.delete.request": {
             /** @example 01878019-c72c-70dc-b097-7e519c775e35 */
             id: string;
         };
@@ -23323,8 +23493,8 @@ export interface components {
             /** @default 2023-10-06 */
             end_date: string;
         };
-        /** userAvailability.totalrequest */
-        "userAvailability.totalrequest": {
+        /** userAvailability.total.request */
+        "userAvailability.total.request": {
             period: {
                 /** @default 2023-10-02 */
                 start_date: string;
@@ -23394,8 +23564,8 @@ export interface components {
                 value?: number;
             };
         };
-        /** userAvailability.totalresponse */
-        "userAvailability.totalresponse": {
+        /** userAvailability.total.response */
+        "userAvailability.total.response": {
             data?: {
                 user?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -23447,8 +23617,8 @@ export interface components {
                 };
             }[];
         };
-        /** userAvailability.dailyrequest */
-        "userAvailability.dailyrequest": {
+        /** userAvailability.daily.request */
+        "userAvailability.daily.request": {
             period: {
                 /** @default 2023-10-02 */
                 start_date: string;
@@ -23477,8 +23647,8 @@ export interface components {
                 number: number;
             };
         };
-        /** userAvailability.dailyresponse */
-        "userAvailability.dailyresponse": {
+        /** userAvailability.daily.response */
+        "userAvailability.daily.response": {
             data?: {
                 user?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -28156,7 +28326,7 @@ export interface operations {
                         estimated_closing_date_until?: string;
                         responsible_user_id?: string | string[];
                         /**
-                         * @description This date is inclusive
+                         * @description This is the last activity of the deal - this date is inclusive
                          * @example 2018-02-11T16:45:30+00:00
                          */
                         updated_since?: string;
@@ -31159,6 +31329,11 @@ export interface operations {
                         end_date?: string;
                         /** @example f29abf48-337d-44b4-aad4-585f5277a456 */
                         milestone_id?: string;
+                        /**
+                         * @description filter by nextgen project group. Cannot be combined with `milestone_id`.
+                         * @example f29abf48-337d-44b4-aad4-585f5277a456
+                         */
+                        group_id?: string;
                         /** @example funny joke HR meeting */
                         term?: string;
                         /** @example 1dfccc8e-68d0-0b83-8d1b-5cf1b0d99ab1 */
@@ -31525,7 +31700,7 @@ export interface operations {
                                     }) | null;
                                 };
                             } | {
-                                /** @example customLocation */
+                                /** @example address */
                                 type?: string;
                                 /** @example 4191c526-5e26-0818-8e16-9523215b5081 */
                                 id?: string;
@@ -31665,7 +31840,7 @@ export interface operations {
                             area_level_two_id?: string;
                         };
                     } | {
-                        /** @example customLocation */
+                        /** @example address */
                         type: string;
                         /** AddressRequest */
                         address: {
@@ -31814,7 +31989,7 @@ export interface operations {
                             area_level_two_id?: string;
                         };
                     } | {
-                        /** @example customLocation */
+                        /** @example address */
                         type: string;
                         /** AddressRequest */
                         address: {
@@ -32565,6 +32740,35 @@ export interface operations {
                     call_outcome_id?: string;
                     /** @example Called, but was not available */
                     outcome_summary?: string;
+                };
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "calls.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "6fac0bf0-e803-424e-af67-76863a3d7d16"
+                 *     }
+                 */
+                "application/json": {
+                    /** @example 6fac0bf0-e803-424e-af67-76863a3d7d16 */
+                    id: string;
                 };
             };
         };
@@ -34014,10 +34218,10 @@ export interface operations {
                             };
                             expected_payment_method?: ({
                                 /**
-                                 * @example sepa_direct_debit
+                                 * @example credit_card
                                  * @enum {string}
                                  */
-                                method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+                                method?: "direct_debit" | "credit_card";
                                 /** @example AB1234 */
                                 reference?: string | null;
                             } | {
@@ -34026,6 +34230,14 @@ export interface operations {
                                  * @enum {string}
                                  */
                                 method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+                            } | {
+                                /**
+                                 * @example sepa_direct_debit
+                                 * @enum {string}
+                                 */
+                                method?: "sepa_direct_debit";
+                                /** @example AB1234 */
+                                reference: string;
                             }) | null;
                             file?: {
                                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
@@ -34256,10 +34468,10 @@ export interface operations {
                     note?: string;
                     expected_payment_method?: ({
                         /**
-                         * @example sepa_direct_debit
+                         * @example credit_card
                          * @enum {string}
                          */
-                        method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+                        method?: "direct_debit" | "credit_card";
                         /** @example AB1234 */
                         reference?: string | null;
                     } | {
@@ -34268,6 +34480,14 @@ export interface operations {
                          * @enum {string}
                          */
                         method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+                    } | {
+                        /**
+                         * @example sepa_direct_debit
+                         * @enum {string}
+                         */
+                        method?: "sepa_direct_debit";
+                        /** @example AB1234 */
+                        reference: string;
                     }) | null;
                     custom_fields?: {
                         /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
@@ -34434,10 +34654,10 @@ export interface operations {
                     }[];
                     expected_payment_method?: ({
                         /**
-                         * @example sepa_direct_debit
+                         * @example credit_card
                          * @enum {string}
                          */
-                        method?: "sepa_direct_debit" | "direct_debit" | "credit_card";
+                        method?: "direct_debit" | "credit_card";
                         /** @example AB1234 */
                         reference?: string | null;
                     } | {
@@ -34446,6 +34666,14 @@ export interface operations {
                          * @enum {string}
                          */
                         method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+                    } | {
+                        /**
+                         * @example sepa_direct_debit
+                         * @enum {string}
+                         */
+                        method?: "sepa_direct_debit";
+                        /** @example AB1234 */
+                        reference: string;
                     }) | null;
                     custom_fields?: {
                         /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
@@ -34571,6 +34799,29 @@ export interface operations {
                     invoice_date?: string;
                     /** @example Some comments about the invoice */
                     note?: string | null;
+                    expected_payment_method?: ({
+                        /**
+                         * @example credit_card
+                         * @enum {string}
+                         */
+                        method?: "direct_debit" | "credit_card";
+                        /** @example AB1234 */
+                        reference?: string | null;
+                    } | {
+                        /**
+                         * @example cash
+                         * @enum {string}
+                         */
+                        method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card";
+                    } | {
+                        /**
+                         * @example sepa_direct_debit
+                         * @enum {string}
+                         */
+                        method?: "sepa_direct_debit";
+                        /** @example AB1234 */
+                        reference: string;
+                    }) | null;
                     custom_fields?: {
                         /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
                         id?: string;
@@ -43486,6 +43737,26 @@ export interface operations {
                  *       "purchase_order_number": "000023",
                  *       "company_entity_id": "0d0dec5a-7096-4009-be37-07eab117db07",
                  *       "color": "#00B2B2",
+                 *       "initial_time_tracked": {
+                 *         "value": 43200,
+                 *         "unit": "minutes"
+                 *       },
+                 *       "initial_price": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "initial_cost": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "initial_amount_billed": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
+                 *       "initial_amount_paid": {
+                 *         "amount": 123.3,
+                 *         "currency": "EUR"
+                 *       },
                  *       "custom_fields": [
                  *         {
                  *           "id": "bf6765de-56eb-40ec-ad14-9096c5dc5fe1",
@@ -43570,6 +43841,58 @@ export interface operations {
                     /** @example 0d0dec5a-7096-4009-be37-07eab117db07 */
                     company_entity_id?: string | null;
                     color?: ("#00B2B2" | "#008A8C" | "#992600" | "#ED9E00" | "#D157D3" | "#A400B2" | "#0071F2" | "#004DA6" | "#64788F" | "#C0C0C4" | "#82828C" | "#1A1C20");
+                    initial_time_tracked?: ({
+                        /** @example 60 */
+                        value?: number;
+                        /** @example minutes */
+                        unit?: string;
+                    } & {
+                        /**
+                         * @example minutes
+                         * @enum {string}
+                         */
+                        unit: "hours" | "minutes" | "seconds";
+                    }) | null;
+                    /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+                    initial_price?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    } | null;
+                    /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+                    initial_cost?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    } | null;
+                    /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+                    initial_amount_billed?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    } | null;
+                    /** @description Must be higher than or equal to zero, and lower than 100000000000 (100 billion). */
+                    initial_amount_paid?: {
+                        /** @example 123.3 */
+                        amount: number;
+                        /**
+                         * CurrencyCode
+                         * @enum {string}
+                         */
+                        currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+                    } | null;
                     /** @description Auto-increment custom fields are not supported on projects. */
                     custom_fields?: {
                         /** @example bf6765de-56eb-40ec-ad14-9096c5dc5fe1 */
@@ -46694,7 +47017,7 @@ export interface operations {
                              * @example unit_price
                              * @enum {string}
                              */
-                            billing_method?: "fixed_price" | "unit_price" | "non_billable";
+                            billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
                             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                             quantity?: number | null;
                             quantity_estimated?: number | null;
@@ -46986,7 +47309,7 @@ export interface operations {
                              * @example unit_price
                              * @enum {string}
                              */
-                            billing_method?: "fixed_price" | "unit_price" | "non_billable";
+                            billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
                             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed");
                             quantity?: number | null;
                             quantity_estimated?: number | null;
@@ -47202,10 +47525,11 @@ export interface operations {
                     /** @example Protects metal from rust and corrosion, penetrates stuck parts, displaces moisture and lubricates almost anything. */
                     description?: string;
                     /**
+                     * @description `parent_fixed_price` is only valid if the parent is fixed price.
                      * @example unit_price
                      * @enum {string}
                      */
-                    billing_method?: "fixed_price" | "unit_price" | "non_billable";
+                    billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
                     quantity?: number;
                     quantity_estimated?: number;
                     unit_price?: {
@@ -47356,10 +47680,11 @@ export interface operations {
                      */
                     status?: "to_do" | "in_progress" | "on_hold" | "done";
                     /**
+                     * @description `parent_fixed_price` is only valid if the parent is fixed price.
                      * @example unit_price
                      * @enum {string}
                      */
-                    billing_method?: "fixed_price" | "unit_price" | "non_billable";
+                    billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price";
                     quantity?: number | null;
                     quantity_estimated?: number | null;
                     unit_price?: {
@@ -48554,7 +48879,7 @@ export interface operations {
                                  * TimeTrackingRelatesToTypes
                                  * @enum {string}
                                  */
-                                type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
+                                type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | "nextgenTask";
                             })[];
                             /** @description Only included for users with access to invoicing */
                             hourly_rate?: {
@@ -48752,7 +49077,7 @@ export interface operations {
                                  * TimeTrackingRelatesToTypes
                                  * @enum {string}
                                  */
-                                type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup";
+                                type?: "contact" | "company" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | "nextgenTask";
                             })[];
                             /** @description Only included for users with access to invoicing */
                             hourly_rate?: {
@@ -51972,6 +52297,8 @@ export interface operations {
                 "application/json": {
                     filter?: {
                         plannable_item_ids?: string[];
+                        project_ids?: string[];
+                        work_type_ids?: string[];
                         /** @example 2024-01-11 */
                         start_date?: string;
                         /** @example 2024-01-12 */
@@ -52001,6 +52328,7 @@ export interface operations {
                             type?: "call" | "closingDay" | "dayOffType" | "externalEvent" | "meeting" | "task";
                         })[];
                         source_types?: ("call" | "closingDay" | "dayOffType" | "externalEvent" | "meeting" | "task")[];
+                        term?: string;
                     };
                     /** Page */
                     page?: {

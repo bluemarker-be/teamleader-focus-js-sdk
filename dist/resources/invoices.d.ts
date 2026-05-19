@@ -275,10 +275,13 @@ export declare class InvoicesResource extends BaseResource {
                 rate?: number | undefined;
             } | undefined;
             expected_payment_method?: {
-                method?: "sepa_direct_debit" | "direct_debit" | "credit_card" | undefined;
+                method?: "direct_debit" | "credit_card" | undefined;
                 reference?: string | null | undefined;
             } | {
                 method?: "cash" | "cheque" | "bankers_draft" | "bank_transfer" | "payment_card" | undefined;
+            } | {
+                method?: "sepa_direct_debit" | undefined;
+                reference: string;
             } | null | undefined;
             file?: {
                 id?: string | undefined;

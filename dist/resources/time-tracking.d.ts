@@ -45,7 +45,7 @@ export declare class TimeTrackingResource extends BaseResource {
         }[] | undefined;
         relates_to?: {
             id?: string | undefined;
-            type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | undefined;
+            type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenTask" | "nextgenProjectGroup" | undefined;
         }[] | undefined;
         hourly_rate?: {
             amount: number;
@@ -96,7 +96,7 @@ export declare class TimeTrackingResource extends BaseResource {
             }[] | undefined;
             relates_to?: {
                 id?: string | undefined;
-                type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenProjectGroup" | undefined;
+                type?: "company" | "contact" | "project" | "milestone" | "ticket" | "nextgenProject" | "nextgenTask" | "nextgenProjectGroup" | undefined;
             }[] | undefined;
             hourly_rate?: {
                 amount: number;

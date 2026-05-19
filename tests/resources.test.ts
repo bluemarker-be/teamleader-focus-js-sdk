@@ -668,6 +668,12 @@ describe("Resources", () => {
       expect(c[0].url).toContain("/calls.update");
     });
 
+    it("delete → POST /calls.delete", async () => {
+      const { client, calls: c } = createVoidClient();
+      await client.calls.delete({ id: "cl1" });
+      expect(c[0].url).toContain("/calls.delete");
+    });
+
     it("complete → POST /calls.complete", async () => {
       const { client, calls: c } = createVoidClient();
       await client.calls.complete({ id: "cl1" });

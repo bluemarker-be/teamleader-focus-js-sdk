@@ -179,13 +179,13 @@ async function main() {
 
   // Patch 7: Add deal_id filter to tasks.list request
   // The API accepts deal_id as a filter but the spec omits it.
-  const tasksListFilterMarker = '"tasks.listrequest": {\n            filter?: {\n                ids?: string[];';
+  const tasksListFilterMarker = '"tasks.list.request": {\n            filter?: {\n                ids?: string[];';
   if (patched.includes(tasksListFilterMarker)) {
     patched = patched.replace(
       tasksListFilterMarker,
-      '"tasks.listrequest": {\n            filter?: {\n                ids?: string[];\n                /** @description Filter tasks linked to a specific deal. */\n                deal_id?: string;',
+      '"tasks.list.request": {\n            filter?: {\n                ids?: string[];\n                /** @description Filter tasks linked to a specific deal. */\n                deal_id?: string;',
     );
-    console.log("Patch 7: Added deal_id filter to tasks.listrequest");
+    console.log("Patch 7: Added deal_id filter to tasks.list.request");
   } else {
     driftedPatches.push("Patch 7 (tasks.list deal_id filter): tasksListFilterMarker pattern not found");
   }

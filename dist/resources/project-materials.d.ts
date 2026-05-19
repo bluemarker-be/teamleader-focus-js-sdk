@@ -17,7 +17,7 @@ export declare class ProjectMaterialsResource extends BaseResource {
         } | null | undefined;
         title?: string | undefined;
         status?: "to_do" | "in_progress" | "on_hold" | "done" | undefined;
-        billing_method?: "fixed_price" | "unit_price" | "non_billable" | undefined;
+        billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price" | undefined;
         billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
         quantity?: number | null | undefined;
         quantity_estimated?: number | null | undefined;
@@ -95,7 +95,7 @@ export declare class ProjectMaterialsResource extends BaseResource {
             title?: string | undefined;
             description?: string | null | undefined;
             status?: "to_do" | "in_progress" | "on_hold" | "done" | undefined;
-            billing_method?: "fixed_price" | "unit_price" | "non_billable" | undefined;
+            billing_method?: "fixed_price" | "unit_price" | "non_billable" | "parent_fixed_price" | undefined;
             billing_status?: ("not_billable" | "not_billed" | "partially_billed" | "fully_billed") | undefined;
             quantity?: number | null | undefined;
             quantity_estimated?: number | null | undefined;

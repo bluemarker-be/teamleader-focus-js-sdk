@@ -87,6 +87,8 @@ export declare class CallsResource extends BaseResource {
     }>;
     /** Update an existing call */
     update(params: RequestBody<"calls.update">): Promise<void>;
+    /** Delete a call */
+    delete(params: RequestBody<"calls.delete">): Promise<void>;
     /** Mark a call as complete */
     complete(params: RequestBody<"calls.complete">): Promise<void>;
 }

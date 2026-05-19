@@ -16,6 +16,10 @@ export class CallsResource extends BaseResource {
     update(params) {
         return this.client.request("/calls.update", params);
     }
+    /** Delete a call */
+    delete(params) {
+        return this.client.request("/calls.delete", params);
+    }
     /** Mark a call as complete */
     complete(params) {
         return this.client.request("/calls.complete", params);
