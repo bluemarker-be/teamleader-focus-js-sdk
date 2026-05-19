@@ -1,5 +1,17 @@
 <!--
-SYNC IMPACT REPORT
+SYNC IMPACT REPORT (v1.0.1, 2026-05-19)
+==================
+Version change: 1.0.0 → 1.0.1 (PATCH — wording clarification)
+Amendment: Governance "Compliance review" paragraph now names
+  `npm run audit` as the canonical pre-release compliance-report tool.
+  No principle redefined; no new rule introduced; the audit was
+  added as feature 001-sdk-quality-audit shipping in v1.0.1.
+Templates / docs touched: none required (existing plan-template gates
+  are unchanged; the audit command is referenced from README and
+  quickstart.md, both already updated).
+
+==================
+HISTORICAL ENTRY (v1.0.0, 2026-05-19)
 ==================
 Version change: (unratified template) → 1.0.0
 Rationale: First ratification. Previous file contained only template placeholders;
@@ -211,7 +223,10 @@ output (`dist/`), or `api-specs/` MUST be reviewed against the relevant
 principles. The principle most often violated in practice — and therefore
 the one to check first — is Principle III (multi-runtime portability);
 the easiest way to break it is also the silent way (a Node-only import
-slipping into `src/`).
+slipping into `src/`). The `npm run audit` command produces a
+reproducible per-principle compliance report and is the canonical
+pre-release check; run it as step 5 of the release sequence (§Development
+Workflow & Quality Gates).
 
 **Runtime guidance for contributors**: implementation specifics
 (file layout, helper conventions, current test commands) live in
@@ -219,4 +234,4 @@ slipping into `src/`).
 stays principle-level and changes rarely; those documents change as
 the code does.
 
-**Version**: 1.0.0 | **Ratified**: 2026-05-19 | **Last Amended**: 2026-05-19
+**Version**: 1.0.1 | **Ratified**: 2026-05-19 | **Last Amended**: 2026-05-19
