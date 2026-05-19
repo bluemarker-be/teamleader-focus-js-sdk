@@ -5,3 +5,4 @@ node_modules/
 .DS_Store
 tests/integration/reports/
 tests/live/
+.claude/settings.local.json

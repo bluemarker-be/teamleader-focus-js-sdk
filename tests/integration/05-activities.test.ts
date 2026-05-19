@@ -284,6 +284,10 @@ describe.skipIf(noToken)("Activities", () => {
         call_outcome_id: callOutcomeId,
       });
     });
+
+    it("delete", async () => {
+      await client.calls.delete({ id: callId });
+    });
   });
 
   // -----------------------------------------------------------------------

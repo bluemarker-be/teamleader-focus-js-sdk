@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://operative.pro/sdk-audit/findings.schema.json",
+  "title": "SDK Audit Findings",
+  "description": "Machine-readable companion to findings.md. One run-local registry of every deviation surfaced by the audit. See specs/001-sdk-quality-audit/data-model.md#entity-audit-finding for field semantics.",
+  "type": "object",
+  "required": ["sha", "generated_for_branch", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Full git SHA the audit ran against."
+    },
+    "generated_for_branch": {
+      "type": "string",
+      "description": "Branch name at audit time (e.g. 001-sdk-quality-audit)."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1",
+      "description": "Bumped only on breaking schema changes."
+    },
+    "findings": {
+      "type": "array",
+      "description": "Sorted ascending by id (per research Decision 2).",
+      "items": { "$ref": "#/$defs/finding" }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "required": ["id", "category", "location", "severity", "classification", "message", "remediation"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$",
+          "description": "SHA-256 of fingerprint, truncated to 16 hex chars."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["consistency", "principle-compliance", "documentation", "changelog"]
+        },
+        "principle": {
+          "type": ["string", "null"],
+          "enum": ["I", "II", "III", "IV", "V", "VI", null],
+          "description": "Constitution principle violated; non-null only when category is principle-compliance."
+        },
+        "location": {
+          "type": "object",
+          "required": ["file", "start_line", "end_line"],
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string",
+              "description": "POSIX-style repo-relative path. No Windows separators ever (research Decision 2)."
+            },
+            "start_line": { "type": "integer", "minimum": 0 },
+            "end_line": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "severity": { "type": "string", "enum": ["low", "medium", "high"] },
+        "classification": { "type": "string", "enum": ["trivial", "non-trivial"] },
+        "message": { "type": "string", "minLength": 1 },
+        "details": { "type": ["string", "null"] },
+        "remediation": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["kind", "description"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "const": "in-pr" },
+                "description": { "type": "string", "minLength": 1 }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["kind", "proposed_approach", "version_impact"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "const": "task" },
+                "proposed_approach": { "type": "string", "minLength": 1 },
+                "version_impact": { "type": "string", "enum": ["none", "patch", "minor", "major"] }
+              }
+            }
+          ]
+        },
+        "variants": {
+          "type": ["array", "null"],
+          "description": "Only populated when category=consistency.",
+          "items": {
+            "type": "object",
+            "required": ["name", "occurrence_count", "resources"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "occurrence_count": { "type": "integer", "minimum": 1 },
+              "resources": {
+                "type": "array",
+                "items": { "type": "string", "description": "resource_name.method_name" }
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "category": { "const": "principle-compliance" } } },
+          "then": { "properties": { "principle": { "type": "string", "enum": ["I", "II", "III", "IV", "V", "VI"] } } }
+        },
+        {
+          "if": { "properties": { "category": { "const": "consistency" } } },
+          "then": { "required": ["variants"] }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "findings": [
+    {
+      "category": "consistency",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "f0279509226fb8cb",
+      "location": {
+        "end_line": 0,
+        "file": "src/resources/",
+        "start_line": 0
+      },
+      "message": "return_envelope divergence on registerPayment: single (3) vs void (1)",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Reviewer to pick canonical form (audit does not auto-arbitrate, per Q3). Variants: single=[incomingCreditNotes.registerPayment, incomingInvoices.registerPayment, receipts.registerPayment]; void=[invoices.registerPayment].",
+        "version_impact": "major"
+      },
+      "severity": "medium",
+      "variants": [
+        {
+          "name": "single",
+          "occurrence_count": 3,
+          "resources": [
+            "incomingCreditNotes.registerPayment",
+            "incomingInvoices.registerPayment",
+            "receipts.registerPayment"
+          ]
+        },
+        {
+          "name": "void",
+          "occurrence_count": 1,
+          "resources": [
+            "invoices.registerPayment"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "consistency",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "fe2697a2ca7daa80",
+      "location": {
+        "end_line": 0,
+        "file": "src/resources/",
+        "start_line": 0
+      },
+      "message": "method_name divergence on synonym-group:add/create/draft: add (9) vs create (19) vs draft (1)",
+      "principle": null,
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Reviewer to pick canonical form (audit does not auto-arbitrate, per Q3). Variants: add=[calls.add, closingDays.add, companies.add, contacts.add, incomingCreditNotes.add, incomingInvoices.add, products.add, receipts.add, timeTracking.add]; create=[customFieldDefinitions.create, dayOffTypes.create, dealPhases.create, dealPipelines.create, deals.create, emailTracking.create, events.create, legacyMilestones.create, legacyProjects.create, notes.create, projectGroups.create, projectMaterials.create, projectTasks.create, projects.create, quotations.create, reservations.create, subscriptions.create, tasks.create, tickets.create]; draft=[invoices.draft].",
+        "version_impact": "major"
+      },
+      "severity": "low",
+      "variants": [
+        {
+          "name": "add",
+          "occurrence_count": 9,
+          "resources": [
+            "calls.add",
+            "closingDays.add",
+            "companies.add",
+            "contacts.add",
+            "incomingCreditNotes.add",
+            "incomingInvoices.add",
+            "products.add",
+            "receipts.add",
+            "timeTracking.add"
+          ]
+        },
+        {
+          "name": "create",
+          "occurrence_count": 19,
+          "resources": [
+            "customFieldDefinitions.create",
+            "dayOffTypes.create",
+            "dealPhases.create",
+            "dealPipelines.create",
+            "deals.create",
+            "emailTracking.create",
+            "events.create",
+            "legacyMilestones.create",
+            "legacyProjects.create",
+            "notes.create",
+            "projectGroups.create",
+            "projectMaterials.create",
+            "projectTasks.create",
+            "projects.create",
+            "quotations.create",
+            "reservations.create",
+            "subscriptions.create",
+            "tasks.create",
+            "tickets.create"
+          ]
+        },
+        {
+          "name": "draft",
+          "occurrence_count": 1,
+          "resources": [
+            "invoices.draft"
+          ]
+        }
+      ]
+    }
+  ],
+  "generated_for_branch": "001-sdk-quality-audit",
+  "schema_version": "1",
+  "sha": "7ee6e8fd63caca3e84cecb35d2561cefb0327cab"
+}

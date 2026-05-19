@@ -155,7 +155,7 @@ All 68 resources are available — see the full list below.
 | `bookkeepingSubmissions` | `list` |
 | `businessTypes` | `list` |
 | `callOutcomes` | `list` |
-| `calls` | `list` `info` `add` `update` `complete` |
+| `calls` | `list` `info` `add` `update` `delete` `complete` |
 | `closingDays` | `list` `add` `delete` |
 | `cloudPlatforms` | `url` |
 | `commercialDiscounts` | `list` |
@@ -166,7 +166,7 @@ All 68 resources are available — see the full list below.
 | `customFieldDefinitions` | `create` `list` `info` |
 | `dayOffTypes` | `list` `create` `update` `delete` |
 | `daysOff` | `import` `bulkDelete` |
-| `dealPhases` | `list` `create` `update` `duplicate` `move` `delete` |
+| `dealPhases` | `list` `create` `update` `move` `delete` |
 | `dealPipelines` | `list` `create` `update` `markAsDefault` `duplicate` `delete` |
 | `dealSources` | `list` |
 | `deals` | `list` `info` `create` `update` `move` `win` `lose` `delete` |
@@ -177,8 +177,8 @@ All 68 resources are available — see the full list below.
 | `expenses` | `list` |
 | `externalParties` | `addToProject` `update` `delete` |
 | `files` | `list` `info` `upload` `download` `delete` |
-| `incomingCreditNotes` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
-| `incomingInvoices` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `incomingCreditNotes` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` `listPayments` `registerPayment` `removePayment` `updatePayment` |
+| `incomingInvoices` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` `listPayments` `registerPayment` `removePayment` `updatePayment` |
 | `invoices` | `list` `info` `download` `draft` `update` `updateBooked` `copy` `book` `delete` `registerPayment` `removePayments` `credit` `creditPartially` `send` `sendViaPeppol` |
 | `legacyMilestones` | `list` `info` `create` `update` `delete` `close` `open` |
 | `legacyProjects` | `list` `info` `create` `update` `close` `reopen` `delete` `addParticipant` `updateParticipant` |
@@ -201,7 +201,7 @@ All 68 resources are available — see the full list below.
 | `projectTasks` | `list` `info` `create` `update` `duplicate` `delete` `assign` `unassign` |
 | `projects` | `list` `info` `create` `update` `close` `reopen` `duplicate` `delete` `addOwner` `removeOwner` `assign` `unassign` `addCustomer` `removeCustomer` `addDeal` `removeDeal` `addQuotation` `removeQuotation` |
 | `quotations` | `list` `info` `download` `create` `send` `update` `accept` `delete` |
-| `receipts` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `receipts` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` `listPayments` `registerPayment` `removePayment` `updatePayment` |
 | `reservations` | `list` `create` `update` `delete` |
 | `subscriptions` | `list` `info` `create` `update` `deactivate` |
 | `tags` | `list` |
@@ -225,6 +225,20 @@ See the [`examples/`](./examples/) folder for end-to-end reference
 implementations — including a Supabase Edge Function that paginates
 companies, creates contacts, links them, and handles every
 `TeamleaderFocusError` subclass with cleanup-on-failure.
+
+## Quality audit
+
+Run `npm run audit` to produce a reproducible quality report covering
+four dimensions: cross-resource consistency (every method shape across
+all 68 resources), constitution-principle compliance (per-file
+verdicts on the six rules in `.specify/memory/constitution.md`),
+README/exports drift, and CHANGELOG/git-log drift.
+
+Outputs land in [`specs/001-sdk-quality-audit/`](./specs/001-sdk-quality-audit/)
+as markdown (PR-reviewable) plus JSON sidecars (machine-diffable
+across runs). Recommended before every release; see
+[`specs/001-sdk-quality-audit/quickstart.md`](./specs/001-sdk-quality-audit/quickstart.md)
+for the full workflow.
 
 ## OAuth2 flow
 

@@ -10,6 +10,31 @@ API spec updated: → 1.157.0
 
 ### Added
 - `/calls.delete` endpoint
+- Live integration test for `calls.delete` in `tests/integration/05-activities.test.ts`
+  (closes the live-coverage gap surfaced by the audit's principle VI check).
+- **Internal: quality audit infrastructure.** New `npm run audit`
+  command runs four cross-cutting checks against the SDK source:
+  - **Cross-resource consistency** across all 68 resources (method
+    name divergences, parameter-shape divergences, return-envelope
+    divergences). Refuses to auto-arbitrate canonical forms; surfaces
+    every divergence with full variant context for human review.
+  - **Constitution-principle compliance** per file × per principle
+    (spec-generated types, multi-runtime portability, zero runtime
+    deps, typed errors, live integration coverage).
+  - **Documentation accuracy** — cross-checks the README Resources
+    table against the actual client exports + identifies snippet
+    drift.
+  - **CHANGELOG accuracy** — flags entries with no matching git tag
+    and ranges where `src/index.ts` changed but the entry is thin.
+  Each run produces six committable artifacts under
+  `specs/001-sdk-quality-audit/` (markdown for review + JSON sidecars
+  for diffing). Reproducible byte-for-byte on the same SHA (FR-009).
+  Zero new runtime or dev dependencies. See
+  `specs/001-sdk-quality-audit/quickstart.md` for usage.
+
+Target version for this Unreleased section: **1.0.1** (PATCH —
+audit infrastructure is internal tooling under `scripts/`, no public
+SDK surface change).
 
 ## [1.0.0] - 2026-04-14
 
@@ -201,7 +226,15 @@ Discovered via `verify:endpoints`, fixed against the actual spec:
 ### Changed
 - Tests folder is no longer in `.gitignore` (was a mistake — integration tests must be version-controlled).
 
-## [0.3.0] - 2026-04-13
+## Pre-tagging early development (v0.0.1 – v0.3.0)
+
+> The entries below predate the repo's release-tagging discipline,
+> which started at `v0.3.1`. Their commits exist in `git log` but were
+> never explicitly tagged. The entries are preserved here for
+> historical context; if you need to pin to one of these versions, use
+> the corresponding commit SHA from `git log` rather than a tag.
+
+### [0.3.0] - 2026-04-13
 
 ### Added
 - API spec updated: 1.129.0 → 1.136.0
@@ -227,7 +260,7 @@ Discovered via `verify:endpoints`, fixed against the actual spec:
 ### Fixed
 - Paginator bug: empty page was yielded before the break check, causing consumers to receive a spurious empty page
 
-## [0.2.0] - 2026-03-27
+### [0.2.0] - 2026-03-27
 
 API spec updated: 1.119.0 → 1.129.0
 
@@ -246,7 +279,7 @@ API spec updated: 1.119.0 → 1.129.0
 - Scripts now read spec from `api-specs/` directory (versioned files) instead of single `api-spec.yaml`
 - Fixed optional/required params on several `.list()` and `.stop()` methods to match the spec
 
-## [0.1.1] - 2026-03-01
+### [0.1.1] - 2026-03-01
 
 API spec updated: 1.112.0 → 1.115.0
 
@@ -255,7 +288,7 @@ API spec updated: 1.112.0 → 1.115.0
 - `orders.info` / `orders.list` — legacy `project` field marked as only available for users with access to the old projects module
 - `timeTracking.list` — `relates_to` filter now supports `nextgenProject` and `nextgenProjectGroup` types
 
-## [0.1.0] - 2026-02-12
+### [0.1.0] - 2026-02-12
 
 ### Added
 - `getTokens` callback for multi-process token resilience — allows reading fresh tokens from a shared store (DB, Redis) before attempting an OAuth refresh, so processes can pick up tokens refreshed by other processes
@@ -268,7 +301,7 @@ API spec updated: 1.112.0 → 1.115.0
 - `incomingInvoices` — added listPayments, registerPayment, removePayment, updatePayment
 - `receipts` — added listPayments, registerPayment, removePayment, updatePayment
 
-## [0.0.1] - 2026-02-12
+### [0.0.1] - 2026-02-12
 
 Initial release — full coverage of the Teamleader Focus API (spec v1.102.0).
 

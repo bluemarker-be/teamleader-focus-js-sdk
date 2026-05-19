@@ -35,6 +35,7 @@ const ONLY_ENDPOINT = args.find((a) => a.startsWith("--only="))?.slice(7)
   ?? (args.indexOf("--only") >= 0 ? args[args.indexOf("--only") + 1] : undefined);
 const FAIL_ON_AS_ANY = args.includes("--fail-on-any");
 const VERBOSE = args.includes("--verbose") || args.includes("-v");
+const JSON_OUTPUT = args.includes("--json");
 
 const INTENTIONALLY_SKIPPED: Record<string, string> = {
   "/invoices.sendViaPeppol": "requires Peppol configuration",
@@ -495,8 +496,18 @@ function printSummary(reports: EndpointReport[]): void {
 // ---------------------------------------------------------------------------
 
 function main(): void {
-  console.log("Building verification report...\n");
+  // JSON-output mode: suppress the "Building..." stdout noise so the
+  // payload is the only thing on stdout (and consumers can parse it
+  // directly). Stderr is unaffected.
+  if (!JSON_OUTPUT) {
+    console.log("Building verification report...\n");
+  }
   const reports = buildReport();
+
+  if (JSON_OUTPUT) {
+    emitJsonReport(reports);
+    return;
+  }
 
   const filtered = ONLY_ENDPOINT
     ? reports.filter(
@@ -543,6 +554,68 @@ function main(): void {
     });
     if (hasAnyIssue) process.exit(1);
   }
+}
+
+/**
+ * Emit the structured JSON payload consumed by `scripts/audit-compliance.ts`
+ * (principle VI live-coverage assessment). The shape is the contract
+ * documented in `specs/001-sdk-quality-audit/tasks.md` T013 — keep stable
+ * across runs to support FR-009 reproducibility.
+ *
+ * Object keys are sorted at every level so two runs against the same code
+ * produce byte-identical stdout.
+ */
+function emitJsonReport(reports: EndpointReport[]): void {
+  const missing_live_coverage: Array<{ endpoint: string; operation_id: string; resource: string; method: string }> = [];
+  const missing_sdk_method: Array<{ endpoint: string; operation_id: string }> = [];
+  const exempted: Array<{ endpoint: string; reason: string }> = [];
+
+  for (const r of reports) {
+    if (INTENTIONALLY_SKIPPED[r.path]) {
+      exempted.push({ endpoint: r.path, reason: INTENTIONALLY_SKIPPED[r.path] });
+      continue;
+    }
+    if (!r.sdk.found) {
+      missing_sdk_method.push({ endpoint: r.path, operation_id: r.operationId });
+      continue;
+    }
+    if (r.integrationTests.length === 0) {
+      const parts = r.operationId.split(".");
+      missing_live_coverage.push({
+        endpoint: r.path,
+        operation_id: r.operationId,
+        resource: parts[0] ?? "",
+        method: parts.slice(1).join(".") ?? "",
+      });
+    }
+  }
+
+  // Deterministic ordering for FR-009 (consumers byte-compare across runs).
+  missing_live_coverage.sort((a, b) => a.endpoint.localeCompare(b.endpoint));
+  missing_sdk_method.sort((a, b) => a.endpoint.localeCompare(b.endpoint));
+  exempted.sort((a, b) => a.endpoint.localeCompare(b.endpoint));
+
+  const payload = {
+    endpoints_total: reports.length,
+    exempted,
+    missing_live_coverage,
+    missing_sdk_method,
+    schema_version: "1",
+  };
+
+  // Manual stable serialization (no devDep on audit-lib from this script).
+  process.stdout.write(JSON.stringify(payload, sortReplacer, 2) + "\n");
+}
+
+function sortReplacer(_key: string, value: unknown): unknown {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    return value;
+  }
+  const sorted: Record<string, unknown> = {};
+  for (const k of Object.keys(value as Record<string, unknown>).sort()) {
+    sorted[k] = (value as Record<string, unknown>)[k];
+  }
+  return sorted;
 }
 
 main();

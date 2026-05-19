@@ -1,0 +1,1171 @@
+{
+  "generated_for_branch": "001-sdk-quality-audit",
+  "rows": [
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "yes",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "package.json",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-changelog.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-compliance.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-consistency.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-docs.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-lib/ast.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-lib/findings.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-lib/git.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-lib/render.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit-lib/types.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/audit.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/check-spec-update.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/check-test-coverage.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/diff-spec.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/generate-types.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/oauth-token.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "scripts/verify-endpoints.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/client.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/errors.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/helpers/custom-fields.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/index.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/oauth.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/paginator.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/accounts.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/activity-types.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/resources/base.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/bookkeeping-submissions.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/business-types.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/call-outcomes.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/calls.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/closing-days.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/cloud-platforms.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/commercial-discounts.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/companies.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/contacts.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/credit-notes.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/currencies.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/custom-field-definitions.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/day-off-types.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/days-off.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/deal-phases.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/deal-pipelines.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/deal-sources.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/deals.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/departments.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/document-templates.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/email-tracking.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/events.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/expenses.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/external-parties.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/files.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/incoming-credit-notes.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/incoming-invoices.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/invoices.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/legacy-milestones.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/legacy-projects.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/level-two-areas.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/lost-reasons.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/mail-templates.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/meetings.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/migrate.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/notes.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/orders.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/payment-methods.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/payment-terms.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/plannable-items.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/price-lists.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/product-categories.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/products.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/project-groups.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/project-lines.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/project-materials.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/project-tasks.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/projects.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/quotations.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/receipts.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/reservations.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/subscriptions.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/tags.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/tasks.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/tax-rates.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/teams.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/ticket-status.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/tickets.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/time-tracking.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/timers.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/units-of-measure.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/user-availability.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/users.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/webhooks.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/withholding-tax-rates.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
+      "file": "src/resources/work-types.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/types/common.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "yes",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "n/a"
+      },
+      "file": "src/types/generated.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "tsconfig.json",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "vitest.config.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "n/a",
+        "IV": "n/a",
+        "V": "n/a",
+        "VI": "n/a"
+      },
+      "file": "vitest.integration.config.ts",
+      "finding_ids": []
+    }
+  ],
+  "schema_version": "1",
+  "sha": "7ee6e8fd63caca3e84cecb35d2561cefb0327cab"
+}

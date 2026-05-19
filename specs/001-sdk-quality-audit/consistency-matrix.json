@@ -1,0 +1,2590 @@
+{
+  "divergence_clusters": [
+    {
+      "attribute": "method_name",
+      "finding_id": "fe2697a2ca7daa80",
+      "variants": [
+        {
+          "occurrence_count": 9,
+          "resources_methods": [
+            "calls.add",
+            "closingDays.add",
+            "companies.add",
+            "contacts.add",
+            "incomingCreditNotes.add",
+            "incomingInvoices.add",
+            "products.add",
+            "receipts.add",
+            "timeTracking.add"
+          ],
+          "value": "add"
+        },
+        {
+          "occurrence_count": 19,
+          "resources_methods": [
+            "customFieldDefinitions.create",
+            "dayOffTypes.create",
+            "dealPhases.create",
+            "dealPipelines.create",
+            "deals.create",
+            "emailTracking.create",
+            "events.create",
+            "legacyMilestones.create",
+            "legacyProjects.create",
+            "notes.create",
+            "projectGroups.create",
+            "projectMaterials.create",
+            "projectTasks.create",
+            "projects.create",
+            "quotations.create",
+            "reservations.create",
+            "subscriptions.create",
+            "tasks.create",
+            "tickets.create"
+          ],
+          "value": "create"
+        },
+        {
+          "occurrence_count": 1,
+          "resources_methods": [
+            "invoices.draft"
+          ],
+          "value": "draft"
+        }
+      ]
+    },
+    {
+      "attribute": "return_envelope",
+      "finding_id": "f0279509226fb8cb",
+      "variants": [
+        {
+          "occurrence_count": 3,
+          "resources_methods": [
+            "incomingCreditNotes.registerPayment",
+            "incomingInvoices.registerPayment",
+            "receipts.registerPayment"
+          ],
+          "value": "single"
+        },
+        {
+          "occurrence_count": 1,
+          "resources_methods": [
+            "invoices.registerPayment"
+          ],
+          "value": "void"
+        }
+      ]
+    }
+  ],
+  "generated_for_branch": "001-sdk-quality-audit",
+  "resources": [
+    {
+      "class_name": "AccountsResource",
+      "file": "src/resources/accounts.ts",
+      "methods": [
+        {
+          "endpoint": "/accounts.projects-v2-status",
+          "errors": [],
+          "name": "projectsV2Status",
+          "param_shape": "",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "accounts"
+    },
+    {
+      "class_name": "ActivityTypesResource",
+      "file": "src/resources/activity-types.ts",
+      "methods": [
+        {
+          "endpoint": "/activityTypes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "activityTypes"
+    },
+    {
+      "class_name": "BookkeepingSubmissionsResource",
+      "file": "src/resources/bookkeeping-submissions.ts",
+      "methods": [
+        {
+          "endpoint": "/bookkeepingSubmissions.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "bookkeepingSubmissions"
+    },
+    {
+      "class_name": "BusinessTypesResource",
+      "file": "src/resources/business-types.ts",
+      "methods": [
+        {
+          "endpoint": "/businessTypes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "businessTypes"
+    },
+    {
+      "class_name": "CallOutcomesResource",
+      "file": "src/resources/call-outcomes.ts",
+      "methods": [
+        {
+          "endpoint": "/callOutcomes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "callOutcomes"
+    },
+    {
+      "class_name": "CallsResource",
+      "file": "src/resources/calls.ts",
+      "methods": [
+        {
+          "endpoint": "/calls.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/calls.complete",
+          "errors": [],
+          "name": "complete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/calls.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/calls.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/calls.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/calls.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "calls"
+    },
+    {
+      "class_name": "ClosingDaysResource",
+      "file": "src/resources/closing-days.ts",
+      "methods": [
+        {
+          "endpoint": "/closingDays.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/closingDays.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/closingDays.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "closingDays"
+    },
+    {
+      "class_name": "CloudPlatformsResource",
+      "file": "src/resources/cloud-platforms.ts",
+      "methods": [
+        {
+          "endpoint": "/cloudPlatforms.url",
+          "errors": [],
+          "name": "url",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "cloudPlatforms"
+    },
+    {
+      "class_name": "CommercialDiscountsResource",
+      "file": "src/resources/commercial-discounts.ts",
+      "methods": [
+        {
+          "endpoint": "/commercialDiscounts.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "commercialDiscounts"
+    },
+    {
+      "class_name": "CompaniesResource",
+      "file": "src/resources/companies.ts",
+      "methods": [
+        {
+          "endpoint": "/companies.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/companies.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/companies.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/companies.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/companies.tag",
+          "errors": [],
+          "name": "tag",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/companies.untag",
+          "errors": [],
+          "name": "untag",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/companies.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/companies.uploadLogo",
+          "errors": [],
+          "name": "uploadLogo",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "companies"
+    },
+    {
+      "class_name": "ContactsResource",
+      "file": "src/resources/contacts.ts",
+      "methods": [
+        {
+          "endpoint": "/contacts.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/contacts.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/contacts.linkToCompany",
+          "errors": [],
+          "name": "linkToCompany",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/contacts.tag",
+          "errors": [],
+          "name": "tag",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.unlinkFromCompany",
+          "errors": [],
+          "name": "unlinkFromCompany",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.untag",
+          "errors": [],
+          "name": "untag",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.updateCompanyLink",
+          "errors": [],
+          "name": "updateCompanyLink",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/contacts.uploadAvatar",
+          "errors": [],
+          "name": "uploadAvatar",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "contacts"
+    },
+    {
+      "class_name": "CreditNotesResource",
+      "file": "src/resources/credit-notes.ts",
+      "methods": [
+        {
+          "endpoint": "/creditNotes.download",
+          "errors": [],
+          "name": "download",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/creditNotes.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/creditNotes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/creditNotes.sendViaPeppol",
+          "errors": [],
+          "name": "sendViaPeppol",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "creditNotes"
+    },
+    {
+      "class_name": "CurrenciesResource",
+      "file": "src/resources/currencies.ts",
+      "methods": [
+        {
+          "endpoint": "/currencies.exchangeRates",
+          "errors": [],
+          "name": "exchangeRates",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "currencies"
+    },
+    {
+      "class_name": "CustomFieldDefinitionsResource",
+      "file": "src/resources/custom-field-definitions.ts",
+      "methods": [
+        {
+          "endpoint": "/customFieldDefinitions.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/customFieldDefinitions.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/customFieldDefinitions.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "customFieldDefinitions"
+    },
+    {
+      "class_name": "DayOffTypesResource",
+      "file": "src/resources/day-off-types.ts",
+      "methods": [
+        {
+          "endpoint": "/dayOffTypes.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/dayOffTypes.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/dayOffTypes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "undefined",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/dayOffTypes.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "dayOffTypes"
+    },
+    {
+      "class_name": "DaysOffResource",
+      "file": "src/resources/days-off.ts",
+      "methods": [
+        {
+          "endpoint": "/daysOff.bulkDelete",
+          "errors": [],
+          "name": "bulkDelete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/daysOff.import",
+          "errors": [],
+          "name": "import",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "daysOff"
+    },
+    {
+      "class_name": "DealPhasesResource",
+      "file": "src/resources/deal-phases.ts",
+      "methods": [
+        {
+          "endpoint": "/dealPhases.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/dealPhases.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/dealPhases.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/dealPhases.move",
+          "errors": [],
+          "name": "move",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/dealPhases.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "dealPhases"
+    },
+    {
+      "class_name": "DealPipelinesResource",
+      "file": "src/resources/deal-pipelines.ts",
+      "methods": [
+        {
+          "endpoint": "/dealPipelines.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/dealPipelines.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/dealPipelines.duplicate",
+          "errors": [],
+          "name": "duplicate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/dealPipelines.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/dealPipelines.markAsDefault",
+          "errors": [],
+          "name": "markAsDefault",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/dealPipelines.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "dealPipelines"
+    },
+    {
+      "class_name": "DealsResource",
+      "file": "src/resources/deals.ts",
+      "methods": [
+        {
+          "endpoint": "/deals.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/deals.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/deals.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/deals.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/deals.lose",
+          "errors": [],
+          "name": "lose",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/deals.move",
+          "errors": [],
+          "name": "move",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/deals.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/deals.win",
+          "errors": [],
+          "name": "win",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "deals"
+    },
+    {
+      "class_name": "DealSourcesResource",
+      "file": "src/resources/deal-sources.ts",
+      "methods": [
+        {
+          "endpoint": "/dealSources.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "dealSources"
+    },
+    {
+      "class_name": "DepartmentsResource",
+      "file": "src/resources/departments.ts",
+      "methods": [
+        {
+          "endpoint": "/departments.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/departments.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "departments"
+    },
+    {
+      "class_name": "DocumentTemplatesResource",
+      "file": "src/resources/document-templates.ts",
+      "methods": [
+        {
+          "endpoint": "/documentTemplates.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "documentTemplates"
+    },
+    {
+      "class_name": "EmailTrackingResource",
+      "file": "src/resources/email-tracking.ts",
+      "methods": [
+        {
+          "endpoint": "/emailTracking.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/emailTracking.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "emailTracking"
+    },
+    {
+      "class_name": "EventsResource",
+      "file": "src/resources/events.ts",
+      "methods": [
+        {
+          "endpoint": "/events.cancel",
+          "errors": [],
+          "name": "cancel",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/events.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/events.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/events.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/events.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "events"
+    },
+    {
+      "class_name": "ExpensesResource",
+      "file": "src/resources/expenses.ts",
+      "methods": [
+        {
+          "endpoint": "/expenses.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "expenses"
+    },
+    {
+      "class_name": "ExternalPartiesResource",
+      "file": "src/resources/external-parties.ts",
+      "methods": [
+        {
+          "endpoint": "/projects-v2/externalParties.addToProject",
+          "errors": [],
+          "name": "addToProject",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/externalParties.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/externalParties.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "externalParties"
+    },
+    {
+      "class_name": "FilesResource",
+      "file": "src/resources/files.ts",
+      "methods": [
+        {
+          "endpoint": "/files.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/files.download",
+          "errors": [],
+          "name": "download",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/files.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/files.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/files.upload",
+          "errors": [],
+          "name": "upload",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "files"
+    },
+    {
+      "class_name": "IncomingCreditNotesResource",
+      "file": "src/resources/incoming-credit-notes.ts",
+      "methods": [
+        {
+          "endpoint": "/incomingCreditNotes.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.approve",
+          "errors": [],
+          "name": "approve",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.listPayments",
+          "errors": [],
+          "name": "listPayments",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.markAsPendingReview",
+          "errors": [],
+          "name": "markAsPendingReview",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.refuse",
+          "errors": [],
+          "name": "refuse",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.registerPayment",
+          "errors": [],
+          "name": "registerPayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.removePayment",
+          "errors": [],
+          "name": "removePayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.sendToBookkeeping",
+          "errors": [],
+          "name": "sendToBookkeeping",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingCreditNotes.updatePayment",
+          "errors": [],
+          "name": "updatePayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "incomingCreditNotes"
+    },
+    {
+      "class_name": "IncomingInvoicesResource",
+      "file": "src/resources/incoming-invoices.ts",
+      "methods": [
+        {
+          "endpoint": "/incomingInvoices.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingInvoices.approve",
+          "errors": [],
+          "name": "approve",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingInvoices.listPayments",
+          "errors": [],
+          "name": "listPayments",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingInvoices.markAsPendingReview",
+          "errors": [],
+          "name": "markAsPendingReview",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.refuse",
+          "errors": [],
+          "name": "refuse",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.registerPayment",
+          "errors": [],
+          "name": "registerPayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/incomingInvoices.removePayment",
+          "errors": [],
+          "name": "removePayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.sendToBookkeeping",
+          "errors": [],
+          "name": "sendToBookkeeping",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/incomingInvoices.updatePayment",
+          "errors": [],
+          "name": "updatePayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "incomingInvoices"
+    },
+    {
+      "class_name": "InvoicesResource",
+      "file": "src/resources/invoices.ts",
+      "methods": [
+        {
+          "endpoint": "/invoices.book",
+          "errors": [],
+          "name": "book",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.copy",
+          "errors": [],
+          "name": "copy",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/invoices.credit",
+          "errors": [],
+          "name": "credit",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/invoices.creditPartially",
+          "errors": [],
+          "name": "creditPartially",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/invoices.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.download",
+          "errors": [],
+          "name": "download",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/invoices.draft",
+          "errors": [],
+          "name": "draft",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/invoices.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/invoices.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/invoices.registerPayment",
+          "errors": [],
+          "name": "registerPayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.removePayments",
+          "errors": [],
+          "name": "removePayments",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.send",
+          "errors": [],
+          "name": "send",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.sendViaPeppol",
+          "errors": [],
+          "name": "sendViaPeppol",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/invoices.updateBooked",
+          "errors": [],
+          "name": "updateBooked",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "invoices"
+    },
+    {
+      "class_name": "LegacyMilestonesResource",
+      "file": "src/resources/legacy-milestones.ts",
+      "methods": [
+        {
+          "endpoint": "/milestones.close",
+          "errors": [],
+          "name": "close",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/milestones.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/milestones.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/milestones.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/milestones.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/milestones.open",
+          "errors": [],
+          "name": "open",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/milestones.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "legacyMilestones"
+    },
+    {
+      "class_name": "LegacyProjectsResource",
+      "file": "src/resources/legacy-projects.ts",
+      "methods": [
+        {
+          "endpoint": "/projects.addParticipant",
+          "errors": [],
+          "name": "addParticipant",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects.close",
+          "errors": [],
+          "name": "close",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/projects.reopen",
+          "errors": [],
+          "name": "reopen",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects.updateParticipant",
+          "errors": [],
+          "name": "updateParticipant",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "legacyProjects"
+    },
+    {
+      "class_name": "LevelTwoAreasResource",
+      "file": "src/resources/level-two-areas.ts",
+      "methods": [
+        {
+          "endpoint": "/levelTwoAreas.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "levelTwoAreas"
+    },
+    {
+      "class_name": "LostReasonsResource",
+      "file": "src/resources/lost-reasons.ts",
+      "methods": [
+        {
+          "endpoint": "/lostReasons.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "lostReasons"
+    },
+    {
+      "class_name": "MailTemplatesResource",
+      "file": "src/resources/mail-templates.ts",
+      "methods": [
+        {
+          "endpoint": "/mailTemplates.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "mailTemplates"
+    },
+    {
+      "class_name": "MeetingsResource",
+      "file": "src/resources/meetings.ts",
+      "methods": [
+        {
+          "endpoint": "/meetings.complete",
+          "errors": [],
+          "name": "complete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/meetings.createReport",
+          "errors": [],
+          "name": "createReport",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/meetings.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/meetings.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/meetings.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/meetings.schedule",
+          "errors": [],
+          "name": "schedule",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/meetings.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "meetings"
+    },
+    {
+      "class_name": "MigrateResource",
+      "file": "src/resources/migrate.ts",
+      "methods": [
+        {
+          "endpoint": "/migrate.activityType",
+          "errors": [],
+          "name": "activityType",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/migrate.id",
+          "errors": [],
+          "name": "id",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/migrate.taxRate",
+          "errors": [],
+          "name": "taxRate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "migrate"
+    },
+    {
+      "class_name": "NotesResource",
+      "file": "src/resources/notes.ts",
+      "methods": [
+        {
+          "endpoint": "/notes.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/notes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/notes.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "notes"
+    },
+    {
+      "class_name": "OrdersResource",
+      "file": "src/resources/orders.ts",
+      "methods": [
+        {
+          "endpoint": "/orders.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/orders.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "orders"
+    },
+    {
+      "class_name": "PaymentMethodsResource",
+      "file": "src/resources/payment-methods.ts",
+      "methods": [
+        {
+          "endpoint": "/paymentMethods.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "paymentMethods"
+    },
+    {
+      "class_name": "PaymentTermsResource",
+      "file": "src/resources/payment-terms.ts",
+      "methods": [
+        {
+          "endpoint": "/paymentTerms.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "paymentTerms"
+    },
+    {
+      "class_name": "PlannableItemsResource",
+      "file": "src/resources/plannable-items.ts",
+      "methods": [
+        {
+          "endpoint": "/plannableItems.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/plannableItems.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "plannableItems"
+    },
+    {
+      "class_name": "PriceListsResource",
+      "file": "src/resources/price-lists.ts",
+      "methods": [
+        {
+          "endpoint": "/priceLists.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "priceLists"
+    },
+    {
+      "class_name": "ProductCategoriesResource",
+      "file": "src/resources/product-categories.ts",
+      "methods": [
+        {
+          "endpoint": "/productCategories.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "productCategories"
+    },
+    {
+      "class_name": "ProductsResource",
+      "file": "src/resources/products.ts",
+      "methods": [
+        {
+          "endpoint": "/products.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/products.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/products.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/products.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/products.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "products"
+    },
+    {
+      "class_name": "ProjectGroupsResource",
+      "file": "src/resources/project-groups.ts",
+      "methods": [
+        {
+          "endpoint": "/projects-v2/projectGroups.assign",
+          "errors": [],
+          "name": "assign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.duplicate",
+          "errors": [],
+          "name": "duplicate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.unassign",
+          "errors": [],
+          "name": "unassign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projectGroups.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "projectGroups"
+    },
+    {
+      "class_name": "ProjectLinesResource",
+      "file": "src/resources/project-lines.ts",
+      "methods": [
+        {
+          "endpoint": "/projects-v2/projectLines.addToGroup",
+          "errors": [],
+          "name": "addToGroup",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projectLines.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/projects-v2/projectLines.removeFromGroup",
+          "errors": [],
+          "name": "removeFromGroup",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "projectLines"
+    },
+    {
+      "class_name": "ProjectMaterialsResource",
+      "file": "src/resources/project-materials.ts",
+      "methods": [
+        {
+          "endpoint": "/projects-v2/materials.assign",
+          "errors": [],
+          "name": "assign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/materials.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/materials.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/materials.duplicate",
+          "errors": [],
+          "name": "duplicate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/materials.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/materials.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/projects-v2/materials.unassign",
+          "errors": [],
+          "name": "unassign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/materials.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "projectMaterials"
+    },
+    {
+      "class_name": "ProjectsResource",
+      "file": "src/resources/projects.ts",
+      "methods": [
+        {
+          "endpoint": "/projects-v2/projects.addCustomer",
+          "errors": [],
+          "name": "addCustomer",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.addDeal",
+          "errors": [],
+          "name": "addDeal",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.addOwner",
+          "errors": [],
+          "name": "addOwner",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.addQuotation",
+          "errors": [],
+          "name": "addQuotation",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.assign",
+          "errors": [],
+          "name": "assign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.close",
+          "errors": [],
+          "name": "close",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/projects.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.duplicate",
+          "errors": [],
+          "name": "duplicate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/projects.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/projects.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/projects-v2/projects.removeCustomer",
+          "errors": [],
+          "name": "removeCustomer",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.removeDeal",
+          "errors": [],
+          "name": "removeDeal",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.removeOwner",
+          "errors": [],
+          "name": "removeOwner",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.removeQuotation",
+          "errors": [],
+          "name": "removeQuotation",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.reopen",
+          "errors": [],
+          "name": "reopen",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.unassign",
+          "errors": [],
+          "name": "unassign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/projects.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "projects"
+    },
+    {
+      "class_name": "ProjectTasksResource",
+      "file": "src/resources/project-tasks.ts",
+      "methods": [
+        {
+          "endpoint": "/projects-v2/tasks.assign",
+          "errors": [],
+          "name": "assign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.duplicate",
+          "errors": [],
+          "name": "duplicate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.unassign",
+          "errors": [],
+          "name": "unassign",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/projects-v2/tasks.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "projectTasks"
+    },
+    {
+      "class_name": "QuotationsResource",
+      "file": "src/resources/quotations.ts",
+      "methods": [
+        {
+          "endpoint": "/quotations.accept",
+          "errors": [],
+          "name": "accept",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/quotations.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/quotations.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/quotations.download",
+          "errors": [],
+          "name": "download",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/quotations.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/quotations.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/quotations.send",
+          "errors": [],
+          "name": "send",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/quotations.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "quotations"
+    },
+    {
+      "class_name": "ReceiptsResource",
+      "file": "src/resources/receipts.ts",
+      "methods": [
+        {
+          "endpoint": "/receipts.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/receipts.approve",
+          "errors": [],
+          "name": "approve",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/receipts.listPayments",
+          "errors": [],
+          "name": "listPayments",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/receipts.markAsPendingReview",
+          "errors": [],
+          "name": "markAsPendingReview",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.refuse",
+          "errors": [],
+          "name": "refuse",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.registerPayment",
+          "errors": [],
+          "name": "registerPayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/receipts.removePayment",
+          "errors": [],
+          "name": "removePayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.sendToBookkeeping",
+          "errors": [],
+          "name": "sendToBookkeeping",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/receipts.updatePayment",
+          "errors": [],
+          "name": "updatePayment",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "receipts"
+    },
+    {
+      "class_name": "ReservationsResource",
+      "file": "src/resources/reservations.ts",
+      "methods": [
+        {
+          "endpoint": "/reservations.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/reservations.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/reservations.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/reservations.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "reservations"
+    },
+    {
+      "class_name": "SubscriptionsResource",
+      "file": "src/resources/subscriptions.ts",
+      "methods": [
+        {
+          "endpoint": "/subscriptions.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/subscriptions.deactivate",
+          "errors": [],
+          "name": "deactivate",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/subscriptions.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/subscriptions.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/subscriptions.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "subscriptions"
+    },
+    {
+      "class_name": "TagsResource",
+      "file": "src/resources/tags.ts",
+      "methods": [
+        {
+          "endpoint": "/tags.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "tags"
+    },
+    {
+      "class_name": "TasksResource",
+      "file": "src/resources/tasks.ts",
+      "methods": [
+        {
+          "endpoint": "/tasks.complete",
+          "errors": [],
+          "name": "complete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/tasks.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tasks.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/tasks.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tasks.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/tasks.reopen",
+          "errors": [],
+          "name": "reopen",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/tasks.schedule",
+          "errors": [],
+          "name": "schedule",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tasks.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "tasks"
+    },
+    {
+      "class_name": "TaxRatesResource",
+      "file": "src/resources/tax-rates.ts",
+      "methods": [
+        {
+          "endpoint": "/taxRates.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "taxRates"
+    },
+    {
+      "class_name": "TeamsResource",
+      "file": "src/resources/teams.ts",
+      "methods": [
+        {
+          "endpoint": "/teams.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "teams"
+    },
+    {
+      "class_name": "TicketsResource",
+      "file": "src/resources/tickets.ts",
+      "methods": [
+        {
+          "endpoint": "/tickets.addInternalMessage",
+          "errors": [],
+          "name": "addInternalMessage",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.addReply",
+          "errors": [],
+          "name": "addReply",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.create",
+          "errors": [],
+          "name": "create",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.getMessage",
+          "errors": [],
+          "name": "getMessage",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.importMessage",
+          "errors": [],
+          "name": "importMessage",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/tickets.listMessages",
+          "errors": [],
+          "name": "listMessages",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/tickets.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "tickets"
+    },
+    {
+      "class_name": "TicketStatusResource",
+      "file": "src/resources/ticket-status.ts",
+      "methods": [
+        {
+          "endpoint": "/ticketStatus.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "ticketStatus"
+    },
+    {
+      "class_name": "TimersResource",
+      "file": "src/resources/timers.ts",
+      "methods": [
+        {
+          "endpoint": "/timers.current",
+          "errors": [],
+          "name": "current",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/timers.start",
+          "errors": [],
+          "name": "start",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/timers.stop",
+          "errors": [],
+          "name": "stop",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/timers.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "timers"
+    },
+    {
+      "class_name": "TimeTrackingResource",
+      "file": "src/resources/time-tracking.ts",
+      "methods": [
+        {
+          "endpoint": "/timeTracking.add",
+          "errors": [],
+          "name": "add",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/timeTracking.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/timeTracking.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/timeTracking.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/timeTracking.resume",
+          "errors": [],
+          "name": "resume",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/timeTracking.update",
+          "errors": [],
+          "name": "update",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "timeTracking"
+    },
+    {
+      "class_name": "UnitsOfMeasureResource",
+      "file": "src/resources/units-of-measure.ts",
+      "methods": [
+        {
+          "endpoint": "/unitsOfMeasure.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "unitsOfMeasure"
+    },
+    {
+      "class_name": "UserAvailabilityResource",
+      "file": "src/resources/user-availability.ts",
+      "methods": [
+        {
+          "endpoint": "/userAvailability.daily",
+          "errors": [],
+          "name": "daily",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/userAvailability.total",
+          "errors": [],
+          "name": "total",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "userAvailability"
+    },
+    {
+      "class_name": "UsersResource",
+      "file": "src/resources/users.ts",
+      "methods": [
+        {
+          "endpoint": "/users.getWeekSchedule",
+          "errors": [],
+          "name": "getWeekSchedule",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/users.info",
+          "errors": [],
+          "name": "info",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/users.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/users.listDaysOff",
+          "errors": [],
+          "name": "listDaysOff",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "single"
+        },
+        {
+          "endpoint": "/users.me",
+          "errors": [],
+          "name": "me",
+          "param_shape": "",
+          "return_envelope": "single"
+        }
+      ],
+      "name": "users"
+    },
+    {
+      "class_name": "WebhooksResource",
+      "file": "src/resources/webhooks.ts",
+      "methods": [
+        {
+          "endpoint": "/webhooks.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        },
+        {
+          "endpoint": "/webhooks.register",
+          "errors": [],
+          "name": "register",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
+          "endpoint": "/webhooks.unregister",
+          "errors": [],
+          "name": "unregister",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        }
+      ],
+      "name": "webhooks"
+    },
+    {
+      "class_name": "WithholdingTaxRatesResource",
+      "file": "src/resources/withholding-tax-rates.ts",
+      "methods": [
+        {
+          "endpoint": "/withholdingTaxRates.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "withholdingTaxRates"
+    },
+    {
+      "class_name": "WorkTypesResource",
+      "file": "src/resources/work-types.ts",
+      "methods": [
+        {
+          "endpoint": "/workTypes.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "workTypes"
+    }
+  ],
+  "schema_version": "1",
+  "sha": "7ee6e8fd63caca3e84cecb35d2561cefb0327cab"
+}
