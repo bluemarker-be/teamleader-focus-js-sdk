@@ -27,6 +27,7 @@ import type {
   AuditModule,
   AuditModuleName,
   AuditModuleResult,
+  ComplianceReport,
   ConsistencyMatrix,
   Finding,
   FindingsFile,
@@ -37,6 +38,10 @@ import {
   runConsistency,
   renderConsistencyMatrixMd,
 } from "./audit-consistency.js";
+import {
+  runCompliance,
+  renderComplianceReportMd,
+} from "./audit-compliance.js";
 
 const MODULE_NAMES: readonly AuditModuleName[] = [
   "consistency",
@@ -66,7 +71,7 @@ const stubModule: AuditModule = async (_ctx) => ({
 
 const MODULES: Record<AuditModuleName, AuditModule> = {
   consistency: runConsistency,
-  compliance: stubModule,
+  compliance: runCompliance,
   docs: stubModule,
   changelog: stubModule,
 };
@@ -86,7 +91,10 @@ const ARTIFACT_WRITERS: Record<
     filename: "consistency-matrix",
     renderMd: (a) => renderConsistencyMatrixMd(a as ConsistencyMatrix),
   },
-  compliance: null,
+  compliance: {
+    filename: "compliance-report",
+    renderMd: (a) => renderComplianceReportMd(a as ComplianceReport),
+  },
   docs: null,
   changelog: null,
 };

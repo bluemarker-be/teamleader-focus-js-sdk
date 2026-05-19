@@ -1,6 +1,46 @@
 {
   "findings": [
     {
+      "category": "principle-compliance",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "315f1b37a6a17009",
+      "location": {
+        "end_line": 45,
+        "file": "src/paginator.ts",
+        "start_line": 45
+      },
+      "message": "Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass",
+      "principle": "V",
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
+        "version_impact": "minor"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "principle-compliance",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "317f220ee8378e37",
+      "location": {
+        "end_line": 497,
+        "file": "src/client.ts",
+        "start_line": 497
+      },
+      "message": "Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass",
+      "principle": "V",
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
+        "version_impact": "minor"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
       "category": "consistency",
       "classification": "non-trivial",
       "details": null,
@@ -91,6 +131,46 @@
       ]
     },
     {
+      "category": "principle-compliance",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "a1efe1a403b7d831",
+      "location": {
+        "end_line": 421,
+        "file": "src/client.ts",
+        "start_line": 421
+      },
+      "message": "Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass",
+      "principle": "V",
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
+        "version_impact": "minor"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
+      "category": "principle-compliance",
+      "classification": "non-trivial",
+      "details": null,
+      "id": "b0f2a062e828281a",
+      "location": {
+        "end_line": 454,
+        "file": "src/client.ts",
+        "start_line": 454
+      },
+      "message": "Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass",
+      "principle": "V",
+      "remediation": {
+        "kind": "task",
+        "proposed_approach": "Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).",
+        "version_impact": "minor"
+      },
+      "severity": "medium",
+      "variants": null
+    },
+    {
       "category": "consistency",
       "classification": "non-trivial",
       "details": null,
@@ -126,6 +206,25 @@
           ]
         }
       ]
+    },
+    {
+      "category": "principle-compliance",
+      "classification": "trivial",
+      "details": null,
+      "id": "f1e64031e524514a",
+      "location": {
+        "end_line": 0,
+        "file": "src/resources/calls.ts",
+        "start_line": 0
+      },
+      "message": "calls.delete (/calls.delete) has no live integration test",
+      "principle": "VI",
+      "remediation": {
+        "description": "Add a live integration test for /calls.delete under tests/integration/, or — if the endpoint is unsafe to exercise against a production tenant — add it to scripts/verify-endpoints.ts INTENTIONALLY_SKIPPED with a reason.",
+        "kind": "in-pr"
+      },
+      "severity": "medium",
+      "variants": null
     },
     {
       "category": "consistency",
@@ -198,5 +297,5 @@
   ],
   "generated_for_branch": "001-sdk-quality-audit",
   "schema_version": "1",
-  "sha": "a1977b39570b3364d75f1eb6cdb220f69e663daa"
+  "sha": "d5f9c2792de04bf2af048675cdf5ec4485acb0f2"
 }

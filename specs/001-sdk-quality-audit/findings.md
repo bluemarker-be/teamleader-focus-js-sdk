@@ -1,8 +1,8 @@
 # Audit Findings
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `a1977b39570b3364d75f1eb6cdb220f69e663daa`
+**Branch**: `001-sdk-quality-audit` · **SHA**: `d5f9c2792de04bf2af048675cdf5ec4485acb0f2`
 
-Total findings: **3**
+Total findings: **8**
 
 ## consistency (3)
 
@@ -14,3 +14,13 @@ Total findings: **3**
 ### low
 
 - **fe2697a2ca7daa80** `src/resources/` — method_name divergence on synonym-group:add/create/draft: add (9) vs create (19) vs draft (1) (**non-trivial**; task (major): Reviewer to pick canonical form (audit does not auto-arbitrate, per Q3). Variants: add=[calls.add, closingDays.add, companies.add, contacts.add, incomingCreditNotes.add, incomingInvoices.add, products.add, receipts.add, timeTracking.add]; create=[customFieldDefinitions.create, dayOffTypes.create, dealPhases.create, dealPipelines.create, deals.create, emailTracking.create, events.create, legacyMilestones.create, legacyProjects.create, notes.create, projectGroups.create, projectMaterials.create, projectTasks.create, projects.create, quotations.create, reservations.create, subscriptions.create, tasks.create, tickets.create]; draft=[invoices.draft].)
+
+## principle-compliance (5)
+
+### medium
+
+- **315f1b37a6a17009** `src/paginator.ts:45` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
+- **317f220ee8378e37** `src/client.ts:497` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
+- **a1efe1a403b7d831** `src/client.ts:421` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
+- **b0f2a062e828281a** `src/client.ts:454` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
+- **f1e64031e524514a** `src/resources/calls.ts` — calls.delete (/calls.delete) has no live integration test (trivial; in-PR: Add a live integration test for /calls.delete under tests/integration/, or — if the endpoint is unsafe to exercise against a production tenant — add it to scripts/verify-endpoints.ts INTENTIONALLY_SKIPPED with a reason.)
