@@ -155,7 +155,7 @@ All 68 resources are available — see the full list below.
 | `bookkeepingSubmissions` | `list` |
 | `businessTypes` | `list` |
 | `callOutcomes` | `list` |
-| `calls` | `list` `info` `add` `update` `complete` |
+| `calls` | `list` `info` `add` `update` `delete` `complete` |
 | `closingDays` | `list` `add` `delete` |
 | `cloudPlatforms` | `url` |
 | `commercialDiscounts` | `list` |
@@ -166,7 +166,7 @@ All 68 resources are available — see the full list below.
 | `customFieldDefinitions` | `create` `list` `info` |
 | `dayOffTypes` | `list` `create` `update` `delete` |
 | `daysOff` | `import` `bulkDelete` |
-| `dealPhases` | `list` `create` `update` `duplicate` `move` `delete` |
+| `dealPhases` | `list` `create` `update` `move` `delete` |
 | `dealPipelines` | `list` `create` `update` `markAsDefault` `duplicate` `delete` |
 | `dealSources` | `list` |
 | `deals` | `list` `info` `create` `update` `move` `win` `lose` `delete` |
@@ -177,8 +177,8 @@ All 68 resources are available — see the full list below.
 | `expenses` | `list` |
 | `externalParties` | `addToProject` `update` `delete` |
 | `files` | `list` `info` `upload` `download` `delete` |
-| `incomingCreditNotes` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
-| `incomingInvoices` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `incomingCreditNotes` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` `listPayments` `registerPayment` `removePayment` `updatePayment` |
+| `incomingInvoices` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` `listPayments` `registerPayment` `removePayment` `updatePayment` |
 | `invoices` | `list` `info` `download` `draft` `update` `updateBooked` `copy` `book` `delete` `registerPayment` `removePayments` `credit` `creditPartially` `send` `sendViaPeppol` |
 | `legacyMilestones` | `list` `info` `create` `update` `delete` `close` `open` |
 | `legacyProjects` | `list` `info` `create` `update` `close` `reopen` `delete` `addParticipant` `updateParticipant` |
@@ -201,7 +201,7 @@ All 68 resources are available — see the full list below.
 | `projectTasks` | `list` `info` `create` `update` `duplicate` `delete` `assign` `unassign` |
 | `projects` | `list` `info` `create` `update` `close` `reopen` `duplicate` `delete` `addOwner` `removeOwner` `assign` `unassign` `addCustomer` `removeCustomer` `addDeal` `removeDeal` `addQuotation` `removeQuotation` |
 | `quotations` | `list` `info` `download` `create` `send` `update` `accept` `delete` |
-| `receipts` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` |
+| `receipts` | `add` `info` `update` `delete` `approve` `refuse` `markAsPendingReview` `sendToBookkeeping` `listPayments` `registerPayment` `removePayment` `updatePayment` |
 | `reservations` | `list` `create` `update` `delete` |
 | `subscriptions` | `list` `info` `create` `update` `deactivate` |
 | `tags` | `list` |

@@ -291,6 +291,9 @@ function makeDocFinding(
   severity: "low" | "medium" | "high",
 ): Finding {
   const location = { file: fileRel, start_line: startLine, end_line: startLine };
+  // All three docs flavours are TRIVIAL per FR-008: single file
+  // (README.md), no public-API surface change, no behavior change
+  // observable to a caller. Doc drift is fix-in-PR by definition.
   return {
     id: computeFindingId({
       category: "documentation",
@@ -302,26 +305,18 @@ function makeDocFinding(
     principle: null,
     location,
     severity,
-    classification: flavor === "snippet-broken" ? "trivial" : "non-trivial",
+    classification: "trivial",
     message,
     details: null,
-    remediation:
-      flavor === "documented-but-absent"
-        ? {
-            kind: "task",
-            proposed_approach: `Remove the stale README entry, or restore the documented symbol if it was removed unintentionally.`,
-            version_impact: "patch",
-          }
-        : flavor === "present-but-undocumented"
-        ? {
-            kind: "task",
-            proposed_approach: `Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).`,
-            version_impact: "patch",
-          }
-        : {
-            kind: "in-pr",
-            description: `Update the README snippet to reference an existing client method.`,
-          },
+    remediation: {
+      kind: "in-pr",
+      description:
+        flavor === "documented-but-absent"
+          ? `Remove the stale README entry, or restore the documented symbol if it was removed unintentionally.`
+          : flavor === "present-but-undocumented"
+          ? `Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).`
+          : `Update the README snippet to reference an existing client method.`,
+    },
     variants: null,
   };
 }

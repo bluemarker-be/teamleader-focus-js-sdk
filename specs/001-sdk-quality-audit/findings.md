@@ -1,8 +1,8 @@
 # Audit Findings
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `b8ed99f4ecd0db07a144ddae9f488cb94d71412c`
+**Branch**: `001-sdk-quality-audit` · **SHA**: `a3ec05ad7141378e8bf103e09fcef6f164a00a06`
 
-Total findings: **26**
+Total findings: **7**
 
 ## consistency (3)
 
@@ -23,35 +23,3 @@ Total findings: **26**
 - **317f220ee8378e37** `src/client.ts:497` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
 - **a1efe1a403b7d831** `src/client.ts:421` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
 - **b0f2a062e828281a** `src/client.ts:454` — Bare `throw new Error(...)` — should construct a TeamleaderFocus* subclass (**non-trivial**; task (minor): Replace with the appropriate TeamleaderFocus* subclass so consumers can pattern-match on error identity (constitution principle V).)
-
-## documentation (14)
-
-### high
-
-- **2acdf0c355e7a98d** `README.md` — README lists `dealPhases.duplicate` but it doesn't exist on the resource (**non-trivial**; task (patch): Remove the stale README entry, or restore the documented symbol if it was removed unintentionally.)
-
-### medium
-
-- **0e319eb91a432b26** `README.md` — `incomingCreditNotes.removePayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **168d3a1e57b03e67** `README.md` — `incomingInvoices.registerPayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **261646c76069a5e0** `README.md` — `calls.delete` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **678ed78675da556a** `README.md` — `incomingInvoices.listPayments` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **6efa01535564b88f** `README.md` — `incomingInvoices.updatePayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **770227a877ca7f99** `README.md` — `receipts.updatePayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **808340bd160169a2** `README.md` — `incomingInvoices.removePayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **868f40d1cdd15c2e** `README.md` — `incomingCreditNotes.registerPayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **a6c8747695c30c3d** `README.md` — `receipts.registerPayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **b454277a9925b8b6** `README.md` — `incomingCreditNotes.updatePayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **be9a593870309b0f** `README.md` — `incomingCreditNotes.listPayments` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **cb90c9cab059b4fb** `README.md` — `receipts.listPayments` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-- **d1f8e01f956e3c57** `README.md` — `receipts.removePayment` exists but isn't listed in the README Resources table (**non-trivial**; task (patch): Add the missing entry to the README Resources table (or document the omission in the snippet's surrounding text if it's intentional).)
-
-## changelog (5)
-
-### medium
-
-- **13a5c3c5f237d98a** `CHANGELOG.md:283` — CHANGELOG declares `[0.1.0]` but no matching git tag `v0.1.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **7cf4660a14f7693a** `CHANGELOG.md:255` — CHANGELOG declares `[0.2.0]` but no matching git tag `v0.2.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **bc8e9cfac0fdc4fd** `CHANGELOG.md:229` — CHANGELOG declares `[0.3.0]` but no matching git tag `v0.3.0` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **c2cbfc0af94738ec** `CHANGELOG.md:296` — CHANGELOG declares `[0.0.1]` but no matching git tag `v0.0.1` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)
-- **fc3e8d787a2bbfc7** `CHANGELOG.md:274` — CHANGELOG declares `[0.1.1]` but no matching git tag `v0.1.1` exists (**non-trivial**; task (none): Add the missing git tag (`git tag vX.Y.Z <commit-sha>` for the release commit), or remove the CHANGELOG entry if the release was never shipped.)

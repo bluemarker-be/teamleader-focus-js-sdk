@@ -188,6 +188,12 @@ function makeChangelogFinding(
   severity: "low" | "medium" | "high",
 ): Finding {
   const location = { file: fileRel, start_line: startLine, end_line: startLine };
+  // `missing-git-tag` is TRIVIAL: it's resolved by either a single
+  // CHANGELOG edit (demote/remove the entry) or a single git tag
+  // command. No code change, no behavior change.
+  // `silent-surface-change` is NON-TRIVIAL: requires inspecting the
+  // diff between two tags and adding informed CHANGELOG text.
+  const isTrivial = flavor === "missing-git-tag";
   return {
     id: computeFindingId({
       category: "changelog",
@@ -199,17 +205,19 @@ function makeChangelogFinding(
     principle: null,
     location,
     severity,
-    classification: "non-trivial",
+    classification: isTrivial ? "trivial" : "non-trivial",
     message,
     details: null,
-    remediation: {
-      kind: "task",
-      proposed_approach:
-        flavor === "missing-git-tag"
-          ? `Add the missing git tag (\`git tag vX.Y.Z <commit-sha>\` for the release commit), or remove the CHANGELOG entry if the release was never shipped.`
-          : `Audit the diff between the two tags (\`git diff <prev>..<curr> -- src/index.ts\`) and add a CHANGELOG entry describing every public-API change found.`,
-      version_impact: "none",
-    },
+    remediation: isTrivial
+      ? {
+          kind: "in-pr",
+          description: `Add the missing git tag (\`git tag vX.Y.Z <commit-sha>\` for the release commit) OR demote the CHANGELOG entry from \`##\` to \`###\` under a non-versioned parent heading (e.g., "Pre-tagging early development") to acknowledge it as historical rather than a released version.`,
+        }
+      : {
+          kind: "task",
+          proposed_approach: `Audit the diff between the two tags (\`git diff <prev>..<curr> -- src/index.ts\`) and add a CHANGELOG entry describing every public-API change found.`,
+          version_impact: "none",
+        },
     variants: null,
   };
 }

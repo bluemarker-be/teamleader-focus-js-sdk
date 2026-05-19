@@ -226,7 +226,15 @@ Discovered via `verify:endpoints`, fixed against the actual spec:
 ### Changed
 - Tests folder is no longer in `.gitignore` (was a mistake — integration tests must be version-controlled).
 
-## [0.3.0] - 2026-04-13
+## Pre-tagging early development (v0.0.1 – v0.3.0)
+
+> The entries below predate the repo's release-tagging discipline,
+> which started at `v0.3.1`. Their commits exist in `git log` but were
+> never explicitly tagged. The entries are preserved here for
+> historical context; if you need to pin to one of these versions, use
+> the corresponding commit SHA from `git log` rather than a tag.
+
+### [0.3.0] - 2026-04-13
 
 ### Added
 - API spec updated: 1.129.0 → 1.136.0
@@ -252,7 +260,7 @@ Discovered via `verify:endpoints`, fixed against the actual spec:
 ### Fixed
 - Paginator bug: empty page was yielded before the break check, causing consumers to receive a spurious empty page
 
-## [0.2.0] - 2026-03-27
+### [0.2.0] - 2026-03-27
 
 API spec updated: 1.119.0 → 1.129.0
 
@@ -271,7 +279,7 @@ API spec updated: 1.119.0 → 1.129.0
 - Scripts now read spec from `api-specs/` directory (versioned files) instead of single `api-spec.yaml`
 - Fixed optional/required params on several `.list()` and `.stop()` methods to match the spec
 
-## [0.1.1] - 2026-03-01
+### [0.1.1] - 2026-03-01
 
 API spec updated: 1.112.0 → 1.115.0
 
@@ -280,7 +288,7 @@ API spec updated: 1.112.0 → 1.115.0
 - `orders.info` / `orders.list` — legacy `project` field marked as only available for users with access to the old projects module
 - `timeTracking.list` — `relates_to` filter now supports `nextgenProject` and `nextgenProjectGroup` types
 
-## [0.1.0] - 2026-02-12
+### [0.1.0] - 2026-02-12
 
 ### Added
 - `getTokens` callback for multi-process token resilience — allows reading fresh tokens from a shared store (DB, Redis) before attempting an OAuth refresh, so processes can pick up tokens refreshed by other processes
@@ -293,7 +301,7 @@ API spec updated: 1.112.0 → 1.115.0
 - `incomingInvoices` — added listPayments, registerPayment, removePayment, updatePayment
 - `receipts` — added listPayments, registerPayment, removePayment, updatePayment
 
-## [0.0.1] - 2026-02-12
+### [0.0.1] - 2026-02-12
 
 Initial release — full coverage of the Teamleader Focus API (spec v1.102.0).
 
