@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://operative.pro/sdk-audit/compliance-report.schema.json",
+  "title": "SDK Audit Compliance Report",
+  "description": "Per-file × per-principle compliance grid. Companion to compliance-report.md. See specs/001-sdk-quality-audit/data-model.md#entity-compliance-report.",
+  "type": "object",
+  "required": ["sha", "generated_for_branch", "rows"],
+  "additionalProperties": false,
+  "properties": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "generated_for_branch": { "type": "string" },
+    "schema_version": { "type": "string", "const": "1" },
+    "rows": {
+      "type": "array",
+      "description": "Sorted ascending by file (per research Decision 2).",
+      "items": {
+        "type": "object",
+        "required": ["file", "cells", "finding_ids"],
+        "additionalProperties": false,
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "POSIX-style repo-relative path."
+          },
+          "cells": {
+            "type": "object",
+            "description": "Exactly six keys (I–VI), one per constitution principle.",
+            "required": ["I", "II", "III", "IV", "V", "VI"],
+            "additionalProperties": false,
+            "properties": {
+              "I":   { "$ref": "#/$defs/verdict" },
+              "II":  { "$ref": "#/$defs/verdict" },
+              "III": { "$ref": "#/$defs/verdict" },
+              "IV":  { "$ref": "#/$defs/verdict" },
+              "V":   { "$ref": "#/$defs/verdict" },
+              "VI":  { "$ref": "#/$defs/verdict" }
+            }
+          },
+          "finding_ids": {
+            "type": "array",
+            "description": "IDs of findings explaining any partial/no cell in this row. Empty when all cells are yes/n/a.",
+            "items": { "type": "string", "pattern": "^[0-9a-f]{16}$" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "verdict": {
+      "type": "string",
+      "enum": ["yes", "partial", "no", "n/a"]
+    }
+  }
+}

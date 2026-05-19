@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://operative.pro/sdk-audit/consistency-matrix.schema.json",
+  "title": "SDK Audit Consistency Matrix",
+  "description": "Per-resource × per-method observations plus detected divergence clusters. Companion to consistency-matrix.md. See specs/001-sdk-quality-audit/data-model.md#entity-consistency-matrix.",
+  "type": "object",
+  "required": ["sha", "generated_for_branch", "resources", "divergence_clusters"],
+  "additionalProperties": false,
+  "properties": {
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "generated_for_branch": { "type": "string" },
+    "schema_version": { "type": "string", "const": "1" },
+    "resources": {
+      "type": "array",
+      "description": "Sorted ascending by name.",
+      "items": {
+        "type": "object",
+        "required": ["name", "class_name", "file", "methods"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "description": "Camel-case name exposed on TeamleaderFocusClient (e.g. contacts)." },
+          "class_name": { "type": "string", "description": "Resource class name (e.g. ContactsResource)." },
+          "file": { "type": "string", "description": "POSIX-style path to the resource module." },
+          "methods": {
+            "type": "array",
+            "description": "Sorted ascending by name.",
+            "items": {
+              "type": "object",
+              "required": ["name", "endpoint", "param_shape", "return_envelope", "errors"],
+              "additionalProperties": false,
+              "properties": {
+                "name": { "type": "string" },
+                "endpoint": { "type": "string", "description": "Underlying Teamleader endpoint (e.g. /contacts.add)." },
+                "param_shape": { "type": "string", "description": "Canonical fingerprint of the parameter type." },
+                "return_envelope": { "type": "string", "enum": ["single", "iterable", "void", "binary", "other"] },
+                "errors": {
+                  "type": "array",
+                  "items": { "type": "string", "description": "TeamleaderFocusError subclass name." }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "divergence_clusters": {
+      "type": "array",
+      "description": "Sorted ascending by attribute then by first variant value.",
+      "items": {
+        "type": "object",
+        "required": ["attribute", "variants", "finding_id"],
+        "additionalProperties": false,
+        "properties": {
+          "attribute": { "type": "string", "enum": ["method_name", "param_shape", "return_envelope"] },
+          "variants": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["value", "occurrence_count", "resources_methods"],
+              "additionalProperties": false,
+              "properties": {
+                "value": { "type": "string" },
+                "occurrence_count": { "type": "integer", "minimum": 1 },
+                "resources_methods": {
+                  "type": "array",
+                  "items": { "type": "string", "description": "resource_name.method_name" }
+                }
+              }
+            }
+          },
+          "finding_id": { "type": "string", "pattern": "^[0-9a-f]{16}$" }
+        }
+      }
+    }
+  }
+}
