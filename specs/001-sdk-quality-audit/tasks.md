@@ -141,9 +141,15 @@ description: "Task list for SDK Quality & Consistency Audit"
 
 ### Remediation Tasks (populated by T028)
 
-> **NOTE**: This subsection starts empty. T028 will append one `T1xx` entry per non-trivial finding produced by the audit run in T026. These entries describe remediation work for subsequent release cycles; they are NOT scheduled into this audit's PR.
+> **NOTE**: This subsection is populated by T028 once T026's audit run produces its findings. Entries describe remediation work for subsequent release cycles; they are NOT scheduled into this audit's PR.
+>
+> **Partial population (2026-05-19)**: T101–T103 below were filed against the MVP audit run (consistency module only; SHA `a1977b3`). The full audit run at T026 may surface additional T1xx entries from the compliance / docs / changelog modules once US2 and US3 land.
 
-*(populated during execution)*
+- [ ] T101 Register `dayOffTypes.list` as an intentional deviation in `scripts/audit-consistency.ts`. Investigation showed the upstream OpenAPI spec for `/dayOffTypes.list` declares no `requestBody`, only a `Content-Type` header — so `src/resources/day-off-types.ts:6` (`list(_params?: undefined, ...)`) correctly models a parameterless endpoint, NOT a divergence to fix. Add an `INTENTIONAL_DEVIATIONS` registry (cf. `INTENTIONALLY_SKIPPED` in `verify-endpoints.ts`) with `{ resource: "dayOffTypes", method: "list", attribute: "param_shape", reason: "Upstream API takes no body parameters; only Content-Type header" }` and filter matching divergences out of findings + clusters. Finding ID surfaced: `93f5f2e8211ae060`. Target version: **patch** (audit-internal change, no SDK public-API impact).
+
+- [ ] T102 Decide canonical return envelope for `*.registerPayment` methods. The audit found `invoices.registerPayment` returns `void` while the three siblings (`incomingCreditNotes.registerPayment`, `incomingInvoices.registerPayment`, `receipts.registerPayment`) return `single` (`{ data: T }`). Either (a) align `invoices.registerPayment` to return the registered payment (breaking change for any consumer destructuring its current `void` result — though none in production are expected to), or (b) align the three siblings to return `void` (breaking change for any consumer using their return values). Cross-check the upstream Teamleader API to determine which envelope is correct per the spec, then propose the alignment direction. Finding ID surfaced: `f0279509226fb8cb`. Target version: **major** (v2.0.0 candidate per constitution principle II).
+
+- [ ] T103 Decide canonical name for write-style operations across the 29 affected resources. The audit found the synonym cluster `add` (9 resources) / `create` (19 resources) / `draft` (1 resource: `invoices.draft`) for the create-style operation. This is the highest-volume divergence in the SDK and the rename would affect ~100 production Edge Functions. Choose a canonical (likely `create` by majority, but `add` may read more naturally for some entities like `tags`, `closingDays`; `invoices.draft` carries semantic meaning — drafts aren't a finalized invoice — and may warrant keeping). Per constitution principle II, a rename is MAJOR; per the v1.0.0 changelog commitment, this requires a deprecation MINOR (1.x.0) shipping the new name alongside the old, before removal in 2.0.0. Finding ID surfaced: `fe2697a2ca7daa80`. Target version: **major** (v2.0.0 candidate, preceded by a 1.x.0 deprecation MINOR).
 
 ---
 
