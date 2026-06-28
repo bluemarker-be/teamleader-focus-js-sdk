@@ -187,7 +187,7 @@ All 68 resources are available — see the full list below.
 | `mailTemplates` | `list` |
 | `meetings` | `list` `info` `schedule` `update` `complete` `createReport` `delete` |
 | `migrate` | `id` `taxRate` `activityType` |
-| `notes` | `list` `create` `update` |
+| `notes` | `list` `create` `update` `delete` |
 | `orders` | `list` `info` |
 | `paymentMethods` | `list` |
 | `paymentTerms` | `list` |
@@ -214,6 +214,7 @@ All 68 resources are available — see the full list below.
 | `timers` | `current` `start` `stop` `update` |
 | `unitsOfMeasure` | `list` |
 | `userAvailability` | `total` `daily` |
+| `userSchedules` | `list` |
 | `users` | `me` `list` `info` `listDaysOff` `getWeekSchedule` |
 | `webhooks` | `register` `list` `unregister` |
 | `withholdingTaxRates` | `list` |

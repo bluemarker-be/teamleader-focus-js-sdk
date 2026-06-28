@@ -12,5 +12,8 @@ export class NotesResource extends BaseResource {
     update(params) {
         return this.client.request("/notes.update", params);
     }
+    delete(params) {
+        return this.client.request("/notes.delete", params);
+    }
 }
 //# sourceMappingURL=notes.js.map

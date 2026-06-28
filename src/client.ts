@@ -72,6 +72,7 @@ import { TimeTrackingResource } from "./resources/time-tracking.js";
 import { TimersResource } from "./resources/timers.js";
 import { UnitsOfMeasureResource } from "./resources/units-of-measure.js";
 import { UserAvailabilityResource } from "./resources/user-availability.js";
+import { UserSchedulesResource } from "./resources/user-schedules.js";
 import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
 import { WithholdingTaxRatesResource } from "./resources/withholding-tax-rates.js";
@@ -82,7 +83,7 @@ const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_MAX_RETRIES = 3;
 
 /** Bumped in lockstep with package.json. Sent as the default User-Agent. */
-export const SDK_VERSION = "1.0.0";
+export const SDK_VERSION = "1.1.0";
 const DEFAULT_USER_AGENT = `teamleader-focus-js-sdk/${SDK_VERSION}`;
 
 interface TeamleaderFocusClientConfigBase {
@@ -241,6 +242,7 @@ export class TeamleaderFocusClient {
   public readonly timers: TimersResource;
   public readonly unitsOfMeasure: UnitsOfMeasureResource;
   public readonly userAvailability: UserAvailabilityResource;
+  public readonly userSchedules: UserSchedulesResource;
   public readonly users: UsersResource;
   public readonly webhooks: WebhooksResource;
   public readonly withholdingTaxRates: WithholdingTaxRatesResource;
@@ -334,6 +336,7 @@ export class TeamleaderFocusClient {
     this.timers = new TimersResource(this);
     this.unitsOfMeasure = new UnitsOfMeasureResource(this);
     this.userAvailability = new UserAvailabilityResource(this);
+    this.userSchedules = new UserSchedulesResource(this);
     this.users = new UsersResource(this);
     this.webhooks = new WebhooksResource(this);
     this.withholdingTaxRates = new WithholdingTaxRatesResource(this);

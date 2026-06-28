@@ -44,7 +44,7 @@ export declare class ExpensesResource extends BaseResource {
         review_status?: "pending" | "approved" | "refused" | undefined;
         bookkeeping_status?: "not_sent" | "sent" | undefined;
         iban_number?: string | null | undefined;
-        payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid" | undefined;
+        payment_status?: "unknown" | "paid" | "partially_paid" | "credited" | "not_paid" | undefined;
         paid_amount?: number | null | undefined;
         paid_at?: string | null | undefined;
     }, void, undefined>;

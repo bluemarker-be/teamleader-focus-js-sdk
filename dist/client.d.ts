@@ -63,12 +63,13 @@ import { TimeTrackingResource } from "./resources/time-tracking.js";
 import { TimersResource } from "./resources/timers.js";
 import { UnitsOfMeasureResource } from "./resources/units-of-measure.js";
 import { UserAvailabilityResource } from "./resources/user-availability.js";
+import { UserSchedulesResource } from "./resources/user-schedules.js";
 import { UsersResource } from "./resources/users.js";
 import { WebhooksResource } from "./resources/webhooks.js";
 import { WithholdingTaxRatesResource } from "./resources/withholding-tax-rates.js";
 import { WorkTypesResource } from "./resources/work-types.js";
 /** Bumped in lockstep with package.json. Sent as the default User-Agent. */
-export declare const SDK_VERSION = "1.0.0";
+export declare const SDK_VERSION = "1.1.0";
 interface TeamleaderFocusClientConfigBase {
     /** OAuth2 refresh token — required for auto-refresh */
     refreshToken?: string;
@@ -221,6 +222,7 @@ export declare class TeamleaderFocusClient {
     readonly timers: TimersResource;
     readonly unitsOfMeasure: UnitsOfMeasureResource;
     readonly userAvailability: UserAvailabilityResource;
+    readonly userSchedules: UserSchedulesResource;
     readonly users: UsersResource;
     readonly webhooks: WebhooksResource;
     readonly withholdingTaxRates: WithholdingTaxRatesResource;

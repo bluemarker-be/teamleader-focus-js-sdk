@@ -16,4 +16,8 @@ export class NotesResource extends BaseResource {
   update(params: RequestBody<"notes.update">) {
     return this.client.request<void>("/notes.update", params);
   }
+
+  delete(params: RequestBody<"notes.delete">) {
+    return this.client.request<void>("/notes.delete", params);
+  }
 }

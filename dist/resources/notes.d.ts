@@ -22,5 +22,6 @@ export declare class NotesResource extends BaseResource {
     }>;
     /** Update an existing note */
     update(params: RequestBody<"notes.update">): Promise<void>;
+    delete(params: RequestBody<"notes.delete">): Promise<void>;
 }
 //# sourceMappingURL=notes.d.ts.map

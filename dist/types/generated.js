@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-05-19T13:09:22.770Z
+// Generated: 2026-06-28T19:44:04.079Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -29,10 +29,10 @@
 //    The API accepts deal_id as a filter on tasks.list but the spec omits it.
 //    Patch: added optional deal_id to the tasks.listrequest filter.
 //
-// 8. bookkeepingSubmissions filter.subject.type snake_case → camelCase
-//    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
-//    expects "incomingInvoice" | "incomingCreditNote".
-//    Patch: replaced enum values in all occurrences.
+// 8. [RESOLVED in spec 1.170.0] bookkeepingSubmissions filter.subject.type snake_case → camelCase
+//    The spec used "incoming_invoice" | "incoming_credit_note" but the API
+//    expected "incomingInvoice" | "incomingCreditNote".
+//    Status: spec now uses camelCase natively — no patch needed.
 //
 // 9. tickets.info response missing { data } wrapper
 //    The spec returns the ticket fields at top level, but the real API wraps

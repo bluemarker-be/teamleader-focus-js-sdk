@@ -42,7 +42,7 @@ export declare class DepartmentsResource extends BaseResource {
             currency?: string | undefined;
             iban?: string | undefined;
             bic?: string | undefined;
-            fiscal_regime?: string | null | undefined;
+            fiscal_regime?: "RF01" | "RF02" | "RF03" | "RF04" | "RF05" | "RF06" | "RF07" | "RF08" | "RF09" | "RF10" | "RF11" | "RF12" | "RF13" | "RF14" | "RF15" | "RF16" | "RF17" | "RF18" | "RF19" | null | undefined;
             status?: "active" | "archived" | undefined;
         } | undefined;
     }>;

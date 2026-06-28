@@ -4,8 +4,8 @@ export declare class ReceiptsResource extends BaseResource {
     /** Add a new receipt */
     add(params: RequestBody<"receipts.add">): Promise<{
         data?: {
-            type?: string | undefined;
             id?: string | undefined;
+            type?: string | undefined;
         } | undefined;
     }>;
     /** Get details for a single receipt */

@@ -28,6 +28,10 @@ export declare class UsersResource extends BaseResource {
                 } | null | undefined;
                 whitelabeling?: boolean | undefined;
             } | undefined;
+            teams?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            }[] | undefined;
         } | undefined;
     }>;
     /** Iterate all users — auto-paginates across every page. */

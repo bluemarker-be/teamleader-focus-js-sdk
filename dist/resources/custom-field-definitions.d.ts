@@ -24,6 +24,7 @@ export declare class CustomFieldDefinitionsResource extends BaseResource {
                 value?: string | undefined;
             }[] | undefined;
             extra_option_allowed?: boolean | undefined;
+            default_value?: string | null | undefined;
         } | undefined;
     }, void, undefined>;
     /** Get details for a single custom field definition */

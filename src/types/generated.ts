@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-05-19T13:09:22.770Z
+// Generated: 2026-06-28T19:44:04.079Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -29,10 +29,10 @@
 //    The API accepts deal_id as a filter on tasks.list but the spec omits it.
 //    Patch: added optional deal_id to the tasks.listrequest filter.
 //
-// 8. bookkeepingSubmissions filter.subject.type snake_case → camelCase
-//    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
-//    expects "incomingInvoice" | "incomingCreditNote".
-//    Patch: replaced enum values in all occurrences.
+// 8. [RESOLVED in spec 1.170.0] bookkeepingSubmissions filter.subject.type snake_case → camelCase
+//    The spec used "incoming_invoice" | "incoming_credit_note" but the API
+//    expected "incomingInvoice" | "incomingCreditNote".
+//    Status: spec now uses camelCase natively — no patch needed.
 //
 // 9. tickets.info response missing { data } wrapper
 //    The spec returns the ticket fields at top level, but the real API wraps
@@ -182,9 +182,32 @@ export interface paths {
         put?: never;
         /**
          * users.getWeekSchedule
+         * @deprecated
          * @description Returns information about week schedule of a user. Only available with the *Weekly working schedule* feature.
+         *
+         *     **Deprecated:** use `userSchedules.list` instead, which returns the working schedules of multiple users expanded per day over a date range.
          */
         post: operations["users.getWeekSchedule"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/userSchedules.list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * userSchedules.list
+         * @description Returns the working schedules of one or more users, expanded per day over a date range of at most 7 days. Only available with the *Weekly working schedule* feature.
+         */
+        post: operations["userSchedules.list"];
         delete?: never;
         options?: never;
         head?: never;
@@ -387,6 +410,26 @@ export interface paths {
          * @description Update an existing note.
          */
         post: operations["notes.update"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/notes.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * notes.delete
+         * @description Delete a note.
+         */
+        post: operations["notes.delete"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3264,7 +3307,7 @@ export interface paths {
         put?: never;
         /**
          * receipts.markAsPendingReview
-         * @description Mark a receipts as pending review.
+         * @description Mark a receipt as pending review.
          */
         post: operations["receipts.markAsPendingReview"];
         delete?: never;
@@ -3284,7 +3327,7 @@ export interface paths {
         put?: never;
         /**
          * receipts.refuse
-         * @description Refuse a receipts.
+         * @description Refuse a receipt.
          */
         post: operations["receipts.refuse"];
         delete?: never;
@@ -6065,8 +6108,11 @@ export interface components {
                 iban?: string;
                 /** @example BICBANK */
                 bic?: string;
-                /** @example RF01 */
-                fiscal_regime?: string | null;
+                /**
+                 * @example RF01
+                 * @enum {string|null}
+                 */
+                fiscal_regime?: "RF01" | "RF02" | "RF03" | "RF04" | "RF05" | "RF06" | "RF07" | "RF08" | "RF09" | "RF10" | "RF11" | "RF12" | "RF13" | "RF14" | "RF15" | "RF16" | "RF17" | "RF18" | "RF19" | null;
                 /**
                  * @example active
                  * @enum {string}
@@ -6150,6 +6196,14 @@ export interface components {
                     /** @example true */
                     whitelabeling?: boolean;
                 };
+                teams?: ({
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /** @example team */
+                    type?: string;
+                })[];
             };
         };
         /** Page */
@@ -6464,6 +6518,86 @@ export interface components {
                 }[];
             };
         };
+        /** userSchedules.list.request */
+        "userSchedules.list.request": {
+            filter: {
+                /** @description The users for which to return working schedules. */
+                user_ids: string[];
+                /**
+                 * @description Start of the date range (inclusive) in `YYYY-MM-DD` format.
+                 * @example 2026-06-01
+                 */
+                from: string;
+                /**
+                 * @description End of the date range (inclusive) in `YYYY-MM-DD` format. Must be on or after `from`, and the range may span at most 7 days.
+                 * @example 2026-06-07
+                 */
+                until: string;
+            };
+            /** Page */
+            page?: {
+                /** @default 20 */
+                size: number;
+                /** @default 1 */
+                number: number;
+            };
+        };
+        /** userSchedules.list.response */
+        "userSchedules.list.response": {
+            data?: {
+                user?: {
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } & {
+                    /**
+                     * @example user
+                     * @enum {string}
+                     */
+                    type?: "user";
+                };
+                /** @description The working schedule expanded per day over the requested range. Non-working days are omitted. */
+                schedule?: {
+                    /**
+                     * @description The day in `YYYY-MM-DD` format.
+                     * @example 2026-06-01
+                     */
+                    date?: string;
+                    periods?: {
+                        /**
+                         * @example working_hours
+                         * @enum {string}
+                         */
+                        type?: "working_hours" | "lunch_break";
+                        start?: {
+                            /**
+                             * @description The time of day in 24-hour hh:mm format. The time will be reported in the user's time zone.
+                             * @example 09:00
+                             */
+                            time?: string;
+                        };
+                        end?: {
+                            /**
+                             * @description The time of day in 24-hour hh:mm format. The time will be reported in the user's time zone.
+                             * @example 17:00
+                             */
+                            time?: string;
+                        };
+                    }[];
+                }[];
+            }[];
+            meta?: {
+                /** Pagination */
+                page?: {
+                    /** @example 10 */
+                    size?: number;
+                    /** @example 2 */
+                    number?: number;
+                };
+                /** @example 12 */
+                matches?: number;
+            };
+        };
         /** teams.list.request */
         "teams.list.request": {
             filter?: {
@@ -6525,6 +6659,7 @@ export interface components {
             label: string;
             type: ("single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user");
             context: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
+            required?: boolean;
             /**
              * @description - Use `options` when `type` is one of [`single_select`, `multi_select`]
              *     - Use `default_value` when `type` is `auto_increment`
@@ -6596,6 +6731,8 @@ export interface components {
                     }[];
                     /** @example true */
                     extra_option_allowed?: boolean;
+                    /** @description Only returned for `single_select` type */
+                    default_value?: string | null;
                 };
             }[];
         };
@@ -6645,19 +6782,6 @@ export interface components {
                 size: number;
                 /** @default 1 */
                 number: number;
-            };
-            sort?: {
-                field: string;
-                /**
-                 * Order
-                 * @enum {string}
-                 */
-                order?: "asc" | "desc";
-            } & {
-                /** @default name */
-                field: string;
-                /** @default asc */
-                order: string;
             };
         };
         /** IdAndName */
@@ -6843,6 +6967,11 @@ export interface components {
             id: string;
             /** @example new note content */
             content?: string;
+        };
+        /** notes.delete.request */
+        "notes.delete.request": {
+            /** @example 36386b05-936e-4cc0-9523-bd20d797ebf5 */
+            id: string;
         };
         /**
          * EmailTrackingSubjectTypes
@@ -7434,7 +7563,7 @@ export interface components {
                     electronic_invoicing_address?: string | null;
                 };
                 /**
-                 * @description Uses Markdown formatting
+                 * @description This is the background information in Markdown
                  * @example First contact at expo
                  */
                 remarks?: string;
@@ -7586,7 +7715,7 @@ export interface components {
             /** @example 01234567-X */
             national_identification_number?: string;
             /**
-             * @description Uses Markdown formatting
+             * @description This is the background information in Markdown
              * @example Met at expo
              */
             remarks?: string;
@@ -7687,7 +7816,7 @@ export interface components {
             /** @example 19346758-T */
             national_identification_number?: string;
             /**
-             * @description Uses Markdown formatting
+             * @description This is the background information in Markdown
              * @example Met at expo
              */
             remarks?: string | null;
@@ -8095,7 +8224,7 @@ export interface components {
                     type?: string;
                 };
                 /**
-                 * @description Uses Markdown formatting
+                 * @description This is the background information in Markdown
                  * @example First contact at expo
                  */
                 remarks?: string;
@@ -8215,7 +8344,7 @@ export interface components {
             /** @example 2b12bd5d-d2d9-43ac-8755-36a1e00bd67f */
             responsible_user_id?: string;
             /**
-             * @description Uses Markdown formatting
+             * @description This is the background information in Markdown
              * @example Met at expo
              */
             remarks?: string;
@@ -8314,7 +8443,7 @@ export interface components {
             /** @example 0ea94804-401d-4dbd-a577-c2d60998f798 */
             responsible_user_id?: string | null;
             /**
-             * @description Uses Markdown formatting
+             * @description This is the background information in Markdown
              * @example Met at expo
              */
             remarks?: string | null;
@@ -8573,7 +8702,10 @@ export interface components {
                 id?: string;
                 /** @example Interesting deal */
                 title?: string;
-                /** @example Additional information */
+                /**
+                 * @description This is the remarks field
+                 * @example Additional information
+                 */
                 summary?: string | null;
                 /** @example 2017/2 */
                 reference?: string;
@@ -8716,7 +8848,10 @@ export interface components {
                 id?: string;
                 /** @example Interesting deal */
                 title?: string;
-                /** @example Additional information */
+                /**
+                 * @description This is the remarks field
+                 * @example Additional information
+                 */
                 summary?: string | null;
                 /** @example 2017/2 */
                 reference?: string;
@@ -8911,7 +9046,10 @@ export interface components {
             };
             /** @example Interesting business deal */
             title: string;
-            /** @example Additional information */
+            /**
+             * @description This is the remarks field
+             * @example Additional information
+             */
             summary?: string;
             /** @example b38ebb9b-6e46-4bf4-a1e2-af747d6b64ae */
             source_id?: string;
@@ -8962,6 +9100,8 @@ export interface components {
                 /** @example 1.1238 */
                 exchange_rate: number;
             };
+            /** @example 000023 */
+            purchase_order_number?: string | null;
         };
         /** deals.create.response */
         "deals.create.response": {
@@ -8993,7 +9133,10 @@ export interface components {
             };
             /** @example Interesting business deal */
             title?: string;
-            /** @example Additional information */
+            /**
+             * @description This is the remarks field
+             * @example Additional information
+             */
             summary?: string | null;
             /** @example b38ebb9b-6e46-4bf4-a1e2-af747d6b64ae */
             source_id?: string | null;
@@ -9042,6 +9185,8 @@ export interface components {
                 /** @example 1.1238 */
                 exchange_rate: number;
             };
+            /** @example 000023 */
+            purchase_order_number?: string | null;
         };
         /** deals.move.request */
         "deals.move.request": {
@@ -9504,7 +9649,7 @@ export interface components {
                  * @example open
                  * @enum {string}
                  */
-                status?: "open" | "accepted" | "expired" | "rejected" | "closed";
+                status?: "open" | "accepted" | "refused" | "expired";
                 /** @example Webdevelopment */
                 name?: string;
                 expiry?: {
@@ -10067,7 +10212,7 @@ export interface components {
                  * @example open
                  * @enum {string}
                  */
-                status?: "open" | "accepted" | "expired" | "rejected" | "closed";
+                status?: "open" | "accepted" | "refused" | "expired";
                 /** @example Webdevelopment */
                 name?: string;
                 /** TypeAndId */
@@ -12912,7 +13057,7 @@ export interface components {
                 /** @example +++084/2613/66074+++ */
                 payment_reference?: string | null;
                 /**
-                 * @description plaintext
+                 * @description This is the remarks field
                  * @example 'Some extra remarks about the invoice'
                  */
                 note?: string | null;
@@ -13005,12 +13150,12 @@ export interface components {
          * @example pdf
          * @enum {string}
          */
-        InvoiceDownloadFormat: "pdf" | "ubl/e-fff" | "ubl/peppol_bis_3";
+        InvoiceDownloadFormat: "pdf" | "ubl/e-fff" | "ubl/peppol_bis_3" | "ubl/xrechnung";
         /** invoices.download.request */
         "invoices.download.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
-            format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3");
+            format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3" | "ubl/xrechnung");
         };
         /** invoices.download.response */
         "invoices.download.response": {
@@ -13141,6 +13286,11 @@ export interface components {
             project_id?: string;
             /** @example 000023 */
             purchase_order_number?: string;
+            /**
+             * @description Links the created invoice to the source quotation and its deal, marking the deal as won.
+             * @example 0be7d809-ff5d-4702-9dc1-2afa9de71a43
+             */
+            quotation_id?: string;
             grouped_lines: {
                 section?: {
                     title: string;
@@ -13202,7 +13352,10 @@ export interface components {
                 /** @example winter promotion */
                 description?: string;
             }[];
-            /** @example Invoice comments */
+            /**
+             * @description This is the remarks field
+             * @example Invoice comments
+             */
             note?: string;
             expected_payment_method?: ({
                 /**
@@ -13349,7 +13502,10 @@ export interface components {
             }[];
             /** @example 2016-02-04 */
             invoice_date?: string;
-            /** @example Some comments about the invoice */
+            /**
+             * @description This is the remarks field
+             * @example Some comments about the invoice
+             */
             note?: string | null;
             discounts?: {
                 /**
@@ -14297,12 +14453,12 @@ export interface components {
          * @example pdf
          * @enum {string}
          */
-        CreditNoteDownloadFormat: "pdf" | "ubl/e-fff";
+        CreditNoteDownloadFormat: "pdf" | "ubl/e-fff" | "ubl/peppol_bis_3" | "ubl/xrechnung";
         /** creditNotes.download.request */
         "creditNotes.download.request": {
             /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
             id: string;
-            format: ("pdf" | "ubl/e-fff");
+            format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3" | "ubl/xrechnung");
         };
         /** creditNotes.download.response */
         "creditNotes.download.response": {
@@ -15672,7 +15828,7 @@ export interface components {
                 /** @description Filters by one or more bookkeeping statuses */
                 bookkeeping_statuses?: ("sent" | "not_sent")[];
                 /** @description Filters by one or more payment statuses */
-                payment_statuses?: ("paid" | "unpaid")[];
+                payment_statuses?: ("unknown" | "paid" | "partially_paid" | "credited" | "not_paid")[];
                 /** @description Filters by one or more department IDs */
                 department_ids?: string[];
                 /** @description Filters by a specific supplier */
@@ -15695,7 +15851,7 @@ export interface components {
                 paid_at?: {
                     /** @enum {string} */
                     operator: "is_empty" | "between" | "equals" | "before" | "after";
-                    /** @description Required if operator is `equals`, `before`, or `after` */
+                    /** @description Required if operator is `equals`, `before`, or `after`, date is inclusive */
                     value?: string;
                     /** @description Required if operator is `between` */
                     start?: string;
@@ -15772,7 +15928,7 @@ export interface components {
                 bookkeeping_status?: "not_sent" | "sent";
                 iban_number?: string | null;
                 /** @enum {string} */
-                payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid";
+                payment_status?: "unknown" | "paid" | "partially_paid" | "credited" | "not_paid";
                 paid_amount?: number | null;
                 paid_at?: string | null;
             }[];
@@ -20854,10 +21010,10 @@ export interface components {
                 order?: "asc" | "desc";
             } & {
                 /**
-                 * @example name
+                 * @example due_on
                  * @enum {string}
                  */
-                field?: "name";
+                field?: "created_at" | "due_on";
             })[];
         };
         /**
@@ -22022,8 +22178,16 @@ export interface components {
              * @enum {string}
              */
             initial_reply?: "automatic" | "disabled";
-            /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+            /**
+             * @description Links the ticket to a milestone. Only applicable to accounts using legacy projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+             * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+             */
             milestone_id?: string;
+            /**
+             * @description Links the ticket to a project. Only applicable to accounts using the new projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+             * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+             */
+            project_id?: string;
         };
         /** tickets.create.response */
         "tickets.create.response": {
@@ -22095,8 +22259,16 @@ export interface components {
                     type?: "company" | "contact" | "product" | "user";
                 });
             }[];
-            /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+            /**
+             * @description Links the ticket to a milestone. Only applicable to accounts using legacy projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+             * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+             */
             milestone_id?: string | null;
+            /**
+             * @description Links the ticket to a project. Only applicable to accounts using the new projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+             * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+             */
+            project_id?: string | null;
         };
         /** tickets.listMessages.request */
         "tickets.listMessages.request": {
@@ -22337,7 +22509,7 @@ export interface components {
                      * @example company
                      * @enum {string}
                      */
-                    type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "product" | "project" | "nextgenProject" | "ticket";
+                    type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "meeting" | "product" | "project" | "nextgenProject" | "ticket";
                 };
             };
             /** Page */
@@ -22386,7 +22558,7 @@ export interface components {
                      * @example company
                      * @enum {string}
                      */
-                    type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "nextgenProject" | "ticket";
+                    type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "meeting" | "product" | "project" | "nextgenProject" | "ticket";
                 }) | null;
                 /** @example meeting-report.pdf */
                 name?: string;
@@ -23186,13 +23358,18 @@ export interface components {
         /** cloudPlatforms.url.request */
         "cloudPlatforms.url.request": {
             /** @enum {string} */
-            type: "invoice" | "quotation" | "ticket";
+            type: "deal" | "invoice" | "quotation" | "ticket";
             /** @example b7023c11-455e-4fa5-bb96-87f37dbc7d07 */
             id: string;
         };
         /** cloudPlatforms.url.response */
         "cloudPlatforms.url.response": {
             data?: {
+                /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/ */
+                public?: string;
+                /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/?preview=true */
+                preview?: string;
+            } | {
                 /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/ */
                 url?: string;
             };
@@ -23216,7 +23393,7 @@ export interface components {
         "plannableItems.list.request": {
             filter?: {
                 ids?: string[];
-                status?: ("active" | "deactivated")[];
+                types?: ("closingDay" | "dayOffType" | "meeting" | "task" | "call" | "externalEvent")[];
                 /** @example Set-up */
                 term?: string;
                 /** @example 2023-10-02 */
@@ -23950,8 +24127,11 @@ export interface operations {
                             iban?: string;
                             /** @example BICBANK */
                             bic?: string;
-                            /** @example RF01 */
-                            fiscal_regime?: string | null;
+                            /**
+                             * @example RF01
+                             * @enum {string|null}
+                             */
+                            fiscal_regime?: "RF01" | "RF02" | "RF03" | "RF04" | "RF05" | "RF06" | "RF07" | "RF08" | "RF09" | "RF10" | "RF11" | "RF12" | "RF13" | "RF14" | "RF15" | "RF16" | "RF17" | "RF18" | "RF19" | null;
                             /**
                              * @example active
                              * @enum {string}
@@ -24062,6 +24242,14 @@ export interface operations {
                                 /** @example true */
                                 whitelabeling?: boolean;
                             };
+                            teams?: ({
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } & {
+                                /** @example team */
+                                type?: string;
+                            })[];
                         };
                     };
                 };
@@ -24566,6 +24754,188 @@ export interface operations {
             };
         };
     };
+    "userSchedules.list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "filter": {
+                 *         "user_ids": [
+                 *           "87982c96-f2fe-4b05-838c-ff42c0525758",
+                 *           "b5094b3f-bb7a-0391-b01b-e709773f3509"
+                 *         ],
+                 *         "from": "2026-06-01",
+                 *         "until": "2026-06-07"
+                 *       },
+                 *       "page": {
+                 *         "size": 20,
+                 *         "number": 1
+                 *       }
+                 *     }
+                 */
+                "application/json": {
+                    filter: {
+                        /** @description The users for which to return working schedules. */
+                        user_ids: string[];
+                        /**
+                         * @description Start of the date range (inclusive) in `YYYY-MM-DD` format.
+                         * @example 2026-06-01
+                         */
+                        from: string;
+                        /**
+                         * @description End of the date range (inclusive) in `YYYY-MM-DD` format. Must be on or after `from`, and the range may span at most 7 days.
+                         * @example 2026-06-07
+                         */
+                        until: string;
+                    };
+                    /** Page */
+                    page?: {
+                        /** @default 20 */
+                        size?: number;
+                        /** @default 1 */
+                        number?: number;
+                    };
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": [
+                     *         {
+                     *           "user": {
+                     *             "type": "user",
+                     *             "id": "87982c96-f2fe-4b05-838c-ff42c0525758"
+                     *           },
+                     *           "schedule": [
+                     *             {
+                     *               "date": "2026-06-01",
+                     *               "periods": [
+                     *                 {
+                     *                   "type": "working_hours",
+                     *                   "start": {
+                     *                     "time": "09:00"
+                     *                   },
+                     *                   "end": {
+                     *                     "time": "12:00"
+                     *                   }
+                     *                 },
+                     *                 {
+                     *                   "type": "lunch_break",
+                     *                   "start": {
+                     *                     "time": "12:00"
+                     *                   },
+                     *                   "end": {
+                     *                     "time": "13:00"
+                     *                   }
+                     *                 },
+                     *                 {
+                     *                   "type": "working_hours",
+                     *                   "start": {
+                     *                     "time": "13:00"
+                     *                   },
+                     *                   "end": {
+                     *                     "time": "17:00"
+                     *                   }
+                     *                 }
+                     *               ]
+                     *             },
+                     *             {
+                     *               "date": "2026-06-02",
+                     *               "periods": [
+                     *                 {
+                     *                   "type": "working_hours",
+                     *                   "start": {
+                     *                     "time": "09:00"
+                     *                   },
+                     *                   "end": {
+                     *                     "time": "17:00"
+                     *                   }
+                     *                 }
+                     *               ]
+                     *             }
+                     *           ]
+                     *         }
+                     *       ],
+                     *       "meta": {
+                     *         "page": {
+                     *           "size": 20,
+                     *           "number": 1
+                     *         },
+                     *         "matches": 2
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        data?: {
+                            user?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } & {
+                                /**
+                                 * @example user
+                                 * @enum {string}
+                                 */
+                                type?: "user";
+                            };
+                            /** @description The working schedule expanded per day over the requested range. Non-working days are omitted. */
+                            schedule?: {
+                                /**
+                                 * @description The day in `YYYY-MM-DD` format.
+                                 * @example 2026-06-01
+                                 */
+                                date?: string;
+                                periods?: {
+                                    /**
+                                     * @example working_hours
+                                     * @enum {string}
+                                     */
+                                    type?: "working_hours" | "lunch_break";
+                                    start?: {
+                                        /**
+                                         * @description The time of day in 24-hour hh:mm format. The time will be reported in the user's time zone.
+                                         * @example 09:00
+                                         */
+                                        time?: string;
+                                    };
+                                    end?: {
+                                        /**
+                                         * @description The time of day in 24-hour hh:mm format. The time will be reported in the user's time zone.
+                                         * @example 17:00
+                                         */
+                                        time?: string;
+                                    };
+                                }[];
+                            }[];
+                        }[];
+                        meta?: {
+                            /** Pagination */
+                            page?: {
+                                /** @example 10 */
+                                size?: number;
+                                /** @example 2 */
+                                number?: number;
+                            };
+                            /** @example 12 */
+                            matches?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
     "teams.list": {
         parameters: {
             query?: never;
@@ -24691,6 +25061,7 @@ export interface operations {
                     label: string;
                     type: ("single_line" | "multi_line" | "single_select" | "multi_select" | "date" | "money" | "auto_increment" | "integer" | "number" | "boolean" | "email" | "telephone" | "url" | "company" | "contact" | "product" | "user");
                     context: ("contact" | "company" | "sale" | "project" | "milestone" | "product" | "invoice" | "subscription" | "ticket" | "meeting" | "todo" | "callback" | "meeting_report" | "pro_external_cost" | "werkbonnen");
+                    required?: boolean;
                     /**
                      * @description - Use `options` when `type` is one of [`single_select`, `multi_select`]
                      *     - Use `default_value` when `type` is `auto_increment`
@@ -24838,6 +25209,8 @@ export interface operations {
                                 }[];
                                 /** @example true */
                                 extra_option_allowed?: boolean;
+                                /** @description Only returned for `single_select` type */
+                                default_value?: string | null;
                             };
                         }[];
                     };
@@ -24944,19 +25317,6 @@ export interface operations {
                         size?: number;
                         /** @default 1 */
                         number?: number;
-                    };
-                    sort?: {
-                        field: string;
-                        /**
-                         * Order
-                         * @enum {string}
-                         */
-                        order?: "asc" | "desc";
-                    } & {
-                        /** @default name */
-                        field?: string;
-                        /** @default asc */
-                        order?: string;
                     };
                 };
             };
@@ -25329,6 +25689,35 @@ export interface operations {
                     id: string;
                     /** @example new note content */
                     content?: string;
+                };
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "notes.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "id": "36386b05-936e-4cc0-9523-bd20d797ebf5"
+                 *     }
+                 */
+                "application/json": {
+                    /** @example 36386b05-936e-4cc0-9523-bd20d797ebf5 */
+                    id: string;
                 };
             };
         };
@@ -26454,7 +26843,7 @@ export interface operations {
                                 electronic_invoicing_address?: string | null;
                             };
                             /**
-                             * @description Uses Markdown formatting
+                             * @description This is the background information in Markdown
                              * @example First contact at expo
                              */
                             remarks?: string;
@@ -26617,7 +27006,7 @@ export interface operations {
                     /** @example 01234567-X */
                     national_identification_number?: string;
                     /**
-                     * @description Uses Markdown formatting
+                     * @description This is the background information in Markdown
                      * @example Met at expo
                      */
                     remarks?: string;
@@ -26797,7 +27186,7 @@ export interface operations {
                     /** @example 19346758-T */
                     national_identification_number?: string;
                     /**
-                     * @description Uses Markdown formatting
+                     * @description This is the background information in Markdown
                      * @example Met at expo
                      */
                     remarks?: string | null;
@@ -27618,7 +28007,7 @@ export interface operations {
                                 type?: string;
                             };
                             /**
-                             * @description Uses Markdown formatting
+                             * @description This is the background information in Markdown
                              * @example First contact at expo
                              */
                             remarks?: string;
@@ -27801,7 +28190,7 @@ export interface operations {
                     /** @example 2b12bd5d-d2d9-43ac-8755-36a1e00bd67f */
                     responsible_user_id?: string;
                     /**
-                     * @description Uses Markdown formatting
+                     * @description This is the background information in Markdown
                      * @example Met at expo
                      */
                     remarks?: string;
@@ -27979,7 +28368,7 @@ export interface operations {
                     /** @example 0ea94804-401d-4dbd-a577-c2d60998f798 */
                     responsible_user_id?: string | null;
                     /**
-                     * @description Uses Markdown formatting
+                     * @description This is the background information in Markdown
                      * @example Met at expo
                      */
                     remarks?: string | null;
@@ -28517,7 +28906,10 @@ export interface operations {
                             id?: string;
                             /** @example Interesting deal */
                             title?: string;
-                            /** @example Additional information */
+                            /**
+                             * @description This is the remarks field
+                             * @example Additional information
+                             */
                             summary?: string | null;
                             /** @example 2017/2 */
                             reference?: string;
@@ -28780,7 +29172,10 @@ export interface operations {
                             id?: string;
                             /** @example Interesting deal */
                             title?: string;
-                            /** @example Additional information */
+                            /**
+                             * @description This is the remarks field
+                             * @example Additional information
+                             */
                             summary?: string | null;
                             /** @example 2017/2 */
                             reference?: string;
@@ -28995,7 +29390,10 @@ export interface operations {
                     };
                     /** @example Interesting business deal */
                     title: string;
-                    /** @example Additional information */
+                    /**
+                     * @description This is the remarks field
+                     * @example Additional information
+                     */
                     summary?: string;
                     /** @example b38ebb9b-6e46-4bf4-a1e2-af747d6b64ae */
                     source_id?: string;
@@ -29046,6 +29444,8 @@ export interface operations {
                         /** @example 1.1238 */
                         exchange_rate: number;
                     };
+                    /** @example 000023 */
+                    purchase_order_number?: string | null;
                 };
             };
         };
@@ -29137,7 +29537,10 @@ export interface operations {
                     };
                     /** @example Interesting business deal */
                     title?: string;
-                    /** @example Additional information */
+                    /**
+                     * @description This is the remarks field
+                     * @example Additional information
+                     */
                     summary?: string | null;
                     /** @example b38ebb9b-6e46-4bf4-a1e2-af747d6b64ae */
                     source_id?: string | null;
@@ -29188,6 +29591,8 @@ export interface operations {
                         /** @example 1.1238 */
                         exchange_rate: number;
                     };
+                    /** @example 000023 */
+                    purchase_order_number?: string | null;
                 };
             };
         };
@@ -30235,7 +30640,7 @@ export interface operations {
                              * @example open
                              * @enum {string}
                              */
-                            status?: "open" | "accepted" | "expired" | "rejected" | "closed";
+                            status?: "open" | "accepted" | "refused" | "expired";
                             /** @example Webdevelopment */
                             name?: string;
                             expiry?: {
@@ -30645,7 +31050,7 @@ export interface operations {
                              * @example open
                              * @enum {string}
                              */
-                            status?: "open" | "accepted" | "expired" | "rejected" | "closed";
+                            status?: "open" | "accepted" | "refused" | "expired";
                             /** @example Webdevelopment */
                             name?: string;
                             /** TypeAndId */
@@ -34255,7 +34660,7 @@ export interface operations {
                             /** @example +++084/2613/66074+++ */
                             payment_reference?: string | null;
                             /**
-                             * @description plaintext
+                             * @description This is the remarks field
                              * @example 'Some extra remarks about the invoice'
                              */
                             note?: string | null;
@@ -34365,7 +34770,7 @@ export interface operations {
                 "application/json": {
                     /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
                     id: string;
-                    format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3");
+                    format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3" | "ubl/xrechnung");
                 };
             };
         };
@@ -34455,6 +34860,11 @@ export interface operations {
                     project_id?: string;
                     /** @example 000023 */
                     purchase_order_number?: string;
+                    /**
+                     * @description Links the created invoice to the source quotation and its deal, marking the deal as won.
+                     * @example 0be7d809-ff5d-4702-9dc1-2afa9de71a43
+                     */
+                    quotation_id?: string;
                     grouped_lines: {
                         section?: {
                             title: string;
@@ -34516,7 +34926,10 @@ export interface operations {
                         /** @example winter promotion */
                         description?: string;
                     }[];
-                    /** @example Invoice comments */
+                    /**
+                     * @description This is the remarks field
+                     * @example Invoice comments
+                     */
                     note?: string;
                     expected_payment_method?: ({
                         /**
@@ -34690,7 +35103,10 @@ export interface operations {
                     }[];
                     /** @example 2016-02-04 */
                     invoice_date?: string;
-                    /** @example Some comments about the invoice */
+                    /**
+                     * @description This is the remarks field
+                     * @example Some comments about the invoice
+                     */
                     note?: string | null;
                     discounts?: {
                         /**
@@ -36077,7 +36493,7 @@ export interface operations {
                 "application/json": {
                     /** @example d885e5d5-bacb-4607-bde9-abc4a04a901b */
                     id: string;
-                    format: ("pdf" | "ubl/e-fff");
+                    format: ("pdf" | "ubl/e-fff" | "ubl/peppol_bis_3" | "ubl/xrechnung");
                 };
             };
         };
@@ -37546,7 +37962,7 @@ export interface operations {
                  *       "filter": {
                  *         "subject": {
                  *           "id": "018d5965-19fb-701a-af11-e80451931551",
-                 *           "type": "incoming_invoice"
+                 *           "type": "incomingInvoice"
                  *         }
                  *       }
                  *     }
@@ -37577,7 +37993,7 @@ export interface operations {
                      *           "id": "018d5965-19fb-701a-af11-e80451931551",
                      *           "subject": {
                      *             "id": "018d5965-19fb-701a-af11-e80451931551",
-                     *             "type": "incoming_invoice"
+                     *             "type": "incomingInvoice"
                      *           },
                      *           "email_address": "john.doe@example.com",
                      *           "status": "sending",
@@ -37638,7 +38054,7 @@ export interface operations {
                  *         ],
                  *         "payment_statuses": [
                  *           "paid",
-                 *           "unpaid"
+                 *           "not_paid"
                  *         ],
                  *         "department_ids": [
                  *           "018fcef1-4f96-7349-9f57-1c7857023c42"
@@ -37682,7 +38098,7 @@ export interface operations {
                         /** @description Filters by one or more bookkeeping statuses */
                         bookkeeping_statuses?: ("sent" | "not_sent")[];
                         /** @description Filters by one or more payment statuses */
-                        payment_statuses?: ("paid" | "unpaid")[];
+                        payment_statuses?: ("unknown" | "paid" | "partially_paid" | "credited" | "not_paid")[];
                         /** @description Filters by one or more department IDs */
                         department_ids?: string[];
                         /** @description Filters by a specific supplier */
@@ -37705,7 +38121,7 @@ export interface operations {
                         paid_at?: {
                             /** @enum {string} */
                             operator: "is_empty" | "between" | "equals" | "before" | "after";
-                            /** @description Required if operator is `equals`, `before`, or `after` */
+                            /** @description Required if operator is `equals`, `before`, or `after`, date is inclusive */
                             value?: string;
                             /** @description Required if operator is `between` */
                             start?: string;
@@ -37848,7 +38264,7 @@ export interface operations {
                             bookkeeping_status?: "not_sent" | "sent";
                             iban_number?: string | null;
                             /** @enum {string} */
-                            payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid";
+                            payment_status?: "unknown" | "paid" | "partially_paid" | "credited" | "not_paid";
                             paid_amount?: number | null;
                             paid_at?: string | null;
                         }[];
@@ -37875,7 +38291,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -37958,7 +38374,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -37987,7 +38403,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -38016,7 +38432,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -38217,7 +38633,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -38246,7 +38662,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -38371,7 +38787,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -38400,7 +38816,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -38770,7 +39186,7 @@ export interface operations {
                             review_status?: "pending" | "approved" | "refused";
                             iban_number?: string | null;
                             /** @enum {string} */
-                            payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid";
+                            payment_status?: "unknown" | "paid" | "partially_paid" | "credited" | "not_paid";
                         };
                     };
                 };
@@ -39173,7 +39589,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -39229,8 +39645,14 @@ export interface operations {
                      */
                     "application/json": {
                         data?: {
-                            type?: string;
+                            /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                             id?: string;
+                            type?: string;
+                        } & {
+                            /** @example receipt */
+                            type?: unknown;
+                            /** @example 018d5965-19fb-701a-af11-e80451931551 */
+                            id?: unknown;
                         };
                     };
                 };
@@ -39244,7 +39666,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -39273,7 +39695,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -39302,7 +39724,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -39490,7 +39912,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -39519,7 +39941,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -39675,7 +40097,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 /**
                  * @example {
@@ -48030,10 +48452,10 @@ export interface operations {
                         order?: "asc" | "desc";
                     } & {
                         /**
-                         * @example name
+                         * @example due_on
                          * @enum {string}
                          */
-                        field?: "name";
+                        field?: "created_at" | "due_on";
                     })[];
                 };
             };
@@ -50025,8 +50447,16 @@ export interface operations {
                      * @enum {string}
                      */
                     initial_reply?: "automatic" | "disabled";
-                    /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+                    /**
+                     * @description Links the ticket to a milestone. Only applicable to accounts using legacy projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+                     * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+                     */
                     milestone_id?: string;
+                    /**
+                     * @description Links the ticket to a project. Only applicable to accounts using the new projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+                     * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+                     */
+                    project_id?: string;
                 };
             };
         };
@@ -50154,8 +50584,16 @@ export interface operations {
                             type?: "company" | "contact" | "product" | "user";
                         });
                     }[];
-                    /** @example 32665afd-1818-0ed3-9e18-a603a3a21b95 */
+                    /**
+                     * @description Links the ticket to a milestone. Only applicable to accounts using legacy projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+                     * @example 32665afd-1818-0ed3-9e18-a603a3a21b95
+                     */
                     milestone_id?: string | null;
+                    /**
+                     * @description Links the ticket to a project. Only applicable to accounts using the new projects. A ticket can be linked to either a `milestone_id` or a `project_id`, but not both.
+                     * @example 49b403be-a32e-0901-9b1c-25214f9027c6
+                     */
+                    project_id?: string | null;
                 };
             };
         };
@@ -50689,7 +51127,7 @@ export interface operations {
                              * @example company
                              * @enum {string}
                              */
-                            type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "product" | "project" | "nextgenProject" | "ticket";
+                            type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "meeting" | "product" | "project" | "nextgenProject" | "ticket";
                         };
                     };
                     /** Page */
@@ -50762,7 +51200,7 @@ export interface operations {
                                  * @example company
                                  * @enum {string}
                                  */
-                                type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "nextgenProject" | "ticket";
+                                type?: "company" | "contact" | "deal" | "invoice" | "creditNote" | "meeting" | "product" | "project" | "nextgenProject" | "ticket";
                             }) | null;
                             /** @example meeting-report.pdf */
                             name?: string;
@@ -52007,7 +52445,7 @@ export interface operations {
                  */
                 "application/json": {
                     /** @enum {string} */
-                    type: "invoice" | "quotation" | "ticket";
+                    type: "deal" | "invoice" | "quotation" | "ticket";
                     /** @example b7023c11-455e-4fa5-bb96-87f37dbc7d07 */
                     id: string;
                 };
@@ -52028,6 +52466,11 @@ export interface operations {
                      */
                     "application/json": {
                         data?: {
+                            /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/ */
+                            public?: string;
+                            /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/?preview=true */
+                            preview?: string;
+                        } | {
                             /** @example https://teamleader.cloud/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yUmR5yNZ45P_jHDbjAzuk4kRA8YNoM9ckSZOZpMIJmU/ */
                             url?: string;
                         };
@@ -52099,7 +52542,7 @@ export interface operations {
                 "application/json": {
                     filter?: {
                         ids?: string[];
-                        status?: ("active" | "deactivated")[];
+                        types?: ("closingDay" | "dayOffType" | "meeting" | "task" | "call" | "externalEvent")[];
                         /** @example Set-up */
                         term?: string;
                         /** @example 2023-10-02 */
@@ -52167,15 +52610,15 @@ export interface operations {
                      *           },
                      *           "total_duration": {
                      *             "value": 600,
-                     *             "currency": "minutes"
+                     *             "unit": "minutes"
                      *           },
                      *           "planned_duration": {
                      *             "value": 600,
-                     *             "currency": "minutes"
+                     *             "unit": "minutes"
                      *           },
                      *           "unplanned_duration": {
                      *             "value": 0,
-                     *             "currency": "minutes"
+                     *             "unit": "minutes"
                      *           }
                      *         }
                      *       ]
@@ -52270,15 +52713,15 @@ export interface operations {
                      *         },
                      *         "total_duration": {
                      *           "value": 600,
-                     *           "currency": "minutes"
+                     *           "unit": "minutes"
                      *         },
                      *         "planned_duration": {
                      *           "value": 600,
-                     *           "currency": "minutes"
+                     *           "unit": "minutes"
                      *         },
                      *         "unplanned_duration": {
                      *           "value": 0,
-                     *           "currency": "minutes"
+                     *           "unit": "minutes"
                      *         }
                      *       }
                      *     }
@@ -52339,9 +52782,11 @@ export interface operations {
             content: {
                 /**
                  * @example {
-                 *       "plannable_item_ids": [
-                 *         "46156648-87c6-478d-8aa7-1dc3a00dacab"
-                 *       ]
+                 *       "filter": {
+                 *         "plannable_item_ids": [
+                 *           "46156648-87c6-478d-8aa7-1dc3a00dacab"
+                 *         ]
+                 *       }
                  *     }
                  */
                 "application/json": {
@@ -52408,7 +52853,7 @@ export interface operations {
                      *           "date": "2024-01-02",
                      *           "duration": {
                      *             "value": 60,
-                     *             "currency": "minutes"
+                     *             "unit": "minutes"
                      *           },
                      *           "assignee": null,
                      *           "origin": null,

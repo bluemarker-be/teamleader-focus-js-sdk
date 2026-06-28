@@ -46,7 +46,7 @@ export declare class IncomingInvoicesResource extends BaseResource {
             payment_reference?: string | null | undefined;
             review_status?: "pending" | "approved" | "refused" | undefined;
             iban_number?: string | null | undefined;
-            payment_status?: "unknown" | "paid" | "partially_paid" | "not_paid" | undefined;
+            payment_status?: "unknown" | "paid" | "partially_paid" | "credited" | "not_paid" | undefined;
         } | undefined;
     }>;
     /** Update an existing incoming invoice */

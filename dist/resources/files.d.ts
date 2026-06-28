@@ -8,7 +8,7 @@ export declare class FilesResource extends BaseResource {
         id?: string | undefined;
         subject?: {
             id?: string | undefined;
-            type?: "company" | "contact" | "invoice" | "ticket" | "creditNote" | "deal" | "nextgenProject" | undefined;
+            type?: "company" | "contact" | "product" | "project" | "invoice" | "ticket" | "meeting" | "creditNote" | "deal" | "nextgenProject" | undefined;
         } | null | undefined;
         name?: string | undefined;
         mime_type?: "application/msword" | "application/octet-stream" | "application/pdf" | "application/vnd.ms-excel" | "application/vnd.ms-powerpoint" | "application/vnd.openxmlformats-officedocument.presentationml.presentation" | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "application/xml" | "application/zip" | "audio/mpeg" | "audio/wav" | "image/gif" | "image/jpeg" | "image/png" | "text/css" | "text/csv" | "text/html" | "text/javascript" | "text/plain" | "video/3gpp" | "video/mpeg" | "video/quicktime" | "video/x-msvideo" | undefined;

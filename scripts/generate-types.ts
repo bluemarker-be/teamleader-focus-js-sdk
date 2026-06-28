@@ -73,10 +73,10 @@ async function main() {
 //    The API accepts deal_id as a filter on tasks.list but the spec omits it.
 //    Patch: added optional deal_id to the tasks.listrequest filter.
 //
-// 8. bookkeepingSubmissions filter.subject.type snake_case → camelCase
-//    The spec uses "incoming_invoice" | "incoming_credit_note" but the API
-//    expects "incomingInvoice" | "incomingCreditNote".
-//    Patch: replaced enum values in all occurrences.
+// 8. [RESOLVED in spec 1.170.0] bookkeepingSubmissions filter.subject.type snake_case → camelCase
+//    The spec used "incoming_invoice" | "incoming_credit_note" but the API
+//    expected "incomingInvoice" | "incomingCreditNote".
+//    Status: spec now uses camelCase natively — no patch needed.
 //
 // 9. tickets.info response missing { data } wrapper
 //    The spec returns the ticket fields at top level, but the real API wraps
@@ -190,18 +190,7 @@ async function main() {
     driftedPatches.push("Patch 7 (tasks.list deal_id filter): tasksListFilterMarker pattern not found");
   }
 
-  // Patch 8: bookkeepingSubmissions filter.subject.type uses snake_case in spec but API expects camelCase
-  // Spec: "incoming_invoice" | "incoming_credit_note" | "receipt"
-  // API:  "incomingInvoice" | "incomingCreditNote" | "receipt"
-  const wrongBookkeepingEnum = '"incoming_invoice" | "incoming_credit_note" | "receipt"';
-  const fixedBookkeepingEnum = '"incomingInvoice" | "incomingCreditNote" | "receipt"';
-  const bookkeepingPatchCount = patched.split(wrongBookkeepingEnum).length - 1;
-  if (bookkeepingPatchCount > 0) {
-    patched = patched.replaceAll(wrongBookkeepingEnum, fixedBookkeepingEnum);
-    console.log(`Patch 8: Fixed bookkeepingSubmissions subject.type enum — snake_case → camelCase (${bookkeepingPatchCount} occurrences)`);
-  } else {
-    driftedPatches.push("Patch 8 (bookkeepingSubmissions enum): wrongBookkeepingEnum pattern not found");
-  }
+  // Patch 8: [RESOLVED in spec 1.170.0] bookkeepingSubmissions enum now uses camelCase natively.
 
   // Patch 9: tickets.info response — spec returns the ticket fields at top level,
   // but the real API wraps it as { data: { ...fields... } }. Wrap the content.

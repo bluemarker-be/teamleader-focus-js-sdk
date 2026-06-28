@@ -225,6 +225,10 @@ describe.skipIf(noToken)("CRM — Contacts & Companies", () => {
         content: "SDK integration test note — updated",
       });
     });
+
+    it("delete", async () => {
+      await client.notes.delete({ id: noteId });
+    });
   });
 
   // -----------------------------------------------------------------------

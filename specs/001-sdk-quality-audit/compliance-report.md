@@ -1,8 +1,8 @@
 # Compliance Report
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `7ee6e8fd63caca3e84cecb35d2561cefb0327cab`
+**Branch**: `main` · **SHA**: `eb20ed4dcb61619ffa20c078957d86194bfa478e`
 
-Files audited: **97** · 224 ✓ · 0 ~ · 0 ✗ · 358 · (n/a)
+Files audited: **98** · 227 ✓ · 0 ~ · 0 ✗ · 361 · (n/a)
 
 ## Per-file × per-principle grid
 
@@ -96,6 +96,7 @@ Files audited: **97** · 224 ✓ · 0 ~ · 0 ✗ · 358 · (n/a)
 | src/resources/timers.ts                   | · | ·  | ✓   | ·  | ✓ | ✓  |          |
 | src/resources/units-of-measure.ts         | · | ·  | ✓   | ·  | ✓ | ✓  |          |
 | src/resources/user-availability.ts        | · | ·  | ✓   | ·  | ✓ | ✓  |          |
+| src/resources/user-schedules.ts           | · | ·  | ✓   | ·  | ✓ | ✓  |          |
 | src/resources/users.ts                    | · | ·  | ✓   | ·  | ✓ | ✓  |          |
 | src/resources/webhooks.ts                 | · | ·  | ✓   | ·  | ✓ | ✓  |          |
 | src/resources/withholding-tax-rates.ts    | · | ·  | ✓   | ·  | ✓ | ✓  |          |

@@ -76,7 +76,7 @@
       ]
     }
   ],
-  "generated_for_branch": "001-sdk-quality-audit",
+  "generated_for_branch": "main",
   "resources": [
     {
       "class_name": "AccountsResource",
@@ -1441,6 +1441,13 @@
           "return_envelope": "single"
         },
         {
+          "endpoint": "/notes.delete",
+          "errors": [],
+          "name": "delete",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "void"
+        },
+        {
           "endpoint": "/notes.list",
           "errors": [],
           "name": "list",
@@ -2529,6 +2536,20 @@
       "name": "users"
     },
     {
+      "class_name": "UserSchedulesResource",
+      "file": "src/resources/user-schedules.ts",
+      "methods": [
+        {
+          "endpoint": "/userSchedules.list",
+          "errors": [],
+          "name": "list",
+          "param_shape": "RequestBody<\"<endpoint>\">",
+          "return_envelope": "iterable"
+        }
+      ],
+      "name": "userSchedules"
+    },
+    {
       "class_name": "WebhooksResource",
       "file": "src/resources/webhooks.ts",
       "methods": [
@@ -2586,5 +2607,5 @@
     }
   ],
   "schema_version": "1",
-  "sha": "7ee6e8fd63caca3e84cecb35d2561cefb0327cab"
+  "sha": "eb20ed4dcb61619ffa20c078957d86194bfa478e"
 }

@@ -1,8 +1,8 @@
 # Consistency Matrix
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `7ee6e8fd63caca3e84cecb35d2561cefb0327cab`
+**Branch**: `main` · **SHA**: `eb20ed4dcb61619ffa20c078957d86194bfa478e`
 
-Resources audited: **68** · Methods total: **290** · Divergence clusters: **2**
+Resources audited: **69** · Methods total: **292** · Divergence clusters: **2**
 
 ## Resource × method overview
 
@@ -45,7 +45,7 @@ Resources audited: **68** · Methods total: **290** · Divergence clusters: **2*
 | mailTemplates          | MailTemplatesResource          | list                                                                                                                                                                                   |
 | meetings               | MeetingsResource               | complete, createReport, delete, info, list, schedule, update                                                                                                                           |
 | migrate                | MigrateResource                | activityType, id, taxRate                                                                                                                                                              |
-| notes                  | NotesResource                  | create, list, update                                                                                                                                                                   |
+| notes                  | NotesResource                  | create, delete, list, update                                                                                                                                                           |
 | orders                 | OrdersResource                 | info, list                                                                                                                                                                             |
 | paymentMethods         | PaymentMethodsResource         | list                                                                                                                                                                                   |
 | paymentTerms           | PaymentTermsResource           | list                                                                                                                                                                                   |
@@ -73,6 +73,7 @@ Resources audited: **68** · Methods total: **290** · Divergence clusters: **2*
 | unitsOfMeasure         | UnitsOfMeasureResource         | list                                                                                                                                                                                   |
 | userAvailability       | UserAvailabilityResource       | daily, total                                                                                                                                                                           |
 | users                  | UsersResource                  | getWeekSchedule, info, list, listDaysOff, me                                                                                                                                           |
+| userSchedules          | UserSchedulesResource          | list                                                                                                                                                                                   |
 | webhooks               | WebhooksResource               | list, register, unregister                                                                                                                                                             |
 | withholdingTaxRates    | WithholdingTaxRatesResource    | list                                                                                                                                                                                   |
 | workTypes              | WorkTypesResource              | list                                                                                                                                                                                   |

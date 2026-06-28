@@ -42,7 +42,7 @@ export declare class QuotationsResource extends BaseResource {
         } | undefined;
         created_at?: string | null | undefined;
         updated_at?: string | null | undefined;
-        status?: "open" | "accepted" | "expired" | "rejected" | "closed" | undefined;
+        status?: "open" | "accepted" | "refused" | "expired" | undefined;
         name?: string | undefined;
         expiry?: {
             expires_after?: string | undefined;
@@ -159,7 +159,7 @@ export declare class QuotationsResource extends BaseResource {
             }[] | undefined;
             created_at?: string | null | undefined;
             updated_at?: string | null | undefined;
-            status?: "open" | "accepted" | "expired" | "rejected" | "closed" | undefined;
+            status?: "open" | "accepted" | "refused" | "expired" | undefined;
             name?: string | undefined;
             document_template?: {
                 id?: string | undefined;

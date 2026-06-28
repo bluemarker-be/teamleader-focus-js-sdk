@@ -4,7 +4,77 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased] - 2026-05-19
+## [1.1.0] - 2026-06-28
+
+API spec updated: 1.157.0 → 1.170.0
+
+### Added
+- `notes.delete()` method on `NotesResource`.
+- `userSchedules.list()` method on new `UserSchedulesResource` — returns
+  per-day working schedules for one or more users over a date range
+  (max 7 days). Replaces the now-deprecated `users.getWeekSchedule`.
+- `invoices.draft`: optional `quotation_id` — links the created invoice
+  to its source quotation and marks the deal as won.
+- `deals.create` / `deals.update`: `purchase_order_number`.
+- `tickets.create` / `tickets.update`: `project_id` (for new-projects
+  accounts; mutually exclusive with `milestone_id`).
+- `customFieldDefinitions.create`: `required: boolean`.
+- `customFieldDefinitions.list`: `default_value` (nullable; only for
+  `single_select` type).
+- `invoices.download`: new format `ubl/xrechnung`.
+- `creditNotes.download`: new formats `ubl/peppol_bis_3`, `ubl/xrechnung`.
+- `users.me`: `teams` array.
+- `departments.info`: Belgian tax-regime codes `RF01`–`RF12`.
+- `files.list`: subject types `meeting`, `product`, `project`.
+
+### Changed
+- **Breaking (types reflect upstream rename — runtime calls with old
+  values were already failing).**
+  - `quotations.list` / `quotations.info`: status enum
+    `closed` & `rejected` → `refused`.
+  - `expenses.list`: status enum `unpaid` → `not_paid`; added
+    `unknown`, `partially_paid`, `credited`.
+  - `bookkeepingSubmissions.list`: subject-type enum
+    `incoming_invoice` → `incomingInvoice`,
+    `incoming_credit_note` → `incomingCreditNote`. Upstream
+    finally fixed this, so internal Patch 8 has been removed
+    (`scripts/generate-types.ts`).
+  - `plannableItems.list` / `plannableItems.info` /
+    `reservations.list`: property `currency` → `unit`.
+  - `meetings.list`: typo fix `creaded_by` → `created_by`.
+  - `tasks.list`: sort field options replaced — `name` →
+    `created_at` and `due_on`.
+  - `cloudPlatforms.url`: response is now a `oneOf` discriminated
+    on `type`. For `type=deal` it returns `{ public, preview }`;
+    for `invoice`/`quotation`/`ticket` it still returns `{ url }`.
+  - `incomingCreditNotes.*` (8 endpoints) and `receipts.*` (7
+    endpoints): request body is now marked `required: true` in
+    the spec (was effectively required at runtime, now enforced
+    by types).
+
+### Deprecated
+- `users.getWeekSchedule` — replaced by `userSchedules.list`. Will
+  be removed in a future major version of the upstream API.
+
+### Removed
+- `workTypes.list`: the `sort` parameter is gone from the spec.
+
+### Internal
+- Removed obsolete spec-patch (Patch 8 — bookkeepingSubmissions
+  enum camelCase) — fixed upstream in spec 1.170.0.
+- README Resources table updated with `userSchedules` and
+  `notes.delete`.
+- Live integration test for `notes.delete` in
+  `tests/integration/03-crm-contacts-companies.test.ts`.
+- Also bundles the audit-infrastructure work originally targeted
+  at 1.0.1 (see entry dated 2026-05-19 below — `npm run audit`).
+
+Target version for this Unreleased section: **1.1.0** (MINOR — new
+resource and methods; the enum/property-rename changes are passed
+through from upstream and tighten types to match real runtime
+behavior).
+
+## [1.1.0] - 2026-05-19 (audit infrastructure — bundled into 1.1.0)
 
 API spec updated: → 1.157.0
 

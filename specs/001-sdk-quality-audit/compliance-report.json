@@ -1,5 +1,5 @@
 {
-  "generated_for_branch": "001-sdk-quality-audit",
+  "generated_for_branch": "main",
   "rows": [
     {
       "cells": {
@@ -1066,6 +1066,18 @@
         "V": "yes",
         "VI": "yes"
       },
+      "file": "src/resources/user-schedules.ts",
+      "finding_ids": []
+    },
+    {
+      "cells": {
+        "I": "n/a",
+        "II": "n/a",
+        "III": "yes",
+        "IV": "n/a",
+        "V": "yes",
+        "VI": "yes"
+      },
       "file": "src/resources/users.ts",
       "finding_ids": []
     },
@@ -1167,5 +1179,5 @@
     }
   ],
   "schema_version": "1",
-  "sha": "7ee6e8fd63caca3e84cecb35d2561cefb0327cab"
+  "sha": "eb20ed4dcb61619ffa20c078957d86194bfa478e"
 }

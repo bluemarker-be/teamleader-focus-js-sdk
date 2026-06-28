@@ -1,6 +1,6 @@
 # Audit Findings
 
-**Branch**: `001-sdk-quality-audit` · **SHA**: `7ee6e8fd63caca3e84cecb35d2561cefb0327cab`
+**Branch**: `main` · **SHA**: `eb20ed4dcb61619ffa20c078957d86194bfa478e`
 
 Total findings: **2**
 
