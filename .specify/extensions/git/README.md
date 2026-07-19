@@ -92,9 +92,7 @@ When Git is not installed or the directory is not a Git repository:
 
 ## Scripts
 
-The extension bundles cross-platform scripts:
+The extension bundles Bash scripts:
 
-- `scripts/bash/create-new-feature.sh` — Bash implementation
-- `scripts/bash/git-common.sh` — Shared Git utilities (Bash)
-- `scripts/powershell/create-new-feature.ps1` — PowerShell implementation
-- `scripts/powershell/git-common.ps1` — Shared Git utilities (PowerShell)
+- `scripts/bash/create-new-feature.sh` — Feature-branch creation
+- `scripts/bash/git-common.sh` — Shared Git utilities

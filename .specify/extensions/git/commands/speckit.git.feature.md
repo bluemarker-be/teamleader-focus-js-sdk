@@ -43,14 +43,12 @@ Generate a concise short name (2-4 words) for the branch:
 
 Run the appropriate script based on your platform:
 
-- **Bash**: `.specify/extensions/git/scripts/bash/create-new-feature.sh --json --short-name "<short-name>" "<feature description>"`
-- **Bash (timestamp)**: `.specify/extensions/git/scripts/bash/create-new-feature.sh --json --timestamp --short-name "<short-name>" "<feature description>"`
-- **PowerShell**: `.specify/extensions/git/scripts/powershell/create-new-feature.ps1 -Json -ShortName "<short-name>" "<feature description>"`
-- **PowerShell (timestamp)**: `.specify/extensions/git/scripts/powershell/create-new-feature.ps1 -Json -Timestamp -ShortName "<short-name>" "<feature description>"`
+- `.specify/extensions/git/scripts/bash/create-new-feature.sh --json --short-name "<short-name>" "<feature description>"`
+- Timestamp variant: `.specify/extensions/git/scripts/bash/create-new-feature.sh --json --timestamp --short-name "<short-name>" "<feature description>"`
 
 **IMPORTANT**:
 - Do NOT pass `--number` — the script determines the correct next number automatically
-- Always include the JSON flag (`--json` for Bash, `-Json` for PowerShell) so the output can be parsed reliably
+- Always include the `--json` flag so the output can be parsed reliably
 - You must only ever run this script once per feature
 - The JSON output will contain `BRANCH_NAME` and `FEATURE_NUM`
 
