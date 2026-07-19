@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-06-28T19:44:04.079Z
+// Generated: 2026-07-19T13:09:20.604Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -13862,7 +13862,10 @@ export interface components {
                 subject: string;
                 /** @example Please find your invoice attached to this mail */
                 body: string;
-                /** @example 045cd6a9-7527-09c9-aa16-fd5ac7953e71 */
+                /**
+                 * @description Important: use this to set the language of the email and to keep track of which template was used. If you want to use the mail_template content, this should be fetched in a separate request to mailTemplates.list and passed in the above subject and body
+                 * @example 045cd6a9-7527-09c9-aa16-fd5ac7953e71
+                 */
                 mail_template_id?: string | null;
             };
             recipients?: {
@@ -35754,7 +35757,10 @@ export interface operations {
                         subject: string;
                         /** @example Please find your invoice attached to this mail */
                         body: string;
-                        /** @example 045cd6a9-7527-09c9-aa16-fd5ac7953e71 */
+                        /**
+                         * @description Important: use this to set the language of the email and to keep track of which template was used. If you want to use the mail_template content, this should be fetched in a separate request to mailTemplates.list and passed in the above subject and body
+                         * @example 045cd6a9-7527-09c9-aa16-fd5ac7953e71
+                         */
                         mail_template_id?: string | null;
                     };
                     recipients?: {
