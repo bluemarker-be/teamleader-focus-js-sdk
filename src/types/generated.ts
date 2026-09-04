@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-07-19T13:09:20.604Z
+// Generated: 2026-09-04T13:13:50.413Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -7259,7 +7259,7 @@ export interface components {
             })[];
             /**
              * @description Comma-separated list of optional includes
-             * @example custom_fields,price_list
+             * @example custom_fields
              */
             includes?: string;
         };
@@ -7410,13 +7410,13 @@ export interface components {
                         type?: "company" | "contact" | "product" | "user";
                     });
                 }[];
-                /** @description Only included with request parameter `includes=price_list` */
+                /** @description Only included when the account has access to price lists. `null` when no price list is set on the contact. */
                 price_list?: {
                     /** @example priceList */
                     type?: string;
                     /** @example 27261187-19c9-081f-b833-021fa5873129 */
                     id?: string;
-                };
+                } | null;
             }[];
         };
         /** contacts.info.request */
@@ -7596,6 +7596,13 @@ export interface components {
                 updated_at?: string;
                 /** @example https://focus.teamleader.eu/contact_detail.php?id=cde0bc5f-8602-4e12-b5d3-f03436b54c0d */
                 web_url?: string;
+                /** @description Only included when the account has access to price lists. `null` when no price list is set on the contact. */
+                price_list?: {
+                    /** @example priceList */
+                    type?: string;
+                    /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                    id?: string;
+                } | null;
             };
         };
         /** AddressRequest */
@@ -7737,6 +7744,8 @@ export interface components {
             }[];
             /** @example false */
             marketing_mails_consent?: boolean;
+            /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+            price_list_id?: string;
         };
         /** contacts.add.response */
         "contacts.add.response": {
@@ -7839,6 +7848,11 @@ export interface components {
             }[];
             /** @example false */
             marketing_mails_consent?: boolean;
+            /**
+             * @description Pass `null` to remove the price list from the contact
+             * @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2
+             */
+            price_list_id?: string | null;
         };
         /** contacts.delete.request */
         "contacts.delete.request": {
@@ -7953,7 +7967,7 @@ export interface components {
             })[];
             /**
              * @description Comma-separated list of optional includes
-             * @example custom_fields,price_list
+             * @example custom_fields
              */
             includes?: string;
         };
@@ -8087,13 +8101,13 @@ export interface components {
                         type?: "company" | "contact" | "product" | "user";
                     });
                 }[];
-                /** @description Only included with request parameter `includes=price_list` */
+                /** @description Only included when the account has access to price lists. `null` when no price list is set on the company. */
                 price_list?: {
                     /** @example priceList */
                     type?: string;
                     /** @example 27261187-19c9-081f-b833-021fa5873129 */
                     id?: string;
-                };
+                } | null;
             }[];
         };
         /** companies.info.request */
@@ -8278,6 +8292,13 @@ export interface components {
                     /** @example false */
                     is_decision_maker?: boolean;
                 }[];
+                /** @description Only included when the account has access to price lists. `null` when no price list is set on the company. */
+                price_list?: {
+                    /** @example priceList */
+                    type?: string;
+                    /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                    id?: string;
+                } | null;
             };
         };
         /** companies.add.request */
@@ -8367,6 +8388,8 @@ export interface components {
             /** @example false */
             marketing_mails_consent?: boolean;
             preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & string;
+            /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+            price_list_id?: string;
         };
         /** companies.add.response */
         "companies.add.response": {
@@ -8467,6 +8490,8 @@ export interface components {
             /** @example false */
             marketing_mails_consent?: boolean;
             preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & (string | null);
+            /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+            price_list_id?: string;
         };
         /** companies.uploadLogo.request */
         "companies.uploadLogo.request": {
@@ -15775,6 +15800,8 @@ export interface components {
         /** commercialDiscounts.list.response */
         "commercialDiscounts.list.response": {
             data?: {
+                /** @example f8f95182-3947-0a4a-b426-3adaa66fc32a */
+                id?: string;
                 /** @example My holiday discount */
                 name?: string;
                 /** TypeAndId */
@@ -26372,7 +26399,7 @@ export interface operations {
                  *           "field": "added_at"
                  *         }
                  *       ],
-                 *       "includes": "custom_fields,price_list"
+                 *       "includes": "custom_fields"
                  *     }
                  */
                 "application/json": {
@@ -26426,7 +26453,7 @@ export interface operations {
                     })[];
                     /**
                      * @description Comma-separated list of optional includes
-                     * @example custom_fields,price_list
+                     * @example custom_fields
                      */
                     includes?: string;
                 };
@@ -26615,13 +26642,13 @@ export interface operations {
                                     type?: "company" | "contact" | "product" | "user";
                                 });
                             }[];
-                            /** @description Only included with request parameter `includes=price_list` */
+                            /** @description Only included when the account has access to price lists. `null` when no price list is set on the contact. */
                             price_list?: {
                                 /** @example priceList */
                                 type?: string;
                                 /** @example 27261187-19c9-081f-b833-021fa5873129 */
                                 id?: string;
-                            };
+                            } | null;
                         }[];
                     };
                 };
@@ -26733,7 +26760,11 @@ export interface operations {
                      *         "marketing_mails_consent": false,
                      *         "added_at": "2016-02-04T16:44:33+00:00",
                      *         "updated_at": "2016-02-05T16:44:33+00:00",
-                     *         "web_url": "https://focus.teamleader.eu/contact_detail.php?id=cde0bc5f-8602-4e12-b5d3-f03436b54c0d"
+                     *         "web_url": "https://focus.teamleader.eu/contact_detail.php?id=cde0bc5f-8602-4e12-b5d3-f03436b54c0d",
+                     *         "price_list": {
+                     *           "type": "priceList",
+                     *           "id": "5a37d173-78d3-05f3-b018-d51fadc1c5d2"
+                     *         }
                      *       }
                      *     }
                      */
@@ -26879,6 +26910,13 @@ export interface operations {
                             updated_at?: string;
                             /** @example https://focus.teamleader.eu/contact_detail.php?id=cde0bc5f-8602-4e12-b5d3-f03436b54c0d */
                             web_url?: string;
+                            /** @description Only included when the account has access to price lists. `null` when no price list is set on the contact. */
+                            price_list?: {
+                                /** @example priceList */
+                                type?: string;
+                                /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                                id?: string;
+                            } | null;
                         };
                     };
                 };
@@ -26942,7 +26980,8 @@ export interface operations {
                  *           "value": "092980616"
                  *         }
                  *       ],
-                 *       "marketing_mails_consent": false
+                 *       "marketing_mails_consent": false,
+                 *       "price_list_id": "5a37d173-78d3-05f3-b018-d51fadc1c5d2"
                  *     }
                  */
                 "application/json": {
@@ -27031,6 +27070,8 @@ export interface operations {
                     }[];
                     /** @example false */
                     marketing_mails_consent?: boolean;
+                    /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                    price_list_id?: string;
                 };
             };
         };
@@ -27118,7 +27159,8 @@ export interface operations {
                  *           "value": "092980616"
                  *         }
                  *       ],
-                 *       "marketing_mails_consent": false
+                 *       "marketing_mails_consent": false,
+                 *       "price_list_id": "5a37d173-78d3-05f3-b018-d51fadc1c5d2"
                  *     }
                  */
                 "application/json": {
@@ -27214,6 +27256,11 @@ export interface operations {
                     custom_fields_update_strategy?: "partial";
                     /** @example false */
                     marketing_mails_consent?: boolean;
+                    /**
+                     * @description Pass `null` to remove the price list from the contact
+                     * @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2
+                     */
+                    price_list_id?: string | null;
                 };
             };
         };
@@ -27506,7 +27553,7 @@ export interface operations {
                  *           "field": "name"
                  *         }
                  *       ],
-                 *       "includes": "custom_fields,price_list"
+                 *       "includes": "custom_fields"
                  *     }
                  */
                 "application/json": {
@@ -27565,7 +27612,7 @@ export interface operations {
                     })[];
                     /**
                      * @description Comma-separated list of optional includes
-                     * @example custom_fields,price_list
+                     * @example custom_fields
                      */
                     includes?: string;
                 };
@@ -27771,13 +27818,13 @@ export interface operations {
                                     type?: "company" | "contact" | "product" | "user";
                                 });
                             }[];
-                            /** @description Only included with request parameter `includes=price_list` */
+                            /** @description Only included when the account has access to price lists. `null` when no price list is set on the company. */
                             price_list?: {
                                 /** @example priceList */
                                 type?: string;
                                 /** @example 27261187-19c9-081f-b833-021fa5873129 */
                                 id?: string;
-                            };
+                            } | null;
                         }[];
                     };
                 };
@@ -27904,7 +27951,11 @@ export interface operations {
                      *             "division": "Engineering",
                      *             "is_decision_maker": false
                      *           }
-                     *         ]
+                     *         ],
+                     *         "price_list": {
+                     *           "type": "priceList",
+                     *           "id": "5a37d173-78d3-05f3-b018-d51fadc1c5d2"
+                     *         }
                      *       }
                      *     }
                      */
@@ -28064,6 +28115,13 @@ export interface operations {
                                 /** @example false */
                                 is_decision_maker?: boolean;
                             }[];
+                            /** @description Only included when the account has access to price lists. `null` when no price list is set on the company. */
+                            price_list?: {
+                                /** @example priceList */
+                                type?: string;
+                                /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                                id?: string;
+                            } | null;
                         };
                     };
                 };
@@ -28127,7 +28185,8 @@ export interface operations {
                  *         }
                  *       ],
                  *       "marketing_mails_consent": false,
-                 *       "preferred_currency": "EUR"
+                 *       "preferred_currency": "EUR",
+                 *       "price_list_id": "5a37d173-78d3-05f3-b018-d51fadc1c5d2"
                  *     }
                  */
                 "application/json": {
@@ -28216,6 +28275,8 @@ export interface operations {
                     /** @example false */
                     marketing_mails_consent?: boolean;
                     preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & string;
+                    /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                    price_list_id?: string;
                 };
             };
         };
@@ -28303,7 +28364,8 @@ export interface operations {
                  *         }
                  *       ],
                  *       "marketing_mails_consent": false,
-                 *       "preferred_currency": "EUR"
+                 *       "preferred_currency": "EUR",
+                 *       "price_list_id": "5a37d173-78d3-05f3-b018-d51fadc1c5d2"
                  *     }
                  */
                 "application/json": {
@@ -28397,6 +28459,8 @@ export interface operations {
                     /** @example false */
                     marketing_mails_consent?: boolean;
                     preferred_currency?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") & (string | null);
+                    /** @example 5a37d173-78d3-05f3-b018-d51fadc1c5d2 */
+                    price_list_id?: string;
                 };
             };
         };
@@ -37864,6 +37928,7 @@ export interface operations {
                      * @example {
                      *       "data": [
                      *         {
+                     *           "id": "f8f95182-3947-0a4a-b426-3adaa66fc32a",
                      *           "name": "My holiday discount",
                      *           "department": {
                      *             "type": "department",
@@ -37875,6 +37940,8 @@ export interface operations {
                      */
                     "application/json": {
                         data?: {
+                            /** @example f8f95182-3947-0a4a-b426-3adaa66fc32a */
+                            id?: string;
                             /** @example My holiday discount */
                             name?: string;
                             /** TypeAndId */
