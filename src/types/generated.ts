@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-09-04T13:13:50.413Z
+// Generated: 2026-09-04T13:16:37.285Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -627,7 +627,7 @@ export interface paths {
         put?: never;
         /**
          * daysOff.import
-         * @description Imports a list of days off for the given user.
+         * @description Imports a list of days off for the given user. Each day is either timed, using `starts_at` and `ends_at`, or a full day, using `date` on its own.
          */
         post: operations["daysOff.import"];
         delete?: never;
@@ -7189,13 +7189,26 @@ export interface components {
              * @example 0f517e20-2e76-4684-8d6c-3334f6d7148c
              */
             leave_type_id: string;
-            /** @description At least one day must be present */
-            days: {
-                /** @example 2024-02-01T08:00:00+00:00 */
+            /** @description At least one day must be present, and at most 100. */
+            days: ({
+                /**
+                 * Format: date-time
+                 * @example 2024-02-01T08:00:00+00:00
+                 */
                 starts_at: string;
-                /** @example 2024-02-01T18:00:00+00:00 */
+                /**
+                 * Format: date-time
+                 * @example 2024-02-01T18:00:00+00:00
+                 */
                 ends_at: string;
-            }[];
+            } | {
+                /**
+                 * Format: date
+                 * @description Imports the day off as a full day. The user must have a working schedule on this date.
+                 * @example 2024-02-02
+                 */
+                date: string;
+            })[];
         };
         /** daysOff.bulkDelete.request */
         "daysOff.bulkDelete.request": {
@@ -7220,8 +7233,11 @@ export interface components {
                     type: "primary";
                 };
                 ids?: string[];
-                /** @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5 */
-                company_id?: string;
+                /**
+                 * @description Filters on contacts linked to this company. To fetch the contacts that are linked to no company at all, provide `null`. A contact whose only linked company has been deleted is part of that set.
+                 * @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5
+                 */
+                company_id?: string | null;
                 /**
                  * @description Filters on first_name, last_name, email and telephone
                  * @example James
@@ -9084,6 +9100,7 @@ export interface components {
             responsible_user_id?: string;
             /** @example 060687bb-a742-4882-a538-199a5e5feb60 */
             phase_id?: string;
+            /** @description The amount may be negative. */
             estimated_value?: {
                 /** @example 123.3 */
                 amount: number;
@@ -9169,6 +9186,7 @@ export interface components {
             department_id?: string | null;
             /** @example 98b2863e-7b01-4232-82f5-ede1f0b9db22 */
             responsible_user_id?: string | null;
+            /** @description The amount may be negative. */
             estimated_value?: {
                 /** @example 123.3 */
                 amount: number;
@@ -9284,6 +9302,11 @@ export interface components {
             filter?: {
                 ids?: string[];
                 status?: ("open" | "pending_deletion")[];
+                /**
+                 * @description Searches in the pipeline name only
+                 * @example Sales
+                 */
+                term?: string;
             };
             /** Page */
             page?: {
@@ -9512,6 +9535,11 @@ export interface components {
         "dealSources.list.request": {
             filter?: {
                 ids?: string[];
+                /**
+                 * @description Searches in the deal source name only
+                 * @example Website
+                 */
+                term?: string;
             };
             /** Page */
             page?: {
@@ -10293,16 +10321,6 @@ export interface components {
                 expires?: string;
             };
         };
-        /** Currency */
-        Currency: {
-            /**
-             * CurrencyCode
-             * @enum {string}
-             */
-            code: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
-            /** @example 1.1238 */
-            exchange_rate?: number;
-        };
         /** AmountWithTax */
         AmountWithTax: {
             /** @example 123.3 */
@@ -10448,7 +10466,7 @@ export interface components {
         "quotations.create.request": {
             /** @example cef01135-7e51-4f6f-a6eb-6e5e5a885ac8 */
             deal_id: string;
-            /** Currency */
+            /** CurrencyWithRequiredExchangeRate */
             currency?: {
                 /**
                  * CurrencyCode
@@ -10456,7 +10474,7 @@ export interface components {
                  */
                 code: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 /** @example 1.1238 */
-                exchange_rate?: number;
+                exchange_rate: number;
             };
             /** @description A quotation needs `grouped_lines` and/or `text` to be valid */
             grouped_lines?: {
@@ -10568,6 +10586,11 @@ export interface components {
              * @example Quotation text
              */
             text?: string;
+            /**
+             * @description Between 1 and 80 characters. Only letters, digits and limited punctuation are accepted; characters such as `/`, `\`, `*`, `?`, `<`, `>` and `|` are rejected. If omitted, a name is generated based on the quotation number.
+             * @example Webdevelopment
+             */
+            name?: string;
             /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
             document_template_id?: string;
             expiry?: {
@@ -10705,7 +10728,7 @@ export interface components {
         "quotations.update.request": {
             /** @example 5b16f6ee-e302-0079-901b-50c26c4a55b1 */
             id: string;
-            /** Currency */
+            /** CurrencyWithRequiredExchangeRate */
             currency?: {
                 /**
                  * CurrencyCode
@@ -10713,7 +10736,7 @@ export interface components {
                  */
                 code: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 /** @example 1.1238 */
-                exchange_rate?: number;
+                exchange_rate: number;
             };
             /** @description A quotation needs `grouped_lines` and/or `text` to be valid */
             grouped_lines?: {
@@ -10825,6 +10848,11 @@ export interface components {
              * @example Quotation text
              */
             text?: string | null;
+            /**
+             * @description Between 1 and 80 characters. Only letters, digits and limited punctuation are accepted; characters such as `/`, `\`, `*`, `?`, `<`, `>` and `|` are rejected.
+             * @example Webdevelopment
+             */
+            name?: string;
             /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
             document_template_id?: string;
             expiry?: {
@@ -12715,6 +12743,12 @@ export interface components {
                 } | null;
             })[];
         };
+        /**
+         * InvoiceContent
+         * @example goods_and_services
+         * @enum {string|null}
+         */
+        InvoiceContent: "goods" | "services" | "goods_and_services" | null;
         /** ExpectedPaymentMethod */
         ExpectedPaymentMethod: {
             /**
@@ -13086,6 +13120,7 @@ export interface components {
                  * @example 'Some extra remarks about the invoice'
                  */
                 note?: string | null;
+                invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                 /** @example USD */
                 currency?: string;
                 /** CurrencyExchangeRate */
@@ -13217,6 +13252,16 @@ export interface components {
                 /** @example 417a2231-c3c7-4e1c-a6bb-1b014836ca60 */
                 contact_id: string;
             };
+        };
+        /** Currency */
+        Currency: {
+            /**
+             * CurrencyCode
+             * @enum {string}
+             */
+            code: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
+            /** @example 1.1238 */
+            exchange_rate?: number;
         };
         /** InvoicesGroupedLinesRequest */
         InvoicesGroupedLinesRequest: {
@@ -13382,6 +13427,7 @@ export interface components {
              * @example Invoice comments
              */
             note?: string;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
             expected_payment_method?: ({
                 /**
                  * @example credit_card
@@ -13532,6 +13578,7 @@ export interface components {
              * @example Some comments about the invoice
              */
             note?: string | null;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
             discounts?: {
                 /**
                  * @description Values between 0 and 100
@@ -13670,6 +13717,7 @@ export interface components {
             invoice_date?: string;
             /** @example Some comments about the invoice */
             note?: string | null;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
             expected_payment_method?: ({
                 /**
                  * @example credit_card
@@ -14641,6 +14689,7 @@ export interface components {
                  * @example Some more **information** about this subscription
                  */
                 note?: string | null;
+                invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                 /**
                  * @example active
                  * @enum {string}
@@ -14911,6 +14960,7 @@ export interface components {
                  * @example Some more **information** about this subscription
                  */
                 note?: string | null;
+                invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                 /**
                  * @example active
                  * @enum {string}
@@ -15412,6 +15462,7 @@ export interface components {
             project_id?: string;
             /** @example Subscription comments */
             note?: string;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
             /** PaymentTerm */
             payment_term: {
                 /** @enum {string} */
@@ -15593,6 +15644,7 @@ export interface components {
             deal_id?: string | null;
             /** @example Subscription comments */
             note?: string | null;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
             grouped_lines?: {
                 section?: {
                     title?: string;
@@ -19146,6 +19198,13 @@ export interface components {
                 /** @example 01859b27-1525-7372-bd40-26a6363c8bfe */
                 project_id?: string;
             };
+            /** Page */
+            page?: {
+                /** @default 20 */
+                size: number;
+                /** @default 1 */
+                number: number;
+            };
         };
         /**
          * BillingStatus
@@ -20392,6 +20451,13 @@ export interface components {
         "projects-v2_materials.list.request": {
             filter?: {
                 ids?: string[];
+            };
+            /** Page */
+            page?: {
+                /** @default 20 */
+                size: number;
+                /** @default 1 */
+                number: number;
             };
         };
         /** projects-v2_materials.list.response */
@@ -21982,6 +22048,8 @@ export interface components {
                 };
                 /** @description an array of project ids */
                 project_ids?: string[];
+                /** @description Only lists tickets assigned to one of these users. Pass `null` as an entry to include tickets that are unassigned, e.g. `["f29abf48-337d-44b4-aad4-585f5277a456", null]`, or `[null]` for the unassigned ones only. */
+                assignee_ids?: (string | null)[];
                 exclude?: {
                     status_ids?: string[];
                 };
@@ -23219,6 +23287,13 @@ export interface components {
         "orders.list.request": {
             filter?: {
                 ids?: string[];
+            };
+            /** Page */
+            page?: {
+                /** @default 20 */
+                size: number;
+                /** @default 1 */
+                number: number;
             };
             /**
              * @description Comma-separated list of optional includes
@@ -26288,6 +26363,9 @@ export interface operations {
                  *         {
                  *           "starts_at": "2024-02-01T08:00:00+00:00",
                  *           "ends_at": "2024-02-01T18:00:00+00:00"
+                 *         },
+                 *         {
+                 *           "date": "2024-02-02"
                  *         }
                  *       ]
                  *     }
@@ -26303,13 +26381,26 @@ export interface operations {
                      * @example 0f517e20-2e76-4684-8d6c-3334f6d7148c
                      */
                     leave_type_id: string;
-                    /** @description At least one day must be present */
-                    days: {
-                        /** @example 2024-02-01T08:00:00+00:00 */
+                    /** @description At least one day must be present, and at most 100. */
+                    days: ({
+                        /**
+                         * Format: date-time
+                         * @example 2024-02-01T08:00:00+00:00
+                         */
                         starts_at: string;
-                        /** @example 2024-02-01T18:00:00+00:00 */
+                        /**
+                         * Format: date-time
+                         * @example 2024-02-01T18:00:00+00:00
+                         */
                         ends_at: string;
-                    }[];
+                    } | {
+                        /**
+                         * Format: date
+                         * @description Imports the day off as a full day. The user must have a working schedule on this date.
+                         * @example 2024-02-02
+                         */
+                        date: string;
+                    })[];
                 };
             };
         };
@@ -26414,8 +26505,11 @@ export interface operations {
                             type: "primary";
                         };
                         ids?: string[];
-                        /** @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5 */
-                        company_id?: string;
+                        /**
+                         * @description Filters on contacts linked to this company. To fetch the contacts that are linked to no company at all, provide `null`. A contact whose only linked company has been deleted is part of that set.
+                         * @example cb8da52a-ce89-4bf6-8f7e-8ee6cb85e3b5
+                         */
+                        company_id?: string | null;
                         /**
                          * @description Filters on first_name, last_name, email and telephone
                          * @example James
@@ -29470,6 +29564,7 @@ export interface operations {
                     responsible_user_id?: string;
                     /** @example 060687bb-a742-4882-a538-199a5e5feb60 */
                     phase_id?: string;
+                    /** @description The amount may be negative. */
                     estimated_value?: {
                         /** @example 123.3 */
                         amount: number;
@@ -29615,6 +29710,7 @@ export interface operations {
                     department_id?: string | null;
                     /** @example 98b2863e-7b01-4232-82f5-ede1f0b9db22 */
                     responsible_user_id?: string | null;
+                    /** @description The amount may be negative. */
                     estimated_value?: {
                         /** @example 123.3 */
                         amount: number;
@@ -29879,6 +29975,11 @@ export interface operations {
                     filter?: {
                         ids?: string[];
                         status?: ("open" | "pending_deletion")[];
+                        /**
+                         * @description Searches in the pipeline name only
+                         * @example Sales
+                         */
+                        term?: string;
                     };
                     /** Page */
                     page?: {
@@ -30477,6 +30578,11 @@ export interface operations {
                 "application/json": {
                     filter?: {
                         ids?: string[];
+                        /**
+                         * @description Searches in the deal source name only
+                         * @example Website
+                         */
+                        term?: string;
                     };
                     /** Page */
                     page?: {
@@ -31264,7 +31370,7 @@ export interface operations {
                 "application/json": {
                     /** @example cef01135-7e51-4f6f-a6eb-6e5e5a885ac8 */
                     deal_id: string;
-                    /** Currency */
+                    /** CurrencyWithRequiredExchangeRate */
                     currency?: {
                         /**
                          * CurrencyCode
@@ -31272,7 +31378,7 @@ export interface operations {
                          */
                         code: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                         /** @example 1.1238 */
-                        exchange_rate?: number;
+                        exchange_rate: number;
                     };
                     /** @description A quotation needs `grouped_lines` and/or `text` to be valid */
                     grouped_lines?: {
@@ -31384,6 +31490,11 @@ export interface operations {
                      * @example Quotation text
                      */
                     text?: string;
+                    /**
+                     * @description Between 1 and 80 characters. Only letters, digits and limited punctuation are accepted; characters such as `/`, `\`, `*`, `?`, `<`, `>` and `|` are rejected. If omitted, a name is generated based on the quotation number.
+                     * @example Webdevelopment
+                     */
+                    name?: string;
                     /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
                     document_template_id?: string;
                     expiry?: {
@@ -31632,7 +31743,7 @@ export interface operations {
                 "application/json": {
                     /** @example 5b16f6ee-e302-0079-901b-50c26c4a55b1 */
                     id: string;
-                    /** Currency */
+                    /** CurrencyWithRequiredExchangeRate */
                     currency?: {
                         /**
                          * CurrencyCode
@@ -31640,7 +31751,7 @@ export interface operations {
                          */
                         code: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                         /** @example 1.1238 */
-                        exchange_rate?: number;
+                        exchange_rate: number;
                     };
                     /** @description A quotation needs `grouped_lines` and/or `text` to be valid */
                     grouped_lines?: {
@@ -31752,6 +31863,11 @@ export interface operations {
                      * @example Quotation text
                      */
                     text?: string | null;
+                    /**
+                     * @description Between 1 and 80 characters. Only letters, digits and limited punctuation are accepted; characters such as `/`, `\`, `*`, `?`, `<`, `>` and `|` are rejected.
+                     * @example Webdevelopment
+                     */
+                    name?: string;
                     /** @example 179e1564-493b-4305-8c54-a34fc80920fc */
                     document_template_id?: string;
                     expiry?: {
@@ -34731,6 +34847,7 @@ export interface operations {
                              * @example 'Some extra remarks about the invoice'
                              */
                             note?: string | null;
+                            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                             /** @example USD */
                             currency?: string;
                             /** CurrencyExchangeRate */
@@ -34998,6 +35115,7 @@ export interface operations {
                      * @example Invoice comments
                      */
                     note?: string;
+                    invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                     expected_payment_method?: ({
                         /**
                          * @example credit_card
@@ -35175,6 +35293,7 @@ export interface operations {
                      * @example Some comments about the invoice
                      */
                     note?: string | null;
+                    invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                     discounts?: {
                         /**
                          * @description Values between 0 and 100
@@ -35334,6 +35453,7 @@ export interface operations {
                     invoice_date?: string;
                     /** @example Some comments about the invoice */
                     note?: string | null;
+                    invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                     expected_payment_method?: ({
                         /**
                          * @example credit_card
@@ -36742,6 +36862,7 @@ export interface operations {
                              * @example Some more **information** about this subscription
                              */
                             note?: string | null;
+                            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                             /**
                              * @example active
                              * @enum {string}
@@ -36930,6 +37051,7 @@ export interface operations {
                              * @example Some more **information** about this subscription
                              */
                             note?: string | null;
+                            invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                             /**
                              * @example active
                              * @enum {string}
@@ -37370,6 +37492,7 @@ export interface operations {
                     project_id?: string;
                     /** @example Subscription comments */
                     note?: string;
+                    invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                     /** PaymentTerm */
                     payment_term: {
                         /** @enum {string} */
@@ -37553,6 +37676,7 @@ export interface operations {
                     deal_id?: string | null;
                     /** @example Subscription comments */
                     note?: string | null;
+                    invoice_content?: ("goods" | "services" | "goods_and_services" | null);
                     grouped_lines?: {
                         section?: {
                             title?: string;
@@ -45291,6 +45415,10 @@ export interface operations {
                  *           "0185a0c3-b791-7629-8361-d60f3c0d7ce2"
                  *         ],
                  *         "project_id": "01859b27-1525-7372-bd40-26a6363c8bfe"
+                 *       },
+                 *       "page": {
+                 *         "size": 20,
+                 *         "number": 1
                  *       }
                  *     }
                  */
@@ -45299,6 +45427,13 @@ export interface operations {
                         ids?: string[];
                         /** @example 01859b27-1525-7372-bd40-26a6363c8bfe */
                         project_id?: string;
+                    };
+                    /** Page */
+                    page?: {
+                        /** @default 20 */
+                        size?: number;
+                        /** @default 1 */
+                        number?: number;
                     };
                 };
             };
@@ -47435,12 +47570,23 @@ export interface operations {
                  *           "46156648-87c6-478d-8aa7-1dc3a00dacab",
                  *           "46156648-87c6-478d-8aa7-1dc3a00daca4"
                  *         ]
+                 *       },
+                 *       "page": {
+                 *         "size": 20,
+                 *         "number": 1
                  *       }
                  *     }
                  */
                 "application/json": {
                     filter?: {
                         ids?: string[];
+                    };
+                    /** Page */
+                    page?: {
+                        /** @default 20 */
+                        size?: number;
+                        /** @default 1 */
+                        number?: number;
                     };
                 };
             };
@@ -50147,6 +50293,8 @@ export interface operations {
                         };
                         /** @description an array of project ids */
                         project_ids?: string[];
+                        /** @description Only lists tickets assigned to one of these users. Pass `null` as an entry to include tickets that are unassigned, e.g. `["f29abf48-337d-44b4-aad4-585f5277a456", null]`, or `[null]` for the unassigned ones only. */
+                        assignee_ids?: (string | null)[];
                         exclude?: {
                             status_ids?: string[];
                         };
@@ -52175,12 +52323,23 @@ export interface operations {
                  *           "7c3c4edc-fd8d-0cc3-bd1e-9f3f9d7b7db2"
                  *         ]
                  *       },
+                 *       "page": {
+                 *         "size": 20,
+                 *         "number": 1
+                 *       },
                  *       "includes": "custom_fields"
                  *     }
                  */
                 "application/json": {
                     filter?: {
                         ids?: string[];
+                    };
+                    /** Page */
+                    page?: {
+                        /** @default 20 */
+                        size?: number;
+                        /** @default 1 */
+                        number?: number;
                     };
                     /**
                      * @description Comma-separated list of optional includes

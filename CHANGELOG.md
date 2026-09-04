@@ -4,6 +4,10 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased] - 2026-09-04
+
+API spec updated: → 1.213.0
+
 ## [Unreleased] - 2026-07-31
 
 API spec updated: → 1.187.0
