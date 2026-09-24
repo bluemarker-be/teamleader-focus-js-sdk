@@ -4,17 +4,28 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased] - 2026-09-04
+## [1.2.0] - 2026-09-24
 
-API spec updated: → 1.213.0
+First release under the `@bluemarker` npm scope. Package renamed from
+`teamleader-focus-js-sdk` → `@bluemarker/teamleader-focus-js-sdk`.
 
-## [Unreleased] - 2026-07-31
+### Changed
+- API spec synced through four intermediate versions since 1.1.0:
+  1.170.0 → 1.183.0 → 1.187.0 → 1.213.0 → 1.220.0. All bumps were
+  additive / documentation-only — no endpoints added or removed, no
+  breaking changes. The generic `RequestBody<opId>` / `ResponseBody<opId>`
+  typing surfaces new optional fields (e.g. deals `second_responsible_user`
+  include, `ledgerAccounts` descriptions, invoice `book_and_send` enum
+  wording) automatically without new SDK methods.
 
-API spec updated: → 1.187.0
-
-## [Unreleased] - 2026-07-19
-
-API spec updated: → 1.183.0
+### Internal
+- Post-generation patches 2, 5, 6, and 7 all still required
+  (`dealPhases.duplicate` 404, context enum `deal→sale`,
+  `custom_fields_update_strategy`, `tasks.list.deal_id`) — Teamleader
+  has not yet fixed these upstream.
+- SDK coverage vs spec 1.220.0: 292/292 functional operations
+  implemented (100%); `dealPhases.duplicate` intentionally excluded
+  because the endpoint returns 404.
 
 ## [1.1.0] - 2026-06-28
 

@@ -5,6 +5,7 @@ export declare class CommercialDiscountsResource extends BaseResource {
     list(params?: RequestBody<"commercialDiscounts.list">, options?: {
         maxPages?: number;
     }): AsyncGenerator<{
+        id?: string | undefined;
         name?: string | undefined;
         department?: {
             id?: string | undefined;

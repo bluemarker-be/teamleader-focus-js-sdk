@@ -1,7 +1,7 @@
 // Auto-generated from Teamleader Focus API OpenAPI spec
 // Do not edit manually — run `npm run generate` to regenerate
 // Source: api-specs/ (latest version)
-// Generated: 2026-09-04T13:16:37.285Z
+// Generated: 2026-09-24T12:59:22.114Z
 //
 // ⚠️  Post-generation patches (spec deviations reported to Teamleader):
 //
@@ -3447,7 +3447,7 @@ export interface paths {
         put?: never;
         /**
          * productCategories.list
-         * @description Get a list of product categories.
+         * @description Get a list of product categories. They are used as a ledger account, which is important for accounting.
          */
         post: operations["productCategories.list"];
         delete?: never;
@@ -8696,7 +8696,7 @@ export interface components {
             })[];
             /**
              * @description Comma-separated list of optional includes
-             * @example custom_fields
+             * @example custom_fields,second_responsible_user
              */
             includes?: string;
         };
@@ -8818,6 +8818,12 @@ export interface components {
                     id?: string;
                     type?: string;
                 };
+                /** @description Only included with request parameter `includes=second_responsible_user`. This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it */
+                second_responsible_user?: {
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } | null;
                 /** @example 2017-05-09T11:31:30+00:00 */
                 closed_at?: string;
                 /** TypeAndId */
@@ -8881,6 +8887,11 @@ export interface components {
         "deals.info.request": {
             /** @example f6871b06-6513-4750-b5e6-ff3503b5a029 */
             id: string;
+            /**
+             * @description Comma-separated list of optional includes
+             * @example second_responsible_user
+             */
+            includes?: string;
         };
         /** deals.info.response */
         "deals.info.response": {
@@ -8964,6 +8975,12 @@ export interface components {
                     id?: string;
                     type?: string;
                 };
+                /** @description Only included with request parameter `includes=second_responsible_user`. This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it */
+                second_responsible_user?: {
+                    /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                    id?: string;
+                    type?: string;
+                } | null;
                 /** @example 2017-05-09T11:31:30+00:00 */
                 closed_at?: string;
                 /** TypeAndId */
@@ -9098,6 +9115,11 @@ export interface components {
             department_id?: string;
             /** @example 98b2863e-7b01-4232-82f5-ede1f0b9db22 */
             responsible_user_id?: string;
+            /**
+             * @description This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it
+             * @example 656a9c04-de65-01f9-9610-3ac636738e91
+             */
+            second_responsible_user_id?: string | null;
             /** @example 060687bb-a742-4882-a538-199a5e5feb60 */
             phase_id?: string;
             /** @description The amount may be negative. */
@@ -9186,6 +9208,11 @@ export interface components {
             department_id?: string | null;
             /** @example 98b2863e-7b01-4232-82f5-ede1f0b9db22 */
             responsible_user_id?: string | null;
+            /**
+             * @description This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it. `null` clears it
+             * @example 656a9c04-de65-01f9-9610-3ac636738e91
+             */
+            second_responsible_user_id?: string | null;
             /** @description The amount may be negative. */
             estimated_value?: {
                 /** @example 123.3 */
@@ -12722,6 +12749,7 @@ export interface components {
                     };
                 };
             } & {
+                /** @description These are ledger accounts */
                 product_category?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
@@ -12931,6 +12959,7 @@ export interface components {
                             };
                         };
                     } & {
+                        /** @description These are ledger accounts */
                         product_category?: {
                             /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                             id?: string;
@@ -13307,7 +13336,10 @@ export interface components {
             } & {
                 /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                 withholding_tax_rate_id?: string;
-                /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                /**
+                 * @description These are ledger accounts
+                 * @example e2314517-3cab-4aa9-8471-450e73449041
+                 */
                 product_category_id?: string;
             })[];
         };
@@ -13404,7 +13436,10 @@ export interface components {
                 } & {
                     /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                     withholding_tax_rate_id?: string;
-                    /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example e2314517-3cab-4aa9-8471-450e73449041
+                     */
                     product_category_id?: string;
                 })[];
             }[];
@@ -13567,7 +13602,10 @@ export interface components {
                 } & {
                     /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                     withholding_tax_rate_id?: string;
-                    /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example e2314517-3cab-4aa9-8471-450e73449041
+                     */
                     product_category_id?: string;
                 })[];
             }[];
@@ -13709,7 +13747,10 @@ export interface components {
                 } & {
                     /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                     withholding_tax_rate_id?: string;
-                    /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example e2314517-3cab-4aa9-8471-450e73449041
+                     */
                     product_category_id?: string;
                 })[];
             }[];
@@ -13872,7 +13913,10 @@ export interface components {
                 } & {
                     /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                     withholding_tax_rate_id?: string;
-                    /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example e2314517-3cab-4aa9-8471-450e73449041
+                     */
                     product_category_id?: string;
                 })[];
             }[];
@@ -14259,6 +14303,7 @@ export interface components {
                 };
             } & {
                 extended_description?: string;
+                /** @description These are ledger accounts */
                 product_category?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
@@ -14480,6 +14525,7 @@ export interface components {
                         };
                     } & {
                         extended_description?: string;
+                        /** @description These are ledger accounts */
                         product_category?: {
                             /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                             id?: string;
@@ -14927,6 +14973,7 @@ export interface components {
                     };
                 };
             } & {
+                /** @description These are ledger accounts */
                 product_category?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
@@ -15186,6 +15233,7 @@ export interface components {
                             };
                         };
                     } & {
+                        /** @description These are ledger accounts */
                         product_category?: {
                             /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                             id?: string;
@@ -15213,7 +15261,7 @@ export interface components {
                      * @enum {string}
                      */
                     action?: "draft" | "book" | "book_and_send";
-                    /** @description Only provided when action is "book and send". */
+                    /** @description Only provided when action is "book_and_send". */
                     sending_methods?: {
                         /**
                          * @example email
@@ -15308,7 +15356,10 @@ export interface components {
             } & {
                 /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                 withholding_tax_rate_id?: string;
-                /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                /**
+                 * @description These are ledger accounts
+                 * @example e2314517-3cab-4aa9-8471-450e73449041
+                 */
                 product_category_id?: string;
             })[];
         };
@@ -15326,7 +15377,7 @@ export interface components {
         } | {
             /** @example book_and_send */
             action: string;
-            /** @description Only provided when action is "book and send". */
+            /** @description Only provided when action is "book_and_send". Method "email" is always required; when "peppol" is used, "email" acts as the fallback for when Peppol sending fails. */
             sending_methods: {
                 /**
                  * @example email
@@ -15450,7 +15501,10 @@ export interface components {
                 } & {
                     /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                     withholding_tax_rate_id?: string;
-                    /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example e2314517-3cab-4aa9-8471-450e73449041
+                     */
                     product_category_id?: string;
                 })[];
             }[];
@@ -15484,7 +15538,7 @@ export interface components {
             } | {
                 /** @example book_and_send */
                 action: string;
-                /** @description Only provided when action is "book and send". */
+                /** @description Only provided when action is "book_and_send". Method "email" is always required; when "peppol" is used, "email" acts as the fallback for when Peppol sending fails. */
                 sending_methods: {
                     /**
                      * @example email
@@ -15544,7 +15598,7 @@ export interface components {
         } | {
             /** @example book_and_send */
             action: string;
-            /** @description Only provided when action is "book and send". */
+            /** @description Only provided when action is "book_and_send". Method "email" is always required; when "peppol" is used, "email" acts as the fallback for when Peppol sending fails. */
             sending_methods: {
                 /**
                  * @example email
@@ -15688,7 +15742,10 @@ export interface components {
                 } & {
                     /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                     withholding_tax_rate_id?: string;
-                    /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example e2314517-3cab-4aa9-8471-450e73449041
+                     */
                     product_category_id?: string;
                 })[];
             }[];
@@ -15706,7 +15763,7 @@ export interface components {
             } | {
                 /** @example book_and_send */
                 action: string;
-                /** @description Only provided when action is "book and send". */
+                /** @description Only provided when action is "book_and_send". Method "email" is always required; when "peppol" is used, "email" acts as the fallback for when Peppol sending fails. */
                 sending_methods: {
                     /**
                      * @example email
@@ -15901,7 +15958,7 @@ export interface components {
         };
         "expenses.list.request": {
             filter?: {
-                /** @description Filters by document number and supplier name, case-insensitive */
+                /** @description Filters by document number, supplier name and title, case-insensitive */
                 term?: string;
                 /** @description Filters by one or more source types */
                 source_types?: ("incomingInvoice" | "incomingCreditNote" | "receipt")[];
@@ -16030,7 +16087,7 @@ export interface components {
         "incomingCreditNotes.listPayments.request": {
             id: string;
         };
-        /** receipts.listPayments.response */
+        /** incomingCreditNotes.listPayments.response */
         "incomingCreditNotes.listPayments.response": {
             data?: {
                 id?: string;
@@ -16053,8 +16110,15 @@ export interface components {
                 remark?: string | null;
             }[];
             meta?: {
+                /** Money */
                 total?: {
-                    amount?: number;
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 };
             };
         };
@@ -16111,7 +16175,7 @@ export interface components {
         "incomingInvoices.listPayments.request": {
             id: string;
         };
-        /** receipts.listPayments.response */
+        /** incomingInvoices.listPayments.response */
         "incomingInvoices.listPayments.response": {
             data?: {
                 id?: string;
@@ -16134,8 +16198,15 @@ export interface components {
                 remark?: string | null;
             }[];
             meta?: {
+                /** Money */
                 total?: {
-                    amount?: number;
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 };
             };
         };
@@ -16215,8 +16286,15 @@ export interface components {
                 remark?: string | null;
             }[];
             meta?: {
+                /** Money */
                 total?: {
-                    amount?: number;
+                    /** @example 123.3 */
+                    amount: number;
+                    /**
+                     * CurrencyCode
+                     * @enum {string}
+                     */
+                    currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                 };
             };
         };
@@ -16480,6 +16558,7 @@ export interface components {
                     });
                 }[];
                 price_list_prices?: unknown[][];
+                /** @description These are ledger accounts */
                 product_category?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
@@ -16606,7 +16685,10 @@ export interface components {
             } | null;
             /** @example af48fe9e-d44c-0eac-8813-8be051b10921 */
             department_id?: string;
-            /** @example 624ca743-8998-4f8c-add1-c427bb022166 */
+            /**
+             * @description These are ledger accounts
+             * @example 624ca743-8998-4f8c-add1-c427bb022166
+             */
             product_category_id?: string;
             /** @example 23097774-e51e-0371-9b42-98ef8ca8bbb6 */
             tax_rate_id?: string;
@@ -16687,7 +16769,10 @@ export interface components {
             } | null;
             /** @example af48fe9e-d44c-0eac-8813-8be051b10921 */
             department_id?: string;
-            /** @example 624ca743-8998-4f8c-add1-c427bb022166 */
+            /**
+             * @description These are ledger accounts
+             * @example 624ca743-8998-4f8c-add1-c427bb022166
+             */
             product_category_id?: string;
             /** @example 23097774-e51e-0371-9b42-98ef8ca8bbb6 */
             tax_rate_id?: string;
@@ -22980,6 +23065,7 @@ export interface components {
                     };
                 };
             } & {
+                /** @description These are ledger accounts */
                 product_category?: {
                     /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                     id?: string;
@@ -23124,6 +23210,7 @@ export interface components {
                             };
                         };
                     } & {
+                        /** @description These are ledger accounts */
                         product_category?: {
                             /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                             id?: string;
@@ -28970,7 +29057,7 @@ export interface operations {
                     })[];
                     /**
                      * @description Comma-separated list of optional includes
-                     * @example custom_fields
+                     * @example custom_fields,second_responsible_user
                      */
                     includes?: string;
                 };
@@ -29142,6 +29229,12 @@ export interface operations {
                                 id?: string;
                                 type?: string;
                             };
+                            /** @description Only included with request parameter `includes=second_responsible_user`. This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it */
+                            second_responsible_user?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } | null;
                             /** @example 2017-05-09T11:31:30+00:00 */
                             closed_at?: string;
                             /** TypeAndId */
@@ -29222,6 +29315,11 @@ export interface operations {
                 "application/json": {
                     /** @example f6871b06-6513-4750-b5e6-ff3503b5a029 */
                     id: string;
+                    /**
+                     * @description Comma-separated list of optional includes
+                     * @example second_responsible_user
+                     */
+                    includes?: string;
                 };
             };
         };
@@ -29408,6 +29506,12 @@ export interface operations {
                                 id?: string;
                                 type?: string;
                             };
+                            /** @description Only included with request parameter `includes=second_responsible_user`. This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it */
+                            second_responsible_user?: {
+                                /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
+                                id?: string;
+                                type?: string;
+                            } | null;
                             /** @example 2017-05-09T11:31:30+00:00 */
                             closed_at?: string;
                             /** TypeAndId */
@@ -29562,6 +29666,11 @@ export interface operations {
                     department_id?: string;
                     /** @example 98b2863e-7b01-4232-82f5-ede1f0b9db22 */
                     responsible_user_id?: string;
+                    /**
+                     * @description This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it
+                     * @example 656a9c04-de65-01f9-9610-3ac636738e91
+                     */
+                    second_responsible_user_id?: string | null;
                     /** @example 060687bb-a742-4882-a538-199a5e5feb60 */
                     phase_id?: string;
                     /** @description The amount may be negative. */
@@ -29710,6 +29819,11 @@ export interface operations {
                     department_id?: string | null;
                     /** @example 98b2863e-7b01-4232-82f5-ede1f0b9db22 */
                     responsible_user_id?: string | null;
+                    /**
+                     * @description This requires the second deal responsible feature to be enabled. Contact support.focus@teamleader.eu to enable it. `null` clears it
+                     * @example 656a9c04-de65-01f9-9610-3ac636738e91
+                     */
+                    second_responsible_user_id?: string | null;
                     /** @description The amount may be negative. */
                     estimated_value?: {
                         /** @example 123.3 */
@@ -34658,6 +34772,7 @@ export interface operations {
                                         };
                                     };
                                 } & {
+                                    /** @description These are ledger accounts */
                                     product_category?: {
                                         /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                         id?: string;
@@ -35092,7 +35207,10 @@ export interface operations {
                         } & {
                             /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                             withholding_tax_rate_id?: string;
-                            /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                            /**
+                             * @description These are ledger accounts
+                             * @example e2314517-3cab-4aa9-8471-450e73449041
+                             */
                             product_category_id?: string;
                         })[];
                     }[];
@@ -35282,7 +35400,10 @@ export interface operations {
                         } & {
                             /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                             withholding_tax_rate_id?: string;
-                            /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                            /**
+                             * @description These are ledger accounts
+                             * @example e2314517-3cab-4aa9-8471-450e73449041
+                             */
                             product_category_id?: string;
                         })[];
                     }[];
@@ -35445,7 +35566,10 @@ export interface operations {
                         } & {
                             /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                             withholding_tax_rate_id?: string;
-                            /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                            /**
+                             * @description These are ledger accounts
+                             * @example e2314517-3cab-4aa9-8471-450e73449041
+                             */
                             product_category_id?: string;
                         })[];
                     }[];
@@ -35837,7 +35961,10 @@ export interface operations {
                         } & {
                             /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                             withholding_tax_rate_id?: string;
-                            /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                            /**
+                             * @description These are ledger accounts
+                             * @example e2314517-3cab-4aa9-8471-450e73449041
+                             */
                             product_category_id?: string;
                         })[];
                     }[];
@@ -36617,6 +36744,7 @@ export interface operations {
                                     };
                                 } & {
                                     extended_description?: string;
+                                    /** @description These are ledger accounts */
                                     product_category?: {
                                         /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                         id?: string;
@@ -37277,6 +37405,7 @@ export interface operations {
                                         };
                                     };
                                 } & {
+                                    /** @description These are ledger accounts */
                                     product_category?: {
                                         /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                         id?: string;
@@ -37304,7 +37433,7 @@ export interface operations {
                                  * @enum {string}
                                  */
                                 action?: "draft" | "book" | "book_and_send";
-                                /** @description Only provided when action is "book and send". */
+                                /** @description Only provided when action is "book_and_send". */
                                 sending_methods?: {
                                     /**
                                      * @example email
@@ -37480,7 +37609,10 @@ export interface operations {
                         } & {
                             /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                             withholding_tax_rate_id?: string;
-                            /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                            /**
+                             * @description These are ledger accounts
+                             * @example e2314517-3cab-4aa9-8471-450e73449041
+                             */
                             product_category_id?: string;
                         })[];
                     }[];
@@ -37514,7 +37646,7 @@ export interface operations {
                     } | {
                         /** @example book_and_send */
                         action: string;
-                        /** @description Only provided when action is "book and send". */
+                        /** @description Only provided when action is "book_and_send". Method "email" is always required; when "peppol" is used, "email" acts as the fallback for when Peppol sending fails. */
                         sending_methods: {
                             /**
                              * @example email
@@ -37720,7 +37852,10 @@ export interface operations {
                         } & {
                             /** @example c0c03f1e-77e3-402c-a713-30ea1c585824 */
                             withholding_tax_rate_id?: string;
-                            /** @example e2314517-3cab-4aa9-8471-450e73449041 */
+                            /**
+                             * @description These are ledger accounts
+                             * @example e2314517-3cab-4aa9-8471-450e73449041
+                             */
                             product_category_id?: string;
                         })[];
                     }[];
@@ -37738,7 +37873,7 @@ export interface operations {
                     } | {
                         /** @example book_and_send */
                         action: string;
-                        /** @description Only provided when action is "book and send". */
+                        /** @description Only provided when action is "book_and_send". Method "email" is always required; when "peppol" is used, "email" acts as the fallback for when Peppol sending fails. */
                         sending_methods: {
                             /**
                              * @example email
@@ -38286,7 +38421,7 @@ export interface operations {
                  */
                 "application/json": {
                     filter?: {
-                        /** @description Filters by document number and supplier name, case-insensitive */
+                        /** @description Filters by document number, supplier name and title, case-insensitive */
                         term?: string;
                         /** @description Filters by one or more source types */
                         source_types?: ("incomingInvoice" | "incomingCreditNote" | "receipt")[];
@@ -38787,7 +38922,8 @@ export interface operations {
                      *       ],
                      *       "meta": {
                      *         "total": {
-                     *           "amount": 123.3
+                     *           "amount": 123.3,
+                     *           "currency": "EUR"
                      *         }
                      *       }
                      *     }
@@ -38814,8 +38950,15 @@ export interface operations {
                             remark?: string | null;
                         }[];
                         meta?: {
+                            /** Money */
                             total?: {
-                                amount?: number;
+                                /** @example 123.3 */
+                                amount: number;
+                                /**
+                                 * CurrencyCode
+                                 * @enum {string}
+                                 */
+                                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                             };
                         };
                     };
@@ -39435,7 +39578,8 @@ export interface operations {
                      *       ],
                      *       "meta": {
                      *         "total": {
-                     *           "amount": 123.3
+                     *           "amount": 123.3,
+                     *           "currency": "EUR"
                      *         }
                      *       }
                      *     }
@@ -39462,8 +39606,15 @@ export interface operations {
                             remark?: string | null;
                         }[];
                         meta?: {
+                            /** Money */
                             total?: {
-                                amount?: number;
+                                /** @example 123.3 */
+                                amount: number;
+                                /**
+                                 * CurrencyCode
+                                 * @enum {string}
+                                 */
+                                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                             };
                         };
                     };
@@ -40066,7 +40217,8 @@ export interface operations {
                      *       ],
                      *       "meta": {
                      *         "total": {
-                     *           "amount": 123.3
+                     *           "amount": 123.3,
+                     *           "currency": "EUR"
                      *         }
                      *       }
                      *     }
@@ -40093,8 +40245,15 @@ export interface operations {
                             remark?: string | null;
                         }[];
                         meta?: {
+                            /** Money */
                             total?: {
-                                amount?: number;
+                                /** @example 123.3 */
+                                amount: number;
+                                /**
+                                 * CurrencyCode
+                                 * @enum {string}
+                                 */
+                                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
                             };
                         };
                     };
@@ -40793,6 +40952,7 @@ export interface operations {
                                 });
                             }[];
                             price_list_prices?: unknown[][];
+                            /** @description These are ledger accounts */
                             product_category?: {
                                 /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                 id?: string;
@@ -40892,7 +41052,10 @@ export interface operations {
                     } | null;
                     /** @example af48fe9e-d44c-0eac-8813-8be051b10921 */
                     department_id?: string;
-                    /** @example 624ca743-8998-4f8c-add1-c427bb022166 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example 624ca743-8998-4f8c-add1-c427bb022166
+                     */
                     product_category_id?: string;
                     /** @example 23097774-e51e-0371-9b42-98ef8ca8bbb6 */
                     tax_rate_id?: string;
@@ -40970,7 +41133,10 @@ export interface operations {
                     } | null;
                     /** @example af48fe9e-d44c-0eac-8813-8be051b10921 */
                     department_id?: string;
-                    /** @example 624ca743-8998-4f8c-add1-c427bb022166 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example 624ca743-8998-4f8c-add1-c427bb022166
+                     */
                     product_category_id?: string;
                     /** @example 23097774-e51e-0371-9b42-98ef8ca8bbb6 */
                     tax_rate_id?: string;
@@ -41122,7 +41288,10 @@ export interface operations {
                     } | null;
                     /** @example af48fe9e-d44c-0eac-8813-8be051b10921 */
                     department_id?: string;
-                    /** @example 624ca743-8998-4f8c-add1-c427bb022166 */
+                    /**
+                     * @description These are ledger accounts
+                     * @example 624ca743-8998-4f8c-add1-c427bb022166
+                     */
                     product_category_id?: string;
                     /** @example 23097774-e51e-0371-9b42-98ef8ca8bbb6 */
                     tax_rate_id?: string;
@@ -52143,6 +52312,7 @@ export interface operations {
                                         };
                                     };
                                 } & {
+                                    /** @description These are ledger accounts */
                                     product_category?: {
                                         /** @example eab232c6-49b2-4b7e-a977-5e1148dad471 */
                                         id?: string;

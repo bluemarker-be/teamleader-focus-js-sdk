@@ -43,6 +43,10 @@ export declare class DealsResource extends BaseResource {
             id?: string | undefined;
             type?: string | undefined;
         } | undefined;
+        second_responsible_user?: {
+            id?: string | undefined;
+            type?: string | undefined;
+        } | null | undefined;
         closed_at?: string | undefined;
         source?: {
             id?: string | undefined;
@@ -119,6 +123,10 @@ export declare class DealsResource extends BaseResource {
                 id?: string | undefined;
                 type?: string | undefined;
             } | undefined;
+            second_responsible_user?: {
+                id?: string | undefined;
+                type?: string | undefined;
+            } | null | undefined;
             closed_at?: string | undefined;
             source?: {
                 id?: string | undefined;

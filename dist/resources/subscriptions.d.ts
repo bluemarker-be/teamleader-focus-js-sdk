@@ -8,6 +8,7 @@ export declare class SubscriptionsResource extends BaseResource {
         id?: string | undefined;
         title?: string | undefined;
         note?: string | null | undefined;
+        invoice_content?: ("goods" | "services" | "goods_and_services" | null) | undefined;
         status?: "active" | "deactivated" | undefined;
         department?: {
             id?: string | undefined;
@@ -81,6 +82,7 @@ export declare class SubscriptionsResource extends BaseResource {
             id?: string | undefined;
             title?: string | undefined;
             note?: string | null | undefined;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null) | undefined;
             status?: "active" | "deactivated" | undefined;
             department?: {
                 id?: string | undefined;

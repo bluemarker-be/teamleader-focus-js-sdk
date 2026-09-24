@@ -8,67 +8,31 @@ Types are auto-generated from the official OpenAPI spec — your editor gives yo
 
 ### Node.js / Bun
 
-Install a pinned version via git tag:
-
 ```bash
-# HTTPS (requires a GitHub Personal Access Token with repo:read scope)
-npm install git+https://github.com/operative-bv/teamleader-focus-js-sdk.git#v1.0.0
-
-# SSH (requires your GitHub SSH key)
-npm install git+ssh://git@github.com:operative-bv/teamleader-focus-js-sdk.git#v1.0.0
+npm install @bluemarker/teamleader-focus-js-sdk
+# or: pnpm add @bluemarker/teamleader-focus-js-sdk
+# or: bun add @bluemarker/teamleader-focus-js-sdk
 ```
-
-Pinning to a tag is strongly recommended for production use.
 
 ### Deno / Supabase Edge Functions
 
-Deno imports modules directly from URLs. For a private repo, configure Deno
-with a Bearer token for `raw.githubusercontent.com` and import from the tag:
+Import directly via Deno's npm specifier — no auth token needed:
 
 ```ts
 // supabase/functions/my-function/index.ts
-import { TeamleaderFocusClient } from
-  "https://raw.githubusercontent.com/operative-bv/teamleader-focus-js-sdk/v1.0.0/dist/index.js";
+import { TeamleaderFocusClient } from "npm:@bluemarker/teamleader-focus-js-sdk@^1.2.0";
 ```
 
-Sub-imports (resource classes, helpers) are resolved relatively to the source
-URL, so the same auth token covers everything.
+Or via a CDN like esm.sh if you prefer HTTP imports:
 
-**Setting the auth token:**
-
-1. Create a GitHub [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new)
-   with `Contents: Read-only` scoped to just this repository. This keeps
-   blast radius small if the token ever leaks.
-
-2. Expose it to Deno via the `DENO_AUTH_TOKENS` environment variable. The
-   format is `<token>@<host>`:
-
-   ```bash
-   # Local Deno
-   export DENO_AUTH_TOKENS="github_pat_xxxxx@raw.githubusercontent.com"
-
-   # Supabase Edge Functions
-   supabase secrets set DENO_AUTH_TOKENS="github_pat_xxxxx@raw.githubusercontent.com"
-   ```
-
-   Deno then sends `Authorization: Bearer <token>` on every request to
-   `raw.githubusercontent.com`, which GitHub accepts for private repo content.
-
-3. Deploy the Edge Function as usual:
-
-   ```bash
-   supabase functions deploy my-function
-   ```
-
-**Updating the SDK version** means changing the URL in your import statement
-(e.g. `v1.0.0` → `v1.1.0`) — no separate install step. See
-[`examples/supabase-with-private-import.ts`](./examples/supabase-with-private-import.ts)
-for a complete Edge Function example.
+```ts
+import { TeamleaderFocusClient } from "https://esm.sh/@bluemarker/teamleader-focus-js-sdk@1.2.0";
+```
 
 ## Setup
 
 ```typescript
-import { TeamleaderFocusClient } from "teamleader-focus-js-sdk";
+import { TeamleaderFocusClient } from "@bluemarker/teamleader-focus-js-sdk";
 
 const teamleader = new TeamleaderFocusClient({
   accessToken: "your-access-token",
@@ -106,7 +70,7 @@ const teamleader = new TeamleaderFocusClient({
 ### Reading custom fields
 
 ```typescript
-import { customField } from "teamleader-focus-js-sdk";
+import { customField } from "@bluemarker/teamleader-focus-js-sdk";
 
 const { data: contact } = await teamleader.contacts.info({ id: "abc" });
 const birthday = customField<string>(contact, "bf6765de-56eb-40ec-ad14-9096c5dc5fe1");
@@ -250,7 +214,7 @@ import {
   createAuthorizationUrl,
   exchangeCodeForTokens,
   refreshTokens,
-} from "teamleader-focus-js-sdk";
+} from "@bluemarker/teamleader-focus-js-sdk";
 
 // Step 1: Redirect user to Teamleader
 const url = createAuthorizationUrl({
@@ -334,7 +298,7 @@ import {
   TeamleaderFocusValidationError,
   TeamleaderFocusRateLimitError,
   TeamleaderFocusNetworkError,
-} from "teamleader-focus-js-sdk";
+} from "@bluemarker/teamleader-focus-js-sdk";
 
 try {
   const { data } = await teamleader.contacts.info({ id: "uuid" });

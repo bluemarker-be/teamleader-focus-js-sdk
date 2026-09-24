@@ -60,7 +60,7 @@ export declare class ContactsResource extends BaseResource {
         price_list?: {
             type?: string | undefined;
             id?: string | undefined;
-        } | undefined;
+        } | null | undefined;
     }, void, undefined>;
     /** Get details for a single contact */
     info(params: RequestBody<"contacts.info">): Promise<{
@@ -133,6 +133,10 @@ export declare class ContactsResource extends BaseResource {
             added_at?: string | undefined;
             updated_at?: string | undefined;
             web_url?: string | undefined;
+            price_list?: {
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
         } | undefined;
     }>;
     /** Create a new contact */

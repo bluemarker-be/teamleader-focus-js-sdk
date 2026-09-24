@@ -268,6 +268,7 @@ export declare class InvoicesResource extends BaseResource {
             }[] | undefined;
             payment_reference?: string | null | undefined;
             note?: string | null | undefined;
+            invoice_content?: ("goods" | "services" | "goods_and_services" | null) | undefined;
             currency?: string | undefined;
             currency_exchange_rate?: {
                 from?: ("BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR") | undefined;

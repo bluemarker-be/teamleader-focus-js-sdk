@@ -66,7 +66,7 @@ export declare class CompaniesResource extends BaseResource {
         price_list?: {
             type?: string | undefined;
             id?: string | undefined;
-        } | undefined;
+        } | null | undefined;
     }, void, undefined>;
     /** Get details for a single company */
     info(params: RequestBody<"companies.info">): Promise<{
@@ -146,6 +146,10 @@ export declare class CompaniesResource extends BaseResource {
                 division?: string | null | undefined;
                 is_decision_maker?: boolean | undefined;
             }[] | undefined;
+            price_list?: {
+                type?: string | undefined;
+                id?: string | undefined;
+            } | null | undefined;
         } | undefined;
     }>;
     /** Create a new company */

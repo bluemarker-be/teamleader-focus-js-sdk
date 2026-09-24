@@ -78,7 +78,8 @@ export declare class IncomingInvoicesResource extends BaseResource {
         }[] | undefined;
         meta?: {
             total?: {
-                amount?: number | undefined;
+                amount: number;
+                currency: "BAM" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CZK" | "DKK" | "EUR" | "GBP" | "INR" | "ISK" | "JPY" | "MAD" | "MXN" | "NOK" | "PEN" | "PLN" | "RON" | "SEK" | "TRY" | "USD" | "ZAR";
             } | undefined;
         } | undefined;
     }>;

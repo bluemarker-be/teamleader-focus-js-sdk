@@ -1,33 +1,28 @@
 // @ts-nocheck -- This file targets the Deno runtime (Supabase Edge Functions).
 
 /**
- * Supabase Edge Function — importing the SDK from a private GitHub repo
- * =====================================================================
+ * Supabase Edge Function — consuming the SDK from npm
+ * ====================================================
  *
- * Demonstrates how to consume this SDK in Deno without copying dist/ into
- * your Supabase project. Deno fetches the module from GitHub's raw URL,
- * authenticated via DENO_AUTH_TOKENS.
+ * Since v1.2.0 the SDK is published to npm as
+ * `@bluemarker/teamleader-focus-js-sdk`, so Deno can import it directly
+ * via the `npm:` specifier — no auth token, no CDN indirection.
  *
  * Prerequisites:
  *
- *   1. Create a GitHub fine-grained PAT with "Contents: Read-only" scoped
- *      to just the teamleader-focus-js-sdk repository.
+ *   1. Store your Teamleader token in Supabase secrets:
  *
- *   2. Store it in Supabase secrets alongside your Teamleader token:
- *
- *        supabase secrets set DENO_AUTH_TOKENS="github_pat_xxxxx@raw.githubusercontent.com"
  *        supabase secrets set TEAMLEADER_ACCESS_TOKEN=...
  *
- *   3. Deploy:
+ *   2. Deploy:
  *
  *        supabase functions deploy companies-lister
  *
- *   4. Invoke:
+ *   3. Invoke:
  *
  *        curl -X POST https://<project>.functions.supabase.co/companies-lister
  *
- * Updating the SDK version is just a URL change in the import below — no
- * reinstall, no redeploy of secrets.
+ * Updating the SDK version is just a version bump in the import below.
  */
 
 import {
@@ -35,7 +30,7 @@ import {
   TeamleaderFocusError,
   TeamleaderFocusValidationError,
   TeamleaderFocusAuthenticationError,
-} from "https://raw.githubusercontent.com/henkdeblauw/teamleader-focus-js-sdk/v1.0.0/dist/index.js";
+} from "npm:@bluemarker/teamleader-focus-js-sdk@^1.2.0";
 
 Deno.serve(async () => {
   const teamleader = new TeamleaderFocusClient({
