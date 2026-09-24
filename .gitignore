@@ -5,7 +5,8 @@ node_modules/
 .DS_Store
 tests/integration/reports/
 tests/live/
-# Local development tooling (Claude Code + Speckit) — kept out of the repo
+# Local development tooling (Claude Code + Speckit + Superpowers) — kept out of the repo
 .claude/
 .specify/
 CLAUDE.md
+docs/superpowers/
