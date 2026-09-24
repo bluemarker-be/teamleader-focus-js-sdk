@@ -4,6 +4,22 @@ All notable changes to this SDK will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.1] - 2026-09-24
+
+### Changed
+- `README.md` polished for the public npm audience:
+  - Removed sections that only make sense inside the source repo
+    (Quality audit, Verification scripts, Development, Type-safety
+    internals with file paths).
+  - Added a "Get your credentials" step in Setup, linking to the
+    [Teamleader Marketplace](https://marketplace.teamleader.eu/) so
+    new consumers know where to register an OAuth2 app.
+  - Added an MIT license footer.
+  - `Examples` link now points at the GitHub blob URL because the
+    `examples/` folder is not shipped in the npm tarball.
+- `package.json` `repository.url` updated from `operative-bv/…` →
+  `bluemarker-be/…` to reflect the GitHub org rename.
+
 ## [1.2.0] - 2026-09-24
 
 First release under the `@bluemarker` npm scope. Package renamed from

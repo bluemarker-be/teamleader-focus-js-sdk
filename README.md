@@ -31,6 +31,17 @@ import { TeamleaderFocusClient } from "https://esm.sh/@bluemarker/teamleader-foc
 
 ## Setup
 
+### Get your credentials
+
+1. Register a Teamleader Focus OAuth2 application at the
+   [Teamleader Marketplace](https://marketplace.teamleader.eu/).
+2. Note your `client_id` and `client_secret`.
+3. Complete the OAuth2 flow to obtain an `access_token` and
+   `refresh_token` — see [OAuth2 flow](#oauth2-flow) below for the
+   built-in helpers.
+
+### Basic client
+
 ```typescript
 import { TeamleaderFocusClient } from "@bluemarker/teamleader-focus-js-sdk";
 
@@ -186,24 +197,10 @@ All 68 resources are available — see the full list below.
 
 ## Examples
 
-See the [`examples/`](./examples/) folder for end-to-end reference
-implementations — including a Supabase Edge Function that paginates
-companies, creates contacts, links them, and handles every
-`TeamleaderFocusError` subclass with cleanup-on-failure.
-
-## Quality audit
-
-Run `npm run audit` to produce a reproducible quality report covering
-four dimensions: cross-resource consistency (every method shape across
-all 68 resources), constitution-principle compliance (per-file
-verdicts on the six rules in `.specify/memory/constitution.md`),
-README/exports drift, and CHANGELOG/git-log drift.
-
-Outputs land in [`specs/001-sdk-quality-audit/`](./specs/001-sdk-quality-audit/)
-as markdown (PR-reviewable) plus JSON sidecars (machine-diffable
-across runs). Recommended before every release; see
-[`specs/001-sdk-quality-audit/quickstart.md`](./specs/001-sdk-quality-audit/quickstart.md)
-for the full workflow.
+See the [`examples/` folder on GitHub](https://github.com/bluemarker-be/teamleader-focus-js-sdk/tree/main/examples)
+for end-to-end reference implementations — including a Supabase Edge
+Function that paginates companies, creates contacts, links them, and
+handles every `TeamleaderFocusError` subclass with cleanup-on-failure.
 
 ## OAuth2 flow
 
@@ -332,41 +329,13 @@ const teamleader = new TeamleaderFocusClient({
 
 ## Type safety & spec alignment
 
-The SDK is generated from Teamleader's official OpenAPI spec
-(`api-specs/<version>.yaml`, fetched from `@teamleader/focus-api-specification`).
-A small set of documented patches (in `scripts/generate-types.ts`) corrects
-known divergences between spec and runtime API (e.g. enum values the API
-actually accepts but the spec omits). Each patch explains what and why.
+Types are generated directly from Teamleader's official OpenAPI
+specification (`@teamleader/focus-api-specification`). A small set of
+documented patches corrects known divergences between the spec and
+the runtime API — for example, enum values the API actually accepts
+but the spec omits. When Teamleader updates its API, a new SDK
+release picks up the changes with matching type coverage.
 
-### Verification scripts
+## License
 
-```bash
-npm run check-spec         # fetch latest remote spec, show diff, report patch status
-npm run diff-spec          # detailed structural diff (endpoints + schemas + tags)
-npm run test:coverage      # which endpoints have integration tests
-npm run verify:endpoints   # TypeScript-level verification per endpoint:
-                           #   - SDK has a resource method
-                           #   - Endpoint URL matches the spec
-                           #   - Every unit + integration test call is type-valid
-                           #   - Reports `as any` casts and type mismatches
-```
-
-`verify:endpoints` uses the TypeScript compiler API, so its output is as
-accurate as the compiler itself. When the spec changes, run `npm run generate`
-then `npm run verify:endpoints` to see exactly which tests need updating.
-
-## Development
-
-```bash
-npm run generate         # regenerate types from OpenAPI spec
-npm run build            # compile to dist/
-npm run test             # run unit tests (mocked)
-npm run test:integration # run integration tests against real API (needs .env credentials)
-npm run dev              # watch mode
-```
-
-Integration tests require these environment variables (see `.env.example`):
-- `ACCESS_TOKEN`, `REFRESH_TOKEN`, `CLIENT_ID`, `CLIENT_SECRET`
-
-Running the integration suite will rotate the refresh token; the suite writes
-fresh tokens back to `.env` automatically so subsequent runs still work.
+MIT © [Henk de Blauw / Bluemarker](https://www.bluemarker.be)
