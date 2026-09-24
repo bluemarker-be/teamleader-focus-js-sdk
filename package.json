@@ -15,16 +15,11 @@
     "teamleader-focus",
     "sdk",
     "typescript",
-    "api-client",
-    "openapi",
-    "crm",
-    "invoicing",
-    "esm",
-    "zero-dependencies"
+    "api-client"
   ],
-  "homepage": "https://www.bluemarker.be",
+  "homepage": "https://github.com/bluemarker-be/teamleader-focus-js-sdk#readme",
   "bugs": {
-    "email": "henk@bluemarker.be"
+    "url": "https://github.com/bluemarker-be/teamleader-focus-js-sdk/issues"
   },
   "type": "module",
   "main": "./dist/index.js",
